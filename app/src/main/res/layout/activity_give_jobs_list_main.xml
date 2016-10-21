@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <fragment
+        android:id="@+id/fragmet_give_jobs"
+        android:layout_weight="11"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:name="com.tac.iparttimejob.UI.GiveJobs.GiveJobsValidList"
+        tools:layout="@layout/fragment_give_jobs_valid_list"
+        >
+
+    </fragment>
+
+
+    <android.support.design.widget.TabLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        app:tabMode="scrollable"
+        app:layout_scrollFlags="scroll|enterAlways"
+        android:id="@+id/tabLayout_give_jobs_bottom"
+        >
+        <android.support.design.widget.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="你好"
+            />
+
+    </android.support.design.widget.TabLayout>
+
+
+</LinearLayout>

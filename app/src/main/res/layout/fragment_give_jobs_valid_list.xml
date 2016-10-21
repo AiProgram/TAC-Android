@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        >
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar_give_jobs_top"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:theme="?attr/actionBarTheme"
+                android:minHeight="?attr/actionBarSize"
+                android:id="@+id/toolbar_give_jobs_top"
+                app:layout_scrollFlags="scroll|enterAlways"
+                >
+
+                <com.tac.iparttimejob.UI.Utils.RoundImageView
+                    android:id="@+id/navigation_header_container"
+                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:src="@drawable/user_head_image"
+                     />
+
+            </android.support.v7.widget.Toolbar>
+
+
+            <android.support.design.widget.TabLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:tabMode="scrollable"
+                android:id="@+id/tabLayout_give_jobs_top"
+                >
+
+            </android.support.design.widget.TabLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView_give_jobs_main"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
+
+
+</android.support.design.widget.CoordinatorLayout>
+
