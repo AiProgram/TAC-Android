@@ -18,23 +18,4 @@
 
     </fragment>
 
-
-    <android.support.design.widget.TabLayout
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="bottom"
-        app:tabMode="scrollable"
-        app:layout_scrollFlags="scroll|enterAlways"
-        android:id="@+id/tabLayout_give_jobs_bottom"
-        >
-        <android.support.design.widget.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="你好"
-            />
-
-    </android.support.design.widget.TabLayout>
-
-
 </LinearLayout>
