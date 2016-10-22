@@ -49,7 +49,7 @@ public class GiveJobsValidList extends Fragment{
 
 
     private void initData(int pager) {
-        mData = new ArrayList<>();
+        mData = new ArrayList();
         for (int i = 1; i < 50; i++) {
             mData.add("pager" + pager + " 第" + i + "个item");
         }
