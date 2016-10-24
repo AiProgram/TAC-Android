@@ -1,6 +1,6 @@
 package com.tac.iparttimejob.UI.GiveJobs;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -49,7 +49,7 @@ public class GiveJobsValidList extends Fragment{
 
 
     private void initData(int pager) {
-        mData = new ArrayList<>();
+        mData = new ArrayList();
         for (int i = 1; i < 50; i++) {
             mData.add("pager" + pager + " 第" + i + "个item");
         }
