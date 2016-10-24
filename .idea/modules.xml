@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TAC-Android.iml" filepath="$PROJECT_DIR$/TAC-Android.iml" />
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+=======
+>>>>>>> 818ba876907aea21f8535572f48e7f4cc31a2190
     </modules>
   </component>
 </project>
