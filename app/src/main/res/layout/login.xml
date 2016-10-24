@@ -45,6 +45,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="150dp"
+            android:layout_marginTop="50dp"
             android:id="@+id/logo"
             android:src="@drawable/logo1"
             android:layout_alignParentRight="true"
@@ -81,23 +82,32 @@
 
 
         <CheckBox
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="记住密码"
             android:id="@+id/Login_Remember"
             android:layout_below="@+id/login_edit_pwd"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textSize="15dp" />
+            android:textSize="20sp" />
 
         <TextView
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:text="修改密码"
-            android:id="@+id/login_text_change_pwd"
+            android:text="忘记密码"
+            android:id="@+id/login_text_forget_pwd"
             android:layout_below="@+id/login_edit_pwd"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:textSize="15dp" />
+            android:textSize="20sp" />
+
+        <TextView
+            android:text="TAC荣誉出品"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TAC"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 </RelativeLayout>
