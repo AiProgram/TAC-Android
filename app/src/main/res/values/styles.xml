@@ -7,6 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    
+    <style name="MyCustomToolbar" >
+        <item name="android:textColorPrimary">@color/toolbarTextColor</item>
+    </style>
 
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabMaxWidth">@dimen/tab_max_width</item>
@@ -16,5 +20,23 @@
         <item name="tabPaddingEnd">12dp</item>
         <item name="tabBackground">@color/tab_bgcolor</item>
         <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+    </style>
+    
+    <style name="ContentTitleTextStyle">
+        <item name="android:textSize">25dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#DE000000</item>
+    </style>
+
+    <style name="ContentDisciptionTextStyle">
+        <item name="android:textColor">#757575</item>
+        <item name="android:paddingLeft">@dimen/content_padding_horizontal</item>
+        <item name="android:paddingTop">@dimen/content_padding_vertical</item>
+        <item name="android:width">120dp</item>
+    </style>
+
+    <style name="ContentTextStyle">
+        <item name="android:textColor">#FF000000</item>
     </style>
 </resources>

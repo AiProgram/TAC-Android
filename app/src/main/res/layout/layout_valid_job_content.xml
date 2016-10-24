@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.tac.iparttimejob.UI.Utils.TitleToolBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_valid_job_content"/>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+
+        <TextView
+            android:text="招聘PHP程序员"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/title_content"
+            android:paddingTop="@dimen/content_title_padding"
+            android:paddingBottom="@dimen/content_title_padding"
+            style="@style/ContentTitleTextStyle"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="报酬："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ContentDisciptionTextStyle"
+            android:id="@+id/label_payment"
+            android:layout_below="@+id/label_deadline"
+            android:layout_alignStart="@+id/label_deadline" />
+
+        <TextView
+            android:text="联系电话："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ContentDisciptionTextStyle"
+            android:id="@+id/label_phone_number"
+            android:layout_below="@+id/label_payment"
+            android:layout_alignStart="@+id/label_payment" />
+
+        <TextView
+            android:text="2016年11月10日"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_deadline"
+            style="@style/ContentTextStyle"
+            android:layout_alignBaseline="@+id/label_deadline"
+            android:layout_alignBottom="@+id/label_deadline"
+            android:layout_toEndOf="@+id/label_deadline" />
+
+        <TextView
+            android:text="联系邮箱："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ContentDisciptionTextStyle"
+            android:layout_below="@+id/label_phone_number"
+            android:layout_alignStart="@+id/label_phone_number"
+            android:id="@+id/label_email" />
+
+        <TextView
+            android:text="example@163.com"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ContentTextStyle"
+            android:layout_alignBottom="@+id/label_email"
+            android:layout_toEndOf="@+id/label_email"
+            android:id="@+id/tv_email" />
+
+        <TextView
+            android:text="5人/10人"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_numbers"
+            style="@style/ContentTextStyle"
+            android:layout_alignBaseline="@+id/label_numbers"
+            android:layout_alignBottom="@+id/label_numbers"
+            android:layout_toEndOf="@+id/label_numbers" />
+
+        <TextView
+            android:text="3000元/人"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_payment"
+            style="@style/ContentTextStyle"
+            android:layout_alignBaseline="@+id/label_payment"
+            android:layout_alignBottom="@+id/label_payment"
+            android:layout_toEndOf="@+id/label_payment" />
+
+        <TextView
+            android:text="工作地点："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ContentDisciptionTextStyle"
+            android:id="@+id/label_workplace"
+            android:layout_below="@+id/label_email"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="项目详情："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ContentDisciptionTextStyle"
+            android:id="@+id/label_detail"
+            android:layout_below="@+id/label_workplace"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="精通PHP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ContentTextStyle"
+            android:id="@+id/tv_language_requirment"
+            android:layout_alignBaseline="@+id/label_langauage_requirment"
+            android:layout_alignBottom="@+id/label_langauage_requirment"
+            android:layout_toEndOf="@+id/label_langauage_requirment" />
+
+        <TextView
+            android:text="招聘/应聘："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ContentDisciptionTextStyle"
+            android:id="@+id/label_numbers"
+            android:layout_below="@+id/label_langauage_requirment"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="语言要求："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/label_langauage_requirment"
+            style="@style/ContentDisciptionTextStyle"
+            android:layout_below="@+id/tv_author"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="AiProgram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_author"
+            style="@style/ContentTextStyle"
+            android:layout_alignBaseline="@+id/label_author"
+            android:layout_alignBottom="@+id/label_author"
+            android:layout_toEndOf="@+id/label_author" />
+
+        <TextView
+            android:text="发布者："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/label_author"
+            style="@style/ContentDisciptionTextStyle"
+            android:layout_below="@+id/title_content"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="12356789"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_phone_number"
+            style="@style/ContentTextStyle"
+            android:layout_alignBaseline="@+id/label_phone_number"
+            android:layout_alignBottom="@+id/label_phone_number"
+            android:layout_toEndOf="@+id/label_phone_number" />
+
+        <TextView
+            android:text="截止日期："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ContentDisciptionTextStyle"
+            android:id="@+id/label_deadline"
+            android:layout_below="@+id/tv_numbers"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="福州大学"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_workplace"
+            style="@style/ContentTextStyle"
+            android:layout_alignBaseline="@+id/label_workplace"
+            android:layout_alignBottom="@+id/label_workplace"
+            android:layout_toEndOf="@+id/label_workplace" />
+
+        <TextView
+            android:text="项目详情在此"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            style="@style/ContentTextStyle"
+            android:layout_marginStart="29dp"
+            android:id="@+id/tv_detail"
+            android:layout_below="@+id/label_detail"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+</ScrollView>
+</LinearLayout>

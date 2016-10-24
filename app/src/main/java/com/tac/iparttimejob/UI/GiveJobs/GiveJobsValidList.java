@@ -65,9 +65,9 @@ public class GiveJobsValidList extends Fragment{
 
         //设置Toolbar主标题
         Toolbar mToolbar=(Toolbar)fragmentView.findViewById(R.id.toolbar_give_jobs_top);
-        mToolbar.setTitle("用户名");
+//        mToolbar.setTitle("用户名");
         //设置Toolbar副标题
-        mToolbar.setSubtitle("Sub title");
+//        mToolbar.setSubtitle("Sub title");
 
         //TabLayout的切换监听
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -89,7 +89,7 @@ public class GiveJobsValidList extends Fragment{
             }
         });
         //设置RecycleView
-        RecyclerView recyclerView = (RecyclerView)fragmentView.findViewById(R.id.recyclerView_give_jobs_main);
+        RecyclerView recyclerView = (RecyclerView)fragmentView.findViewById(R.id.recyclerView_give_jobs_valid_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
