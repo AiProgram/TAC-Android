@@ -39,4 +39,8 @@
     <style name="ContentTextStyle">
         <item name="android:textColor">#FF000000</item>
     </style>
+
+    <style name="SignUpEditTextStyle">
+        <item name="met_baseColor">#0028E5</item>
+    </style>
 </resources>
