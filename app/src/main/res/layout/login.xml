@@ -62,18 +62,19 @@
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/login_edit_pwd"
-            android:drawableLeft="@android:drawable/ic_lock_idle_lock"
+            android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
             android:hint="请输入您的密码"
             android:layout_below="@+id/login_edit_account"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <EditText
+
             android:layout_width="400dp"
             android:layout_height="60dp"
             android:inputType="textPersonName"
             android:id="@+id/login_edit_account"
-            android:drawableLeft="@android:drawable/ic_menu_myplaces"
+            android:drawableLeft="@drawable/ic_account_circle_black_24dp"
             android:hint="请输入您的用户名"
             android:layout_below="@+id/logo"
             android:layout_alignParentLeft="true"
