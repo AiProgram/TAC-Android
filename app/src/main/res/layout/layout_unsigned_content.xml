@@ -15,9 +15,9 @@
         android:id="@+id/scrollView2">
 
         <RelativeLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
 
 
             <TextView
@@ -67,7 +67,7 @@
                 android:id="@+id/tv_email" />
 
             <TextView
-                android:text="5人/10人"
+                android:text="5人"
                 android:textColor="@color/warningRed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,15 +94,6 @@
                 style="@style/ContentDisciptionTextStyle"
                 android:id="@+id/label_workplace"
                 android:layout_below="@+id/label_email"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:text="项目详情："
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/ContentDisciptionTextStyle"
-                android:id="@+id/label_detail"
-                android:layout_below="@+id/label_workplace"
                 android:layout_alignParentStart="true" />
 
             <TextView
@@ -218,22 +209,22 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="取消招聘"
-                android:layout_margin="25dp"
-                style="@style/WarningButton"
-                android:layout_alignParentBottom="true"
+                android:text="报名"
+                style="@style/AcceptButton"
                 android:layout_below="@id/tv_detail"
-            />
+                android:layout_margin="25dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/btn_signUp" />
 
-            <Button
-                android:text="报名列表"
+            <TextView
+                android:text="项目详情："
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/AcceptButton"
-                android:layout_margin="25dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:id="@+id/button" />
+                style="@style/ContentDisciptionTextStyle"
+                android:id="@+id/label_detail"
+                android:layout_below="@+id/label_workplace"
+                android:layout_alignParentStart="true" />
 
         </RelativeLayout>
     </ScrollView>

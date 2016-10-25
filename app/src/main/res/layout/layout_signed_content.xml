@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,14 +11,23 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView2">
+        android:layout_height="match_parent">
 
         <RelativeLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
 
+
+            <TextView
+                android:text="招聘PHP程序员"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/title_content"
+                android:paddingTop="@dimen/content_title_padding"
+                android:paddingBottom="@dimen/content_title_padding"
+                style="@style/ContentTitleTextStyle"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:text="报酬："
@@ -67,7 +76,7 @@
                 android:id="@+id/tv_email" />
 
             <TextView
-                android:text="5人/10人"
+                android:text="5人"
                 android:textColor="@color/warningRed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -192,50 +201,16 @@
                 android:layout_below="@+id/label_detail"
                 android:layout_alignParentStart="true" />
 
-            <TextView
-                android:text="剩余5天"
-                android:layout_marginLeft="15dp"
-                android:textColor="@color/warningRed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_days_left"
-                android:layout_alignBaseline="@+id/tv_deadline"
-                android:layout_alignBottom="@+id/tv_deadline"
-                android:layout_toEndOf="@+id/tv_deadline" />
-
-            <TextView
-                android:text="招聘PHP程序员"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/title_content"
-                android:paddingTop="@dimen/content_title_padding"
-                android:paddingBottom="@dimen/content_title_padding"
-                style="@style/ContentTitleTextStyle"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="56dp" />
-
             <Button
+                android:text="取消报名"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="取消招聘"
-                android:layout_margin="25dp"
+                android:id="@+id/btn_cancel_signUp"
                 style="@style/WarningButton"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@id/tv_detail"
-            />
-
-            <Button
-                android:text="报名列表"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/AcceptButton"
                 android:layout_margin="25dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:id="@+id/button" />
-
+                android:layout_below="@+id/tv_detail"
+                android:layout_centerHorizontal="true" />
         </RelativeLayout>
     </ScrollView>
 
-</RelativeLayout>
+</LinearLayout>
