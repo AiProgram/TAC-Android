@@ -16,6 +16,7 @@ import java.util.Map;
 
 
 public class HttpPost {
+    public static  final String GSON_ERR="数据解析失败";
     public static void post(final String address, final Map<String,String>params, final HttpCallBackListener listener){
 
             new Thread(new Runnable() {
