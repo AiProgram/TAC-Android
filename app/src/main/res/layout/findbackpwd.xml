@@ -85,6 +85,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <Spinner
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/findbackpwd_question"
+        android:layout_alignTop="@+id/findbackpwd_name"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="48dp" />
+
     <Button
         android:layout_width="120dp"
         android:layout_height="wrap_content"
@@ -96,14 +105,5 @@
         android:layout_alignBaseline="@+id/findbackpwd_btn_sure"
         android:layout_alignBottom="@+id/findbackpwd_btn_sure"
         android:layout_alignParentEnd="true" />
-
-    <Spinner
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/findbackpwd_question"
-        android:layout_alignTop="@+id/findbackpwd_name"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="48dp" />
 
 </RelativeLayout>

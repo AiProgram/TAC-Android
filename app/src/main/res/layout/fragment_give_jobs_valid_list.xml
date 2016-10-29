@@ -1,77 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <android.support.design.widget.CoordinatorLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android"
         >
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/appbar_give_jobs_top"
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:background="?attr/colorPrimary"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize"
+            android:id="@+id/toolbar_give_jobs_top"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
 
-            <android.support.v7.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary"
-                android:theme="?attr/actionBarTheme"
-                android:minHeight="?attr/actionBarSize"
-                android:id="@+id/toolbar_give_jobs_top"
-                app:layout_scrollFlags="scroll|enterAlways"
-                >
-
-                <com.tac.iparttimejob.UI.Utils.RoundImageView
-                    android:id="@+id/navigation_header_container"
-                    android:layout_height="@dimen/toolbar_head_image_Size"
-                    android:layout_width="@dimen/toolbar_head_image_Size"
-                    android:src="@drawable/user_head_image"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/title_give_jobs_valid_list"
-                    android:layout_gravity="center"
-                    android:textColor="#FFFFFF"
-                    android:text="我要招聘"
-                    android:textSize="@dimen/toolbar_title_text_size" />
-
-                <ImageButton
-                    android:layout_width="@dimen/toolbar_icon_size"
-                    android:layout_height="@dimen/toolbar_icon_size"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="10dp"
-                    android:scaleType="centerInside"
-                    android:id="@+id/imgbtn_add_jobs"
-                    android:background="@drawable/ic_playlist_add_white_48dp"
-                    />
-
-
-            </android.support.v7.widget.Toolbar>
-
-
-            <android.support.design.widget.TabLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:tabTextColor="@color/white"
-                app:tabSelectedTextColor="@color/heavyPink"
-                app:tabMode="scrollable"
-                android:id="@+id/tabLayout_give_jobs_top"
-                >
+                android:orientation="horizontal">
 
-            </android.support.design.widget.TabLayout>
 
-        </android.support.design.widget.AppBarLayout>
+            <com.tac.iparttimejob.UI.Utils.RoundImageView
+                android:id="@+id/navigation_header_container"
+                android:layout_height="@dimen/toolbar_head_image_Size"
+                android:layout_width="@dimen/toolbar_head_image_Size"
+                android:src="@drawable/user_head_image"
+                android:layout_weight="1"
+                />
 
-    <android.support.v7.widget.RecyclerView
+                <android.support.design.widget.TabLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="40"
+                    app:tabTextColor="@color/white"
+                    app:tabSelectedTextColor="@color/heavyPink"
+                    app:tabMode="fixed"
+                    android:id="@+id/tabLayout_give_jobs_top"
+                    android:layout_below="@id/toolbar_give_jobs_top"
+                    >
+                </android.support.design.widget.TabLayout>
+
+            <ImageButton
+                android:layout_width="@dimen/toolbar_icon_size"
+                android:layout_height="@dimen/toolbar_icon_size"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:scaleType="centerInside"
+                android:id="@+id/imgbtn_add_jobs"
+                android:background="@drawable/ic_playlist_add_white_48dp"
+                />
+
+            </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recyclerView_give_jobs_valid_list"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_give_jobs_top"
+        android:id="@+id/srl_give_jobs">
+
+        <com.tac.iparttimejob.UI.Utils.RefreshRecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_give_jobs"
+            android:layout_below="@+id/tabLayout_give_jobs_top"
+            android:layout_alignParentStart="true" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
+
 

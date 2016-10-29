@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/IParttimeJob.iml" filepath="$PROJECT_DIR$/IParttimeJob.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/TAC-Android.iml" filepath="$PROJECT_DIR$/TAC-Android.iml" />
->>>>>>> a4f8431c82f919a1139bdb9ff1d6bbe6be409b8b
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
