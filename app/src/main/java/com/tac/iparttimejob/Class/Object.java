@@ -5,7 +5,9 @@ package com.tac.iparttimejob.Class;
  */
 
 public class Object {
-    public static UserResult.User userObject;
-    public static ResumeResult.Resume resumeObject;
-    public static RecuitResult.Recuit recuitObject;
+    public static UserResult.User       userObject;
+    public static ResumeResult.Resume   resumeObject;
+    public static RecuitResult.Recuit   recuitObject;
+    public static LoginResult.LoginUser loginObject;
+    public static String                emailData;
 }

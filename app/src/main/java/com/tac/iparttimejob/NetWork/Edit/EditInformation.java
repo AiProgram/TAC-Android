@@ -117,5 +117,38 @@ public class EditInformation extends HttpPost {
 
 
     }
+    public static void reSetUserPassword(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.RESETPASSWD, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                RecuitResult recuitResult=null;
+                try {
+                    recuitResult=new Gson().fromJson(result,RecuitResult.class);
+                }
+                catch (JsonSyntaxException e) {
+                    //错误
+                }
+                if(recuitResult!=null)
+                {
+                    if(recuitResult.isSuccess())
+                    {
+                        listener.onFinish("");
+                    }
+                    else
+                    {
+                        listener.onError(recuitResult.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+                listener.onError(error);
+            }
+        });
+
+
+    }
 
 }

@@ -10,6 +10,9 @@ import com.tac.iparttimejob.NetWork.Connect.HttpPost;
 
 import java.util.Map;
 
+import static com.tac.iparttimejob.Class.Object.loginObject;
+
+
 /**
  * Created by 守候。 on 2016/10/26.
  */
@@ -31,7 +34,19 @@ public class SignIn extends HttpPost{
                     {
                         if(loginResult.isSuccess())
                         {
+                            loginObject.setPhone(loginResult.getLoginUser().getPhone());
+                            loginObject.setAccount(loginResult.getLoginUser().getAccount());
+                            loginObject.setEmail(loginResult.getLoginUser().getEmail());
+                            loginObject.setImage(loginResult.getLoginUser().getImage());
+                            loginObject.setKind(loginResult.getLoginUser().getKind());
+                            loginObject.setName(loginResult.getLoginUser().getName());
+                            loginObject.setNickName(loginResult.getLoginUser().getNickName());
+                            loginObject.setPasswd(loginResult.getLoginUser().getPasswd());
+                            loginObject.setType(loginResult.getLoginUser().getType());
+                            loginObject.setUserID(loginResult.getLoginUser().getUserID());
+
                             listener.onFinish("");
+
                         }
                         else
                         {

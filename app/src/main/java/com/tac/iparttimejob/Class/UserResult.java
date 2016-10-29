@@ -23,6 +23,17 @@ public class UserResult {
 
     private boolean success;
     private String  message;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    private User user;
+
     public class User {
         public String getUserID() {
             return userID;
@@ -105,6 +116,17 @@ public class UserResult {
         private String email;
         private String image;
         private int type;
+
+        public int getKind() {
+            return kind;
+        }
+
+        public void setKind(int kind) {
+            this.kind = kind;
+        }
+
+        private int kind;
+
 
     }
 }

@@ -1,7 +1,10 @@
 package com.tac.iparttimejob.NetWork.Query;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.tac.iparttimejob.Class.EmailResult;
 import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.Class.ResumeResult;
 import com.tac.iparttimejob.Class.UserResult;
@@ -11,6 +14,7 @@ import com.tac.iparttimejob.NetWork.Connect.HttpPost;
 
 import java.util.Map;
 
+import static com.tac.iparttimejob.Class.Object.emailData;
 import static com.tac.iparttimejob.Class.Object.recuitObject;
 import static com.tac.iparttimejob.Class.Object.resumeObject;
 import static com.tac.iparttimejob.Class.Object.userObject;
@@ -58,7 +62,6 @@ public class QueryInformation extends HttpPost{
                             resumeObject.setSingleResume(resume.getSingleResume());
                             resumeObject.setUserID(resume.getUserID());
                             resumeObject.setUrl(resume.getUrl());
-
                             listener.onFinish("");
                         }
                         else
@@ -76,6 +79,7 @@ public class QueryInformation extends HttpPost{
 
             @Override
             public void onError(String error) {
+                Log.d("POST错误:",error);
                 listener.onError(error);
             }
         });
@@ -88,7 +92,6 @@ public class QueryInformation extends HttpPost{
             @Override
             public void onFinish(String result) {
                 UserResult userResult=null;
-                UserResult.User user =null;
                 try {
 
                     userResult=new Gson().fromJson(result,UserResult.class);
@@ -100,32 +103,18 @@ public class QueryInformation extends HttpPost{
                 {
                     if(userResult.isSuccess())
                     {
-                        try {
-
-                            user=new Gson().fromJson(result,UserResult.User.class);
-
-                        }
-                        catch (JsonSyntaxException e) {
-                            //错误
-                        }
-                        if(user!=null) {
-                            userObject.setPhone(user.getPhone());
-                            userObject.setUserID(user.getUserID());
-                            userObject.setAccount(user.getAccount());
-                            userObject.setEmail(user.getEmail());
-                            userObject.setImage(user.getImage());
-                            userObject.setName(user.getName());
-                            userObject.setNickName(user.getNickName());
-                            userObject.setPasswd(user.getPasswd());
-                            userObject.setAccount(user.getAccount());
-                            userObject.setType(user.getType());
+                            userObject.setPhone(userResult.getUser().getPhone());
+                            userObject.setUserID(userResult.getUser().getUserID());
+                            userObject.setAccount(userResult.getUser().getAccount());
+                            userObject.setEmail(userResult.getUser().getEmail());
+                            userObject.setImage(userResult.getUser().getImage());
+                            userObject.setName(userResult.getUser().getName());
+                            userObject.setNickName(userResult.getUser().getNickName());
+                            userObject.setPasswd(userResult.getUser().getPasswd());
+                            userObject.setAccount(userResult.getUser().getAccount());
+                            userObject.setType(userResult.getUser().getType());
 
                             listener.onFinish("");
-                        }
-                        else
-                        {
-                            listener.onError(GSON_ERR);
-                        }
                     }
                     else
                     {
@@ -137,6 +126,7 @@ public class QueryInformation extends HttpPost{
 
             @Override
             public void onError(String error) {
+                Log.d("POST错误:",error);
                 listener.onError(error);
             }
         });
@@ -147,7 +137,7 @@ public class QueryInformation extends HttpPost{
             @Override
             public void onFinish(String result) {
                 RecuitResult recuitResult=null;
-                RecuitResult.Recuit recuit =null;
+
                 try {
 
                     recuitResult=new Gson().fromJson(result,RecuitResult.class);
@@ -159,40 +149,27 @@ public class QueryInformation extends HttpPost{
                 {
                     if(recuitResult.isSuccess())
                     {
-                        try {
-
-                            recuit=new Gson().fromJson(result, RecuitResult.Recuit.class);
-
-                        }
-                        catch (JsonSyntaxException e) {
-                            //错误
-                        }
-                        if(recuit!=null) {
-                            recuitObject.setPhone(recuit.getPhone());
-                            recuitObject.setApplyPeopleNum(recuit.getApplyPeopleNum());
-                            recuitObject.setDeadLine(recuit.getDeadLine());
-                            recuitObject.setDisplayTime(recuit.getDisplayTime());
-                            recuitObject.setEmail(recuit.getEmail());
-                            recuitObject.setIsOK(recuit.getIsOK());
-                            recuitObject.setOkTime(recuit.getDisplayTime());
-                            recuitObject.setOwner(recuit.getOwner());
-                            recuitObject.setOwnerID(recuit.getOwnerID());
-                            recuitObject.setReason(recuit.getReason());
-                            recuitObject.setRecruitID(recuit.getRecruitID());
-                            recuitObject.setRequrire(recuit.getRequrire());
-                            recuitObject.setSingleInfo(recuit.getSingleInfo());
-                            recuitObject.setStatus(recuit.getStatus());
-                            recuitObject.setTitle(recuit.getTitle());
-                            recuitObject.setWorkInfo(recuit.getWorkInfo());
-                            recuitObject.setWorkPlace(recuit.getWorkPlace());
-                            recuitObject.setNeedPeopleNum(recuit.getNeedPeopleNum());
+                            recuitObject.setPhone(recuitResult.getRecuit().getPhone());
+                            recuitObject.setApplyPeopleNum(recuitResult.getRecuit().getApplyPeopleNum());
+                            recuitObject.setDeadLine(recuitResult.getRecuit().getDeadLine());
+                            recuitObject.setDisplayTime(recuitResult.getRecuit().getDisplayTime());
+                            recuitObject.setEmail(recuitResult.getRecuit().getEmail());
+                            recuitObject.setIsOK(recuitResult.getRecuit().getIsOK());
+                            recuitObject.setOkTime(recuitResult.getRecuit().getDisplayTime());
+                            recuitObject.setOwner(recuitResult.getRecuit().getOwner());
+                            recuitObject.setOwnerID(recuitResult.getRecuit().getOwnerID());
+                            recuitObject.setReason(recuitResult.getRecuit().getReason());
+                            recuitObject.setRecruitID(recuitResult.getRecuit().getRecruitID());
+                            recuitObject.setRequrire(recuitResult.getRecuit().getRequrire());
+                            recuitObject.setSingleInfo(recuitResult.getRecuit().getSingleInfo());
+                            recuitObject.setStatus(recuitResult.getRecuit().getStatus());
+                            recuitObject.setTitle(recuitResult.getRecuit().getTitle());
+                            recuitObject.setWorkInfo(recuitResult.getRecuit().getWorkInfo());
+                            recuitObject.setWorkPlace(recuitResult.getRecuit().getWorkPlace());
+                            recuitObject.setNeedPeopleNum(recuitResult.getRecuit().getNeedPeopleNum());
 
                             listener.onFinish("");
-                        }
-                        else
-                        {
-                            listener.onError(GSON_ERR);
-                        }
+
                     }
                     else
                     {
@@ -204,6 +181,46 @@ public class QueryInformation extends HttpPost{
 
             @Override
             public void onError(String error) {
+                Log.d("POST错误:",error);
+                listener.onError(error);
+
+            }
+        });
+    }
+    public static void getEmailInformation(Map<String,String> params, final HttpCallBackListener listener)
+    {
+        post(HttpAddress.HOST + HttpAddress.GET_RECUIT_INFORMATION, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                EmailResult emailResult=null;
+
+                try {
+
+                    emailResult=new Gson().fromJson(result,EmailResult.class);
+                }
+                catch (JsonSyntaxException e) {
+                    //错误
+                }
+                if(emailResult!=null)
+                {
+                    if(emailResult.isSuccess())
+                    {
+                        emailData=emailResult.getEmailData();
+                        listener.onFinish("发送成功");
+
+                    }
+                    else
+                    {
+                        listener.onError(emailResult.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+
+                Log.d("POST错误:",error);
                 listener.onError(error);
             }
         });

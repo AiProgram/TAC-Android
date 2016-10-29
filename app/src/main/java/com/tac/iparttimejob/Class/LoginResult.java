@@ -18,6 +18,16 @@ public class LoginResult {
     boolean success;
     String message;
 
+
+    public LoginUser getLoginUser() {
+        return loginUser;
+    }
+
+    public void setLoginUser(LoginUser loginUser) {
+        this.loginUser = loginUser;
+    }
+
+    private LoginUser loginUser;
     public String getMessage() {
         return message;
     }
@@ -25,26 +35,96 @@ public class LoginResult {
     public void setMessage(String message) {
         this.message = message;
     }
+    public class LoginUser {
+        public String getUserID() {
+            return userID;
+        }
 
-    public PersonalResume getPersonalResume() {
-        return personalResume;
-    }
+        public void setUserID(String userID) {
+            this.userID = userID;
+        }
 
-    public void setPersonalResume(PersonalResume personalResume) {
-        this.personalResume = personalResume;
-    }
+        public String getAccount() {
+            return account;
+        }
 
-    private PersonalResume personalResume;
-    class PersonalResume{
+        public void setAccount(String account) {
+            this.account = account;
+        }
+
+        public String getNickName() {
+            return nickName;
+        }
+
+        public void setNickName(String nickName) {
+            this.nickName = nickName;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public String getPasswd() {
+            return passwd;
+        }
+
+        public void setPasswd(String passwd) {
+            this.passwd = passwd;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
         private String userID;
+        private String account;
+        private String nickName;
         private String name;
-        private String phoneNumber;
-        private String eMail;
-        private String information;
-        private String informationDetail;
-        private String doProject;
-        private String goodAt;
+        private String phone;
+        private String passwd;
+        private String email;
+        private String image;
+        private int type;
+        private int kind;
 
+        public int getKind() {
+            return kind;
+        }
 
+        public void setKind(int kind) {
+            this.kind = kind;
+        }
     }
 }
