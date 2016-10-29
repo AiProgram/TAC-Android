@@ -4,6 +4,9 @@ package com.tac.iparttimejob.NetWork.Connect;
  * Created by wait。 on 2016/10/24.
  * HTTP发送请求
  */
+import android.os.Looper;
+import android.util.Log;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -22,6 +25,7 @@ public class HttpPost {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    Looper.prepare();
                     HttpURLConnection connection = null;
 
                     try {
@@ -37,9 +41,11 @@ public class HttpPost {
                           }
                         }
                         str.deleteCharAt(str.length()-1); //删除最后一个字符&
+                        Log.d("zjm",str.toString());
                         byte[] data=str.toString().getBytes();
                         URL url = new URL(address);
                         connection = (HttpURLConnection) url.openConnection();
+
                         connection.setRequestMethod("POST");    //设置以Post方式提交数据
                         connection.setConnectTimeout(8000); //设置连接超时时间
                         connection.setReadTimeout(8000);
@@ -47,6 +53,8 @@ public class HttpPost {
                         connection.setDoOutput(true);            //打开输出流，以便向服务器提交数
                         OutputStream outputStream=connection.getOutputStream();
                         outputStream.write(data);               //提交数据
+
+                        //Log.d("zjm",connection.getResponseMessage());
                         InputStream inPutStream=connection.getInputStream();
                         BufferedReader reader = new BufferedReader(new  InputStreamReader(inPutStream,"UTF-8"));
                         StringBuilder result = new StringBuilder();  //返回结果
@@ -59,11 +67,14 @@ public class HttpPost {
                             listener.onFinish(result.toString());
                         }
                     } catch (Exception e) {
+
+                        e.printStackTrace();
                         if (listener != null) {
     // 回调onError()方法
                             listener.onError(e.toString());
                         }
                     } finally {
+
                         if (connection != null) {
                             connection.disconnect();
                         }

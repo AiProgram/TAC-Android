@@ -1,5 +1,7 @@
 package com.tac.iparttimejob.Class;
 
+import com.tac.iparttimejob.R;
+
 /**
  * Created by 守候。 on 2016/10/26.
  */
@@ -24,6 +26,15 @@ public class RecuitResult {
     }
 
     private String message;
+    private Recuit recuit;
+
+    public Recuit getRecuit() {
+        return recuit;
+    }
+
+    public void setRecuit(Recuit recuit) {
+        this.recuit = recuit;
+    }
 
     public class Recuit {
         private String recruitID;

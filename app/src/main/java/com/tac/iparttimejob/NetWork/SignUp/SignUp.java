@@ -1,5 +1,7 @@
 package com.tac.iparttimejob.NetWork.SignUp;
 
+import android.util.Log;
+
 import com.google.gson.JsonSyntaxException;
 import com.tac.iparttimejob.Class.RegisterResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
@@ -13,8 +15,9 @@ import com.google.gson.Gson;
 
 public class SignUp extends HttpPost{
     public static  void register(Map<String,String>params, final HttpCallBackListener listener){
+            Log.d("params:",HttpAddress.HOST+HttpAddress.SIGNUP_ADDRESS);
 
-             HttpPost.post(HttpAddress.SIGNUP_ADDRESS,params,new  HttpCallBackListener() {
+             HttpPost.post(HttpAddress.HOST+HttpAddress.SIGNUP_ADDRESS,params,new  HttpCallBackListener() {
             @Override
             public void onFinish(String result)
             {
@@ -29,11 +32,14 @@ public class SignUp extends HttpPost{
                 {
                     if(registerResult.isSuccess())
                     {
-                        listener.onFinish("");
+
+                        listener.onFinish("注册成功");
                     }
                     else
                     {
+                        Log.d("出错:",registerResult.getMessage());
                         listener.onError(registerResult.getMessage());
+
                     }
                 }
                 else listener.onError(GSON_ERR);
@@ -41,6 +47,7 @@ public class SignUp extends HttpPost{
             @Override
             public void onError(String error)
             {
+                Log.d("出错:",error);
                 listener.onError(error);
             }
 
