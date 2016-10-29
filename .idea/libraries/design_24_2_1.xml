@@ -4,13 +4,18 @@
       <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/design/24.2.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/design/24.2.1/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/design/24.2.1/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/design/24.2.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
+<<<<<<< HEAD
+      <root url="jar://E:/ProgramFiles/Android/sdk/extras/android/m2repository/com/android/support/design/24.2.1/design-24.2.1-sources.jar!/" />
+=======
       <root url="jar://$PROJECT_DIR$/../../../SDK/extras/android/m2repository/com/android/support/design/24.2.1/design-24.2.1-sources.jar!/" />
+>>>>>>> a4f8431c82f919a1139bdb9ff1d6bbe6be409b8b
       <root url="jar://$USER_HOME$/AppData/Local/Android/Sdk/extras/android/m2repository/com/android/support/design/24.2.1/design-24.2.1-sources.jar!/" />
+      <root url="jar://D:/../SDK/extras/android/m2repository/com/android/support/design/24.2.1/design-24.2.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -15,6 +15,10 @@ import com.tac.iparttimejob.R;
  * Created by AiProgram on 2016/10/23.
  */
 
+/**
+ * 这是带有退回的公共Toolbar布局
+ */
+
 public class TitleToolBarLayout extends LinearLayout{
 
     public TitleToolBarLayout(Context context, AttributeSet attrs) {
@@ -30,6 +34,7 @@ public class TitleToolBarLayout extends LinearLayout{
         });
     }
 
+    //设置中部标题
     public void setTitleText(String titleText){
         TextView TitleTextView = (TextView) findViewById(R.id.title_common_toolbar);
         TitleTextView.setText(titleText);
