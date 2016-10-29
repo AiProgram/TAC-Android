@@ -45,7 +45,7 @@ public class SignIn extends HttpPost{
                             loginObject.setType(loginResult.getLoginUser().getType());
                             loginObject.setUserID(loginResult.getLoginUser().getUserID());
 
-                            listener.onFinish("");
+                            listener.onFinish("登录成功");
 
                         }
                         else

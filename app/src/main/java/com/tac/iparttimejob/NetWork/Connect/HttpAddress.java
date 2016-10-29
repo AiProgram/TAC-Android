@@ -11,7 +11,7 @@ public class HttpAddress {
     public static final String SIGNUP_ADDRESS          ="tacpersonal/register";
     public static final String LOGIN_ADDRESSS          ="tacpersonal/login";
     public static final String EMAIL_ADDRESS           ="tacpersonal/checkEmail";
-    public static final String RESETPASSWD             =""
+    public static final String RESETPASSWD             ="";
     public static final String SET_PERSONAL_RESUME         ="";
     public static final String GET_PERSONAL_RESUME         ="";
     public static final String GET_USER_INFORMATION        ="";

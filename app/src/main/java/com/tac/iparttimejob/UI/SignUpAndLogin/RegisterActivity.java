@@ -28,8 +28,8 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register);
-        button=(Button)findViewById(R.id.register_btn_sure);
+        setContentView(R.layout.layout_register);
+        button=(Button)findViewById(R.id.btn_accept_register);
 
         //下面代码测试正确.按照下面格式写即可
         button.setOnClickListener(new View.OnClickListener() {
