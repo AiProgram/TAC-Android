@@ -11,6 +11,7 @@ import com.tac.iparttimejob.NetWork.Connect.HttpPost;
 import java.util.Map;
 
 import static com.tac.iparttimejob.Class.Object.loginObject;
+import static com.tac.iparttimejob.Class.Object.userObject;
 
 
 /**
@@ -45,6 +46,16 @@ public class SignIn extends HttpPost{
                             loginObject.setType(loginResult.getLoginUser().getType());
                             loginObject.setUserID(loginResult.getLoginUser().getUserID());
 
+                            userObject.setPhone(loginResult.getLoginUser().getPhone());
+                            userObject.setAccount(loginResult.getLoginUser().getAccount());
+                            userObject.setEmail(loginResult.getLoginUser().getEmail());
+                            userObject.setImage(loginResult.getLoginUser().getImage());
+                            userObject.setKind(loginResult.getLoginUser().getKind());
+                            userObject.setName(loginResult.getLoginUser().getName());
+                            userObject.setNickName(loginResult.getLoginUser().getNickName());
+                            userObject.setPasswd(loginResult.getLoginUser().getPasswd());
+                            userObject.setType(loginResult.getLoginUser().getType());
+                            userObject.setUserID(loginResult.getLoginUser().getUserID());
                             listener.onFinish("登录成功");
 
                         }

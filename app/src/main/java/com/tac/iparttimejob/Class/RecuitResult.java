@@ -41,6 +41,15 @@ public class RecuitResult {
         private String ownerID;
         private String owner;
         private String title;
+        private UserResult.User user;
+        public UserResult.User getUser() {
+            return user;
+        }
+
+        public void setUser(UserResult.User user) {
+            this.user = user;
+        }
+
 
         public String getRecruitID() {
             return recruitID;
