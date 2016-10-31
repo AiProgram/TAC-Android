@@ -1,4 +1,4 @@
-package com.tac.iparttimejob.UI.GiveJobs;
+package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;

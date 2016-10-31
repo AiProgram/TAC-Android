@@ -1,13 +1,10 @@
-package com.tac.iparttimejob.UI.GiveJobs;
+package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
-import android.view.View;
 
 import com.tac.iparttimejob.R;
 

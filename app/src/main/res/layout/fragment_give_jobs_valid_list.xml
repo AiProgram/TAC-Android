@@ -25,11 +25,10 @@
                 android:orientation="horizontal">
 
 
-            <com.tac.iparttimejob.UI.Utils.RoundImageView
-                android:id="@+id/navigation_header_container"
+            <Space
+                android:id="@+id/sp_navigation_bar"
                 android:layout_height="@dimen/toolbar_head_image_Size"
                 android:layout_width="@dimen/toolbar_head_image_Size"
-                android:src="@drawable/user_head_image"
                 android:layout_weight="1"
                 />
 
@@ -45,15 +44,16 @@
                     >
                 </android.support.design.widget.TabLayout>
 
-            <ImageButton
-                android:layout_width="@dimen/toolbar_icon_size"
-                android:layout_height="@dimen/toolbar_icon_size"
-                android:layout_weight="1"
-                android:layout_marginRight="10dp"
-                android:scaleType="centerInside"
-                android:id="@+id/imgbtn_add_jobs"
-                android:background="@drawable/ic_playlist_add_white_48dp"
-                />
+                <ImageButton
+                    android:layout_width="@dimen/toolbar_icon_size"
+                    android:layout_height="@dimen/toolbar_icon_size"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="centerInside"
+                    android:id="@+id/imgbtn_add_jobs"
+                    android:background="@drawable/ic_playlist_add_white_48dp"
+                    />
 
             </LinearLayout>
 

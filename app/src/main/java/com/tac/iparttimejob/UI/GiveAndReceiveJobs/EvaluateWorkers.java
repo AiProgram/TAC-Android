@@ -1,4 +1,4 @@
-package com.tac.iparttimejob.UI.GiveJobs;
+package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
 /**
  * Created by AiProgram on 2016/10/21.

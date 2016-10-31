@@ -1,7 +1,9 @@
-package com.tac.iparttimejob.UI.GiveJobs;
+package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
 
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.tac.iparttimejob.UI.MyManager.MyManager;
 
 /**
  * Created by AiProgram on 2016/10/21.
@@ -18,7 +20,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     public android.support.v4.app.Fragment getItem(int position) {
        switch (position){
            case 1:return new GiveJobsList();
-           case 2:return new GiveJobsList();
+           case 2:return new MyManager();
            case 3:return new GiveJobsList();
            default:return new GiveJobsList();
        }
