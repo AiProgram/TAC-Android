@@ -11,6 +11,7 @@ import com.tac.iparttimejob.Class.EmailResult;
 import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.Class.RecuitList;
 import com.tac.iparttimejob.Class.ResumeResult;
+import com.tac.iparttimejob.Class.ReturnMessage;
 import com.tac.iparttimejob.Class.UserResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpAddress;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
@@ -64,18 +65,15 @@ public class QueryInformation extends HttpPost{
                             //错误
                         }
                         if(resume!=null) {
-                            resumeObject.setDetailResume(resume.getDetailResume());
-                            resumeObject.setEmail(resume.getEmail());
-                            resumeObject.setGoodAt(resume.getGoodAt());
-                            resumeObject.setHadDone(resume.getHadDone());
+                            resumeObject.setUser(resume.getUser());
+                            resumeObject.setResumeid(resume.getResumeid());
+                            resumeObject.setNickname(resume.getNickname());
                             resumeObject.setName(resume.getName());
-                            resumeObject.setNikeName(resume.getNikeName());
                             resumeObject.setPhone(resume.getPhone());
-                            resumeObject.setResumeID(resume.getResumeID());
+                            resumeObject.setEmail(resume.getEmail());
                             resumeObject.setSingleResume(resume.getSingleResume());
-                            resumeObject.setUserID(resume.getUserID());
-                            resumeObject.setUrl(resume.getUrl());
-                            listener.onFinish("");
+                            resumeObject.setDetailResume(resume.getDetailResume());
+                            listener.onFinish("成功");
                         }
                         else
                         {
@@ -84,7 +82,7 @@ public class QueryInformation extends HttpPost{
                     }
                     else
                     {
-                        Log.d("返回:",resumeResult.getMessage());
+                        Log.d("gsonErr:",resumeResult.getMessage());
                         listener.onError(resumeResult.getMessage());
                     }
                 }
@@ -149,7 +147,7 @@ public class QueryInformation extends HttpPost{
     //邮件验证码
     public static void getEmailInformation(Map<String,String> params, final HttpCallBackListener listener)
     {
-        post(HttpAddress.HOST + HttpAddress.GET_RECUIT_INFORMATION, params, new HttpCallBackListener() {
+        post(HttpAddress.HOST + HttpAddress.GET_RECRUIT_INFORMATION, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
                 EmailResult emailResult=null;
@@ -188,7 +186,7 @@ public class QueryInformation extends HttpPost{
     }
     //查看招聘信息
     public static void getRecruitInformation(Map<String,String>params,final HttpCallBackListener listener){
-        post(HttpAddress.HOST + HttpAddress.GET_RECUIT_INFORMATION, params, new HttpCallBackListener() {
+        post(HttpAddress.HOST + HttpAddress.GET_RECRUIT_INFORMATION, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
                 RecuitResult recuitResult=null;
@@ -496,5 +494,38 @@ public class QueryInformation extends HttpPost{
             }
         });
     }
+    //查看申请是否成功
+    public static void getCheckChoosen(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.GET_CHECK_CHOOSEN, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                ReturnMessage status=null;
+                try {
+                    status=new Gson().fromJson(result,ReturnMessage.class);
+                }
+                catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(status!=null)
+                {
+                    if(status.isSuccess())
+                    {
+                        listener.onFinish("true");
+                    }
+                    else
+                    {
+                        listener.onError(status.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
 
+            @Override
+            public void onError(String error) {
+                Log.d("postErr:",error);
+                listener.onError(error);
+            }
+        });
+    }
 }

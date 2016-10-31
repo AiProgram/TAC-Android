@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.tac.iparttimejob.Class.EnrollList;
 import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.Class.ReturnMessage;
 import com.tac.iparttimejob.Class.UserResult;
@@ -18,9 +19,9 @@ import java.util.Map;
  */
 
 public class EditInformation extends HttpPost {
-    public static void setPersonalResume(Map<String,String>params,final HttpCallBackListener listener)
+    public static void setCreatPersonalResume(Map<String,String>params,final HttpCallBackListener listener)
     {
-        post(HttpAddress.HOST + HttpAddress.SET_PERSONAL_RESUME, params, new HttpCallBackListener() {
+        post(HttpAddress.HOST + HttpAddress.SET_CANCEL_APPLICATION, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
                 ReturnMessage resumeResult=null;
@@ -37,7 +38,7 @@ public class EditInformation extends HttpPost {
                     if(resumeResult.isSuccess())
                     {
 
-                        listener.onFinish("");
+                        listener.onFinish("创建成功");
                     }
                     else
                     {
@@ -49,6 +50,80 @@ public class EditInformation extends HttpPost {
 
             @Override
             public void onError(String error) {
+
+                Log.d("postErr:",error);
+                listener.onError(error);
+            }
+        });
+    }
+    public static void setUpdateRecruit(Map<String,String>params,final HttpCallBackListener listener)
+    {
+        post(HttpAddress.HOST + HttpAddress.SET_UPDATE_PERSONAL_RESUME, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                ReturnMessage resumeResult=null;
+                try {
+
+                    resumeResult=new Gson().fromJson(result,ReturnMessage.class);
+                }
+                catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(resumeResult!=null)
+                {
+                    if(resumeResult.isSuccess())
+                    {
+
+                        listener.onFinish("更新成功");
+                    }
+                    else
+                    {
+                        listener.onError(resumeResult.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.d("postErr:",error);
+                listener.onError(error);
+            }
+        });
+    }
+    public static void setCreatRecuit(Map<String,String>params,final HttpCallBackListener listener)
+    {
+        post(HttpAddress.HOST + HttpAddress.SET_CREAT_RECRUIT, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                ReturnMessage resumeResult=null;
+                try {
+
+                    resumeResult=new Gson().fromJson(result,ReturnMessage.class);
+                }
+                catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(resumeResult!=null)
+                {
+                    if(resumeResult.isSuccess())
+                    {
+
+                        listener.onFinish("创建成功");
+                    }
+                    else
+                    {
+                        listener.onError(resumeResult.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.d("postErr:",error);
                 listener.onError(error);
             }
         });
@@ -84,12 +159,14 @@ public class EditInformation extends HttpPost {
 
             @Override
             public void onError(String error) {
+
+                Log.d("postErr:",error);
                 listener.onError(error);
             }
         });
     }
     public static void setRecuitInformation(Map<String,String>params,final HttpCallBackListener listener){
-        post(HttpAddress.HOST + HttpAddress.SET_RECUIT_INFORMATION, params, new HttpCallBackListener() {
+        post(HttpAddress.HOST + HttpAddress.SET_RECRUIT_INFORMATION, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
                 ReturnMessage recuitResult=null;
@@ -116,6 +193,7 @@ public class EditInformation extends HttpPost {
 
             @Override
             public void onError(String error) {
+                Log.d("postErr:",error);
                 listener.onError(error);
             }
         });
@@ -150,6 +228,7 @@ public class EditInformation extends HttpPost {
 
             @Override
             public void onError(String error) {
+                Log.d("postErr:",error);
                 listener.onError(error);
             }
         });
@@ -205,7 +284,8 @@ public class EditInformation extends HttpPost {
                 {
                     if(status.isSuccess())
                     {
-                        listener.onFinish("修改成功");
+
+                        listener.onFinish("选择成功");
                     }
                     else
                     {
@@ -292,5 +372,6 @@ public class EditInformation extends HttpPost {
             }
         });
     }
+
 
 }

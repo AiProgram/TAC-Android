@@ -32,28 +32,22 @@ public class ResumeResult {
 
 public class  Resume {
 
-    public String getResumeID() {
-        return resumeID;
+    UserResult.User user;
+
+    public int getResumeid() {
+        return resumeid;
     }
 
-    public void setResumeID(String resumeID) {
-        this.resumeID = resumeID;
+    public void setResumeid(int resumeid) {
+        this.resumeid = resumeid;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
-    public String getNikeName() {
-        return nikeName;
-    }
-
-    public void setNikeName(String nikeName) {
-        this.nikeName = nikeName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getName() {
@@ -80,22 +74,6 @@ public class  Resume {
         this.email = email;
     }
 
-    public int getHadDone() {
-        return hadDone;
-    }
-
-    public void setHadDone(int hadDone) {
-        this.hadDone = hadDone;
-    }
-
-    public String getGoodAt() {
-        return goodAt;
-    }
-
-    public void setGoodAt(String goodAt) {
-        this.goodAt = goodAt;
-    }
-
     public String getSingleResume() {
         return singleResume;
     }
@@ -112,6 +90,14 @@ public class  Resume {
         this.detailResume = detailResume;
     }
 
+    private int resumeid;
+    private String nickname;
+    private  String name;
+    private String phone;
+    private String email;
+    private String singleResume;
+    private String detailResume;
+
     public String getUrl() {
         return url;
     }
@@ -120,17 +106,24 @@ public class  Resume {
         this.url = url;
     }
 
-    private String resumeID;
-    private String userID;
-    private String nikeName;
-    private String name;
-    private String phone;
-    private String email;
-    private int hadDone;
-    private String goodAt;
-    private String singleResume;
-    private String detailResume;
+    public int getKind() {
+        return kind;
+    }
+
+    public void setKind(int kind) {
+        this.kind = kind;
+    }
+
     private String url;
+    private int kind;
+    public UserResult.User getUser() {
+        return user;
+    }
+
+    public void setUser(UserResult.User user) {
+        this.user = user;
+    }
+
 }
 
 }

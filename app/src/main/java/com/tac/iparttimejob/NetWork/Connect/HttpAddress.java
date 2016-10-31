@@ -13,13 +13,16 @@ public class HttpAddress {
     public static final String EMAIL_ADDRESS           ="tacpersonal/checkEmail";
     public static final String RESETPASSWD             ="";
 
-    public static final String SET_PERSONAL_RESUME         ="";
-    public static final String GET_PERSONAL_RESUME         ="";
+    public static final String SET_CTEAT_PERSONAL_RESUME         ="tacpersonal/createResume";
+    public static final String SET_UPDATE_PERSONAL_RESUME       ="tacpersonal/ updateResume";
+    public static final String GET_PERSONAL_RESUME         ="tacpersonal/ getResume";
     public static final String GET_USER_INFORMATION        ="";
     public static final String SET_USER_INFORMATION        ="";
-    public static final String SET_RECUIT_INFORMATION      ="tacrecruit/createRecruit";
+    public static final String SET_CREAT_RECRUIT            ="tacrecruit/createRecruit";
+
+    public static final String SET_RECRUIT_INFORMATION      ="tacrecruit/createRecruit";
     //查看某条招聘
-    public static final String GET_RECUIT_INFORMATION      ="tacrecruit/getRecruitByID";
+    public static final String GET_RECRUIT_INFORMATION      ="tacrecruit/getRecruitByID";
     //查看招聘列表
     public static final String GET_IN_RECUIT_LIST          ="tacrecruit/getRecruiting";
     public static final String GET_NOT_RECUIT_LIST         ="tacrecruit/getRecruited";
@@ -42,6 +45,7 @@ public class HttpAddress {
     //申请应聘
     public static final String SET_CREAT_APPLICATION        ="tacapplication/createApplicants";
     public static final String SET_CANCEL_APPLICATION       ="tacapplication/cancelApplicants";
+    public static final String GET_CHECK_CHOOSEN            ="tacapplication/checkChoosen";
 
 
 
