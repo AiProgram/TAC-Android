@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rl_my_manager">
+
+    <RelativeLayout
+        android:id="@+id/rl_user_filed"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginStart="23dp"
+        android:layout_below="@+id/tv_title_my_manager"
+        android:layout_alignParentStart="true">
+
+        <com.tac.iparttimejob.UI.Utils.RoundImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/riv_user_head"
+            android:src="@drawable/user_head_image"
+            android:scaleType="fitXY"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
+        </com.tac.iparttimejob.UI.Utils.RoundImageView>
+    </RelativeLayout>
+
+    <TextView
+        android:text="擅长JAVA，有一定的Android基础且熟练使用数据库"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_single_info"
+        android:layout_marginTop="27dp"
+        android:layout_below="@+id/tv_username_my_manager"
+        android:layout_alignStart="@+id/tv_username_my_manager" />
+
+    <TextView
+        android:text="我的管理"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/ContentTitleTextStyle"
+        android:id="@+id/tv_title_my_manager"
+        android:layout_marginTop="13dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="AiProgram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_username_my_manager"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/tv_title_my_manager"
+        android:layout_alignEnd="@+id/tv_title_my_manager" />
+
+    <ExpandableListView
+        android:id="@+id/elv_function_my_manager"
+        android:indicatorRight="?android:attr/expandableListPreferredItemIndicatorLeft"
+        android:divider="#D1CDC4"
+        android:dividerHeight="1.5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/rl_user_filed" />
+
+
+</RelativeLayout>

@@ -1,4 +1,4 @@
-package com.tac.iparttimejob.UI.GiveJobs;
+package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;

@@ -60,7 +60,7 @@ public class MyGiveJobAdapter extends RecyclerView.Adapter<MyGiveJobAdapter.MyVi
 
     //设置recyclerView的item布局
     public MyGiveJobAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MyViewHolder myViewHolder=new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_valid_jobs_item,parent,false));
+        MyViewHolder myViewHolder=new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_valid_job,parent,false));
         return myViewHolder;
     }
 
