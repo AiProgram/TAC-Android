@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText editText;
     private Button button;
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_register);
         button=(Button)findViewById(R.id.btn_accept_register);

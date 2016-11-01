@@ -19,15 +19,15 @@ public class LoginResult {
     String message;
 
 
-    public LoginUser getLoginUser() {
-        return loginUser;
+    public LoginUser getData() {
+        return data;
     }
 
-    public void setLoginUser(LoginUser loginUser) {
-        this.loginUser = loginUser;
+    public void setData(LoginUser data) {
+        this.data = data;
     }
 
-    private LoginUser loginUser;
+    private LoginUser data;
     public String getMessage() {
         return message;
     }
@@ -35,13 +35,15 @@ public class LoginResult {
     public void setMessage(String message) {
         this.message = message;
     }
-    public class LoginUser {
-        public String getUserID() {
-            return userID;
+    public static class LoginUser {
+
+
+        public String getUserid() {
+            return userid;
         }
 
-        public void setUserID(String userID) {
-            this.userID = userID;
+        public void setUserid(String userid) {
+            this.userid = userid;
         }
 
         public String getAccount() {
@@ -52,12 +54,12 @@ public class LoginResult {
             this.account = account;
         }
 
-        public String getNickName() {
-            return nickName;
+        public String getNickname() {
+            return nickname;
         }
 
-        public void setNickName(String nickName) {
-            this.nickName = nickName;
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
         }
 
         public String getName() {
@@ -108,9 +110,17 @@ public class LoginResult {
             this.type = type;
         }
 
-        private String userID;
+        public int getKind() {
+            return kind;
+        }
+
+        public void setKind(int kind) {
+            this.kind = kind;
+        }
+
+        private String userid;
         private String account;
-        private String nickName;
+        private String nickname;
         private String name;
         private String phone;
         private String passwd;
@@ -119,12 +129,5 @@ public class LoginResult {
         private int type;
         private int kind;
 
-        public int getKind() {
-            return kind;
-        }
-
-        public void setKind(int kind) {
-            this.kind = kind;
-        }
     }
 }

@@ -23,15 +23,17 @@ public class EmailResult {
         this.message = message;
     }
 
-    public String getEmailData() {
-        return EmailData;
-    }
-
-    public void setEmailData(String emailData) {
-        EmailData = emailData;
-    }
 
     private boolean success;
     private String  message;
-    private String  EmailData;
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    private String  data;
 }

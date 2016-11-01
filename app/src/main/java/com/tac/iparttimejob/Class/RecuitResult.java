@@ -26,15 +26,17 @@ public class RecuitResult {
     }
 
     private String message;
-    private Recuit recuit;
 
-    public Recuit getRecuit() {
-        return recuit;
+    public Recuit getData() {
+        return data;
     }
 
-    public void setRecuit(Recuit recuit) {
-        this.recuit = recuit;
+    public void setData(Recuit data) {
+        this.data = data;
     }
+
+    private Recuit data;
+
 
     public class Recuit {
         private String recruitID;

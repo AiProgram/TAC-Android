@@ -23,15 +23,18 @@ public class ApplicationList {
         this.message = message;
     }
 
-    public List<Application> getApplications() {
-        return applications;
-    }
 
-    public void setApplications(List<Application> applications) {
-        this.applications = applications;
-    }
 
     private boolean success;
     private String message;
-    private List<Application> applications;
+
+    public List<Application> getData() {
+        return data;
+    }
+
+    public void setData(List<Application> data) {
+        this.data = data;
+    }
+
+    private List<Application> data;
 }

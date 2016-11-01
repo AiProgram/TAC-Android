@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.os.Handler;
 
+import com.tac.iparttimejob.Class.LoginResult;
+import com.tac.iparttimejob.Class.UserResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Login.SignIn;
 import com.tac.iparttimejob.NetWork.SignUp.SignUp;
@@ -19,6 +21,9 @@ import com.tac.iparttimejob.UI.SignUpAndLogin.RegisterActivity;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static com.tac.iparttimejob.Class.Object.loginObject;
+import static com.tac.iparttimejob.Class.Object.userObject;
 
 
 /**
@@ -33,7 +38,9 @@ public class TestActivity extends AppCompatActivity {
     private Handler handler=new Handler();;
 
     @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+    protected void onPostCreate( Bundle savedInstanceState) {
+        loginObject=new LoginResult.LoginUser();
+        userObject=new UserResult.User();
         super.onPostCreate(savedInstanceState);
         setContentView(R.layout.layout_test);
         btn=(Button) findViewById(R.id.btn_test);
@@ -50,13 +57,21 @@ public class TestActivity extends AppCompatActivity {
 
     public void test(){
 
-        Map<String,String>login=new LinkedHashMap<String, String>();
+        final Map<String,String>login=new LinkedHashMap<String, String>();
         login.put("name",username);
         login.put("psw",password);
         SignIn.login(login, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
                 Toast.makeText(TestActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                Log.d("UserInfo:",loginObject.getPhone());
+                Log.d("UserInfo:",loginObject.getEmail());
+                Log.d("UserInfo:",loginObject.getName());
+                Log.d("UserInfo:",loginObject.getNickname());
+                Log.d("UserInfo:",loginObject.getPasswd());
+                Log.d("UserInfo:",loginObject.getUserid());
+
+
                 Log.i("Login","成功");
             }
 

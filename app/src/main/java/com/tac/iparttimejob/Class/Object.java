@@ -11,7 +11,7 @@ public class Object {
     //用户信息返回
     public static UserResult.User       userObject;
     //个人资料
-    public static ResumeResult.Resume   resumeObject;
+    public static Resume             resumeObject;
     //招聘信息
     public static RecuitResult.Recuit   recuitObject;
     //登录信息含个人资料
