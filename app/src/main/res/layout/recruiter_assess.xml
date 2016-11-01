@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:id="@+id/relativeLayout3"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/relativeLayout2"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户2:"
+            android:textSize="25sp"
+            android:id="@+id/user2"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="评分:"
+            android:textSize="25sp"
+            android:id="@+id/user2_score"
+            android:layout_marginEnd="23dp"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/uer2_score_num" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="90"
+            android:textSize="25sp"
+            android:id="@+id/uer2_score_num"
+            android:layout_marginEnd="21dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+            android:id="@+id/uer2_assess"
+            android:textSize="25sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="举报"
+            android:textColor="#ff0055"
+            android:textSize="20sp"
+            android:id="@+id/textView2"
+            android:layout_below="@+id/uer2_assess"
+            android:layout_alignEnd="@+id/uer2_score_num"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:id="@+id/relativeLayout2"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户1:"
+            android:textSize="25sp"
+            android:id="@+id/user1"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="评分:"
+            android:textSize="25sp"
+            android:id="@+id/user1_score"
+            android:layout_marginEnd="23dp"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/uer1_score_num" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="95"
+            android:textSize="25sp"
+            android:id="@+id/uer1_score_num"
+            android:layout_marginEnd="21dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+            android:id="@+id/uer1_assess"
+            android:textSize="25sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="举报"
+            android:textColor="#ff0055"
+            android:textSize="20sp"
+            android:id="@+id/textView"
+            android:layout_below="@+id/uer1_assess"
+            android:layout_alignEnd="@+id/uer1_score_num" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/relativeLayout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="招聘者的评价"
+            android:textSize="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/assess_title" />
+    </RelativeLayout>
+
+</RelativeLayout>
