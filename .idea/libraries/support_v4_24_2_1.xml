@@ -1,13 +1,8 @@
 <component name="libraryTable">
   <library name="support-v4-24.2.1">
     <CLASSES>
-<<<<<<< HEAD:.idea/libraries/support_v4_25_0_0.xml
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.0/res" />
-=======
       <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/res" />
->>>>>>> da93a5125349bb7e79b1662c6f91e13414d574b8:.idea/libraries/support_v4_24_2_1.xml
     </CLASSES>
     <JAVADOC />
     <SOURCES />

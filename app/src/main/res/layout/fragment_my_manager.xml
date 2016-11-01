@@ -56,9 +56,9 @@
 
     <ExpandableListView
         android:id="@+id/elv_function_my_manager"
-        android:indicatorRight="?android:attr/expandableListPreferredItemIndicatorLeft"
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
         android:divider="#D1CDC4"
-        android:dividerHeight="1.5dp"
+        android:dividerHeight="2px"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_width="match_parent"

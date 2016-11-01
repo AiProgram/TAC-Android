@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.BlurBitmap;
@@ -58,8 +59,51 @@ public class MyManager extends Fragment {
        // bitmapDrawable.setTileModeY( Shader.TileMode.CLAMP);
         rl_user_filed.setBackgroundDrawable(bitmapDrawable);
 
+        //为ExpandableListVIew设置adapter
         adapter=new MyELVAdapter(this.getContext());
         elv.setAdapter(adapter);
 
+        initELVListener();
     }
+
+    //初始化ELV监听器
+    public void initELVListener(){
+        elv.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+                switch (i){
+                    case 2:{
+                        if(i1==0){
+                            //转到招聘者的评价界面
+                        }
+                        else if(i1==1){
+                            //转到应聘者界面
+                        }
+                    }break;
+                    default:
+                }
+
+                return false;
+            }
+        });
+
+        elv.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+                switch (i){
+                    case 0:{
+                        //转到账号信息
+                    }
+                    case 1:{
+                        //转到个人简历
+                    }
+                    case 3:{
+                        //转到反馈见面
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
 }

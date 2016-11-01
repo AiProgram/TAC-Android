@@ -153,16 +153,6 @@
                 android:layout_alignParentStart="true" />
 
             <TextView
-                android:text="12356789"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_phone_number"
-                style="@style/ContentTextStyle"
-                android:layout_alignBaseline="@+id/label_phone_number"
-                android:layout_alignBottom="@+id/label_phone_number"
-                android:layout_toEndOf="@+id/label_phone_number" />
-
-            <TextView
                 android:text="截止日期："
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -223,7 +213,7 @@
                 style="@style/WarningButton"
                 android:layout_alignParentBottom="true"
                 android:layout_below="@id/tv_detail"
-            />
+                android:id="@+id/btn_cancel_recruit" />
 
             <Button
                 android:text="报名列表"
@@ -233,7 +223,17 @@
                 android:layout_margin="25dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/button" />
+                android:id="@+id/btn_get_want_list" />
+
+            <TextView
+                android:text="12356789"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_phone_number"
+                style="@style/ContentTextStyle"
+                android:layout_alignBaseline="@+id/label_phone_number"
+                android:layout_alignBottom="@+id/label_phone_number"
+                android:layout_toEndOf="@+id/label_phone_number" />
 
         </RelativeLayout>
     </ScrollView>

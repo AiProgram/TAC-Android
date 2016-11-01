@@ -99,6 +99,15 @@
                 android:layout_alignParentStart="true" />
 
             <TextView
+                android:text="项目详情："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/ContentDisciptionTextStyle"
+                android:id="@+id/label_detail"
+                android:layout_below="@+id/label_workplace"
+                android:layout_alignParentStart="true" />
+
+            <TextView
                 android:text="精通PHP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -186,12 +195,13 @@
                 android:layout_alignParentStart="true" />
 
             <TextView
-                android:text="剩余5天"
+                android:text="已经失效"
                 android:layout_marginLeft="15dp"
-                android:textColor="@color/warningRed"
+                android:background="@color/warningRed"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_days_left"
+                android:id="@+id/tv_unvalid_warning"
                 android:layout_alignBaseline="@+id/tv_deadline"
                 android:layout_alignBottom="@+id/tv_deadline"
                 android:layout_toEndOf="@+id/tv_deadline" />
@@ -208,27 +218,17 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="56dp" />
 
-            <TextView
-                android:text="项目详情："
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/ContentDisciptionTextStyle"
-                android:id="@+id/label_detail"
-                android:layout_below="@+id/label_workplace"
-                android:layout_alignParentStart="true" />
-
             <Button
+                android:text="选中列表"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="报名"
                 style="@style/AcceptButton"
-                android:id="@+id/btn_signUp"
-                android:layout_below="@id/tv_detail"
+                android:id="@+id/button"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginBottom="17dp"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/tv_detail"/>
 
         </RelativeLayout>
 

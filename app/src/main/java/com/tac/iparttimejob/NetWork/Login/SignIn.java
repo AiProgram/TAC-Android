@@ -21,7 +21,7 @@ import static com.tac.iparttimejob.Class.Object.userObject;
 public class SignIn extends HttpPost{
     public static  void login(Map<String,String>params, final HttpCallBackListener listener)
     {
-            post(HttpAddress.LOGIN_ADDRESSS, params, new HttpCallBackListener() {
+            post(HttpAddress.HOST+HttpAddress.LOGIN_ADDRESSS, params, new HttpCallBackListener() {
                 @Override
                 public void onFinish(String result) {
                     LoginResult loginResult=null;
