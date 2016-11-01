@@ -57,13 +57,21 @@ public class TestActivity extends AppCompatActivity {
 
     public void test(){
 
-        Map<String,String>login=new LinkedHashMap<String, String>();
+        final Map<String,String>login=new LinkedHashMap<String, String>();
         login.put("name",username);
         login.put("psw",password);
         SignIn.login(login, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
                 Toast.makeText(TestActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                Log.d("UserInfo:",loginObject.getPhone());
+                Log.d("UserInfo:",loginObject.getEmail());
+                Log.d("UserInfo:",loginObject.getName());
+                Log.d("UserInfo:",loginObject.getNickname());
+                Log.d("UserInfo:",loginObject.getPasswd());
+                Log.d("UserInfo:",loginObject.getUserid());
+
+
                 Log.i("Login","成功");
             }
 
