@@ -70,8 +70,8 @@
         android:text="取消"
         android:textSize="20sp"
         android:id="@+id/id_btn_cancel"
-        android:layout_alignBaseline="@+id/id_btn-sure"
-        android:layout_alignBottom="@+id/id_btn-sure"
+        android:layout_alignBaseline="@+id/id_btn_sure"
+        android:layout_alignBottom="@+id/id_btn_sure"
         android:layout_alignParentEnd="true" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:text="确定修改"
         android:textSize="20sp"
-        android:id="@+id/id_btn-sure"
+        android:id="@+id/id_btn_sure"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
     <TextView
