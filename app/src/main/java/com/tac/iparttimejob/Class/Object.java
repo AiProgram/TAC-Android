@@ -5,8 +5,9 @@ import java.util.List;
 /**
  * Created by 守候。 on 2016/10/27.
  */
-
+//List 需要清空时请在主程序行清空.
 public class Object {
+
     //用户信息返回
     public static UserResult.User       userObject;
     //个人资料
