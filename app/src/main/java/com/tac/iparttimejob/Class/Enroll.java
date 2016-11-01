@@ -21,11 +21,11 @@ public class Enroll {
         this.applicantname = applicantname;
     }
 
-    public User getUser() {
+    public UserResult.User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserResult.User user) {
         this.user = user;
     }
 
@@ -121,7 +121,7 @@ public class Enroll {
 
     private int applicantsid;
     private String applicantname;
-    private User user;
+    private UserResult.User user;
     private float point;
     private String singleresume;
     private String image;

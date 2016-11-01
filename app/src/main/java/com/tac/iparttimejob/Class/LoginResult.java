@@ -19,15 +19,15 @@ public class LoginResult {
     String message;
 
 
-    public User getData() {
+    public LoginUser getData() {
         return data;
     }
 
-    public void setData(User data) {
+    public void setData(LoginUser data) {
         this.data = data;
     }
 
-    private User data;
+    private LoginUser data;
     public String getMessage() {
         return message;
     }
@@ -35,5 +35,99 @@ public class LoginResult {
     public void setMessage(String message) {
         this.message = message;
     }
+    public static class LoginUser {
 
+
+        public String getUserid() {
+            return userid;
+        }
+
+        public void setUserid(String userid) {
+            this.userid = userid;
+        }
+
+        public String getAccount() {
+            return account;
+        }
+
+        public void setAccount(String account) {
+            this.account = account;
+        }
+
+        public String getNickname() {
+            return nickname;
+        }
+
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public String getPasswd() {
+            return passwd;
+        }
+
+        public void setPasswd(String passwd) {
+            this.passwd = passwd;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
+        public int getKind() {
+            return kind;
+        }
+
+        public void setKind(int kind) {
+            this.kind = kind;
+        }
+
+        private String userid;
+        private String account;
+        private String nickname;
+        private String name;
+        private String phone;
+        private String passwd;
+        private String email;
+        private String image;
+        private int type;
+        private int kind;
+
+    }
 }

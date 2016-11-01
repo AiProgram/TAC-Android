@@ -26,27 +26,29 @@ public class RecuitResult {
     }
 
     private String message;
-    private Recuit recuit;
 
-    public Recuit getRecuit() {
-        return recuit;
+    public Recuit getData() {
+        return data;
     }
 
-    public void setRecuit(Recuit recuit) {
-        this.recuit = recuit;
+    public void setData(Recuit data) {
+        this.data = data;
     }
+
+    private Recuit data;
+
 
     public class Recuit {
         private String recruitID;
         private String ownerID;
         private String owner;
         private String title;
-        private User user;
-        public User getUser() {
+        private UserResult.User user;
+        public UserResult.User getUser() {
             return user;
         }
 
-        public void setUser(User user) {
+        public void setUser(UserResult.User user) {
             this.user = user;
         }
 

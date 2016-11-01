@@ -29,13 +29,13 @@ public class EnrollList {
 
     private String message;
 
-    public List<Enroll> getEnrolls() {
-        return enrolls;
+    public List<Enroll> getData() {
+        return data;
     }
 
-    public void setEnrolls(List<Enroll> enrolls) {
-        this.enrolls = enrolls;
+    public void setData(List<Enroll> data) {
+        this.data = data;
     }
 
-    private List<Enroll> enrolls;
+    private List<Enroll> data;
 }

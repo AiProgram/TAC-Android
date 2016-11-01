@@ -27,7 +27,7 @@ public class Login extends AppCompatActivity {
     private Button   btn_register;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
 

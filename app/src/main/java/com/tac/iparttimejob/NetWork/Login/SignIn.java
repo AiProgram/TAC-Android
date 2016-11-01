@@ -39,7 +39,7 @@ public class SignIn extends HttpPost{
                         {
                             Log.d("Object:",loginResult.getMessage());
                             Log.d("Object:",loginResult.getData().getPhone());
-                           // loginObject.setNickname("eee");
+                            loginObject.setNickname("eee");
                             loginObject.setPhone(loginResult.getData().getPhone());
                             loginObject.setAccount(loginResult.getData().getAccount());
                             loginObject.setEmail(loginResult.getData().getEmail());
@@ -57,10 +57,10 @@ public class SignIn extends HttpPost{
                             userObject.setImage(loginResult.getData().getImage());
                             userObject.setKind(loginResult.getData().getKind());
                             userObject.setName(loginResult.getData().getName());
-                            userObject.setNickname(loginResult.getData().getNickname());
+                            userObject.setNickName(loginResult.getData().getNickname());
                             userObject.setPasswd(loginResult.getData().getPasswd());
                             userObject.setType(loginResult.getData().getType());
-                            userObject.setUserid(loginResult.getData().getUserid());
+                            userObject.setUserID(loginResult.getData().getUserid());
                             listener.onFinish("登录成功");
 
                         }

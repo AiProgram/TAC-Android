@@ -1,30 +1,10 @@
 package com.tac.iparttimejob.Class;
 
 /**
- * Created by 守候。 on 2016/10/26.
+ * Created by 守候。 on 2016/11/1.
  */
 
-public class ResumeResult {
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    private boolean success;
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    private String  message;
+public class Resume {
     public UserResult.User getUser() {
         return user;
     }
@@ -136,6 +116,4 @@ public class ResumeResult {
 
     private String url;
     private int kind;
-
-
 }

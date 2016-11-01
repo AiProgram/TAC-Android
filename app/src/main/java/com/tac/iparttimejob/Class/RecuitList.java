@@ -12,15 +12,16 @@ public class RecuitList {
     private boolean success;
     private String  message;
 
-    public List<RecuitResult.Recuit> getRecuitList() {
-        return recuitList;
+
+    public List<RecuitResult.Recuit> getData() {
+        return data;
     }
 
-    public void setRecuitList(List<RecuitResult.Recuit> recuitList) {
-        this.recuitList = recuitList;
+    public void setData(List<RecuitResult.Recuit> data) {
+        this.data = data;
     }
 
-    List<RecuitResult.Recuit> recuitList;
+    List<RecuitResult.Recuit> data;
 
     public String getMessage() {
         return message;
