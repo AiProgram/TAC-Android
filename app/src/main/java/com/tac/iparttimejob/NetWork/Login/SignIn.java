@@ -1,5 +1,7 @@
 package com.tac.iparttimejob.NetWork.Login;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.tac.iparttimejob.Class.LoginResult;
@@ -35,27 +37,30 @@ public class SignIn extends HttpPost{
                     {
                         if(loginResult.isSuccess())
                         {
-                            loginObject.setPhone(loginResult.getLoginUser().getPhone());
-                            loginObject.setAccount(loginResult.getLoginUser().getAccount());
-                            loginObject.setEmail(loginResult.getLoginUser().getEmail());
-                            loginObject.setImage(loginResult.getLoginUser().getImage());
-                            loginObject.setKind(loginResult.getLoginUser().getKind());
-                            loginObject.setName(loginResult.getLoginUser().getName());
-                            loginObject.setNickName(loginResult.getLoginUser().getNickName());
-                            loginObject.setPasswd(loginResult.getLoginUser().getPasswd());
-                            loginObject.setType(loginResult.getLoginUser().getType());
-                            loginObject.setUserID(loginResult.getLoginUser().getUserID());
+                            Log.d("Object:",loginResult.getMessage());
+                            Log.d("Object:",loginResult.getData().getPhone());
+                           // loginObject.setNickname("eee");
+                            loginObject.setPhone(loginResult.getData().getPhone());
+                            loginObject.setAccount(loginResult.getData().getAccount());
+                            loginObject.setEmail(loginResult.getData().getEmail());
+                            loginObject.setImage(loginResult.getData().getImage());
+                            loginObject.setKind(loginResult.getData().getKind());
+                            loginObject.setName(loginResult.getData().getName());
+                            loginObject.setNickname(loginResult.getData().getNickname());
+                            loginObject.setPasswd(loginResult.getData().getPasswd());
+                            loginObject.setType(loginResult.getData().getType());
+                            loginObject.setUserid(loginResult.getData().getUserid());
 
-                            userObject.setPhone(loginResult.getLoginUser().getPhone());
-                            userObject.setAccount(loginResult.getLoginUser().getAccount());
-                            userObject.setEmail(loginResult.getLoginUser().getEmail());
-                            userObject.setImage(loginResult.getLoginUser().getImage());
-                            userObject.setKind(loginResult.getLoginUser().getKind());
-                            userObject.setName(loginResult.getLoginUser().getName());
-                            userObject.setNickName(loginResult.getLoginUser().getNickName());
-                            userObject.setPasswd(loginResult.getLoginUser().getPasswd());
-                            userObject.setType(loginResult.getLoginUser().getType());
-                            userObject.setUserID(loginResult.getLoginUser().getUserID());
+                            userObject.setPhone(loginResult.getData().getPhone());
+                            userObject.setAccount(loginResult.getData().getAccount());
+                            userObject.setEmail(loginResult.getData().getEmail());
+                            userObject.setImage(loginResult.getData().getImage());
+                            userObject.setKind(loginResult.getData().getKind());
+                            userObject.setName(loginResult.getData().getName());
+                            userObject.setNickname(loginResult.getData().getNickname());
+                            userObject.setPasswd(loginResult.getData().getPasswd());
+                            userObject.setType(loginResult.getData().getType());
+                            userObject.setUserid(loginResult.getData().getUserid());
                             listener.onFinish("登录成功");
 
                         }

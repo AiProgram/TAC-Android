@@ -9,13 +9,13 @@ import java.util.List;
 public class Object {
 
     //用户信息返回
-    public static UserResult.User       userObject;
+    public static User                  userObject;
     //个人资料
     public static ResumeResult.Resume   resumeObject;
     //招聘信息
     public static RecuitResult.Recuit   recuitObject;
     //登录信息含个人资料
-    public static LoginResult.LoginUser loginObject;
+    public static User                   loginObject;
     //邮件验证码
     public static String                emailData;
     //正在进行的招聘列表

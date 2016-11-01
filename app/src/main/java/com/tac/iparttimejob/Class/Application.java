@@ -13,11 +13,11 @@ public class Application {
         this.recruitid = recruitid;
     }
 
-    public UserResult.User getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserResult.User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -110,7 +110,7 @@ public class Application {
     }
 
     private int recruitid;
-    private UserResult.User user;
+    private User user;
     private String owner;
     private String title;
     private String workplace;

@@ -41,12 +41,12 @@ public class RecuitResult {
         private String ownerID;
         private String owner;
         private String title;
-        private UserResult.User user;
-        public UserResult.User getUser() {
+        private User user;
+        public User getUser() {
             return user;
         }
 
-        public void setUser(UserResult.User user) {
+        public void setUser(User user) {
             this.user = user;
         }
 

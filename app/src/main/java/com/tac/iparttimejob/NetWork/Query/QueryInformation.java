@@ -117,12 +117,12 @@ public class QueryInformation extends HttpPost{
                     if(userResult.isSuccess())
                     {
                             userObject.setPhone(userResult.getUser().getPhone());
-                            userObject.setUserID(userResult.getUser().getUserID());
+                            userObject.setUserid(userResult.getUser().getUserid());
                             userObject.setAccount(userResult.getUser().getAccount());
                             userObject.setEmail(userResult.getUser().getEmail());
                             userObject.setImage(userResult.getUser().getImage());
                             userObject.setName(userResult.getUser().getName());
-                            userObject.setNickName(userResult.getUser().getNickName());
+                            userObject.setNickname(userResult.getUser().getNickname());
                             userObject.setPasswd(userResult.getUser().getPasswd());
                             userObject.setAccount(userResult.getUser().getAccount());
                             userObject.setType(userResult.getUser().getType());

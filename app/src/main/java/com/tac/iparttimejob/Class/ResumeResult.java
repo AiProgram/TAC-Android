@@ -32,7 +32,7 @@ public class ResumeResult {
 
 public class  Resume {
 
-    UserResult.User user;
+    User user;
 
     public int getResumeid() {
         return resumeid;
@@ -116,11 +116,11 @@ public class  Resume {
 
     private String url;
     private int kind;
-    public UserResult.User getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserResult.User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
