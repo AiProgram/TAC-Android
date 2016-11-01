@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
-import com.tac.iparttimejob.UI.Utils.MyGiveJobAdapter;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
 
 import java.util.ArrayList;

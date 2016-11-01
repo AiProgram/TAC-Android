@@ -55,12 +55,13 @@
                 android:layout_above="@+id/tv_job_info" />
 
             <TextView
-                android:text="截止至"
+                android:text="已经截止"
+                android:textColor="@color/warningRed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/tv_job_title"
                 android:layout_alignStart="@+id/tv_deadline"
-                android:id="@+id/tv_deadline_tip" />
+                android:id="@+id/tv_end_tip" />
 
         </RelativeLayout>
 
