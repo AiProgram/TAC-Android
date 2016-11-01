@@ -9,9 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
+import com.tac.iparttimejob.NetWork.SignUp.SignUp;
 import com.tac.iparttimejob.R;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.tac.iparttimejob.UI.Utils.RegexCheck;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by AiProgram on 2016/10/28.
@@ -47,14 +52,43 @@ public class Register extends AppCompatActivity {
         btn_accpet_register=(Button) findViewById(R.id.btn_accept_register);
         btn_cancel_register=(Button) findViewById(R.id.btn_cancel_register);
 
+        //注册按钮事件
         btn_accpet_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getInput();
                 if(checkInput()){
                     //完成注册
+                    //预留用作验证码函数
+                    verifyEmail();
+                    Map<String,String>register=new LinkedHashMap<String, String>();
+                    register.put("name",account);
+                    register.put("password",password);
+                    register.put("phone",phoneNumber);
+                    register.put("email",email);
+                    SignUp.register(register, new HttpCallBackListener() {
+                        @Override
+                        public void onFinish(String result) {
+                            //注册成功事件
+                            Intent intent=new Intent(Register.this,Login.class);
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(Register.this,"注册失败，网络开了点小差",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
+                    });
+
                 }else{
                     //输入错误提示
+                    Toast.makeText(Register.this,"请检查您的输入格式",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -82,11 +116,17 @@ public class Register extends AppCompatActivity {
     private boolean checkInput(){
         RegexCheck regexCheck=new RegexCheck();
         if(!regexCheck.checkAccount(account)) return false;
-        if(!regexCheck.checkPassword(password)) return false;
+        //密码格式检测出了点小问题，等待修复
+        //if(!regexCheck.checkPassword(password)) return false;
         if(!password.equals(passwordConfirmed)) return false;
         if(!regexCheck.checkPhoneNumbers(phoneNumber)) return false;
         if(!regexCheck.checkEmail(email)) return false;
         return true;
+    }
+
+    //验证码函数
+    private void verifyEmail(){
+
     }
 
 

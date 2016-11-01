@@ -3,7 +3,6 @@ package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -47,7 +46,7 @@ public class GiveJobsList extends Fragment{
     //防止多次初始化
     boolean inited=false;
 
-    @Nullable
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_give_jobs_valid_list,container,false);

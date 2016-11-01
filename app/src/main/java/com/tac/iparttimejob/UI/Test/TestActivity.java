@@ -2,7 +2,6 @@ package com.tac.iparttimejob.UI.Test;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -64,12 +63,12 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onFinish(String result) {
                 Toast.makeText(TestActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
-                Log.d("UserInfo:",loginObject.getPhone());
-                Log.d("UserInfo:",loginObject.getEmail());
-                Log.d("UserInfo:",loginObject.getName());
-                Log.d("UserInfo:",loginObject.getNickname());
-                Log.d("UserInfo:",loginObject.getPasswd());
-                Log.d("UserInfo:",loginObject.getUserid());
+                Log.i("UserInfo:",loginObject.getPhone());
+                Log.i("UserInfo:",loginObject.getEmail());
+                Log.i("UserInfo:",loginObject.getName());
+                Log.i("UserInfo:",loginObject.getNickname());
+                Log.i("UserInfo:",loginObject.getPasswd());
+                Log.i("UserInfo:",loginObject.getUserid());
 
 
                 Log.i("Login","成功");
