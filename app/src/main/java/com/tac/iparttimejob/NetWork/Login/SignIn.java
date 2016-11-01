@@ -37,9 +37,6 @@ public class SignIn extends HttpPost{
                     {
                         if(loginResult.isSuccess())
                         {
-                            Log.d("Object:",loginResult.getMessage());
-                            Log.d("Object:",loginResult.getData().getPhone());
-                            loginObject.setNickname("eee");
                             loginObject.setPhone(loginResult.getData().getPhone());
                             loginObject.setAccount(loginResult.getData().getAccount());
                             loginObject.setEmail(loginResult.getData().getEmail());
