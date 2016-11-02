@@ -27,12 +27,25 @@ public class Object {
     //选中的报名列表
     public static List<Enroll>         enrollChooseObjectList;
     //
+
+    //个人
     //查看招聘列表
     public static List<Application>         chooseApplicationList;
     //查看申请列表
     public static List<Application>         applicationObjectList;
     //查看某个招聘
     public static RecuitResult.Recuit             applicationObject;
+
+    //管理员
+    //查看招聘信息
+    public static List<RecuitResult.Recuit> RecuitObjectlistForManager;
+    //查看atoo评论列表
+    public static List<Assessment>   atooAssessmentObjectList;
+    public static List<Assessment>   otoaAssessmentObjectList;
+
+    public static List<Assessment>   atooAssessmentByIDObjectList;
+    public static List<Assessment>   otoaAssessmentByIDObjectList;
+    public static Advice.suggesstion suggesstion;
 
 
 

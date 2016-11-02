@@ -21,13 +21,6 @@ public class Enroll {
         this.applicantname = applicantname;
     }
 
-    public UserResult.User getUser() {
-        return user;
-    }
-
-    public void setUser(UserResult.User user) {
-        this.user = user;
-    }
 
     public float getPoint() {
         return point;
@@ -61,13 +54,7 @@ public class Enroll {
         this.applicanttime = applicanttime;
     }
 
-    public RecuitResult.Recuit getRecuit() {
-        return recuit;
-    }
 
-    public void setRecuit(RecuitResult.Recuit recuit) {
-        this.recuit = recuit;
-    }
 
     public int getOwnerid() {
         return ownerid;
@@ -121,12 +108,30 @@ public class Enroll {
 
     private int applicantsid;
     private String applicantname;
-    private UserResult.User user;
+
+    public UserResult.User getTac_user() {
+        return tac_user;
+    }
+
+    public void setTac_user(UserResult.User tac_user) {
+        this.tac_user = tac_user;
+    }
+
+    private UserResult.User tac_user;
     private float point;
     private String singleresume;
     private String image;
     private String applicanttime;
-    private RecuitResult.Recuit recuit;
+
+    public RecuitResult.Recuit getTac_recruit() {
+        return tac_recruit;
+    }
+
+    public void setTac_recruit(RecuitResult.Recuit tac_recruit) {
+        this.tac_recruit = tac_recruit;
+    }
+
+    private RecuitResult.Recuit tac_recruit;
     private int ownerid;
     private String ownwername;
     private String title;

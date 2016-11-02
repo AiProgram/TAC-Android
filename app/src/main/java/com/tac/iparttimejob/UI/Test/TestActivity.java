@@ -2,7 +2,6 @@ package com.tac.iparttimejob.UI.Test;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -35,7 +34,7 @@ public class TestActivity extends AppCompatActivity {
     private String password="123456";
 
     private Button btn;
-    private Handler handler=new Handler();;
+    private Handler handler=new Handler();
 
     @Override
     protected void onPostCreate( Bundle savedInstanceState) {

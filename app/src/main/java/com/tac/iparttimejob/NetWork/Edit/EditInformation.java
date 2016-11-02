@@ -372,6 +372,106 @@ public class EditInformation extends HttpPost {
             }
         });
     }
+        //评价
+    public static void setAssessment(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.SET_ASSESSMENT, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                ReturnMessage status=null;
+                try {
+                    status=new Gson().fromJson(result,ReturnMessage.class);
+                }
+                catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(status!=null)
+                {
+                    if(status.isSuccess())
+                    {
+                        listener.onFinish("评价成功");
+                    }
+                    else
+                    {
+                        listener.onError(status.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
 
+            @Override
+            public void onError(String error) {
+                Log.d("postErr:",error);
+                listener.onError(error);
+            }
+        });
+    }
+    //更改otoa评论状态
+    public static void setOtoaAssementStatus(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.SET_OTOA_ASSEMENT_STATUS, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                ReturnMessage status=null;
+                try {
+                    status=new Gson().fromJson(result,ReturnMessage.class);
+                }
+                catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(status!=null)
+                {
+                    if(status.isSuccess())
+                    {
+                        listener.onFinish("修改成功");
+                    }
+                    else
+                    {
+                        listener.onError(status.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
 
+            @Override
+            public void onError(String error) {
+                Log.d("postErr:",error);
+                listener.onError(error);
+            }
+        });
+    }
+    //更改atoo评论状态
+    public static void setAtooAssementStatus(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.SET_ATOO_ASSEMENT_STATUS, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                ReturnMessage status=null;
+                try {
+                    status=new Gson().fromJson(result,ReturnMessage.class);
+                }
+                catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(status!=null)
+                {
+                    if(status.isSuccess())
+                    {
+                        listener.onFinish("修改成功");
+                    }
+                    else
+                    {
+                        listener.onError(status.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.d("postErr:",error);
+                listener.onError(error);
+            }
+        });
+    }
 }

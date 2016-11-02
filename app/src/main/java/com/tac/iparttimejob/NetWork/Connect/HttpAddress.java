@@ -44,11 +44,28 @@ public class HttpAddress {
     public static final String GET_APPLICATION_INFORMATION  = "tacapplication/getRecruitByID";
     //申请应聘
     public static final String SET_CREAT_APPLICATION        ="tacapplication/createApplicants";
+    //取消应聘
     public static final String SET_CANCEL_APPLICATION       ="tacapplication/cancelApplicants";
+    //申请被选择
     public static final String GET_CHECK_CHOOSEN            ="tacapplication/checkChoosen";
+    //评价
+    public static final String SET_ASSESSMENT               ="tacapplication/createComment";
+    //管理模块
 
+    public static final String GET_RECRUIT_LIST_FOR_MANAGER  ="tacManager/ getRecruitForManager";
 
+    public static final String GET_ASSESSMENT_LIST_FOR_MANAGER="tacManager/getaTOoCommentForManager";
+//查看评论列表
+    public static final String GET_ATOO_ASSEMENT_LIST     ="tacManager/getaTOoCommentForManager";
+    public static final String GET_OTOA_ASSEMENT_LIST     ="tacManager/getoTOaCommentForManager";
+    public static final String GET_ATOO_ASSEMENT_LIST_BY_ID     ="tacManager/getTac_atoocommentByID";
+    public static final String GET_OTOA_ASSEMENT_LIST_BY_ID     ="tacManager/getTac_otoacommentByID";
+    //修改评论状态
+    public static final String SET_ATOO_ASSEMENT_STATUS ="tacManager/checkaTOoComment";
+    public static final String SET_OTOA_ASSEMENT_STATUS="tacManager/checkoTOaComment";
+    //查看 建议
 
+    public static final String GET_ADVICE="tacManager/getAdvice";
 
 }
 
