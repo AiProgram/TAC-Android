@@ -1,5 +1,6 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,7 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
+import com.tac.iparttimejob.Class.LoginResult;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
@@ -34,6 +37,8 @@ public class GiveJobsList extends Fragment{
     private RefreshRecyclerView rv_give_jobs;
     private SwipeRefreshLayout srl_give_jobs;
     private TabLayout tabLayout;
+    private ImageButton imgbtn_add_jobs;
+
     private Handler handler=new Handler();
     private MyGiveJobAdapter validJobAdapter;
     private MyGiveJobAdapter UnvalidJobAdapter;
@@ -57,6 +62,9 @@ public class GiveJobsList extends Fragment{
     /*耗时初始化操作放在这里*/
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //获得传递的信息
+//        loginResult=(LoginResult) getActivity().getIntent().getExtras().get("LoginResult");
+
         if(inited==false) {
             initData(DataType.VALID_JOB_LIST);
             initData(DataType.UNVALID_JOB_LIST);
@@ -87,6 +95,7 @@ public class GiveJobsList extends Fragment{
         rv_give_jobs=(RefreshRecyclerView) fragmentView.findViewById(R.id.rv_give_jobs);
         srl_give_jobs=(SwipeRefreshLayout) fragmentView.findViewById(R.id.srl_give_jobs);
         tabLayout = (TabLayout)fragmentView.findViewById(R.id.tabLayout_give_jobs_top);
+        imgbtn_add_jobs=(ImageButton) fragmentView.findViewById(R.id.imgbtn_add_jobs) ;
         validJobAdapter=new MyGiveJobAdapter(validJobList);
         UnvalidJobAdapter=new MyGiveJobAdapter(UnvalidJooList);
 
@@ -125,6 +134,18 @@ public class GiveJobsList extends Fragment{
 
             }
         });
+
+        //添加招聘信息的监听器
+        imgbtn_add_jobs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //专项填写招聘的页面
+                Intent intent=new Intent(getActivity(),PostJobs.class);
+                startActivity(intent);
+            }
+        });
+
+
         //设置RecycleView
         rv_give_jobs.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rv_give_jobs.setItemAnimator(new DefaultItemAnimator());

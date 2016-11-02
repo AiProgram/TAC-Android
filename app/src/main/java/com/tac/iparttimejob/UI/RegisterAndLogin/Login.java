@@ -39,13 +39,11 @@ public class Login extends AppCompatActivity {
     private Button   btn_login;
     private Button   btn_register;
 
+
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
-
-        loginObject=new LoginResult.LoginUser();
-        userObject=new UserResult.User();
 
         //获取所有控件
         et_input_account = (EditText) findViewById(R.id.et_input_account);
@@ -55,10 +53,13 @@ public class Login extends AppCompatActivity {
         btn_login = (Button) findViewById(R.id.btn_login);
         btn_register = (Button) findViewById(R.id.btn_register);
 
+
         //登录按钮点击事件
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loginObject=new LoginResult.LoginUser();
+                userObject=new UserResult.User();
                 //登录操作
                 String account=et_input_account.getText().toString();
                 String password=et_input_password.getText().toString();

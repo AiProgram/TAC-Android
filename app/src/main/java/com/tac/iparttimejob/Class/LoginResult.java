@@ -1,10 +1,12 @@
 package com.tac.iparttimejob.Class;
 
+import java.io.Serializable;
+
 /**
  * Created by 守候。 on 2016/10/26.
  */
-
-public class LoginResult {
+//为了方便传递，我加入了Serializable接口，应该没有问题
+public class LoginResult implements Serializable{
 
 
     public boolean isSuccess() {
