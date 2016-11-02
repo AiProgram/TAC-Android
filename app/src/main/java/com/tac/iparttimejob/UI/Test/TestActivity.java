@@ -34,7 +34,7 @@ public class TestActivity extends AppCompatActivity {
     private String password="123456";
 
     private Button btn;
-    private Handler handler=new Handler();;
+    private Handler handler=new Handler();
 
     @Override
     protected void onPostCreate( Bundle savedInstanceState) {

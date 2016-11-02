@@ -5,7 +5,10 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.tac.iparttimejob.Class.Advice;
+import com.tac.iparttimejob.Class.Assessment;
 import com.tac.iparttimejob.Class.ApplicationList;
+import com.tac.iparttimejob.Class.AssessmentList;
 import com.tac.iparttimejob.Class.EnrollList;
 import com.tac.iparttimejob.Class.EmailResult;
 import com.tac.iparttimejob.Class.RecuitResult;
@@ -20,7 +23,10 @@ import com.tac.iparttimejob.NetWork.Connect.HttpPost;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+import static com.tac.iparttimejob.Class.Object.RecuitObjectlistForManager;
 import static com.tac.iparttimejob.Class.Object.applicationObjectList;
+import static com.tac.iparttimejob.Class.Object.atooAssessmentByIDObjectList;
+import static com.tac.iparttimejob.Class.Object.atooAssessmentObjectList;
 import static com.tac.iparttimejob.Class.Object.enrollChooseObjectList;
 import static com.tac.iparttimejob.Class.Object.applicationObject;
 import static com.tac.iparttimejob.Class.Object.chooseApplicationList;
@@ -28,8 +34,11 @@ import static com.tac.iparttimejob.Class.Object.emailData;
 import static com.tac.iparttimejob.Class.Object.enrollObjectList;
 import static com.tac.iparttimejob.Class.Object.inRecuitObjectList;
 import static com.tac.iparttimejob.Class.Object.notRecuitObjectList;
+import static com.tac.iparttimejob.Class.Object.otoaAssessmentByIDObjectList;
+import static com.tac.iparttimejob.Class.Object.otoaAssessmentObjectList;
 import static com.tac.iparttimejob.Class.Object.recuitObject;
 import static com.tac.iparttimejob.Class.Object.resumeObject;
+import static com.tac.iparttimejob.Class.Object.suggesstion;
 import static com.tac.iparttimejob.Class.Object.userObject;
 
 /**
@@ -512,6 +521,201 @@ public class QueryInformation extends HttpPost{
             @Override
             public void onError(String error) {
                 Log.d("postErr:",error);
+                listener.onError(error);
+            }
+        });
+    }
+    //查看招聘列表
+    public static void getRecruitListForManager(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.GET_RECRUIT_LIST_FOR_MANAGER, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                RecuitList recuitResultList=null;
+                Type type=new TypeToken<AssessmentList>(){}.getType();
+                try {
+                    recuitResultList=new Gson().fromJson(result,type);
+                }catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(recuitResultList!=null) {
+                    if (recuitResultList.isSuccess()) {
+                        recuitResultList.getData().addAll(RecuitObjectlistForManager);
+                        listener.onFinish("成功");
+                    } else {
+                        listener.onError(recuitResultList.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+
+                Log.d("POST错误:",error);
+                listener.onError(error);
+            }
+        });
+    }
+    //查看atoo评论列表
+    public static void getAtooAssementForManager(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.GET_ATOO_ASSEMENT_LIST, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                AssessmentList assement=null;
+                Type type=new TypeToken<AssessmentList>(){}.getType();
+                try {
+                    assement=new Gson().fromJson(result,type);
+                }catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(assement!=null) {
+                    if (assement.isSuccess()) {
+                        assement.getData().addAll(atooAssessmentObjectList);
+                        listener.onFinish("成功");
+                    } else {
+                        listener.onError(assement.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+
+                Log.d("POST错误:",error);
+                listener.onError(error);
+            }
+        });
+    }
+    //查看otoa评论列表
+    public static void getOtoaAssementForManager(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.GET_OTOA_ASSEMENT_LIST, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                AssessmentList assement=null;
+                Type type=new TypeToken<AssessmentList>(){}.getType();
+                try {
+                    assement=new Gson().fromJson(result,type);
+                }catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(assement!=null) {
+                    if (assement.isSuccess()) {
+                        assement.getData().addAll(otoaAssessmentObjectList);
+                        listener.onFinish("成功");
+                    } else {
+                        listener.onError(assement.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+
+                Log.d("POST错误:",error);
+                listener.onError(error);
+            }
+        });
+    }
+    //查看atoo评论列表By iD
+    public static void getAtooAssementByIDForManager(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.GET_ATOO_ASSEMENT_LIST_BY_ID, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                AssessmentList assement=null;
+                Type type=new TypeToken<AssessmentList>(){}.getType();
+                try {
+                    assement=new Gson().fromJson(result,type);
+                }catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(assement!=null) {
+                    if (assement.isSuccess()) {
+                        assement.getData().addAll(atooAssessmentByIDObjectList);
+                        listener.onFinish("成功");
+                    } else {
+                        listener.onError(assement.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+
+                Log.d("POST错误:",error);
+                listener.onError(error);
+            }
+        });
+    }
+    //查看otoa评论列表By iD
+    public static void getOtoaAssementByIDForManager(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.GET_OTOA_ASSEMENT_LIST_BY_ID, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                AssessmentList assement=null;
+                Type type=new TypeToken<RecuitList>(){}.getType();
+                try {
+                    assement=new Gson().fromJson(result,type);
+                }catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(assement!=null) {
+                    if (assement.isSuccess()) {
+                        assement.getData().addAll(otoaAssessmentByIDObjectList);
+                        listener.onFinish("成功");
+                    } else {
+                        listener.onError(assement.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+
+                Log.d("POST错误:",error);
+                listener.onError(error);
+            }
+        });
+    }
+    public static void getAdvice(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.GET_ADVICE, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                Advice advice=null;
+                try {
+                    advice=new Gson().fromJson(result,Advice.class);
+                }catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(advice!=null) {
+                    if (advice.isSuccess()) {
+                        suggesstion.setPhone(advice.getData().getPhone());
+                        suggesstion.setAdvice(advice.getData().getAdvice());
+                        suggesstion.setAdviceid(advice.getData().getAdviceid());
+                        suggesstion.setTime(advice.getData().getTime());
+                        suggesstion.setUserid(advice.getData().getUserid());
+                        suggesstion.setUsername(advice.getData().getUsername());
+                        listener.onFinish("成功");
+                    } else {
+                        listener.onError(advice.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+
+                Log.d("POST错误:",error);
                 listener.onError(error);
             }
         });
