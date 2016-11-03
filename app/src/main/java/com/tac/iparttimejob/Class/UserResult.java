@@ -35,12 +35,13 @@ public class UserResult {
     private User user;
 
     public static class User {
-        public String getUserID() {
-            return userID;
+
+        public String getUserid() {
+            return userid;
         }
 
-        public void setUserID(String userID) {
-            this.userID = userID;
+        public void setUserid(String userid) {
+            this.userid = userid;
         }
 
         public String getAccount() {
@@ -51,12 +52,12 @@ public class UserResult {
             this.account = account;
         }
 
-        public String getNickName() {
-            return nickName;
+        public String getNickname() {
+            return nickname;
         }
 
-        public void setNickName(String nickName) {
-            this.nickName = nickName;
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
         }
 
         public String getName() {
@@ -107,9 +108,9 @@ public class UserResult {
             this.type = type;
         }
 
-        private String userID;
+        private String userid;
         private String account;
-        private String nickName;
+        private String nickname;
         private String name;
         private String phone;
         private String passwd;

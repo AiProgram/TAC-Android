@@ -54,10 +54,10 @@ public class SignIn extends HttpPost{
                             userObject.setImage(loginResult.getData().getImage());
                             userObject.setKind(loginResult.getData().getKind());
                             userObject.setName(loginResult.getData().getName());
-                            userObject.setNickName(loginResult.getData().getNickname());
+                            userObject.setNickname(loginResult.getData().getNickname());
                             userObject.setPasswd(loginResult.getData().getPasswd());
                             userObject.setType(loginResult.getData().getType());
-                            userObject.setUserID(loginResult.getData().getUserid());
+                            userObject.setUserid(loginResult.getData().getUserid());
                             listener.onFinish("登录成功");
 
                         }

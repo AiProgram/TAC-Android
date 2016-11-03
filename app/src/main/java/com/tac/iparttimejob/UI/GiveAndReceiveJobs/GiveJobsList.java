@@ -31,6 +31,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.tac.iparttimejob.NetWork.Query.QueryInformation.getInRecruitList;
+
 
 /**
  * Created by AiProgram on 2016/10/21.
@@ -226,7 +228,7 @@ public class GiveJobsList extends Fragment{
         getList.put("rows",(rows)+"");
         //分有效和无效刷新列表
         if(pageNum==DataType.VALID_JOB_LIST) {
-            QueryInformation.getInRecruitList(getList, new HttpCallBackListener() {
+            getInRecruitList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(final String result) {
                     getActivity().runOnUiThread(new Runnable() {
@@ -284,7 +286,7 @@ public class GiveJobsList extends Fragment{
         getList.put("rows",(rows)+"");
         //分有效和无效刷新列表
         if(pageNum==DataType.VALID_JOB_LIST) {
-            QueryInformation.getInRecruitList(getList, new HttpCallBackListener() {
+            getInRecruitList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(final String result) {
                     getActivity().runOnUiThread(new Runnable() {

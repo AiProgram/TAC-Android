@@ -21,6 +21,7 @@ import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Connect.HttpPost;
 
 import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Map;
 
 import static com.tac.iparttimejob.Class.Object.RecuitObjectlistForManager;
@@ -114,12 +115,12 @@ public class QueryInformation extends HttpPost{
                     if(userResult.isSuccess())
                     {
                             userObject.setPhone(userResult.getUser().getPhone());
-                            userObject.setUserID(userResult.getUser().getUserID());
+                            userObject.setUserid(userResult.getUser().getUserid());
                             userObject.setAccount(userResult.getUser().getAccount());
                             userObject.setEmail(userResult.getUser().getEmail());
                             userObject.setImage(userResult.getUser().getImage());
                             userObject.setName(userResult.getUser().getName());
-                            userObject.setNickName(userResult.getUser().getNickName());
+                            userObject.setNickname(userResult.getUser().getNickname());
                             userObject.setPasswd(userResult.getUser().getPasswd());
                             userObject.setAccount(userResult.getUser().getAccount());
                             userObject.setType(userResult.getUser().getType());
@@ -197,24 +198,24 @@ public class QueryInformation extends HttpPost{
                 {
                     if(recuitResult.isSuccess())
                     {
-                        recuitObject.setUser(recuitResult.getData().getUser());
-                        recuitObject.setRecruitID(recuitResult.getData().getRecruitID());
+                        recuitObject.setTac_user(recuitResult.getData().getTac_user());
+                        recuitObject.setRecruitid(recuitResult.getData().getRecruitid());
                         recuitObject.setOwner(recuitResult.getData().getOwner());
                         recuitObject.setTitle(recuitResult.getData().getTitle());
-                        recuitObject.setWorkPlace(recuitResult.getData().getWorkPlace());
-                        recuitObject.setDeadLine(recuitResult.getData().getDeadLine());
+                        recuitObject.setWorkplace(recuitResult.getData().getWorkplace());
+                        recuitObject.setDealdine(recuitResult.getData().getDealdine());
                         recuitObject.setPhone(recuitResult.getData().getPhone());
                         recuitObject.setEmail(recuitResult.getData().getEmail());
-                        recuitObject.setNeedPeopleNum(recuitResult.getData().getNeedPeopleNum());
+                        recuitObject.setNeedpeopleNum(recuitResult.getData().getNeedpeopleNum());
                         recuitObject.setStatus(recuitResult.getData().getStatus());
-                        recuitObject.setApplyPeopleNum(recuitResult.getData().getApplyPeopleNum());
+                        recuitObject.setApplypeopleNum(recuitResult.getData().getApplypeopleNum());
                         recuitObject.setRequrire(recuitResult.getData().getRequrire());
                         recuitObject.setSingleInfo(recuitResult.getData().getSingleInfo());
                         recuitObject.setWorkInfo(recuitResult.getData().getWorkInfo());
-                        recuitObject.setDisplayTime(recuitResult.getData().getDisplayTime());
-                        recuitObject.setIsOK(recuitResult.getData().getIsOK());
+                        recuitObject.setDisplaytime(recuitResult.getData().getDisplaytime());
+                        recuitObject.setIsOk(recuitResult.getData().getIsOk());
                         recuitObject.setReason(recuitResult.getData().getReason());
-                        recuitObject.setOkTime(recuitResult.getData().getOkTime());
+                        recuitObject.setOktime(recuitResult.getData().getOktime());
 
                         listener.onFinish("成功");
                     }
@@ -240,6 +241,7 @@ public class QueryInformation extends HttpPost{
         post(HttpAddress.HOST + HttpAddress.GET_IN_RECUIT_LIST, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
+                Log.d("result:",result);
                 RecuitList recuitResultList=null;
                 Type type=new TypeToken<RecuitList>(){}.getType();
                 try {
@@ -250,6 +252,10 @@ public class QueryInformation extends HttpPost{
                 }
                 if(recuitResultList!=null) {
                     if (recuitResultList.isSuccess()) {
+                        Log.d("recuitList:",recuitResultList.getData().get(0).getPhone());
+                        Log.d("recuitList:",recuitResultList.getData().get(0).getDealdine());
+                        Log.d("recuitList:",recuitResultList.getData().get(0).getDisplaytime());
+                        Log.d("recuitList:",recuitResultList.getData().get(0).getTac_user().getUserid());
                         recuitResultList.getData().addAll(inRecuitObjectList);
                         listener.onFinish("成功");
                     } else {
@@ -421,24 +427,24 @@ public class QueryInformation extends HttpPost{
                 {
                     if(recuitResult.isSuccess())
                     {
-                        applicationObject.setUser(recuitResult.getData().getUser());
-                        applicationObject.setRecruitID(recuitResult.getData().getRecruitID());
+                        applicationObject.setTac_user(recuitResult.getData().getTac_user());
+                        applicationObject.setRecruitid(recuitResult.getData().getRecruitid());
                         applicationObject.setOwner(recuitResult.getData().getOwner());
                         applicationObject.setTitle(recuitResult.getData().getTitle());
-                        applicationObject.setWorkPlace(recuitResult.getData().getWorkPlace());
-                        applicationObject.setDeadLine(recuitResult.getData().getDeadLine());
+                        applicationObject.setWorkplace(recuitResult.getData().getWorkplace());
+                        applicationObject.setDealdine(recuitResult.getData().getDealdine());
                         applicationObject.setPhone(recuitResult.getData().getPhone());
                         applicationObject.setEmail(recuitResult.getData().getEmail());
-                        applicationObject.setNeedPeopleNum(recuitResult.getData().getNeedPeopleNum());
+                        applicationObject.setNeedpeopleNum(recuitResult.getData().getNeedpeopleNum());
                         applicationObject.setStatus(recuitResult.getData().getStatus());
-                        applicationObject.setApplyPeopleNum(recuitResult.getData().getApplyPeopleNum());
+                        applicationObject.setApplypeopleNum(recuitResult.getData().getApplypeopleNum());
                         applicationObject.setRequrire(recuitResult.getData().getRequrire());
                         applicationObject.setSingleInfo(recuitResult.getData().getSingleInfo());
                         applicationObject.setWorkInfo(recuitResult.getData().getWorkInfo());
-                        applicationObject.setDisplayTime(recuitResult.getData().getDisplayTime());
-                        applicationObject.setIsOK(recuitResult.getData().getIsOK());
+                        applicationObject.setDisplaytime(recuitResult.getData().getDisplaytime());
+                        applicationObject.setIsOk(recuitResult.getData().getIsOk());
                         applicationObject.setReason(recuitResult.getData().getReason());
-                        applicationObject.setOkTime(recuitResult.getData().getOkTime());
+                        applicationObject.setOktime(recuitResult.getData().getOktime());
 
                         listener.onFinish("成功");
                     }

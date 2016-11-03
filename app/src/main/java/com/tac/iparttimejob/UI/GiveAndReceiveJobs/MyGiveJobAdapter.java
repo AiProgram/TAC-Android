@@ -113,7 +113,7 @@ public class MyGiveJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         int status=getItemViewType(position);
         String jobTitle=dataList.get(position).getTitle();
         String jobInfo=dataList.get(position).getWorkInfo();
-        String deadline=dataList.get(position).getDeadLine();
+        String deadline=dataList.get(position).getDealdine();
 
         switch (status){
             case DataType.JOB_STATUS_CHECKING:{

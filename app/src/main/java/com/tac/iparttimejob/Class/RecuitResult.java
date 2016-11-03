@@ -39,34 +39,20 @@ public class RecuitResult {
 
 
     public class Recuit {
-        private String recruitID;
-        private String ownerID;
-        private String owner;
-        private String title;
-        private UserResult.User user;
-        public UserResult.User getUser() {
-            return user;
+        public String getRecruitid() {
+            return recruitid;
         }
 
-        public void setUser(UserResult.User user) {
-            this.user = user;
+        public void setRecruitid(String recruitid) {
+            this.recruitid = recruitid;
         }
 
-
-        public String getRecruitID() {
-            return recruitID;
+        public String getOwnerid() {
+            return ownerid;
         }
 
-        public void setRecruitID(String recruitID) {
-            this.recruitID = recruitID;
-        }
-
-        public String getOwnerID() {
-            return ownerID;
-        }
-
-        public void setOwnerID(String ownerID) {
-            this.ownerID = ownerID;
+        public void setOwnerid(String ownerid) {
+            this.ownerid = ownerid;
         }
 
         public String getOwner() {
@@ -85,21 +71,15 @@ public class RecuitResult {
             this.title = title;
         }
 
-        public String getWorkPlace() {
-            return workPlace;
+        public String getWorkplace() {
+            return workplace;
         }
 
-        public void setWorkPlace(String workPlace) {
-            this.workPlace = workPlace;
+        public void setWorkplace(String workplace) {
+            this.workplace = workplace;
         }
 
-        public String getDeadLine() {
-            return deadLine;
-        }
 
-        public void setDeadLine(String deadLine) {
-            this.deadLine = deadLine;
-        }
 
         public String getPhone() {
             return phone;
@@ -117,12 +97,12 @@ public class RecuitResult {
             this.email = email;
         }
 
-        public int getNeedPeopleNum() {
-            return needPeopleNum;
+        public int getNeedpeopleNum() {
+            return needpeopleNum;
         }
 
-        public void setNeedPeopleNum(int needPeopleNum) {
-            this.needPeopleNum = needPeopleNum;
+        public void setNeedpeopleNum(int needpeopleNum) {
+            this.needpeopleNum = needpeopleNum;
         }
 
         public String getRequrire() {
@@ -149,28 +129,28 @@ public class RecuitResult {
             this.workInfo = workInfo;
         }
 
-        public String getDisplayTime() {
-            return displayTime;
+        public String getDisplaytime() {
+            return displaytime;
         }
 
-        public void setDisplayTime(String displayTime) {
-            this.displayTime = displayTime;
+        public void setDisplaytime(String displaytime) {
+            this.displaytime = displaytime;
         }
 
-        public int getIsOK() {
-            return isOK;
+        public int getIsOk() {
+            return isOk;
         }
 
-        public void setIsOK(int isOK) {
-            this.isOK = isOK;
+        public void setIsOk(int isOk) {
+            this.isOk = isOk;
         }
 
-        public String getOkTime() {
-            return okTime;
+        public String getOktime() {
+            return oktime;
         }
 
-        public void setOkTime(String okTime) {
-            this.okTime = okTime;
+        public void setOktime(String oktime) {
+            this.oktime = oktime;
         }
 
         public int getStatus() {
@@ -181,12 +161,12 @@ public class RecuitResult {
             this.status = status;
         }
 
-        public int getApplyPeopleNum() {
-            return applyPeopleNum;
+        public int getApplypeopleNum() {
+            return applypeopleNum;
         }
 
-        public void setApplyPeopleNum(int applyPeopleNum) {
-            this.applyPeopleNum = applyPeopleNum;
+        public void setApplypeopleNum(int applypeopleNum) {
+            this.applypeopleNum = applypeopleNum;
         }
 
         public String getReason() {
@@ -196,20 +176,46 @@ public class RecuitResult {
         public void setReason(String reason) {
             this.reason = reason;
         }
+        public UserResult.User getTac_user() {
+            return tac_user;
+        }
 
-        private String workPlace;
-        private String deadLine;
+        public void setTac_user(UserResult.User tac_user) {
+            this.tac_user = tac_user;
+        }
+
+
+
+
+
+
+        private String workplace;
+
+        public String getDealdine() {
+            return dealdine;
+        }
+
+        public void setDealdine(String dealdine) {
+            this.dealdine = dealdine;
+        }
+
+        private UserResult.User tac_user;
+        private String recruitid;
+        private String ownerid;
+        private String owner;
+        private String title;
+        private String dealdine;
         private String phone;
         private String email;
-        private int needPeopleNum;
+        private int needpeopleNum;
         private String requrire;
         private String singleInfo;
         private String workInfo;
-        private String displayTime;
-        private int isOK;
-        private String okTime;
+        private String displaytime;
+        private int isOk;
+        private String oktime;
         private int status;
-        private int applyPeopleNum;
+        private int applypeopleNum;
         private String reason;
     }
 }
