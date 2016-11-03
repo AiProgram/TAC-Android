@@ -46,11 +46,11 @@
                 android:layout_alignStart="@+id/tv_job_title" />
 
             <TextView
-                android:text="正在审核"
-                style="@style/JobListRemindingLabel"
+                android:text="状态未知"
+                style="@style/JobListWarningLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_checking_tip"
+                android:id="@+id/tv_red_label"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true" />
 

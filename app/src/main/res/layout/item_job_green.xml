@@ -46,13 +46,13 @@
                 android:layout_alignStart="@+id/tv_job_title" />
 
             <TextView
-                android:text="已被驳回"
-                style="@style/JobListWarningLabel"
+                style="@style/JobListRemindingLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_checking_tip"
+                android:id="@+id/tv_green_label"
                 android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:text="未知状态" />
 
         </RelativeLayout>
 

@@ -2,11 +2,21 @@ package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.tac.iparttimejob.Class.LoginResult;
+import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.NetWork.Edit.EditInformation;
+import static com.tac.iparttimejob.Class.Object.loginObject;
+import static com.tac.iparttimejob.Class.Object.userObject;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by AiProgram on 2016/10/21.
@@ -44,6 +54,7 @@ public class PostJobs extends AppCompatActivity{
         initListener();
     }
 
+
     public void getViews(){
         et_input_username=(EditText) findViewById(R.id.et_input_username);
         et_input_title=(EditText)  findViewById(R.id.et_input_title);
@@ -66,6 +77,7 @@ public class PostJobs extends AppCompatActivity{
                     postJobs();
                 }else{
                     //输入报错
+                    Toast.makeText(PostJobs.this,"请检查您的输入格式",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -79,6 +91,7 @@ public class PostJobs extends AppCompatActivity{
         });
     }
 
+    //取得所有的输入
     public void getInput(){
         username=et_input_username.getText().toString();
         title=et_input_title.getText().toString();
@@ -89,11 +102,46 @@ public class PostJobs extends AppCompatActivity{
         displaytime=et_input_post_time.getText().toString();
     }
 
+    //检查输入是否合格,待添加
     public boolean checkInput(){
         return true;
     }
 
+    //操作过于复杂，整合成一个函数
     public void postJobs(){
+        Log.i("post name",loginObject.getName());
+        Map<String,String> post=new LinkedHashMap<>();
+        post.put("userid", loginObject.getUserid());
+        post.put("username",loginObject.getName());
+        post.put("title",title);
+        post.put("workplace",workplace);
+        post.put("deadline",deadline);
+        post.put("phone",phone);
+        post.put("workInfo",detail);
+        post.put("displaytime",displaytime);
+        EditInformation.setCreatRecuit(post, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //UI提示发布成功
+                        Toast.makeText(PostJobs.this,"发布成功",Toast.LENGTH_SHORT).show();
+                        //后续预计操作正在进行列表添加项目
 
+                    }
+                });
+            }
+
+            @Override
+            public void onError(String error) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(PostJobs.this,"发布失败",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 }
