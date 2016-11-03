@@ -1,6 +1,5 @@
 package com.tac.iparttimejob.Class;
 
-import android.support.annotation.VisibleForTesting;
 
 /**
  * Created by 守候。 on 2016/10/27.

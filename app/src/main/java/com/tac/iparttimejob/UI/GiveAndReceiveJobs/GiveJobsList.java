@@ -31,6 +31,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.tac.iparttimejob.Class.Object.inRecuitObjectList;
 import static com.tac.iparttimejob.NetWork.Query.QueryInformation.getInRecruitList;
 
 
@@ -94,9 +95,9 @@ public class GiveJobsList extends Fragment{
 
     //初始化数据,引入网络操作后修改
     private void initData(int pageNum) {
-        Object.inRecuitObjectList=new ArrayList<>();
+        inRecuitObjectList=new ArrayList<>();
         Object.notRecuitObjectList=new ArrayList<>();
-        validJobList=Object.inRecuitObjectList;
+        validJobList= inRecuitObjectList;
         unvalidJooList=Object.notRecuitObjectList;
 
 
@@ -222,6 +223,10 @@ public class GiveJobsList extends Fragment{
     private void pullDownRefresh(int pageNum){
         page=1;
         pointer=0;
+
+
+
+
         Map<String,String> getList=new LinkedHashMap<>();
         getList.put("userid",Object.loginObject.getUserid());
         getList.put("page",(page++)+"");
@@ -272,8 +277,9 @@ public class GiveJobsList extends Fragment{
                 }
             });
         }
-        Log.i("validListSize",Object.inRecuitObjectList.size()+"");
+        Log.i("validListSize", inRecuitObjectList.size()+"");
         Log.i("unValidListSize",Object.notRecuitObjectList.size()+"");
+
     }
 
     /*

@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.tac.iparttimejob.Class.Advice;
+import com.tac.iparttimejob.Class.Application;
 import com.tac.iparttimejob.Class.Assessment;
 import com.tac.iparttimejob.Class.ApplicationList;
 import com.tac.iparttimejob.Class.AssessmentList;
@@ -21,6 +22,7 @@ import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Connect.HttpPost;
 
 import java.lang.reflect.Type;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -241,7 +243,7 @@ public class QueryInformation extends HttpPost{
         post(HttpAddress.HOST + HttpAddress.GET_IN_RECUIT_LIST, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                Log.d("result:",result);
+                //Log.d("result:",result);
                 RecuitList recuitResultList=null;
                 Type type=new TypeToken<RecuitList>(){}.getType();
                 try {
@@ -252,11 +254,11 @@ public class QueryInformation extends HttpPost{
                 }
                 if(recuitResultList!=null) {
                     if (recuitResultList.isSuccess()) {
-                        Log.d("recuitList:",recuitResultList.getData().get(0).getPhone());
-                        Log.d("recuitList:",recuitResultList.getData().get(0).getDealdine());
-                        Log.d("recuitList:",recuitResultList.getData().get(0).getDisplaytime());
-                        Log.d("recuitList:",recuitResultList.getData().get(0).getTac_user().getUserid());
-                        recuitResultList.getData().addAll(inRecuitObjectList);
+                        inRecuitObjectList=recuitResultList.getData();
+                       // recuitResultList.getData().addAll(inRecuitObjectList);
+
+                   //     Log.d("inrecruitObjcet:", inRecuitObjectList.get(0).getDealdine());
+                    //    Log.d("inrecruitObjcet:", inRecuitObjectList.get(0).getTac_user().getUserid());
                         listener.onFinish("成功");
                     } else {
                         listener.onError(recuitResultList.getMessage());
@@ -288,7 +290,8 @@ public class QueryInformation extends HttpPost{
                 }
                 if(recuitResultList!=null) {
                     if (recuitResultList.isSuccess()) {
-                        recuitResultList.getData().addAll(notRecuitObjectList);
+                        notRecuitObjectList=recuitResultList.getData();
+                       // recuitResultList.getData().addAll(notRecuitObjectList);
                         listener.onFinish("成功");
                     } else {
                         listener.onError(recuitResultList.getMessage());
@@ -321,7 +324,8 @@ public class QueryInformation extends HttpPost{
                 }
                 if(enrollList!=null) {
                     if (enrollList.isSuccess()) {
-                        enrollList.getData().addAll(enrollObjectList);
+                        enrollObjectList=enrollList.getData();
+                        //enrollList.getData().addAll(enrollObjectList);
                         listener.onFinish("成功");
                     } else {
                         listener.onError(enrollList.getMessage());
@@ -354,7 +358,8 @@ public class QueryInformation extends HttpPost{
                 }
                 if(enrollList!=null) {
                     if (enrollList.isSuccess()) {
-                        enrollList.getData().addAll(enrollChooseObjectList);
+                        enrollChooseObjectList=enrollList.getData();
+                       // enrollList.getData().addAll(enrollChooseObjectList);
                         listener.onFinish("成功");
                     } else {
                         listener.onError(enrollList.getMessage());
@@ -392,7 +397,8 @@ public class QueryInformation extends HttpPost{
                 }
                 if(chooseApplication!=null) {
                     if (chooseApplication.isSuccess()) {
-                        chooseApplication.getData().addAll(chooseApplicationList);
+                        chooseApplicationList=chooseApplication.getData();
+                        //chooseApplication.getData().addAll(chooseApplicationList);
                         listener.onFinish("成功");
                     } else {
                         listener.onError(chooseApplication.getMessage());
@@ -479,7 +485,8 @@ public class QueryInformation extends HttpPost{
                 }
                 if(applicationList!=null) {
                     if (applicationList.isSuccess()) {
-                        applicationList.getData().addAll(applicationObjectList);
+                        applicationObjectList=applicationList.getData();
+                        //applicationList.getData().addAll(applicationObjectList);
                         listener.onFinish("成功");
                     } else {
                         listener.onError(applicationList.getMessage());
@@ -546,7 +553,9 @@ public class QueryInformation extends HttpPost{
                 }
                 if(recuitResultList!=null) {
                     if (recuitResultList.isSuccess()) {
-                        recuitResultList.getData().addAll(RecuitObjectlistForManager);
+
+                        RecuitObjectlistForManager=recuitResultList.getData();
+                       // recuitResultList.getData().addAll(RecuitObjectlistForManager);
                         listener.onFinish("成功");
                     } else {
                         listener.onError(recuitResultList.getMessage());
@@ -578,7 +587,9 @@ public class QueryInformation extends HttpPost{
                 }
                 if(assement!=null) {
                     if (assement.isSuccess()) {
-                        assement.getData().addAll(atooAssessmentObjectList);
+                        atooAssessmentObjectList=assement.getData();
+
+                        //assement.getData().addAll(atooAssessmentObjectList);
                         listener.onFinish("成功");
                     } else {
                         listener.onError(assement.getMessage());
@@ -610,7 +621,8 @@ public class QueryInformation extends HttpPost{
                 }
                 if(assement!=null) {
                     if (assement.isSuccess()) {
-                        assement.getData().addAll(otoaAssessmentObjectList);
+                        otoaAssessmentObjectList=assement.getData();
+                        //assement.getData().addAll(otoaAssessmentObjectList);
                         listener.onFinish("成功");
                     } else {
                         listener.onError(assement.getMessage());
@@ -642,7 +654,8 @@ public class QueryInformation extends HttpPost{
                 }
                 if(assement!=null) {
                     if (assement.isSuccess()) {
-                        assement.getData().addAll(atooAssessmentByIDObjectList);
+                        atooAssessmentByIDObjectList=assement.getData();
+                        //assement.getData().addAll(atooAssessmentByIDObjectList);
                         listener.onFinish("成功");
                     } else {
                         listener.onError(assement.getMessage());
@@ -674,7 +687,8 @@ public class QueryInformation extends HttpPost{
                 }
                 if(assement!=null) {
                     if (assement.isSuccess()) {
-                        assement.getData().addAll(otoaAssessmentByIDObjectList);
+                        otoaAssessmentByIDObjectList=assement.getData();
+                        //assement.getData().addAll(otoaAssessmentByIDObjectList);
                         listener.onFinish("成功");
                     } else {
                         listener.onError(assement.getMessage());

@@ -8,9 +8,9 @@ import java.util.List;
  * Created by 守候。 on 2016/10/31.
  */
 
-public class RecuitList {
+public class RecuitList implements Cloneable {
     private boolean success;
-    private String  message;
+    private String message;
 
 
     public List<RecuitResult.Recuit> getData() {
@@ -30,7 +30,6 @@ public class RecuitList {
     public void setMessage(String message) {
         this.message = message;
     }
-
 
 
     public boolean isSuccess() {
