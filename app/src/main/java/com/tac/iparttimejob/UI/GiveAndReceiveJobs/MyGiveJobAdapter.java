@@ -1,5 +1,6 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
+import android.support.v7.util.AsyncListUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import java.io.FileOutputStream;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
+import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
@@ -25,9 +27,11 @@ import com.tac.iparttimejob.UI.Utils.DataType;
  */
 public class MyGiveJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    //RecyclerView的数组储存数组
-    private List<RecuitResult.Recuit> dataList;
 
+    int listType;
+    List<RecuitResult.Recuit> dataList;
+
+    //传入的是静态对象时本地对象无法与之同步
     public MyGiveJobAdapter(List<RecuitResult.Recuit>dataList){
         this.dataList=dataList;
     }
@@ -100,7 +104,17 @@ public class MyGiveJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     */
     @Override
     public int getItemCount() {
-        if(dataList==null||dataList.size()==0)
+        //判断数据来源
+//        if (listType==DataType.VALID_JOB_LIST){
+//            if (Object.inRecuitObjectList == null || Object.inRecuitObjectList.size() == 0)
+//                return 0;
+//            return Object.inRecuitObjectList.size();
+//        }else {
+//            if (Object.notRecuitObjectList == null || Object.notRecuitObjectList.size() == 0)
+//                return 0;
+//            return Object.notRecuitObjectList.size();
+//        }
+        if (dataList == null || dataList.size() == 0)
             return 0;
         return dataList.size();
     }
@@ -110,10 +124,26 @@ public class MyGiveJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         //holder.tv_valid_jobs.setText(dataList.get(position));
+
         int status=getItemViewType(position);
-        String jobTitle=dataList.get(position).getTitle();
-        String jobInfo=dataList.get(position).getWorkInfo();
-        String deadline=dataList.get(position).getDealdine();
+        String jobTitle;
+        String jobInfo;
+        String deadline;
+
+        //判断数据来源
+//        if(listType==DataType.VALID_JOB_LIST) {
+//            jobTitle = Object.inRecuitObjectList.get(position).getTitle();
+//            jobInfo = Object.inRecuitObjectList.get(position).getWorkInfo();
+//            deadline = Object.inRecuitObjectList.get(position).getDealdine();
+//        }
+//        else {
+//            jobTitle = Object.notRecuitObjectList.get(position).getTitle();
+//            jobInfo = Object.notRecuitObjectList.get(position).getWorkInfo();
+//            deadline = Object.notRecuitObjectList.get(position).getDealdine();
+//        }
+        jobTitle = dataList.get(position).getTitle();
+        jobInfo = dataList.get(position).getWorkInfo();
+        deadline = dataList.get(position).getDealdine();
 
         switch (status){
             case DataType.JOB_STATUS_CHECKING:{
@@ -179,6 +209,11 @@ public class MyGiveJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public int getItemViewType(int position) {
         //返回招聘状态，用于控制不同子项布局
+        //判断数据来源
+//        if(listType==DataType.VALID_JOB_LIST)
+//            return Object.inRecuitObjectList.get(position).getStatus();
+//        else
+//            return Object.notRecuitObjectList.get(position).getStatus();
         return dataList.get(position).getStatus();
     }
 

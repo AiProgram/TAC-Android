@@ -19,7 +19,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     @Override
     public android.support.v4.app.Fragment getItem(int position) {
        switch (position){
-           case 1:return new GiveJobsList();
+           case 1:return new MyManager();
            case 2:return new MyManager();
            case 3:return new GiveJobsList();
            default:return new GiveJobsList();

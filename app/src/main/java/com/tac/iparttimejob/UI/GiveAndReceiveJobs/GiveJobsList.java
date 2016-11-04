@@ -1,6 +1,7 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,6 +33,8 @@ import java.util.List;
 import java.util.Map;
 
 import static com.tac.iparttimejob.Class.Object.inRecuitObjectList;
+import static com.tac.iparttimejob.Class.Object.notRecuitObjectList;
+import static com.tac.iparttimejob.Class.Object.recuitObject;
 import static com.tac.iparttimejob.NetWork.Query.QueryInformation.getInRecruitList;
 
 
@@ -55,10 +58,9 @@ public class GiveJobsList extends Fragment{
     private MyGiveJobAdapter validJobAdapter;
     private MyGiveJobAdapter UnvalidJobAdapter;
 
+    List<RecuitResult.Recuit> validList=new ArrayList<>();
+    List<RecuitResult.Recuit> unValidList=new ArrayList<>();
 
-    //分别储存进行中和失效的信息
-    private List<RecuitResult.Recuit> validJobList;
-    private List<RecuitResult.Recuit> unvalidJooList;
 
     //防止多次初始化
     boolean inited=false;
@@ -96,22 +98,19 @@ public class GiveJobsList extends Fragment{
     //初始化数据,引入网络操作后修改
     private void initData(int pageNum) {
         inRecuitObjectList=new ArrayList<>();
-        Object.notRecuitObjectList=new ArrayList<>();
-        validJobList= inRecuitObjectList;
-        unvalidJooList=Object.notRecuitObjectList;
-
+        notRecuitObjectList=new ArrayList<>();
 
         srl_give_jobs.setRefreshing(true);
 
         if(pageNum==DataType.VALID_JOB_LIST){
             //清空再全部刷新
-            validJobList.clear();
+            validList.clear();
 
             //利用下拉刷新接口刷新
             pullDownRefresh(pageNum);
         }
         else if(pageNum==DataType.UNVALID_JOB_LIST){
-            unvalidJooList.clear();
+            unValidList.clear();
             pullDownRefresh(pageNum);
         }
 
@@ -126,8 +125,10 @@ public class GiveJobsList extends Fragment{
         srl_give_jobs=(SwipeRefreshLayout) fragmentView.findViewById(R.id.srl_give_jobs);
         tabLayout = (TabLayout)fragmentView.findViewById(R.id.tabLayout_give_jobs_top);
         imgbtn_add_jobs=(ImageButton) fragmentView.findViewById(R.id.imgbtn_add_jobs) ;
-        validJobAdapter=new MyGiveJobAdapter(validJobList);
-        UnvalidJobAdapter=new MyGiveJobAdapter(unvalidJooList);
+
+        //使用type而不是List初始化
+        validJobAdapter=new MyGiveJobAdapter(validList);
+        UnvalidJobAdapter=new MyGiveJobAdapter(unValidList);
 
         //设置ToolBar
             tabLayout.addTab(tabLayout.newTab().setText("进行中"));
@@ -224,9 +225,6 @@ public class GiveJobsList extends Fragment{
         page=1;
         pointer=0;
 
-
-
-
         Map<String,String> getList=new LinkedHashMap<>();
         getList.put("userid",Object.loginObject.getUserid());
         getList.put("page",(page++)+"");
@@ -242,6 +240,8 @@ public class GiveJobsList extends Fragment{
                             Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
                         }
                     });
+                    cloneValidList();
+                    rv_give_jobs.notifyData();
                 }
 
                 @Override
@@ -264,6 +264,8 @@ public class GiveJobsList extends Fragment{
                             Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
                         }
                     });
+                    cloneUnValidList();
+                    rv_give_jobs.notifyData();
                 }
 
                 @Override
@@ -278,8 +280,7 @@ public class GiveJobsList extends Fragment{
             });
         }
         Log.i("validListSize", inRecuitObjectList.size()+"");
-        Log.i("unValidListSize",Object.notRecuitObjectList.size()+"");
-
+        Log.i("unValidListSize",notRecuitObjectList.size()+"");
     }
 
     /*
@@ -298,9 +299,12 @@ public class GiveJobsList extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getActivity(), "上拉更多成功", Toast.LENGTH_SHORT).show();
                         }
                     });
+
+                    addValidList();
+                    rv_give_jobs.notifyData();
                 }
 
                 @Override
@@ -308,7 +312,7 @@ public class GiveJobsList extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "下拉刷新失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "上拉更多失败", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -320,9 +324,12 @@ public class GiveJobsList extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getActivity(), "上拉更多成功", Toast.LENGTH_SHORT).show();
                         }
                     });
+
+                    addUnvalidList();
+                    rv_give_jobs.notifyData();
                 }
 
                 @Override
@@ -330,14 +337,50 @@ public class GiveJobsList extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "下拉刷新失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "上拉更多失败", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
             });
         }
-        Log.i("validListSize",validJobList.size()+"");
-        Log.i("unValidListSize",unvalidJooList.size()+"");
+
+        Log.i("validListSize",inRecuitObjectList.size()+"");
+        Log.i("unValidListSize",notRecuitObjectList.size()+"");
+    }
+
+    public void cloneValidList(){
+        validList.clear();
+        for(int i=0;i<Object.inRecuitObjectList.size();i++)
+            validList.add(Object.inRecuitObjectList.get(i));
+    }
+
+    public void cloneUnValidList(){
+        unValidList.clear();
+        for(int i=0;i<Object.notRecuitObjectList.size();i++)
+            unValidList.add(Object.notRecuitObjectList.get(i));
+    }
+
+    public void addValidList(){
+        if(validList.size()<inRecuitObjectList.size())
+        for(int i=validList.size();i<inRecuitObjectList.size();i++){
+            validList.add(inRecuitObjectList.get(i));
+        }
+    }
+
+    public void addUnvalidList(){
+        if(unValidList.size()<notRecuitObjectList.size())
+            for(int i=unValidList.size();i<notRecuitObjectList.size();i++){
+                unValidList.add(notRecuitObjectList.get(i));
+            }
+    }
+
+    public void test(){
+//        for(int i=0;i<validJobList.size();i++){
+//            Log.i("validJobs",validJobList.get(i).getRecruitid()+" "+validJobList.get(i).getStatus()+"");
+//        }
+//        for(int i=0;i<unvalidJooList.size();i++){
+//            Log.i("unvalidJobs",unvalidJooList.get(i).getRecruitid()+" "+unvalidJooList.get(i).getStatus()+"");
+//        }
     }
 
 }

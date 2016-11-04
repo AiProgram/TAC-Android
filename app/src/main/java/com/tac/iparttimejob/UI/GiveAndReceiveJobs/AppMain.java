@@ -24,6 +24,9 @@ public class AppMain extends AppCompatActivity {
         MainPagerAdapter mainPagerAdapter=new MainPagerAdapter(getSupportFragmentManager());
         mainViewPager.setAdapter(mainPagerAdapter);
 
+        //避免ViewPager销毁fragment
+        mainViewPager.setOffscreenPageLimit(2);
+
         TabLayout mainTabLayout=(TabLayout)findViewById(R.id.tabLayout_give_jobs_bottom);
         mainTabLayout.setupWithViewPager(mainViewPager);
 
