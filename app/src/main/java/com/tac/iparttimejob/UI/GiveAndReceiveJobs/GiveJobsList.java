@@ -67,7 +67,7 @@ public class GiveJobsList extends Fragment{
 
     //一次获得的数量以及显示列表指针
     int page=1;
-    int rows=20;
+    int rows=10;
     int pointer=0;
 
 
@@ -227,7 +227,7 @@ public class GiveJobsList extends Fragment{
 
         Map<String,String> getList=new LinkedHashMap<>();
         getList.put("userid",Object.loginObject.getUserid());
-        getList.put("page",(page++)+"");
+        getList.put("page",(page)+"");
         getList.put("rows",(rows)+"");
         //分有效和无效刷新列表
         if(pageNum==DataType.VALID_JOB_LIST) {
@@ -242,6 +242,7 @@ public class GiveJobsList extends Fragment{
                     });
                     cloneValidList();
                     rv_give_jobs.notifyData();
+                    page++;
                 }
 
                 @Override
@@ -266,6 +267,7 @@ public class GiveJobsList extends Fragment{
                     });
                     cloneUnValidList();
                     rv_give_jobs.notifyData();
+                    page++;
                 }
 
                 @Override
@@ -289,7 +291,7 @@ public class GiveJobsList extends Fragment{
     private void pullUpRefresh(int pageNum){
         Map<String,String> getList=new LinkedHashMap<>();
         getList.put("userid",Object.loginObject.getUserid());
-        getList.put("page",(page++)+"");
+        getList.put("page",(page)+"");
         getList.put("rows",(rows)+"");
         //分有效和无效刷新列表
         if(pageNum==DataType.VALID_JOB_LIST) {
@@ -305,6 +307,7 @@ public class GiveJobsList extends Fragment{
 
                     addValidList();
                     rv_give_jobs.notifyData();
+                    page++;
                 }
 
                 @Override
@@ -330,6 +333,7 @@ public class GiveJobsList extends Fragment{
 
                     addUnvalidList();
                     rv_give_jobs.notifyData();
+                    page++;
                 }
 
                 @Override
@@ -361,15 +365,14 @@ public class GiveJobsList extends Fragment{
     }
 
     public void addValidList(){
-        if(validList.size()<inRecuitObjectList.size())
-        for(int i=validList.size();i<inRecuitObjectList.size();i++){
+        //由于继续获得数据会把结果清空加入新数据，再次直接添加即可
+        for(int i=0;i<inRecuitObjectList.size();i++){
             validList.add(inRecuitObjectList.get(i));
         }
     }
 
     public void addUnvalidList(){
-        if(unValidList.size()<notRecuitObjectList.size())
-            for(int i=unValidList.size();i<notRecuitObjectList.size();i++){
+            for(int i=0;i<notRecuitObjectList.size();i++){
                 unValidList.add(notRecuitObjectList.get(i));
             }
     }
