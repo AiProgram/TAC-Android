@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:text="账号:"
         android:textSize="25sp"
-        android:id="@+id/id_num"
-        android:layout_below="@+id/id_image_btn"
+        android:id="@+id/tv_accoount_label"
+        android:layout_below="@+id/btn_upload_image"
         android:layout_marginTop="30dp"
         android:textAllCaps="false" />
     <TextView
@@ -32,8 +32,8 @@
         android:layout_height="wrap_content"
         android:text="手机号:"
         android:textSize="25sp"
-        android:id="@+id/id_phone"
-        android:layout_below="@+id/id_email"
+        android:id="@+id/tv_phone_label"
+        android:layout_below="@+id/tv_email_label"
         android:layout_marginTop="20dp"
         android:textAllCaps="false" />
     <TextView
@@ -41,37 +41,28 @@
         android:layout_height="wrap_content"
         android:text="邮箱:"
         android:textSize="25sp"
-        android:id="@+id/id_email"
-        android:layout_below="@+id/id_num"
+        android:id="@+id/tv_email_label"
+        android:layout_below="@+id/tv_accoount_label"
         android:layout_marginTop="20dp"
         android:textAllCaps="false" />
-
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:background="@color/cardview_dark_background"
-        android:id="@+id/id_image"
-        android:layout_marginTop="46dp"
-        android:layout_below="@+id/tv_id_title"
-        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="上传"
         android:textSize="20sp"
-        android:layout_below="@+id/id_image"
+        android:layout_below="@+id/iv_user_head_image"
         android:layout_centerHorizontal="true"
-        android:id="@+id/id_image_btn" />
+        android:id="@+id/btn_upload_image" />
 
     <Button
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:text="取消"
         android:textSize="20sp"
-        android:id="@+id/id_btn_cancel"
-        android:layout_alignBaseline="@+id/id_btn_sure"
-        android:layout_alignBottom="@+id/id_btn_sure"
+        android:id="@+id/btn_cancle_change"
+        android:layout_alignBaseline="@+id/btn_confirm_change"
+        android:layout_alignBottom="@+id/btn_confirm_change"
         android:layout_alignParentEnd="true" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
@@ -79,12 +70,12 @@
         android:layout_height="60dp"
         android:inputType="phone"
         android:ems="11"
-        android:id="@+id/reset_phone"
+        android:id="@+id/et_set_phone"
         android:hint="请输入您的手机"
         android:text="12345678901"
         android:textSize="25dp"
-        android:layout_alignBaseline="@+id/id_phone"
-        android:layout_alignBottom="@+id/id_phone"
+        android:layout_alignBaseline="@+id/tv_phone_label"
+        android:layout_alignBottom="@+id/tv_phone_label"
         android:layout_alignParentEnd="true"
         android:layout_alignStart="@+id/tv_id_title" />
 
@@ -93,35 +84,27 @@
         android:layout_height="wrap_content"
         android:text="123456789"
         android:textSize="25dp"
-        android:id="@+id/idnum"
-        android:layout_alignBaseline="@+id/id_num"
-        android:layout_alignBottom="@+id/id_num"
-        android:layout_alignStart="@+id/reset_phone" />
+        android:id="@+id/tv_account"
+        android:layout_alignBaseline="@+id/tv_accoount_label"
+        android:layout_alignBottom="@+id/tv_accoount_label"
+        android:layout_alignStart="@+id/et_set_phone" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="990041251@qq.com"
         android:textSize="25dp"
-        android:id="@+id/idemail"
-        android:layout_above="@+id/id_phone"
-        android:layout_alignStart="@+id/reset_phone" />
+        android:id="@+id/tv_email"
+        android:layout_above="@+id/tv_phone_label"
+        android:layout_alignStart="@+id/et_set_phone" />
 
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:text="确定修改"
-        android:textSize="20sp"
-        android:id="@+id/id_btn_sure"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="密码:"
         android:textSize="25sp"
-        android:id="@+id/id_pwd"
-        android:layout_below="@+id/id_phone"
+        android:id="@+id/tv_password_label"
+        android:layout_below="@+id/tv_phone_label"
         android:layout_marginTop="20dp"
         android:textAllCaps="false"/>
 
@@ -130,21 +113,39 @@
         android:layout_height="wrap_content"
         android:text="********"
         android:textSize="25sp"
-        android:id="@+id/idpwd"
+        android:id="@+id/tv_password"
         android:textAllCaps="false"
-        android:layout_below="@+id/reset_phone"
-        android:layout_alignStart="@+id/reset_phone"
-        android:layout_alignBottom="@+id/id_pwd" />
+        android:layout_below="@+id/et_set_phone"
+        android:layout_alignStart="@+id/et_set_phone"
+        android:layout_alignBottom="@+id/tv_password_label" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="修改密码"
         android:textSize="15dp"
-        android:id="@+id/button2"
-        android:layout_alignBaseline="@+id/id_pwd"
-        android:layout_alignBottom="@+id/id_pwd"
-        android:layout_toEndOf="@+id/idnum" />
+        android:id="@+id/btn_change_password"
+        android:layout_alignBaseline="@+id/tv_password_label"
+        android:layout_alignBottom="@+id/tv_password_label"
+        android:layout_toEndOf="@+id/tv_account" />
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@color/cardview_dark_background"
+        android:id="@+id/iv_user_head_image"
+        android:layout_marginTop="46dp"
+        android:layout_below="@+id/tv_id_title"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="确定修改"
+        android:textSize="20sp"
+        android:id="@+id/btn_confirm_change"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
