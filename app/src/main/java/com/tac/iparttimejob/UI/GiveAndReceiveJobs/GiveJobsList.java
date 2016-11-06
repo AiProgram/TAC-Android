@@ -183,6 +183,22 @@ public class GiveJobsList extends Fragment{
         rv_give_jobs.setAdapter(validJobAdapter);
         //设置RecyclerVi可以上拉刷新
         rv_give_jobs.setLoadMoreEnable(true);
+
+        //有效列表点击事件
+        validJobAdapter.setOnItemClickListener(new MyGiveJobAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                //点击跳转
+                Toast.makeText(getActivity(),"你点击了"+validList.get(position).getTitle(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        //失效列表点击事件
+        UnvalidJobAdapter.setOnItemClickListener(new MyGiveJobAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                //点击跳转
+            }
+        });
     }
 
 

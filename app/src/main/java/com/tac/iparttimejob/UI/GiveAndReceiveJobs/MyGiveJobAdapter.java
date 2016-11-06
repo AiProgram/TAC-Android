@@ -31,6 +31,10 @@ public class MyGiveJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     int listType;
     List<RecuitResult.Recuit> dataList;
 
+    //保存点击事件的监听器,点击事件是用接口配合内部接口传递出去的
+    private OnItemClickListener mOnItemClickListener;
+    private OnItemLongClickListener mOnItemLongClickListener;
+
     //传入的是静态对象时本地对象无法与之同步
     public MyGiveJobAdapter(List<RecuitResult.Recuit>dataList){
         this.dataList=dataList;
@@ -122,7 +126,7 @@ public class MyGiveJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     /*按位置设置item内容*/
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         //holder.tv_valid_jobs.setText(dataList.get(position));
 
         int status=getItemViewType(position);
@@ -177,6 +181,24 @@ public class MyGiveJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 viewHolder.tv_job_info.setText(jobInfo);
             };break;
         }
+        //绑定是绑定点击监听器
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position =holder.getLayoutPosition();
+                mOnItemClickListener.onItemClick(holder.itemView,position);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                int postion=holder.getLayoutPosition();
+                mOnItemLongClickListener.onItemLongClick(holder.itemView,position);
+                //拦截事件的继续传递
+                return true;
+            }
+        });
     }
 
     //设置recyclerView的item布局
@@ -217,5 +239,21 @@ public class MyGiveJobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return dataList.get(position).getStatus();
     }
 
+    //用于实现RecyclerView的点击事件的接口
+    public interface OnItemClickListener{
+        void onItemClick(View view,int position);
+    }
 
+    public interface OnItemLongClickListener{
+        void onItemLongClick(View view,int position);
+    }
+
+
+    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener){
+        this.mOnItemClickListener = mOnItemClickListener;
+    }
+
+    public void setOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickListener) {
+        this.mOnItemLongClickListener = mOnItemLongClickListener;
+    }
 }
