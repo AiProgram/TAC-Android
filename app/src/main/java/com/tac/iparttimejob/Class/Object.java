@@ -13,7 +13,7 @@ public class Object {
     //个人资料
     public static Resume             resumeObject;
     //招聘信息
-    public static RecuitResult.Recuit   recuitObject;
+    public static RecuitResult.Recuit   recuitObject=null;
     //登录信息含个人资料
     public static LoginResult.LoginUser loginObject;
     //邮件验证码

@@ -190,6 +190,9 @@ public class QueryInformation extends HttpPost{
             @Override
             public void onFinish(String result) {
                 RecuitResult recuitResult=null;
+                if(recuitObject==null){
+                    recuitObject=new RecuitResult.Recuit();
+                }
                 try {
                     recuitResult=new Gson().fromJson(result,RecuitResult.class);
                 }catch (JsonSyntaxException e) {

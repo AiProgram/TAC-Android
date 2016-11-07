@@ -38,7 +38,7 @@ public class RecuitResult {
     private Recuit data;
 
 
-    public class Recuit {
+    public static class Recuit {
         public String getRecruitid() {
             return recruitid;
         }
