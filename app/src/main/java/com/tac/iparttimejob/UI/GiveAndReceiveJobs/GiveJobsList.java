@@ -189,7 +189,7 @@ public class GiveJobsList extends Fragment{
             @Override
             public void onItemClick(View view, int position) {
                 //点击跳转
-                Toast.makeText(getActivity(),"你点击了"+validList.get(position).getTitle(),Toast.LENGTH_SHORT).show();
+                jumpToJobContent(DataType.VALID_JOB_LIST,position);
             }
         });
         //失效列表点击事件
@@ -197,10 +197,53 @@ public class GiveJobsList extends Fragment{
             @Override
             public void onItemClick(View view, int position) {
                 //点击跳转
+                jumpToJobContent(DataType.UNVALID_JOB_LIST,position);
             }
         });
     }
 
+    //跳转事件比较复杂，封装起来
+    private void jumpToJobContent(int listType,int position){
+        String recruitid;
+        final Intent intent=new Intent(getActivity(),JobContentForGiver.class);
+        switch (listType){
+            case DataType.VALID_JOB_LIST:{
+                recruitid=validList.get(position).getRecruitid();
+            }break;
+            case DataType.UNVALID_JOB_LIST:{
+                recruitid=unValidList.get(position).getRecruitid();
+            }break;
+            default:recruitid=validList.get(position).getRecruitid();
+        }
+
+        //先获得信息再跳转
+        Map<String,String>getJob=new LinkedHashMap<>();
+        getJob.put("recruitid",recruitid);
+        QueryInformation.getRecruitInformation(getJob, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                //成功提示
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(),"获取详情成功",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                startActivity(intent);
+            }
+
+            @Override
+            public void onError(String error) {
+                //失败提示
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(),"获取详情失败",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
 
 
     /*

@@ -104,9 +104,9 @@
                 android:layout_height="wrap_content"
                 style="@style/ContentTextStyle"
                 android:id="@+id/tv_language_requirment"
-                android:layout_alignBaseline="@+id/label_langauage_requirment"
-                android:layout_alignBottom="@+id/label_langauage_requirment"
-                android:layout_toEndOf="@+id/label_langauage_requirment" />
+                android:layout_alignBaseline="@+id/label_displaytime"
+                android:layout_alignBottom="@+id/label_displaytime"
+                android:layout_toEndOf="@+id/label_displaytime" />
 
             <TextView
                 android:text="招聘/应聘："
@@ -114,14 +114,14 @@
                 android:layout_height="wrap_content"
                 style="@style/ContentDisciptionTextStyle"
                 android:id="@+id/label_numbers"
-                android:layout_below="@+id/label_langauage_requirment"
+                android:layout_below="@+id/label_displaytime"
                 android:layout_alignParentStart="true" />
 
             <TextView
                 android:text="语言要求："
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/label_langauage_requirment"
+                android:id="@+id/label_displaytime"
                 style="@style/ContentDisciptionTextStyle"
                 android:layout_below="@+id/tv_author"
                 android:layout_alignParentStart="true" />
