@@ -9,9 +9,9 @@ import java.util.List;
 public class Object {
 
     //用户信息返回
-    public static UserResult.User       userObject;
+    public static UserResult.User       userObject=null;
     //个人资料
-    public static Resume             resumeObject;
+    public static Resume             resumeObject=null;
     //招聘信息
     public static RecuitResult.Recuit   recuitObject=null;
     //登录信息含个人资料
@@ -19,6 +19,7 @@ public class Object {
     //邮件验证码
     public static String                emailData;
     //正在进行的招聘列表
+    public static List<RecuitResult.Recuit> recuitObjectList;
     public static List<RecuitResult.Recuit> inRecuitObjectList;
     //失效的招聘列表
     public static List<RecuitResult.Recuit> notRecuitObjectList;
@@ -30,7 +31,8 @@ public class Object {
 
     //个人
     //查看招聘列表
-    public static List<Application>         chooseApplicationList;
+    public static List<RecuitResult.Recuit>  chooseApplicationList;
+
     //查看申请列表
     public static List<Application>         applicationObjectList;
     //查看某个招聘
