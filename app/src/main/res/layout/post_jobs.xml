@@ -1,159 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
-
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/relativeLayout">
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户名:"
+            android:textSize="25sp"
+            android:id="@+id/user_tip"
+            android:layout_marginTop="39dp"
+            android:layout_below="@+id/post_title"
+            android:layout_toStartOf="@+id/et_input_username" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="工作地点:"
+            android:textSize="25sp"
+            android:id="@+id/workplace_tip"
+            android:layout_alignTop="@+id/et_input_workplace"
+            android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手机:"
+            android:textSize="25sp"
+            android:id="@+id/phone_tip"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/et_input_deadline"
+            android:layout_toStartOf="@+id/et_input_phone" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_input_username"
+            android:layout_alignTop="@+id/user_tip"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/title_tip" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="发布招聘信息"
             android:textSize="40dp"
+            android:id="@+id/post_title"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/post_title" />
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="78dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="详细信息:"
+            android:textSize="25sp"
+            android:id="@+id/workinfo_tip"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/et_input_phone"
+            android:layout_alignParentStart="true" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_input_post_time"
+            android:layout_below="@+id/et_input_detail"
+            android:layout_marginTop="20dp"
+            android:layout_alignStart="@+id/et_input_deadline" />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="取消"
+            android:textSize="20sp"
+            android:id="@+id/btn_cancel_post"
+            android:layout_alignBaseline="@+id/btn_post_job"
+            android:layout_alignBottom="@+id/btn_post_job"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="截止时间:"
+            android:textSize="25sp"
+            android:id="@+id/deadline_tip"
+            android:layout_alignBaseline="@+id/et_input_deadline"
+            android:layout_alignBottom="@+id/et_input_deadline"
+            android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发布时间:"
+            android:textSize="25sp"
+            android:id="@+id/displaytime_tip"
+            android:layout_marginTop="11dp"
+            android:layout_below="@+id/et_input_detail"
+            android:layout_alignParentStart="true" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_input_title"
+            android:layout_below="@+id/et_input_username"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/title_tip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="标题:"
+            android:textSize="25sp"
+            android:id="@+id/title_tip"
+            android:layout_alignTop="@+id/et_input_title"
+            android:layout_alignEnd="@+id/workplace_tip" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_input_workplace"
+            android:layout_below="@+id/et_input_title"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/workplace_tip" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_input_deadline"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/et_input_workplace"
+            android:layout_toEndOf="@+id/deadline_tip" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_input_phone"
+            android:layout_alignBaseline="@+id/phone_tip"
+            android:layout_alignBottom="@+id/phone_tip"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/workinfo_tip" />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="确定"
+            android:textSize="20sp"
+            android:id="@+id/btn_post_job"
+            android:layout_below="@+id/et_input_post_time"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="17dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_input_detail"
+            android:inputType="textMultiLine"
+            android:minLines="8"
+            android:maxLines="30"
+            android:scrollbars="vertical"
+            android:gravity="top"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/workinfo_tip"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
-
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_input_username"
-        android:layout_alignTop="@+id/user_tip"
-        android:layout_toEndOf="@+id/user_tip" />
-
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_input_workplace"
-        android:layout_below="@+id/et_input_title"
-        android:layout_toEndOf="@+id/workplace_tip"
-        android:layout_marginTop="13dp" />
-
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_input_title"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/et_input_username"
-        android:layout_toEndOf="@+id/title_tip" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="工作地点:"
-        android:textSize="25sp"
-        android:id="@+id/workplace_tip"
-        android:layout_alignTop="@+id/et_input_workplace"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="截止时间:"
-        android:textSize="25sp"
-        android:id="@+id/deadline_tip"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
-
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_input_deadline"
-        android:layout_alignTop="@+id/deadline_tip"
-        android:layout_toEndOf="@+id/deadline_tip" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="标题:"
-        android:textSize="25sp"
-        android:id="@+id/title_tip"
-        android:layout_alignBaseline="@+id/et_input_title"
-        android:layout_alignBottom="@+id/et_input_title"
-        android:layout_toStartOf="@+id/et_input_workplace" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="姓名"
-        android:textSize="25sp"
-        android:id="@+id/user_tip"
-        android:layout_marginTop="39dp"
-        android:layout_below="@+id/relativeLayout"
-        android:layout_toStartOf="@+id/et_input_title" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="手机:"
-        android:textSize="25sp"
-        android:id="@+id/phone_tip"
-        android:layout_below="@+id/et_input_deadline"
-        android:layout_toStartOf="@+id/et_input_deadline"
-        android:layout_marginTop="11dp" />
-
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_input_phone"
-        android:layout_alignTop="@+id/phone_tip"
-        android:layout_toEndOf="@+id/phone_tip" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="详细信息:"
-        android:textSize="25sp"
-        android:id="@+id/workinfo_tip"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/et_input_phone"
-        android:layout_alignParentStart="true" />
-
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_input_detail"
-        android:layout_alignTop="@+id/workinfo_tip"
-        android:layout_toEndOf="@+id/workinfo_tip" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="发布时间:"
-        android:textSize="25sp"
-        android:id="@+id/displaytime_tip"
-        android:layout_marginTop="11dp"
-        android:layout_below="@+id/et_input_detail"
-        android:layout_alignParentStart="true" />
-
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_input_post_time"
-        android:layout_alignTop="@+id/displaytime_tip"
-        android:layout_toEndOf="@+id/displaytime_tip" />
-
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:text="确定"
-        android:textSize="20sp"
-        android:id="@+id/btn_post_job"
-        android:layout_below="@+id/et_input_post_time"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="14dp" />
-
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:text="取消"
-        android:textSize="20sp"
-        android:id="@+id/btn_cancel_post"
-        android:layout_alignBaseline="@+id/btn_post_job"
-        android:layout_alignBottom="@+id/btn_post_job"
-        android:layout_alignParentEnd="true" />
-</RelativeLayout>
+</ScrollView>
