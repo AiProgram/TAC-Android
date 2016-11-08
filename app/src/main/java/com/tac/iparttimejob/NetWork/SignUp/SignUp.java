@@ -32,12 +32,11 @@ public class SignUp extends HttpPost{
                 {
                     if(registerResult.isSuccess())
                     {
-
                         listener.onFinish("注册成功");
                     }
                     else
                     {
-                        Log.d("出错:",registerResult.getMessage());
+                        Log.d("signUpErr:",registerResult.getMessage());
                         listener.onError(registerResult.getMessage());
 
                     }
@@ -47,7 +46,7 @@ public class SignUp extends HttpPost{
             @Override
             public void onError(String error)
             {
-                Log.d("出错:",error);
+                Log.d("signUpErr:",error);
                 listener.onError(error);
             }
 
