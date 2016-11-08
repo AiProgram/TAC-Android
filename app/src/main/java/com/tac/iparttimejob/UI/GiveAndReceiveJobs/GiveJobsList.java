@@ -216,6 +216,7 @@ public class GiveJobsList extends Fragment{
             default:recruitid=validList.get(position).getRecruitid();
         }
 
+        Log.i("recruitid",recruitid);
         //先获得信息再跳转
         Map<String,String>getJob=new LinkedHashMap<>();
         getJob.put("recruitid",recruitid);

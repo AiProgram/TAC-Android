@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <com.tac.iparttimejob.UI.Utils.TitleToolBarLayout
+    <com.tac.iparttimejob.UI.Utils.MyToolBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/title_valid_job_content"/>
+        android:id="@+id/common_toolbar">
+
+    </com.tac.iparttimejob.UI.Utils.MyToolBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/common_toolbar">
 
         <RelativeLayout
             android:layout_height="match_parent"
@@ -213,4 +216,4 @@
         </RelativeLayout>
     </ScrollView>
 
-</LinearLayout>
+</RelativeLayout>

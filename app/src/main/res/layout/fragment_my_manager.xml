@@ -6,8 +6,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_user_filed"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginStart="23dp"
@@ -24,6 +24,7 @@
             android:layout_centerHorizontal="true">
 
         </com.tac.iparttimejob.UI.Utils.RoundImageView>
+
     </RelativeLayout>
 
     <TextView
@@ -58,13 +59,22 @@
         android:id="@+id/elv_function_my_manager"
         android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
         android:divider="#D1CDC4"
-        android:dividerHeight="2px"
+        android:dividerHeight="1px"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="300dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/rl_user_filed" />
+
+    <Button
+        android:text="退出登录"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_exit_login"
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/elv_function_my_manager"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
