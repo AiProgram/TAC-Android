@@ -1,6 +1,5 @@
 package com.tac.iparttimejob.UI.RegisterAndLogin;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -45,7 +44,7 @@ public class Register extends AppCompatActivity {
 
         //控件初始化不能放到别处
         et_set_account=(MaterialEditText) findViewById(R.id.et_set_account);
-        et_set_password=(MaterialEditText) findViewById(R.id.et_set_password);
+        et_set_password=(MaterialEditText) findViewById(R.id.et_reset_password);
         et_confirm_password=(MaterialEditText) findViewById(R.id.et_confirm_password);
         et_set_phone_number=(MaterialEditText) findViewById(R.id.et_set_phone_number);
         et_set_email=(MaterialEditText) findViewById(R.id.et_set_email);
