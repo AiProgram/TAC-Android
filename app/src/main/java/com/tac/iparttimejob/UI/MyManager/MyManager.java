@@ -1,5 +1,6 @@
 package com.tac.iparttimejob.UI.MyManager;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -92,6 +93,8 @@ public class MyManager extends Fragment {
                 switch (i){
                     case 0:{
                         //转到账号信息
+                        Intent intent=new Intent(getActivity(),SetAccountInfo.class);
+                        startActivity(intent);
                     }
                     case 1:{
                         //转到个人简历

@@ -1,10 +1,12 @@
 package com.tac.iparttimejob.UI.MyManager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,9 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.ImageUtils;
+import com.tac.iparttimejob.Class.Object;
+import com.tac.iparttimejob.UI.Utils.BitmapAndStringConverter;
+import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 
 /**
  * Created by AiProgram on 2016/11/5.
@@ -30,9 +37,13 @@ public class SetAccountInfo extends AppCompatActivity{
     private Button    btn_change_password;
     private Button    btn_confirm_change;
     private Button    btn_cancle_change;
+    private TextView  tv_account;
+    private TextView  tv_email;
     private PopupWindow mPopWindow;
 
     private String    newPhone;
+    private Bitmap    userHeadImage;
+    private String    imageString;
 
     private View.OnClickListener popOnclickListener;
 
@@ -50,6 +61,7 @@ public class SetAccountInfo extends AppCompatActivity{
 
         initListener();
 
+        initViews();
     }
 
     private void getViews(){
@@ -59,6 +71,8 @@ public class SetAccountInfo extends AppCompatActivity{
         btn_change_password=(Button) findViewById(R.id.btn_change_password);
         btn_confirm_change=(Button)  findViewById(R.id.btn_confirm_change);
         btn_cancle_change=(Button)   findViewById(R.id.btn_cancle_change);
+        tv_account=(TextView)  findViewById(R.id.tv_account);
+        tv_email=(TextView)  findViewById(R.id.tv_email);
     }
 
     private void initListener(){
@@ -93,6 +107,30 @@ public class SetAccountInfo extends AppCompatActivity{
                 }
             }
         };
+
+        btn_change_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //弹出修改密码Dialog
+                showPasswordDialog();
+            }
+        });
+
+        btn_confirm_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //尝试修改信息
+
+            }
+        });
+
+        btn_cancle_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //退出
+                finish();
+            }
+        });
     }
 
     //下方弹出头像选择方式的按钮
@@ -125,7 +163,7 @@ public class SetAccountInfo extends AppCompatActivity{
             return;
         }
         switch (requestCode) {
-            case TAKE_PHOTO_REQUEST:
+            case TAKE_PHOTO_REQUEST: {
                 Bundle bundle = data.getExtras();//获取到图片数据
                 if (null != bundle) {
                     Bitmap bm = bundle.getParcelable("data");
@@ -135,8 +173,9 @@ public class SetAccountInfo extends AppCompatActivity{
                     Uri uri = ImageUtils.saveBitmapToSdCard(bm);
                     startImageCrop(uri);
                 }
+            }
                 break;
-            case LOCAL_PICS_REQUEST:
+            case LOCAL_PICS_REQUEST: {
                 Uri uri = data.getData();//从图片的Uri是以cotent://格式开头的
                 //获取到图片
                 Bitmap bm = ImageUtils.uri2Bitmap(SetAccountInfo.this, uri);
@@ -146,14 +185,18 @@ public class SetAccountInfo extends AppCompatActivity{
                 Uri fileUri = ImageUtils.saveBitmapToSdCard(bm);
                 //对图片剪
                 startImageCrop(fileUri);
+            }
                 break;
-            case UPLOAD_PIC_REQUEST:
+            case UPLOAD_PIC_REQUEST: {
                 //把裁剪后的图片展示出来
                 Bundle b = data.getExtras();
-                Bitmap bitmap = b.getParcelable("data");
+                userHeadImage = b.getParcelable("data");
                 //图片展示出来
-                iv_user_head_image.setImageBitmap(bitmap);
+                iv_user_head_image.setImageBitmap(userHeadImage);
+                imageString = BitmapAndStringConverter.convertIconToString(userHeadImage);
+                //留待操作上传头像接口
                 break;
+            }
         }
     }
 
@@ -175,5 +218,44 @@ public class SetAccountInfo extends AppCompatActivity{
         intent.putExtra("return-data", true);//是否将数据保留在Bitmap中返回dataParcelable相应的Bitmap数据
         startActivityForResult(intent, UPLOAD_PIC_REQUEST);
 
+    }
+
+    //初始化各个控件，包括文字等
+    private void initViews(){
+        tv_account.setText(Object.userObject.getName());
+        tv_email.setText(Object.userObject.getEmail());
+    }
+
+    //设置密码采用弹出Dialog的形式
+    private void showPasswordDialog(){
+        final View dialog=LayoutInflater.from(this).inflate(R.layout.dialog_reset_password,null);
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("修改您的密码");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //确定修改密码事件
+                EditText et_reset_password=(EditText) dialog.findViewById(R.id.et_reset_password);
+                EditText et_confirm_password=(EditText) dialog.findViewById(R.id.et_confirm_password);
+                String password=et_reset_password.getText().toString();
+                String confirmedPassword=et_confirm_password.getText().toString();
+                if(password.equals(confirmedPassword)){
+                    //调用修改密码接口
+                }else{
+                    //提示两次密码不一致
+                    Toast.makeText(SetAccountInfo.this,"两次输入密码不一致",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //取消修改事件
+            }
+        });
+        //设置Dialog布局
+        builder.setView(dialog);
+        builder.show();
     }
 }

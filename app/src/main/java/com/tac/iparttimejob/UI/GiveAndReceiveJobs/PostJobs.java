@@ -115,6 +115,8 @@ public class PostJobs extends AppCompatActivity{
         workplace=et_input_workplace.getText().toString();
         phone=et_input_phone.getText().toString();
         detail=et_input_detail.getText().toString();
+        deadline=btn_input_deadline.getText().toString();
+        displaytime=btn_input_post_time.getText().toString();
     }
 
     //检查输入是否合格,待添加
