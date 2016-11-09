@@ -32,7 +32,7 @@
             android:textSize="25sp"
             android:id="@+id/phone_tip"
             android:layout_marginTop="20dp"
-            android:layout_below="@+id/et_input_deadline"
+            android:layout_below="@+id/btn_input_deadline"
             android:layout_toStartOf="@+id/et_input_phone" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -62,13 +62,14 @@
             android:layout_below="@+id/et_input_phone"
             android:layout_alignParentStart="true" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
+        <Button
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:id="@+id/et_input_post_time"
+            android:id="@+id/btn_input_post_time"
             android:layout_below="@+id/et_input_detail"
             android:layout_marginTop="20dp"
-            android:layout_alignStart="@+id/et_input_deadline" />
+            android:layout_alignStart="@+id/btn_input_deadline"
+            android:text="选择日期" />
 
         <Button
             android:layout_width="120dp"
@@ -80,15 +81,6 @@
             android:layout_alignBottom="@+id/btn_post_job"
             android:layout_alignParentEnd="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="截止时间:"
-            android:textSize="25sp"
-            android:id="@+id/deadline_tip"
-            android:layout_alignBaseline="@+id/et_input_deadline"
-            android:layout_alignBottom="@+id/et_input_deadline"
-            android:layout_alignParentStart="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -128,14 +120,6 @@
         <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/et_input_deadline"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/et_input_workplace"
-            android:layout_toEndOf="@+id/deadline_tip" />
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/et_input_phone"
             android:layout_alignBaseline="@+id/phone_tip"
             android:layout_alignBottom="@+id/phone_tip"
@@ -148,7 +132,7 @@
             android:text="确定"
             android:textSize="20sp"
             android:id="@+id/btn_post_job"
-            android:layout_below="@+id/et_input_post_time"
+            android:layout_below="@+id/btn_input_post_time"
             android:layout_alignParentStart="true"
             android:layout_marginTop="17dp" />
 
@@ -166,5 +150,23 @@
             android:layout_marginRight="10dp"
             android:layout_below="@+id/workinfo_tip"
             android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="截止时间:"
+            android:textSize="25sp"
+            android:id="@+id/deadline_tip"
+            android:layout_alignTop="@+id/btn_input_deadline"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="选择日期"
+            android:id="@+id/btn_input_deadline"
+            android:layout_marginTop="19dp"
+            android:layout_below="@+id/et_input_workplace"
+            android:layout_toEndOf="@+id/deadline_tip" />
     </RelativeLayout>
 </ScrollView>

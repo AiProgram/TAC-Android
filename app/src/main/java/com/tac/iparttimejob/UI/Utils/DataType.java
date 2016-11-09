@@ -15,4 +15,8 @@ public class DataType {
     public final static int JOB_STATUS_UNDERGONING=2;
     public final static int JOB_STATUS_FINSHED=3;
     public final static int JOB_STATUS_CANCELED=4;
+
+    //用来区分Dialog类型
+    public final static int DIALOG_DATE_PICKER_DEADLINE=1;
+    public final static int DIALOG_DATE_PICKER_POST_TIME=2;
 }
