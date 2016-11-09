@@ -28,6 +28,7 @@ public class Register extends AppCompatActivity {
     private String passwordConfirmed;
     private String phoneNumber;
     private String email;
+    private String signUpErr;
 
     private MaterialEditText et_set_account;
     private MaterialEditText et_set_password;
@@ -75,11 +76,12 @@ public class Register extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onError(String error) {
+                        public void onError(final String error) {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(Register.this,"注册失败，网络开了点小差",Toast.LENGTH_SHORT).show();
+                                    Log.d("signUpErr:",error);
+                                    Toast.makeText(Register.this,error,Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -88,7 +90,8 @@ public class Register extends AppCompatActivity {
 
                 }else{
                     //输入错误提示
-                    Toast.makeText(Register.this,"请检查您的输入格式",Toast.LENGTH_SHORT).show();
+                    Log.d("signUpErr:",signUpErr);
+                    Toast.makeText(Register.this,signUpErr,Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -113,14 +116,48 @@ public class Register extends AppCompatActivity {
     }
 
     //检查用户的输入是否合格
-    private boolean checkInput(){
-        RegexCheck regexCheck=new RegexCheck();
-        if(!regexCheck.checkAccount(account)) return false;
+    private boolean checkInput() {
+        signUpErr="";
+        RegexCheck regexCheck = new RegexCheck();
+        if (!regexCheck.checkAccount(account)) {
+            if(account.equals("")){
+                signUpErr="用户名不能为空";
+            }
+            else {
+                signUpErr="用户名以字母开头,包含数字汉字字母下划线，4到25字符";
+            }
+            return false;
+        }
         //密码格式检测出了点小问题，等待修复
-        //if(!regexCheck.checkPassword(password)) return false;
-        if(!password.equals(passwordConfirmed)) return false;
-        if(!regexCheck.checkPhoneNumbers(phoneNumber)) return false;
-        if(!regexCheck.checkEmail(email)) return false;
+       /* else if(!regexCheck.checkPassword(password)) {
+            if(password.equals("")){
+                signUpErr="密码不能为空";
+            }
+            else signUpErr="密码以字母开头，长度在8到20之间，只能包含字母、数字和下划线";
+            return false;
+        }*/
+        else if(!password.equals(passwordConfirmed)) {
+            if(passwordConfirmed.equals("")){
+                signUpErr="确认密码不能为空";
+            }
+            else  signUpErr="两次密码不一致";
+            return false;
+        }
+        else if(!regexCheck.checkPhoneNumbers(phoneNumber)) {
+            if(phoneNumber.equals("")){
+                signUpErr="手机号不能为空";
+            }
+            else signUpErr="请出入正确的手机号码";
+            return false;
+        }
+        //邮箱格式检查有问题
+        else if(!regexCheck.checkEmail(email)){
+            if(email.equals("")){
+                signUpErr="邮箱不能为空";
+            }
+            else signUpErr="请出入正确的邮箱";
+            return false;
+        }
         return true;
     }
 

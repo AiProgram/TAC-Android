@@ -40,6 +40,7 @@ import static com.tac.iparttimejob.Class.Object.notRecuitObjectList;
 import static com.tac.iparttimejob.Class.Object.otoaAssessmentByIDObjectList;
 import static com.tac.iparttimejob.Class.Object.otoaAssessmentObjectList;
 import static com.tac.iparttimejob.Class.Object.recuitObject;
+import static com.tac.iparttimejob.Class.Object.recuitObjectList;
 import static com.tac.iparttimejob.Class.Object.resumeObject;
 import static com.tac.iparttimejob.Class.Object.suggesstion;
 import static com.tac.iparttimejob.Class.Object.userObject;
@@ -312,6 +313,40 @@ public class QueryInformation extends HttpPost{
             }
         });
     }
+    //查看招聘信息
+    public static void getRecruitList(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.GET_RECUIT_LIST, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                RecuitList recuitResultList=null;
+                Type type=new TypeToken<RecuitList>(){}.getType();
+                try {
+                    recuitResultList=new Gson().fromJson(result,type);
+                }catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(recuitResultList!=null) {
+                    if (recuitResultList.isSuccess()) {
+                        recuitObjectList=recuitResultList.getData();
+                        // recuitResultList.getData().addAll(notRecuitObjectList);
+                        listener.onFinish("成功");
+                    } else {
+                        listener.onError(recuitResultList.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+
+            @Override
+            public void onError(String error) {
+
+                Log.d("POST错误:",error);
+                listener.onError(error);
+            }
+        });
+    }
     //查看报名列表
     public static void getEnrollList(Map<String,String>params,final HttpCallBackListener listener){
         post(HttpAddress.HOST + HttpAddress.GET_ENROLL_LIST, params, new HttpCallBackListener() {
@@ -385,12 +420,12 @@ public class QueryInformation extends HttpPost{
 
 
 
-    //查看招聘
-    public static void getChooseApplicationList(Map<String,String>params,final HttpCallBackListener listener){
-        post(HttpAddress.HOST + HttpAddress.GET_CHOOSE_APPLICATION, params, new HttpCallBackListener() {
+    //查看招聘列表(应聘者)
+    public static void getApplicationList(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.GET_CHOOSE_APPLICATION_LIST, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                ApplicationList chooseApplication=null;
+                RecuitList  chooseApplication=null;
                 Type type=new TypeToken<RecuitList>(){}.getType();
                 try {
                     chooseApplication=new Gson().fromJson(result,type);

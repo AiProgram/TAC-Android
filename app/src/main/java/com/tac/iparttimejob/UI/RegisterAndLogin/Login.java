@@ -85,14 +85,14 @@ public class Login extends AppCompatActivity {
                  account=et_input_account.getText().toString();
                  password=et_input_password.getText().toString();
                 final Map<String,String> login=new LinkedHashMap<String, String>();
-                //记得在结束调试时修改
-//                login.put("name",account);
-//                login.put("psw",password);
+             //   记得在结束调试时修改
+               login.put("name",account);
+               login.put("psw",password);
 
                 remember();
                 //近公测试使用
-                login.put("name","HZS");
-                login.put("psw","123456");
+                //login.put("name","HZS");
+               // login.put("psw","123456");
 
                 SignIn.login(login, new HttpCallBackListener() {
                     @Override
@@ -110,11 +110,11 @@ public class Login extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onError(String error) {
+                    public void onError(final String error) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(Login.this,"密码或者用户名有误",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this,error,Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

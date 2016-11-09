@@ -63,6 +63,7 @@ public class SignIn extends HttpPost{
                         }
                         else
                         {
+                            Log.d("loginErr:",loginResult.getMessage());
                             listener.onError(loginResult.getMessage());
                         }
                     }
@@ -71,6 +72,7 @@ public class SignIn extends HttpPost{
 
                 @Override
                 public void onError(String error) {
+                    Log.d("loginErr:",error.toString());
                     listener.onError(error);
                 }
             });
