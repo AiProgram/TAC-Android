@@ -35,9 +35,6 @@ import static com.tac.iparttimejob.Class.Object.userObject;
 public class Login extends AppCompatActivity {
 
     private String account, password;
-    private String YES = "yes";
-    private String NO = "no";
-    private String isMemory = "";//isMemory变量用来判断SharedPreferences有没有数据，包括上面的YES和NO
     private String FILE = "saveUserNamePwd";//用于保存SharedPreferences的文件
     private SharedPreferences pref = null;
     private SharedPreferences.Editor editor;
@@ -62,14 +59,15 @@ public class Login extends AppCompatActivity {
         btn_login = (Button) findViewById(R.id.btn_login);
         btn_register = (Button) findViewById(R.id.btn_register);
         pref = getSharedPreferences(FILE, MODE_PRIVATE);
-        isMemory = pref.getString("isMemory", NO);
+        boolean isMemory = pref.getBoolean("remember_password",false);
 
         //进入界面时，这个if用来判断SharedPreferences里面name和password有没有数据，有的话则直接打在EditText上面
-        if (isMemory.equals(YES)) {
+        if (isMemory) {
             account = pref.getString("name", "");
             password = pref.getString("password", "");
             et_input_account.setText(account);
             et_input_password.setText(password);
+            cb_remember_password.setChecked(true);
         }
         editor = pref.edit();
         editor.putString(account, et_input_account.toString());
@@ -164,14 +162,10 @@ public class Login extends AppCompatActivity {
             editor = pref.edit();
             editor.putString("name", et_input_account.getText().toString());
             editor.putString("password", et_input_password.getText().toString());
-            editor.putString("isMemory", YES);
+            editor.putBoolean("remember_password", true);
             editor.commit();
-        } else if (!cb_remember_password.isChecked()) {
-            if (pref == null) {
-                pref = getSharedPreferences(FILE, MODE_PRIVATE);
-            }
-            editor = pref.edit();
-            editor.putString("isMemory", NO);
+        } else {
+            editor.clear();
             editor.commit();
         }
     }
