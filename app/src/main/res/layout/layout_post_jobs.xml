@@ -10,16 +10,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="用户名:"
-            android:textSize="25sp"
-            android:id="@+id/user_tip"
-            android:layout_marginTop="39dp"
-            android:layout_below="@+id/post_title"
-            android:layout_toStartOf="@+id/et_input_username" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="工作地点:"
             android:textSize="25sp"
             android:id="@+id/workplace_tip"
@@ -32,8 +22,13 @@
             android:textSize="25sp"
             android:id="@+id/phone_tip"
             android:layout_marginTop="20dp"
+<<<<<<< HEAD:app/src/main/res/layout/layout_post_jobs.xml
             android:layout_below="@+id/btn_input_deadline"
             android:layout_toStartOf="@+id/et_input_phone" />
+=======
+            android:layout_below="@+id/et_input_deadline"
+            android:layout_alignParentStart="true" />
+>>>>>>> 89048a5138c1e8337f2432b42a86c26f738638de:app/src/main/res/layout/post_jobs.xml
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
@@ -41,7 +36,8 @@
             android:id="@+id/et_input_username"
             android:layout_alignTop="@+id/user_tip"
             android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/title_tip" />
+            android:layout_toEndOf="@+id/title_tip"
+            android:layout_alignStart="@+id/et_input_title" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,16 +67,6 @@
             android:layout_alignStart="@+id/btn_input_deadline"
             android:text="选择日期" />
 
-        <Button
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="取消"
-            android:textSize="20sp"
-            android:id="@+id/btn_cancel_post"
-            android:layout_alignBaseline="@+id/btn_post_job"
-            android:layout_alignBottom="@+id/btn_post_job"
-            android:layout_alignParentEnd="true" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -91,14 +77,6 @@
             android:layout_below="@+id/et_input_detail"
             android:layout_alignParentStart="true" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_input_title"
-            android:layout_below="@+id/et_input_username"
-            android:layout_marginTop="20dp"
-            android:layout_toEndOf="@+id/title_tip" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -106,7 +84,8 @@
             android:textSize="25sp"
             android:id="@+id/title_tip"
             android:layout_alignTop="@+id/et_input_title"
-            android:layout_alignEnd="@+id/workplace_tip" />
+            android:layout_alignParentStart="true"
+            android:layout_alignEnd="@+id/user_tip" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
@@ -126,6 +105,7 @@
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@+id/workinfo_tip" />
 
+<<<<<<< HEAD:app/src/main/res/layout/layout_post_jobs.xml
         <Button
             android:layout_width="120dp"
             android:layout_height="wrap_content"
@@ -136,6 +116,8 @@
             android:layout_alignParentStart="true"
             android:layout_marginTop="17dp" />
 
+=======
+>>>>>>> 89048a5138c1e8337f2432b42a86c26f738638de:app/src/main/res/layout/post_jobs.xml
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -154,6 +136,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD:app/src/main/res/layout/layout_post_jobs.xml
             android:text="截止时间:"
             android:textSize="25sp"
             android:id="@+id/deadline_tip"
@@ -168,5 +151,80 @@
             android:layout_marginTop="19dp"
             android:layout_below="@+id/et_input_workplace"
             android:layout_toEndOf="@+id/deadline_tip" />
+=======
+            android:text="用户名:"
+            android:textSize="25sp"
+            android:id="@+id/user_tip"
+            android:layout_marginTop="46dp"
+            android:layout_below="@+id/post_title"
+            android:layout_alignParentStart="true" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_input_title"
+            android:layout_marginTop="18dp"
+            android:layout_below="@+id/et_input_username"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/workplace_tip" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_input_num"
+            android:layout_below="@+id/et_input_post_time"
+            android:layout_marginTop="12dp"
+            android:layout_alignStart="@+id/et_input_post_time" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_input_money"
+            android:layout_below="@+id/et_input_num"
+            android:layout_marginTop="12dp"
+            android:layout_alignStart="@+id/et_input_post_time" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="人数:"
+            android:textSize="25sp"
+            android:id="@+id/num_tip"
+            android:layout_alignBaseline="@+id/et_input_num"
+            android:layout_alignBottom="@+id/et_input_num"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="薪水:"
+            android:textSize="25sp"
+            android:id="@+id/money_tip"
+            android:layout_above="@+id/btn_post_job"
+            android:layout_alignTop="@+id/et_input_money" />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="确定"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:background="@drawable/button_style_sure"
+            android:id="@+id/btn_post_job"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/et_input_detail"
+            android:layout_marginStart="20dp" />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="取消"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:background="@drawable/button_style_cancel"
+            android:id="@+id/btn_cancel_post"
+            android:layout_alignTop="@+id/et_input_money"
+            android:layout_alignEnd="@+id/et_input_detail"
+            android:layout_marginEnd="20dp" />
+>>>>>>> 89048a5138c1e8337f2432b42a86c26f738638de:app/src/main/res/layout/post_jobs.xml
     </RelativeLayout>
 </ScrollView>
