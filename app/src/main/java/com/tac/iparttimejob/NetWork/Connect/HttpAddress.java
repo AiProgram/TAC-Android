@@ -13,13 +13,15 @@ public class HttpAddress {
     public static final String SIGNUP_ADDRESS          ="tacpersonal/register";
     public static final String LOGIN_ADDRESSS          ="tacpersonal/login";
     public static final String EMAIL_ADDRESS           ="tacpersonal/checkEmail";
-    public static final String RESETPASSWD             ="";
+    public static final String RESETPASSWD             ="tacpersonal/updatePassword";
 //创建更新简历
     public static final String SET_CTEAT_PERSONAL_RESUME         ="tacpersonal/createResume";
     public static final String SET_UPDATE_PERSONAL_RESUME       ="tacpersonal/ updateResume";
     //查看简历
     public static final String GET_PERSONAL_RESUME         ="tacpersonal/ getResume";
+    //
     public static final String GET_USER_INFORMATION        ="";
+    public static final String GET_USER_INFORMATION_BY_NAME        ="tacpersonal/getUserByName";
     //更新用户信息
     public static final String SET_USER_INFORMATION        ="tacpersonal/update";
     //反馈

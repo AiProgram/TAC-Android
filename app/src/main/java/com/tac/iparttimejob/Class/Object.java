@@ -10,6 +10,7 @@ public class Object {
 
     //用户信息返回
     public static UserResult.User       userObject=null;
+    public static UserResult.User       getUserObject=null;
     //个人资料
     public static Resume             resumeObject=null;
     //招聘信息
