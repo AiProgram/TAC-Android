@@ -16,6 +16,7 @@ import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.Class.RecuitList;
 import com.tac.iparttimejob.Class.ResumeResult;
 import com.tac.iparttimejob.Class.ReturnMessage;
+import com.tac.iparttimejob.Class.UserImage;
 import com.tac.iparttimejob.Class.UserResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpAddress;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
@@ -30,6 +31,7 @@ import static com.tac.iparttimejob.Class.Object.RecuitObjectlistForManager;
 import static com.tac.iparttimejob.Class.Object.applicationObjectList;
 import static com.tac.iparttimejob.Class.Object.atooAssessmentByIDObjectList;
 import static com.tac.iparttimejob.Class.Object.atooAssessmentObjectList;
+import static com.tac.iparttimejob.Class.Object.atooCommentObjectList;
 import static com.tac.iparttimejob.Class.Object.enrollChooseObjectList;
 import static com.tac.iparttimejob.Class.Object.applicationObject;
 import static com.tac.iparttimejob.Class.Object.chooseApplicationList;
@@ -39,10 +41,12 @@ import static com.tac.iparttimejob.Class.Object.inRecuitObjectList;
 import static com.tac.iparttimejob.Class.Object.notRecuitObjectList;
 import static com.tac.iparttimejob.Class.Object.otoaAssessmentByIDObjectList;
 import static com.tac.iparttimejob.Class.Object.otoaAssessmentObjectList;
+import static com.tac.iparttimejob.Class.Object.otoaCommentObjectList;
 import static com.tac.iparttimejob.Class.Object.recuitObject;
 import static com.tac.iparttimejob.Class.Object.recuitObjectList;
 import static com.tac.iparttimejob.Class.Object.resumeObject;
 import static com.tac.iparttimejob.Class.Object.suggesstion;
+import static com.tac.iparttimejob.Class.Object.userImage;
 import static com.tac.iparttimejob.Class.Object.userObject;
 
 /**
@@ -148,7 +152,7 @@ public class QueryInformation extends HttpPost{
     //邮件验证码
     public static void getEmailInformation(Map<String,String> params, final HttpCallBackListener listener)
     {
-        post(HttpAddress.HOST + HttpAddress.GET_RECRUIT_INFORMATION, params, new HttpCallBackListener() {
+        post(HttpAddress.HOST + HttpAddress.EMAIL_ADDRESS, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
                 EmailResult emailResult=null;
@@ -172,6 +176,45 @@ public class QueryInformation extends HttpPost{
                     else
                     {
                         listener.onError(emailResult.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+
+                Log.d("POST错误:",error);
+                listener.onError(error);
+            }
+        });
+    }
+    //下载头像
+    public static void getImage(Map<String,String> params, final HttpCallBackListener listener)
+    {
+        post(HttpAddress.HOST + HttpAddress.GET_IMAGE, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                UserImage image=null;
+                try {
+
+                    image=new Gson().fromJson(result,UserImage.class);
+                }
+                catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(image!=null)
+                {
+                    if(image.isSuccess())
+                    {
+                        userImage=image.getImage();
+                        listener.onFinish("下载成功");
+
+                    }
+                    else
+                    {
+                        listener.onError(image.getMessage());
                     }
                 }
                 else listener.onError(GSON_ERR);
@@ -611,7 +654,7 @@ public class QueryInformation extends HttpPost{
         });
     }
     //查看atoo评论列表
-    public static void getAtooAssementForManager(Map<String,String>params,final HttpCallBackListener listener){
+  public static void getAtooAssementForManager(Map<String,String>params,final HttpCallBackListener listener){
         post(HttpAddress.HOST + HttpAddress.GET_ATOO_ASSEMENT_LIST, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
@@ -644,6 +687,40 @@ public class QueryInformation extends HttpPost{
             }
         });
     }
+    //查看应聘者对我的评价
+    public static void getAtooComment(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.GET_ATOOCOMMENT, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                AssessmentList assement=null;
+                Type type=new TypeToken<AssessmentList>(){}.getType();
+                try {
+                    assement=new Gson().fromJson(result,type);
+                }catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(assement!=null) {
+                    if (assement.isSuccess()) {
+                        atooCommentObjectList=assement.getData();
+                        //assement.getData().addAll(atooAssessmentObjectList);
+                        listener.onFinish("成功");
+                    } else {
+                        listener.onError(assement.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+
+                Log.d("POST错误:",error);
+                listener.onError(error);
+            }
+        });
+    }
+
     //查看otoa评论列表
     public static void getOtoaAssementForManager(Map<String,String>params,final HttpCallBackListener listener){
         post(HttpAddress.HOST + HttpAddress.GET_OTOA_ASSEMENT_LIST, params, new HttpCallBackListener() {
@@ -660,6 +737,39 @@ public class QueryInformation extends HttpPost{
                 if(assement!=null) {
                     if (assement.isSuccess()) {
                         otoaAssessmentObjectList=assement.getData();
+                        //assement.getData().addAll(otoaAssessmentObjectList);
+                        listener.onFinish("成功");
+                    } else {
+                        listener.onError(assement.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+
+                Log.d("POST错误:",error);
+                listener.onError(error);
+            }
+        });
+    }
+    //查看招聘者对我评价
+    public static void getOtoaComment(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.GET_OTOACOMMENT, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                AssessmentList assement=null;
+                Type type=new TypeToken<AssessmentList>(){}.getType();
+                try {
+                    assement=new Gson().fromJson(result,type);
+                }catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(assement!=null) {
+                    if (assement.isSuccess()) {
+                        otoaCommentObjectList=assement.getData();
                         //assement.getData().addAll(otoaAssessmentObjectList);
                         listener.onFinish("成功");
                     } else {

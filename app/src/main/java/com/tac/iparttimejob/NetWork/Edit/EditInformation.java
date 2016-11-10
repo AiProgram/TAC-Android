@@ -19,9 +19,11 @@ import java.util.Map;
  */
 
 public class EditInformation extends HttpPost {
+
+    //创建简历
     public static void setCreatPersonalResume(Map<String,String>params,final HttpCallBackListener listener)
     {
-        post(HttpAddress.HOST + HttpAddress.SET_CANCEL_APPLICATION, params, new HttpCallBackListener() {
+        post(HttpAddress.HOST + HttpAddress.SET_CTEAT_PERSONAL_RESUME, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
                 ReturnMessage resumeResult=null;
@@ -56,6 +58,7 @@ public class EditInformation extends HttpPost {
             }
         });
     }
+    //更新简历
     public static void setUpdateRecruit(Map<String,String>params,final HttpCallBackListener listener)
     {
         post(HttpAddress.HOST + HttpAddress.SET_UPDATE_PERSONAL_RESUME, params, new HttpCallBackListener() {
@@ -92,6 +95,7 @@ public class EditInformation extends HttpPost {
             }
         });
     }
+    //创建招聘
     public static void setCreatRecuit(Map<String,String>params,final HttpCallBackListener listener)
     {
         post(HttpAddress.HOST + HttpAddress.SET_CREAT_RECRUIT, params, new HttpCallBackListener() {
@@ -128,30 +132,31 @@ public class EditInformation extends HttpPost {
             }
         });
     }
+//更新账户信息
     public static void setUserInformation(Map<String,String>params,final HttpCallBackListener listener)
     {
         post(HttpAddress.HOST + HttpAddress.SET_USER_INFORMATION, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                ReturnMessage userResult=null;
+                ReturnMessage returnMessage=null;
                 try {
 
-                    userResult=new Gson().fromJson(result,ReturnMessage.class);
+                    returnMessage=new Gson().fromJson(result,ReturnMessage.class);
                 }
                 catch (JsonSyntaxException e) {
                     Log.d("gsonErr:",e.toString());
                     //错误
                 }
-                if(userResult!=null)
+                if(returnMessage!=null)
                 {
-                    if(userResult.isSuccess())
+                    if(returnMessage.isSuccess())
                     {
 
-                        listener.onFinish("");
+                        listener.onFinish("修改成功");
                     }
                     else
                     {
-                        listener.onError(userResult.getMessage());
+                        listener.onError(returnMessage.getMessage());
                     }
                 }
                 else listener.onError(GSON_ERR);
@@ -165,8 +170,9 @@ public class EditInformation extends HttpPost {
             }
         });
     }
-    public static void setRecuitInformation(Map<String,String>params,final HttpCallBackListener listener){
-        post(HttpAddress.HOST + HttpAddress.SET_RECRUIT_INFORMATION, params, new HttpCallBackListener() {
+    //反馈
+    public static void setAdvice(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.SET_ADVICE, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
                 ReturnMessage recuitResult=null;
@@ -181,7 +187,7 @@ public class EditInformation extends HttpPost {
                 {
                     if(recuitResult.isSuccess())
                     {
-                        listener.onFinish("创建成功");
+                        listener.onFinish("反馈成功");
                     }
                     else
                     {
@@ -200,6 +206,43 @@ public class EditInformation extends HttpPost {
 
 
     }
+    //上传头像
+    public static void setImage(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.SET_IMAGE, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                ReturnMessage returnMessage=null;
+                try {
+                    returnMessage=new Gson().fromJson(result,ReturnMessage.class);
+                }
+                catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(returnMessage!=null)
+                {
+                    if(returnMessage.isSuccess())
+                    {
+                        listener.onFinish("上传成功");
+                    }
+                    else
+                    {
+                        listener.onError(returnMessage.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.d("postErr:",error);
+                listener.onError(error);
+            }
+        });
+
+
+    }
+    //改密码
     public static void reSetUserPassword(Map<String,String>params,final HttpCallBackListener listener){
         post(HttpAddress.HOST + HttpAddress.RESETPASSWD, params, new HttpCallBackListener() {
             @Override
@@ -267,29 +310,98 @@ public class EditInformation extends HttpPost {
             }
         });
     }
-    //选择应聘申请
-    public static void setChooseEnroll(Map<String,String>params,final HttpCallBackListener listener){
-        post(HttpAddress.HOST + HttpAddress.SET_CHOOSE_ENROLL, params, new HttpCallBackListener() {
+    //举报招聘者对我评价
+    public static void setOtoaReport(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.SET_TIPOTOACOMMENT, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                ReturnMessage status=null;
+                ReturnMessage returnMessage=null;
                 try {
-                    status=new Gson().fromJson(result,ReturnMessage.class);
+                    returnMessage=new Gson().fromJson(result,ReturnMessage.class);
                 }
                 catch (JsonSyntaxException e) {
                     Log.d("gsonErr:",e.toString());
                     //错误
                 }
-                if(status!=null)
+                if(returnMessage!=null)
                 {
-                    if(status.isSuccess())
+                    if(returnMessage.isSuccess())
+                    {
+                        listener.onFinish("举报成功");
+                    }
+                    else
+                    {
+                        listener.onError(returnMessage.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.d("postErr:",error);
+                listener.onError(error);
+            }
+        });
+    }
+    //举报应聘者对我评价
+    public static void setAtooReport(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.SET_TIPATOOCOMMENT, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                ReturnMessage returnMessage=null;
+                try {
+                    returnMessage=new Gson().fromJson(result,ReturnMessage.class);
+                }
+                catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(returnMessage!=null)
+                {
+                    if(returnMessage.isSuccess())
+                    {
+                        listener.onFinish("举报成功");
+                    }
+                    else
+                    {
+                        listener.onError(returnMessage.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.d("postErr:",error);
+                listener.onError(error);
+            }
+        });
+    }
+
+    //选择应聘申请
+    public static void setChooseEnroll(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.SET_CHOOSE_ENROLL, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                ReturnMessage returnMessage=null;
+                try {
+                    returnMessage=new Gson().fromJson(result,ReturnMessage.class);
+                }
+                catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(returnMessage!=null)
+                {
+                    if(returnMessage.isSuccess())
                     {
 
                         listener.onFinish("选择成功");
                     }
                     else
                     {
-                        listener.onError(status.getMessage());
+                        listener.onError(returnMessage.getMessage());
                     }
                 }
                 else listener.onError(GSON_ERR);
@@ -309,23 +421,23 @@ public class EditInformation extends HttpPost {
         post(HttpAddress.HOST + HttpAddress.SET_CREAT_APPLICATION, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                ReturnMessage status=null;
+                ReturnMessage returnMessage=null;
                 try {
-                    status=new Gson().fromJson(result,ReturnMessage.class);
+                    returnMessage=new Gson().fromJson(result,ReturnMessage.class);
                 }
                 catch (JsonSyntaxException e) {
                     Log.d("gsonErr:",e.toString());
                     //错误
                 }
-                if(status!=null)
+                if(returnMessage!=null)
                 {
-                    if(status.isSuccess())
+                    if(returnMessage.isSuccess())
                     {
                         listener.onFinish("申请成功");
                     }
                     else
                     {
-                        listener.onError(status.getMessage());
+                        listener.onError(returnMessage.getMessage());
                     }
                 }
                 else listener.onError(GSON_ERR);
@@ -343,23 +455,23 @@ public class EditInformation extends HttpPost {
         post(HttpAddress.HOST + HttpAddress.SET_CANCEL_APPLICATION, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                ReturnMessage status=null;
+                ReturnMessage returnMessage=null;
                 try {
-                    status=new Gson().fromJson(result,ReturnMessage.class);
+                    returnMessage=new Gson().fromJson(result,ReturnMessage.class);
                 }
                 catch (JsonSyntaxException e) {
                     Log.d("gsonErr:",e.toString());
                     //错误
                 }
-                if(status!=null)
+                if(returnMessage!=null)
                 {
-                    if(status.isSuccess())
+                    if(returnMessage.isSuccess())
                     {
                         listener.onFinish("取消成功");
                     }
                     else
                     {
-                        listener.onError(status.getMessage());
+                        listener.onError(returnMessage.getMessage());
                     }
                 }
                 else listener.onError(GSON_ERR);
@@ -377,23 +489,23 @@ public class EditInformation extends HttpPost {
         post(HttpAddress.HOST + HttpAddress.SET_ASSESSMENT, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                ReturnMessage status=null;
+                ReturnMessage returnMessage=null;
                 try {
-                    status=new Gson().fromJson(result,ReturnMessage.class);
+                    returnMessage=new Gson().fromJson(result,ReturnMessage.class);
                 }
                 catch (JsonSyntaxException e) {
                     Log.d("gsonErr:",e.toString());
                     //错误
                 }
-                if(status!=null)
+                if(returnMessage!=null)
                 {
-                    if(status.isSuccess())
+                    if(returnMessage.isSuccess())
                     {
                         listener.onFinish("评价成功");
                     }
                     else
                     {
-                        listener.onError(status.getMessage());
+                        listener.onError(returnMessage.getMessage());
                     }
                 }
                 else listener.onError(GSON_ERR);
@@ -411,23 +523,23 @@ public class EditInformation extends HttpPost {
         post(HttpAddress.HOST + HttpAddress.SET_OTOA_ASSEMENT_STATUS, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                ReturnMessage status=null;
+                ReturnMessage returnMessage=null;
                 try {
-                    status=new Gson().fromJson(result,ReturnMessage.class);
+                    returnMessage=new Gson().fromJson(result,ReturnMessage.class);
                 }
                 catch (JsonSyntaxException e) {
                     Log.d("gsonErr:",e.toString());
                     //错误
                 }
-                if(status!=null)
+                if(returnMessage!=null)
                 {
-                    if(status.isSuccess())
+                    if(returnMessage.isSuccess())
                     {
                         listener.onFinish("修改成功");
                     }
                     else
                     {
-                        listener.onError(status.getMessage());
+                        listener.onError(returnMessage.getMessage());
                     }
                 }
                 else listener.onError(GSON_ERR);
@@ -445,23 +557,23 @@ public class EditInformation extends HttpPost {
         post(HttpAddress.HOST + HttpAddress.SET_ATOO_ASSEMENT_STATUS, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                ReturnMessage status=null;
+                ReturnMessage returnMessage=null;
                 try {
-                    status=new Gson().fromJson(result,ReturnMessage.class);
+                    returnMessage=new Gson().fromJson(result,ReturnMessage.class);
                 }
                 catch (JsonSyntaxException e) {
                     Log.d("gsonErr:",e.toString());
                     //错误
                 }
-                if(status!=null)
+                if(returnMessage!=null)
                 {
-                    if(status.isSuccess())
+                    if(returnMessage.isSuccess())
                     {
                         listener.onFinish("修改成功");
                     }
                     else
                     {
-                        listener.onError(status.getMessage());
+                        listener.onError(returnMessage.getMessage());
                     }
                 }
                 else listener.onError(GSON_ERR);
