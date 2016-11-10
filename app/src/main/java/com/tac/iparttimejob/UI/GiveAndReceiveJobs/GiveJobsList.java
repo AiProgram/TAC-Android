@@ -1,7 +1,6 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,13 +16,11 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.tac.iparttimejob.Class.LoginResult;
 import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
-import com.tac.iparttimejob.UI.RegisterAndLogin.Login;
 import com.tac.iparttimejob.UI.Utils.DataType;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
 
@@ -34,7 +31,6 @@ import java.util.Map;
 
 import static com.tac.iparttimejob.Class.Object.inRecuitObjectList;
 import static com.tac.iparttimejob.Class.Object.notRecuitObjectList;
-import static com.tac.iparttimejob.Class.Object.recuitObject;
 import static com.tac.iparttimejob.NetWork.Query.QueryInformation.getInRecruitList;
 
 
@@ -73,7 +69,7 @@ public class GiveJobsList extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_give_jobs_valid_list,container,false);
+        View view=inflater.inflate(R.layout.fragment_give_jobs_list,container,false);
         return view;
     }
 
@@ -123,10 +119,9 @@ public class GiveJobsList extends Fragment{
         View fragmentView=getView();
         rv_give_jobs=(RefreshRecyclerView) fragmentView.findViewById(R.id.rv_give_jobs);
         srl_give_jobs=(SwipeRefreshLayout) fragmentView.findViewById(R.id.srl_give_jobs);
-        tabLayout = (TabLayout)fragmentView.findViewById(R.id.tabLayout_give_jobs_top);
+        tabLayout = (TabLayout)fragmentView.findViewById(R.id.tl_receive_jobs_top);
         imgbtn_add_jobs=(ImageButton) fragmentView.findViewById(R.id.imgbtn_add_jobs) ;
 
-        //使用type而不是List初始化
         validJobAdapter=new MyGiveJobAdapter(validList);
         UnvalidJobAdapter=new MyGiveJobAdapter(unValidList);
 
@@ -135,7 +130,7 @@ public class GiveJobsList extends Fragment{
             tabLayout.addTab(tabLayout.newTab().setText("已失效"));
 
         //设置Toolbar主标题
-        Toolbar mToolbar=(Toolbar)fragmentView.findViewById(R.id.toolbar_give_jobs_top);
+        Toolbar mToolbar=(Toolbar)fragmentView.findViewById(R.id.toolbar_receive_jobs_top);
 //        mToolbar.setTitle("用户名");
         //设置Toolbar副标题
 //        mToolbar.setSubtitle("Sub title");
@@ -353,11 +348,17 @@ public class GiveJobsList extends Fragment{
         getList.put("userid",Object.loginObject.getUserid());
         getList.put("page",(page)+"");
         getList.put("rows",(rows)+"");
+
+        //获得新的上拉更多的数据前禁止上拉更多
+        rv_give_jobs.setLoadMoreEnable(false);
         //分有效和无效刷新列表
         if(pageNum==DataType.VALID_JOB_LIST) {
+
             getInRecruitList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(final String result) {
+                    rv_give_jobs.setLoadMoreEnable(true);
+
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -372,6 +373,8 @@ public class GiveJobsList extends Fragment{
 
                 @Override
                 public void onError(String error) {
+                    rv_give_jobs.setLoadMoreEnable(true);
+
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -384,6 +387,8 @@ public class GiveJobsList extends Fragment{
             QueryInformation.getNotRecruitList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(String result) {
+                    rv_give_jobs.setLoadMoreEnable(true);
+
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -398,6 +403,8 @@ public class GiveJobsList extends Fragment{
 
                 @Override
                 public void onError(String error) {
+                    rv_give_jobs.setLoadMoreEnable(true);
+
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

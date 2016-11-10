@@ -19,11 +19,16 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.ImageUtils;
 import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.UI.Utils.BitmapAndStringConverter;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by AiProgram on 2016/11/5.
@@ -195,6 +200,7 @@ public class SetAccountInfo extends AppCompatActivity{
                 iv_user_head_image.setImageBitmap(userHeadImage);
                 imageString = BitmapAndStringConverter.convertIconToString(userHeadImage);
                 //留待操作上传头像接口
+                upLoadUserImgae(imageString);
                 break;
             }
         }
@@ -257,5 +263,37 @@ public class SetAccountInfo extends AppCompatActivity{
         //设置Dialog布局
         builder.setView(dialog);
         builder.show();
+    }
+
+    //上传头像
+    private void upLoadUserImgae(String imageString){
+        //头像文件名
+        String fileNmae=Object.userObject.getName()+".jpg";
+
+        final Map<String,String> setUserImage=new LinkedHashMap<>();
+        setUserImage.put("fileName",fileNmae);
+        setUserImage.put("picture",imageString);
+        EditInformation.setImage(setUserImage, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(SetAccountInfo.this,"设置成功",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onError(String error) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(SetAccountInfo.this,"设置失败",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 }

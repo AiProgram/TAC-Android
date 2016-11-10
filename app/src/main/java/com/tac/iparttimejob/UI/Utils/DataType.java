@@ -9,6 +9,9 @@ public class DataType {
     public final static int VALID_JOB_LIST=0;
     public final static int UNVALID_JOB_LIST=1;
 
+    public final static int UNSIGNED_JOB_LIST=0;
+    public final static int SIGNED_JOB_LIST=1;
+
     //用来区分招聘的状态
     public final static int JOB_STATUS_CHECKING=0;
     public final static int JOB_STATUS_REJECTED=1;

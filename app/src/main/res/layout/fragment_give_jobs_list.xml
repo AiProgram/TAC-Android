@@ -15,7 +15,7 @@
             android:background="?attr/colorPrimary"
             android:theme="?attr/actionBarTheme"
             android:minHeight="?attr/actionBarSize"
-            android:id="@+id/toolbar_give_jobs_top"
+            android:id="@+id/toolbar_receive_jobs_top"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true">
 
@@ -39,8 +39,8 @@
                     app:tabTextColor="@color/white"
                     app:tabSelectedTextColor="@color/heavyPink"
                     app:tabMode="fixed"
-                    android:id="@+id/tabLayout_give_jobs_top"
-                    android:layout_below="@id/toolbar_give_jobs_top"
+                    android:id="@+id/tl_receive_jobs_top"
+                    android:layout_below="@id/toolbar_receive_jobs_top"
                     >
                 </android.support.design.widget.TabLayout>
 
@@ -64,14 +64,14 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar_give_jobs_top"
+        android:layout_below="@id/toolbar_receive_jobs_top"
         android:id="@+id/srl_give_jobs">
 
         <com.tac.iparttimejob.UI.Utils.RefreshRecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/rv_give_jobs"
-            android:layout_below="@+id/tabLayout_give_jobs_top"
+            android:layout_below="@+id/tl_receive_jobs_top"
             android:layout_alignParentStart="true" />
 
     </android.support.v4.widget.SwipeRefreshLayout>

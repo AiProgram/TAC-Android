@@ -14,9 +14,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tac.iparttimejob.Class.Object;
+import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
+import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.BlurBitmap;
 import com.tac.iparttimejob.UI.Utils.RoundImageView;
+import com.tac.iparttimejob.NetWork.Query.QueryInformation;
+import com.tac.iparttimejob.UI.Utils.BitmapAndStringConverter;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 /**
@@ -31,6 +39,8 @@ public class MyManager extends Fragment {
     private RelativeLayout rl_my_manager;
     private ExpandableListView elv;
     private MyELVAdapter adapter;
+
+    private Bitmap userHeadImage;
 
 
     @Override
@@ -51,13 +61,8 @@ public class MyManager extends Fragment {
         rl_my_manager=(RelativeLayout) fragmentView.findViewById(R.id.rl_my_manager);
         elv=(ExpandableListView) fragmentView.findViewById(R.id.elv_function_my_manager);
 
-        //设置用户头像和高斯背景
-        //头像的大小应为640X640，在选择头像上传时解决
-        Bitmap bitmap = BitmapFactory.decodeResource((getActivity()).getResources(), R.drawable.user_head_image);
-        bitmap= BlurBitmap.blurBitmap(bitmap,25,getContext());
-        BitmapDrawable bitmapDrawable=new BitmapDrawable(bitmap);
-       // bitmapDrawable.setTileModeY( Shader.TileMode.CLAMP);
-        rl_user_filed.setBackgroundDrawable(bitmapDrawable);
+
+        getUserHeadImage();
 
         //为ExpandableListVIew设置adapter
         adapter=new MyELVAdapter(this.getContext());
@@ -108,4 +113,41 @@ public class MyManager extends Fragment {
         });
     }
 
+    private void getUserHeadImage(){
+        Map<String,String> getUserImage=new LinkedHashMap<>();
+        //头像文件名
+        String fileNmae=Object.userObject.getName()+".jpg";
+        getUserImage.put("fileName",fileNmae);
+
+        QueryInformation.getImage(getUserImage, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                userHeadImage=BitmapAndStringConverter.convertStringToIcon(Object.userImage);
+
+                //设置用户头像和高斯背景
+                //头像的大小应为640X640，在选择头像上传时解决
+                Bitmap bitmap= BlurBitmap.blurBitmap(userHeadImage,25,getContext());
+                final BitmapDrawable bitmapDrawable=new BitmapDrawable(bitmap);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(),"获取头像成功"+Object.userImage.length(),Toast.LENGTH_SHORT).show();
+                        rl_user_filed.setBackgroundDrawable(bitmapDrawable);
+                        riv_user_head.setImageBitmap(userHeadImage);
+                    }
+                });
+            }
+
+            @Override
+            public void onError(String error) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(),"获取头像失败",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+    }
 }
