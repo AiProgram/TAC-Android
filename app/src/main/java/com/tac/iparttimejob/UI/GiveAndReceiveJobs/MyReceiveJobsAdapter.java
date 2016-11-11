@@ -39,21 +39,25 @@ public class MyReceiveJobsAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+    //设置不同ViewHolder的不同布局及信息显示
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
     }
 
+    //item总数
     @Override
     public int getItemCount() {
         return 0;
     }
 
+    //根据布局类别创建不同ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return null;
     }
 
+    //区分使用哪一种item布局
     @Override
     public int getItemViewType(int position) {
         return super.getItemViewType(position);

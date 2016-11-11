@@ -46,15 +46,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:text="AiProgram"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_username_my_manager"
-        android:layout_marginTop="18dp"
-        android:layout_below="@+id/tv_title_my_manager"
-        android:layout_alignEnd="@+id/tv_title_my_manager" />
-
     <ExpandableListView
         android:id="@+id/elv_function_my_manager"
         android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
@@ -75,6 +66,15 @@
         android:layout_marginTop="26dp"
         android:layout_below="@+id/elv_function_my_manager"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="AiProgram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_username_my_manager"
+        android:layout_marginTop="17dp"
+        android:layout_below="@+id/tv_title_my_manager"
+        android:layout_alignEnd="@+id/tv_title_my_manager" />
 
 
 </RelativeLayout>

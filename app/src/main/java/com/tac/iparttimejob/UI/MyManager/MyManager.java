@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,12 +34,13 @@ import java.util.Map;
 
 public class MyManager extends Fragment {
     private RoundImageView riv_user_head;
-    private TextView tv_username;
+    private TextView tv_username_my_manager;
     private TextView tv_single_info;
     private RelativeLayout rl_user_filed;
     private RelativeLayout rl_my_manager;
     private ExpandableListView elv;
     private MyELVAdapter adapter;
+    private Button btn_exit_login;
 
     private Bitmap userHeadImage;
 
@@ -56,19 +58,57 @@ public class MyManager extends Fragment {
         View fragmentView=getView();
         riv_user_head=(RoundImageView) fragmentView.findViewById(R.id.riv_user_head);
         tv_single_info=(TextView) fragmentView.findViewById(R.id.tv_single_info);
-        tv_username=(TextView) fragmentView.findViewById(R.id.tv_single_info);
+        tv_username_my_manager=(TextView) fragmentView.findViewById(R.id.tv_username_my_manager);
         rl_user_filed=(RelativeLayout) fragmentView.findViewById(R.id.rl_user_filed);
         rl_my_manager=(RelativeLayout) fragmentView.findViewById(R.id.rl_my_manager);
         elv=(ExpandableListView) fragmentView.findViewById(R.id.elv_function_my_manager);
+        btn_exit_login=(Button) fragmentView.findViewById(R.id.btn_exit_login);
 
 
-        getUserHeadImage();
+        //初始化退出登录监听器
+        btn_exit_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //退出登录事件
+            }
+        });
 
         //为ExpandableListVIew设置adapter
         adapter=new MyELVAdapter(this.getContext());
         elv.setAdapter(adapter);
 
         initELVListener();
+
+        //初始化头像、用户名、简介等
+        initViews();
+    }
+
+    public void initViews(){
+        //设置头像
+        getUserHeadImage();
+
+        //获得简历中的一句简介
+        Map<String,String> getSingleInfo=new LinkedHashMap<>();
+        getSingleInfo.put("userid",Object.userObject.getUserid());
+        QueryInformation.getPersonalResume(getSingleInfo, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tv_single_info.setText(Object.resumeObject.getSingleResume());
+                    }
+                });
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+
+        //设置用户名
+        tv_username_my_manager.setText(Object.userObject.getName());
     }
 
     //初始化ELV监听器
