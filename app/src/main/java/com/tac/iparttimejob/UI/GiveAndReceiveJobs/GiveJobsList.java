@@ -62,7 +62,8 @@ public class GiveJobsList extends Fragment{
     boolean inited=false;
 
     //一次获得的数量以及显示列表指针
-    int page=1;
+    int validPage=1;//失效和未失效的列表使用 不同计数器
+    int unvalidPage=1;
     int rows=10;
     int pointer=0;
 
@@ -222,7 +223,7 @@ public class GiveJobsList extends Fragment{
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getActivity(),"获取详情成功",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(),"获取详情成功",Toast.LENGTH_SHORT).show();
                     }
                 });
                 startActivity(intent);
@@ -234,7 +235,7 @@ public class GiveJobsList extends Fragment{
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getActivity(),"获取详情失败",Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity(),"获取详情失败",Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -277,13 +278,24 @@ public class GiveJobsList extends Fragment{
     下拉刷新,输入表示进行中或者已失效
      */
     private void pullDownRefresh(int pageNum){
-        page=1;
-        pointer=0;
 
         Map<String,String> getList=new LinkedHashMap<>();
-        getList.put("userid",Object.loginObject.getUserid());
-        getList.put("page",(page)+"");
-        getList.put("rows",(rows)+"");
+        //失效 和未失效不应使用统一page计数器
+        switch (pageNum){
+            case DataType.VALID_JOB_LIST:{
+                validPage=1;
+                getList.put("userid",Object.loginObject.getUserid());
+                getList.put("page",(validPage)+"");
+                getList.put("rows",(rows)+"");
+            }break;
+            case DataType.UNVALID_JOB_LIST:{
+                unvalidPage=1;
+                getList.put("userid",Object.loginObject.getUserid());
+                getList.put("page",(unvalidPage)+"");
+                getList.put("rows",(rows)+"");
+            }break;
+        }
+
         //分有效和无效刷新列表
         if(pageNum==DataType.VALID_JOB_LIST) {
             getInRecruitList(getList, new HttpCallBackListener() {
@@ -297,7 +309,7 @@ public class GiveJobsList extends Fragment{
                     });
                     cloneValidList();
                     rv_give_jobs.notifyData();
-                    page++;
+                    validPage++;
                 }
 
                 @Override
@@ -305,7 +317,7 @@ public class GiveJobsList extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "下拉刷新失败", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getActivity(), "下拉刷新失败", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -322,7 +334,7 @@ public class GiveJobsList extends Fragment{
                     });
                     cloneUnValidList();
                     rv_give_jobs.notifyData();
-                    page++;
+                    unvalidPage++;
                 }
 
                 @Override
@@ -330,7 +342,7 @@ public class GiveJobsList extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "下拉刷新失败", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(getActivity(), "下拉刷新失败", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -345,9 +357,19 @@ public class GiveJobsList extends Fragment{
      */
     private void pullUpRefresh(int pageNum){
         Map<String,String> getList=new LinkedHashMap<>();
-        getList.put("userid",Object.loginObject.getUserid());
-        getList.put("page",(page)+"");
-        getList.put("rows",(rows)+"");
+        switch (pageNum){
+            case DataType.VALID_JOB_LIST:{
+                getList.put("userid",Object.loginObject.getUserid());
+                getList.put("page",(validPage)+"");
+                getList.put("rows",(rows)+"");
+            }break;
+            case DataType.UNVALID_JOB_LIST:{
+                getList.put("userid",Object.loginObject.getUserid());
+                getList.put("page",(unvalidPage)+"");
+                getList.put("rows",(rows)+"");
+            }break;
+        }
+
 
         //获得新的上拉更多的数据前禁止上拉更多
         rv_give_jobs.setLoadMoreEnable(false);
@@ -368,7 +390,7 @@ public class GiveJobsList extends Fragment{
 
                     addValidList();
                     rv_give_jobs.notifyData();
-                    page++;
+                    validPage++;
                 }
 
                 @Override
@@ -378,7 +400,7 @@ public class GiveJobsList extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "上拉更多失败", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getActivity(), "上拉更多失败", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -398,7 +420,7 @@ public class GiveJobsList extends Fragment{
 
                     addUnvalidList();
                     rv_give_jobs.notifyData();
-                    page++;
+                    unvalidPage++;
                 }
 
                 @Override
@@ -408,7 +430,7 @@ public class GiveJobsList extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "上拉更多失败", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(getActivity(), "上拉更多失败", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

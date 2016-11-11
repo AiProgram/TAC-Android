@@ -1,11 +1,14 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.tac.iparttimejob.Class.Application;
 import com.tac.iparttimejob.Class.RecuitResult;
+import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
 
 import java.util.List;
@@ -39,22 +42,113 @@ public class MyReceiveJobsAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+    //不同 列表项对应不同ViewHolder
+    public class UnsignedViewHolder extends RecyclerView.ViewHolder{
+        private TextView tv_job_title;
+        private TextView  tv_job_info;
+        private TextView tv_deadline;
+        private TextView tv_recruitor_name;
+        public UnsignedViewHolder(View itemView) {
+            super(itemView);
+            tv_job_title=(TextView) itemView.findViewById(R.id.tv_job_title);
+            tv_job_info=(TextView)  itemView.findViewById(R.id.tv_job_info);
+            tv_deadline=(TextView)  itemView.findViewById(R.id.tv_deadline);
+            tv_recruitor_name=(TextView) itemView.findViewById(R.id.tv_recruitor_name);
+        }
+    }
+
+    public class SignedViewHolder extends RecyclerView.ViewHolder{
+        private TextView tv_job_title;
+        private TextView  tv_job_info;
+        private TextView tv_deadline;
+        private TextView tv_recruitor_name;
+        public SignedViewHolder(View itemView) {
+            super(itemView);
+            tv_job_title=(TextView) itemView.findViewById(R.id.tv_job_title);
+            tv_job_info=(TextView)  itemView.findViewById(R.id.tv_job_info);
+            tv_deadline=(TextView)  itemView.findViewById(R.id.tv_deadline);
+            tv_recruitor_name=(TextView) itemView.findViewById(R.id.tv_recruitor_name);
+        }
+    }
+
     //设置不同ViewHolder的不同布局及信息显示
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder,final int position) {
+        String jobTitle;
+        String jobInfo;
+        String deadline;
+        String recruitorName;
+        switch (listType){
+            case DataType.SIGNED_JOB_LIST:{
+                jobTitle=signedList.get(position).getTitle();
+                jobInfo=signedList.get(position).getWorklnfo();
+                deadline=signedList.get(position).getDealdline();
+                recruitorName=signedList.get(position).getOwner();
+                SignedViewHolder viewHolder=(SignedViewHolder)holder;
+                viewHolder.tv_job_title.setText(jobTitle);
+                viewHolder.tv_job_info.setText(jobInfo);
+                viewHolder.tv_deadline.setText(deadline);
+                viewHolder.tv_recruitor_name.setText(recruitorName);
+            }break;
+            case DataType.UNSIGNED_JOB_LIST:{
+                jobTitle=unsignedList.get(position).getTitle();
+                jobInfo=unsignedList.get(position).getWorkInfo();
+                deadline=unsignedList.get(position).getDealdine();
+                recruitorName=unsignedList.get(position).getOwner();
+                SignedViewHolder viewHolder=(SignedViewHolder)holder;
+                viewHolder.tv_job_title.setText(jobTitle);
+                viewHolder.tv_job_info.setText(jobInfo);
+                viewHolder.tv_deadline.setText(deadline);
+                viewHolder.tv_recruitor_name.setText(recruitorName);
+            }break;
+        }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOnItemClickListener.onItemClick(holder.itemView,position);
+            }
+        });
 
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mOnItemLongClickListener.onItemLongClick(holder.itemView,position);
+                //拦截事件的继续传递
+                return true;
+            }
+        });
     }
 
     //item总数
     @Override
     public int getItemCount() {
-        return 0;
+        int size=0;
+        switch (listType){
+            case DataType.SIGNED_JOB_LIST:{
+                size=signedList.size();
+            }break;
+            case DataType.UNSIGNED_JOB_LIST:{
+                size=unsignedList.size();
+            }break;
+        }
+        return size;
     }
 
     //根据布局类别创建不同ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        RecyclerView.ViewHolder viewHolder;
+        switch (listType){
+            case DataType.SIGNED_JOB_LIST:{
+                viewHolder=new SignedViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_job_from_recruitor,parent,false));
+            }break;
+            case DataType.UNSIGNED_JOB_LIST:{
+                viewHolder=new UnsignedViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_job_from_recruitor,parent,false));
+            }break;
+            default:
+                viewHolder=new UnsignedViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_job_from_recruitor,parent,false));
+        }
+        return viewHolder;
     }
 
     //区分使用哪一种item布局
