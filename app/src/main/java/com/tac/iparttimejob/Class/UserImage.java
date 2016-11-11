@@ -24,13 +24,16 @@ public class UserImage {
     }
 
     private String  message;
-    private String image;
 
-    public String getImage() {
-        return image;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
+
+    private String picture;
+
+
 }
