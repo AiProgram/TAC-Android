@@ -40,6 +40,7 @@
         android:text="确定"
         android:textSize="20sp"
         android:layout_marginTop="40dp"
+        android:background="@drawable/button_style_sure"
         android:id="@+id/feedback_btn_sure"
         android:layout_below="@+id/advice"
         android:layout_toStartOf="@+id/feedback_title" />
@@ -49,6 +50,7 @@
         android:layout_height="wrap_content"
         android:text="取消"
         android:textSize="20sp"
+        android:background="@drawable/button_style_cancel"
         android:id="@+id/feedback_btn_cancel"
         android:layout_alignBaseline="@+id/feedback_btn_sure"
         android:layout_alignBottom="@+id/feedback_btn_sure"
