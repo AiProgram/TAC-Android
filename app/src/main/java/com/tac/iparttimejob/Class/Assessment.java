@@ -74,11 +74,11 @@ public class Assessment {
     }
 
     public String getAtooComment() {
-        return AtooComment;
+        return atooComment;
     }
 
     public void setAtooComment(String atooComment) {
-        AtooComment = atooComment;
+        this.atooComment = atooComment;
     }
 
     public float getAtooPoint() {
@@ -89,12 +89,13 @@ public class Assessment {
         this.atooPoint = atooPoint;
     }
 
-    public int getAtppStatus() {
-        return atppStatus;
+
+    public int getAtooStatus() {
+        return atooStatus;
     }
 
-    public void setAtppStatus(int atppStatus) {
-        this.atppStatus = atppStatus;
+    public void setAtooStatus(int atooStatus) {
+        this.atooStatus = atooStatus;
     }
 
     public String getAtooChecktime() {
@@ -121,9 +122,10 @@ public class Assessment {
     private String applicantname;
     private int recruitid;
     private int atooTipoff ;
-    private  String AtooComment;
+    private  String atooComment;
     private float atooPoint;
-    private int atppStatus;
+
+    private int atooStatus;
     private  String atooChecktime;
     private  String atootime;
 

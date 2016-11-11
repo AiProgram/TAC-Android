@@ -10,6 +10,7 @@ public class Object {
 
     //用户信息返回
     public static UserResult.User       userObject=null;
+    public static UserResult.User       getUserObject=null;
     //个人资料
     public static Resume             resumeObject=null;
     //招聘信息
@@ -18,6 +19,7 @@ public class Object {
     public static LoginResult.LoginUser loginObject;
     //邮件验证码
     public static String                emailData;
+    public static String                userImage;
     //正在进行的招聘列表
     public static List<RecuitResult.Recuit> recuitObjectList;
     public static List<RecuitResult.Recuit> inRecuitObjectList;
@@ -37,14 +39,16 @@ public class Object {
     public static List<Application>         applicationObjectList;
     //查看某个招聘
     public static RecuitResult.Recuit             applicationObject;
-
+    //查看应聘者对我评价
+    public static List<Assessment>   atooCommentObjectList;
+    //查看招聘者对我评价
+    public static List<Assessment>   otoaCommentObjectList;
     //管理员
     //查看招聘信息
     public static List<RecuitResult.Recuit> RecuitObjectlistForManager;
     //查看atoo评论列表
     public static List<Assessment>   atooAssessmentObjectList;
     public static List<Assessment>   otoaAssessmentObjectList;
-
     public static List<Assessment>   atooAssessmentByIDObjectList;
     public static List<Assessment>   otoaAssessmentByIDObjectList;
     public static Advice.suggesstion suggesstion;

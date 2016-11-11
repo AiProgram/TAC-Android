@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="报名列表"
+        android:textSize="35sp"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:background="#5544bb"
+        android:id="@+id/enroll_list_title"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="限额/剩余:"
+        android:textSize="25sp"
+        android:layout_marginEnd="20dp"
+        android:id="@+id/num_tip"
+        android:layout_alignBaseline="@+id/list_tip"
+        android:layout_alignBottom="@+id/list_tip"
+        android:layout_toStartOf="@+id/num_limit" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/"
+        android:textSize="25sp"
+        android:id="@+id/num_no"
+        android:layout_alignBaseline="@+id/num_limit"
+        android:layout_alignBottom="@+id/num_limit"
+        android:layout_toEndOf="@+id/num_tip"
+        android:layout_marginStart="15dp" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="33dp"
+        android:id="@+id/uer_image"
+        android:background="#cccccc"
+        android:layout_below="@+id/list_tip"
+        android:layout_alignStart="@+id/list_tip" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sort_introduce"
+        android:text="XXXXXXXXXXXXXXXXXXXXXXX"
+        android:textSize="20sp"
+        android:maxLines="4"
+        android:layout_alignTop="@+id/uer_image"
+        android:layout_alignEnd="@+id/num_tip"
+        android:layout_toEndOf="@+id/list_tip" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XXX"
+        android:textSize="25sp"
+        android:layout_marginEnd="11dp"
+        android:id="@+id/uer_name"
+        android:layout_below="@+id/uer_image"
+        android:layout_alignEnd="@+id/uer_image" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/project_num"
+        android:text="10"
+        android:textSize="20sp"
+        android:textColor="#220088"
+        android:layout_alignBaseline="@+id/project_num_tip"
+        android:layout_alignBottom="@+id/project_num_tip"
+        android:layout_alignEnd="@+id/sort_introduce" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已做过项目数:"
+        android:textSize="20sp"
+        android:id="@+id/project_num_tip"
+        android:layout_below="@+id/sort_introduce"
+        android:layout_alignStart="@+id/sort_introduce"
+        android:layout_marginTop="11dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用户列表"
+        android:textSize="25sp"
+        android:layout_marginTop="24dp"
+        android:id="@+id/list_tip"
+        android:layout_marginStart="20dp"
+        android:layout_below="@+id/enroll_list_title"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="6"
+        android:textSize="25sp"
+        android:textColor="#009900"
+        android:layout_marginEnd="73dp"
+        android:id="@+id/num_limit"
+        android:layout_alignBaseline="@+id/num_tip"
+        android:layout_alignBottom="@+id/num_tip"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:textSize="25sp"
+        android:textColor="#ff0000"
+        android:id="@+id/num_last"
+        android:layout_alignBaseline="@+id/num_no"
+        android:layout_alignBottom="@+id/num_no"
+        android:layout_toEndOf="@+id/num_no" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选中"
+        android:textSize="20sp"
+        android:textColor="#009900"
+        android:id="@+id/checkBox_choose"
+        android:layout_above="@+id/project_num"
+        android:layout_toEndOf="@+id/num_tip" />
+
+
+</RelativeLayout>

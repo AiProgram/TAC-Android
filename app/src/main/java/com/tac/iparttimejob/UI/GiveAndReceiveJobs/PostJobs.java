@@ -1,20 +1,23 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.tac.iparttimejob.Class.LoginResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
-import static com.tac.iparttimejob.Class.Object.loginObject;
-import static com.tac.iparttimejob.Class.Object.userObject;
+import com.tac.iparttimejob.UI.Utils.DataType;
 
+import static com.tac.iparttimejob.Class.Object.loginObject;
+
+import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -26,10 +29,10 @@ public class PostJobs extends AppCompatActivity{
     private EditText et_input_username;
     private EditText et_input_title;
     private EditText et_input_workplace;
-    private EditText et_input_deadline;
+    private Button btn_input_deadline;
     private EditText et_input_phone;
     private EditText et_input_detail;
-    private EditText et_input_post_time;
+    private Button btn_input_post_time;
     private Button btn_post_job;
     private Button btn_cancel_post;
 
@@ -46,7 +49,7 @@ public class PostJobs extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.post_jobs);
+        setContentView(R.layout.layout_post_jobs);
 
         //初始化各个控件
         getViews();
@@ -59,10 +62,10 @@ public class PostJobs extends AppCompatActivity{
         et_input_username=(EditText) findViewById(R.id.et_input_username);
         et_input_title=(EditText)  findViewById(R.id.et_input_title);
         et_input_workplace=(EditText) findViewById(R.id.et_input_workplace);
-        et_input_deadline=(EditText) findViewById(R.id.et_input_deadline);
+        btn_input_deadline=(Button) findViewById(R.id.btn_input_deadline);
         et_input_phone=(EditText)  findViewById(R.id.et_input_phone);
         et_input_detail=(EditText) findViewById(R.id.et_input_detail);
-        et_input_post_time=(EditText) findViewById(R.id.et_input_post_time);
+        btn_input_post_time=(Button) findViewById(R.id.btn_input_post_time);
         btn_post_job=(Button) findViewById(R.id.btn_post_job);
         btn_cancel_post=(Button) findViewById(R.id.btn_cancel_post);
     }
@@ -89,6 +92,20 @@ public class PostJobs extends AppCompatActivity{
                 activity.finish();
             }
         });
+
+        btn_input_deadline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePickerDialog(DataType.DIALOG_DATE_PICKER_DEADLINE);
+            }
+        });
+
+        btn_input_post_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePickerDialog(DataType.DIALOG_DATE_PICKER_POST_TIME);
+            }
+        });
     }
 
     //取得所有的输入
@@ -96,10 +113,10 @@ public class PostJobs extends AppCompatActivity{
         username=et_input_username.getText().toString();
         title=et_input_title.getText().toString();
         workplace=et_input_workplace.getText().toString();
-        deadline=et_input_deadline.getText().toString();
         phone=et_input_phone.getText().toString();
         detail=et_input_detail.getText().toString();
-        displaytime=et_input_post_time.getText().toString();
+        deadline=btn_input_deadline.getText().toString();
+        displaytime=btn_input_post_time.getText().toString();
     }
 
     //检查输入是否合格,待添加
@@ -143,5 +160,50 @@ public class PostJobs extends AppCompatActivity{
                 });
             }
         });
+    }
+
+    //展示日期的选取Dialog
+    private void showDatePickerDialog(int dialogType){
+        Calendar calendar=Calendar.getInstance();
+        switch (dialogType){
+            case DataType.DIALOG_DATE_PICKER_DEADLINE:{
+
+                new DatePickerDialog(PostJobs.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int day) {
+                        // TODO Auto-generated method stub
+                       int mYear = year;
+                       int mMonth = month;
+                       int mDay = day;
+                        //更新EditText控件日期 小于10加0
+                        btn_input_deadline.setText(new StringBuilder().append(mYear).append("-")
+                                .append((mMonth + 1) < 10 ? 0 + (mMonth + 1) : (mMonth + 1))
+                                .append("-")
+                                .append((mDay < 10) ? 0 + mDay : mDay) );
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH) ).show();
+
+            }break;
+            case DataType.DIALOG_DATE_PICKER_POST_TIME:{
+
+                new DatePickerDialog(PostJobs.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int day) {
+                        // TODO Auto-generated method stub
+                        int mYear = year;
+                        int mMonth = month;
+                        int mDay = day;
+                        //更新EditText控件日期 小于10加0
+                        btn_input_post_time.setText(new StringBuilder().append(mYear).append("-")
+                                .append((mMonth + 1) < 10 ? 0 + (mMonth + 1) : (mMonth + 1))
+                                .append("-")
+                                .append((mDay < 10) ? 0 + mDay : mDay) );
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH) ).show();
+
+            }break;
+        }
     }
 }

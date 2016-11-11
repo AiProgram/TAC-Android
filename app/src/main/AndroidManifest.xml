@@ -22,9 +22,14 @@
         <activity android:name=".UI.GiveAndReceiveJobs.PostJobs">
 
         </activity>
- <activity android:name=".UI.GiveAndReceiveJobs.JobContentForGiver">
+        <activity android:name=".UI.GiveAndReceiveJobs.JobContentForGiver">
 
- </activity>
+        </activity>
+
+        <activity android:name=".UI.MyManager.SetAccountInfo">
+
+
+        </activity>
         <activity android:name=".UI.RegisterAndLogin.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
