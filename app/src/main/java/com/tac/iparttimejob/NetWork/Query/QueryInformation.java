@@ -213,7 +213,7 @@ public class QueryInformation extends HttpPost{
                 {
                     if(image.isSuccess())
                     {
-                        userImage=image.getImage();
+                        userImage=image.getPicture();
                         listener.onFinish("下载成功");
 
                     }
