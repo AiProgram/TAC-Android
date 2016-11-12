@@ -3,7 +3,6 @@ package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -44,10 +43,9 @@ public class JobContentForGiver extends AppCompatActivity{
     private Button btn_choosed_list;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.layout_valid_job_content);
-
+       // setContentView(R.layout.layout_valid_job_content);
         //根据状态设置布局
         switch (Object.recuitObject.getStatus()){
             case DataType.JOB_STATUS_UNDERGONING:{

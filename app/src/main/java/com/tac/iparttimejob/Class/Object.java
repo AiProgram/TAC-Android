@@ -22,6 +22,9 @@ public class Object {
     public static String                userImage;
     //正在进行的招聘列表
     public static List<RecuitResult.Recuit> recuitObjectList;
+
+
+
     public static List<RecuitResult.Recuit> inRecuitObjectList;
     //失效的招聘列表
     public static List<RecuitResult.Recuit> notRecuitObjectList;

@@ -60,9 +60,14 @@ public class ReceiveJobsList extends Fragment{
     int rows=10;
     int pointer=0;
 
+<<<<<<< HEAD
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
+=======
+    @Override
+    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
+>>>>>>> ace8b085bdc76bc5876219d839bb13d52d0cbe8e
         View view=inflater.inflate(R.layout.fragment_receive_jobs_list,container,false);
         return view;
     }
