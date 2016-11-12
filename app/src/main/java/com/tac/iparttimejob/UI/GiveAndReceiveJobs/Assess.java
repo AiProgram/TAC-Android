@@ -18,7 +18,7 @@ import static com.tac.iparttimejob.NetWork.Edit.EditInformation.setAssessment;
 /**
  * Created by 守候。 on 2016/11/12.
  */
-评价 剩下不会写
+//评价 剩下不会写
 public class Assess extends AppCompatActivity {
     private TextView title;
     private TextView assess_title;
@@ -38,7 +38,7 @@ public class Assess extends AppCompatActivity {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.assess);
+        setContentView(R.layout.layout_assess);
         title=(TextView)findViewById(R.id.assess_title);
         assess_title=(TextView)findViewById(R.id.assess_tip1);
         assess=(TextView)findViewById(R.id.materialEditText);
@@ -67,7 +67,7 @@ public class Assess extends AppCompatActivity {
                     {
                             if(userKind==0){
                                 Map<String,String> getList=new LinkedHashMap<>();
-                                这里参数没设置
+                               // 这里参数没设置
                                 setAssessment(getList, new HttpCallBackListener() {
                                     @Override
                                     public void onFinish(String result) {
@@ -91,7 +91,7 @@ public class Assess extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    返回
+                    //返回
             }
         });
     }

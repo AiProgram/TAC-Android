@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by 守候。 on 2016/11/12.
  */
-对应类
+//对应类
 public class AssessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     public  AssessAdapter(List<Assessment> dataList) {
         this.dataList = dataList;

@@ -17,6 +17,7 @@ import com.tac.iparttimejob.UI.Utils.MyToolBarLayout;
 
 /**
  * Created by AiProgram on 2016/10/21.
+ * 这是用于展示我要招聘的所有版本招聘详情的类
  */
 
 public class JobContentForGiver extends AppCompatActivity{
@@ -99,6 +100,7 @@ public class JobContentForGiver extends AppCompatActivity{
         tv_detail=(TextView) findViewById(R.id.tv_detail);
     }
 
+    //初始化公有控件
     private void initCommonViews(){
         myToolBarLayout.setTitle("招聘详情");
 
@@ -108,31 +110,62 @@ public class JobContentForGiver extends AppCompatActivity{
         tv_phone_number.setText(Object.recuitObject.getPhone());
         tv_workplace.setText(Object.recuitObject.getWorkplace());
         tv_detail.setText(Object.recuitObject.getWorkInfo());
-
+        tv_numbers.setText(Object.recuitObject.getNeedpeopleNum()+"");
+        tv_email.setText(Object.recuitObject.getEmail());
 
         //服务器暂时不提供的设置为消失
-//        tv_numbers.setVisibility(TextView.GONE);
 //        tv_payment.setVisibility(TextView.GONE);
-//        tv_email.setVisibility(TextView.GONE);
+
 
     }
 
+    //初始化每个界面独有的控件
     private void initUniqueViews(){
         switch (Object.recuitObject.getStatus()){
             case DataType.JOB_STATUS_UNDERGONING:{
-
+                btn_cancel_recruit=(Button) findViewById(R.id.btn_cancel_recruit);
+                btn_signed_list=(Button) findViewById(R.id.btn_signed_list);
+                btn_cancel_recruit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //取消招聘
+                    }
+                });
+                btn_signed_list.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //报名名单
+                    }
+                });
             }break;
             case DataType.JOB_STATUS_CANCELED:{
-
+                btn_choosed_list=(Button)  findViewById(R.id.btn_choosed_list);
+                btn_choosed_list.setVisibility(View.GONE);
             }break;
             case DataType.JOB_STATUS_CHECKING:{
-
+                btn_cancel_recruit=(Button) findViewById(R.id.btn_cancel_recruit);
+                btn_signed_list=(Button) findViewById(R.id.btn_signed_list);
+                btn_cancel_recruit.setClickable(false);
+                btn_signed_list.setClickable(false);
             }break;
             case DataType.JOB_STATUS_FINSHED:{
-
+                btn_choosed_list=(Button) findViewById(R.id.btn_choosed_list);
+                btn_choosed_list.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //选中的列表
+                    }
+                });
             }break;
             case DataType.JOB_STATUS_REJECTED:{
-
+                btn_choosed_list=(Button) findViewById(R.id.btn_choosed_list);
+                //选中列表这时变成查看被拒绝理由的按钮
+                btn_choosed_list.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //查看被拒绝发布理由
+                    }
+                });
             }break;
         }
     }

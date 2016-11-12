@@ -31,7 +31,9 @@ import java.util.Map;
 
 import static com.tac.iparttimejob.Class.Object.inRecuitObjectList;
 import static com.tac.iparttimejob.Class.Object.notRecuitObjectList;
+import static com.tac.iparttimejob.Class.Object.recuitObjectList;
 import static com.tac.iparttimejob.NetWork.Query.QueryInformation.getInRecruitList;
+import static com.tac.iparttimejob.NetWork.Query.QueryInformation.getRecruitList;
 
 
 /**
@@ -287,18 +289,20 @@ public class GiveJobsList extends Fragment{
                 getList.put("userid",Object.loginObject.getUserid());
                 getList.put("page",(validPage)+"");
                 getList.put("rows",(rows)+"");
+                getList.put("rstatus",DataType.RECRUIT_STATUS_VALID+"");
             }break;
             case DataType.UNVALID_JOB_LIST:{
                 unvalidPage=1;
                 getList.put("userid",Object.loginObject.getUserid());
                 getList.put("page",(unvalidPage)+"");
                 getList.put("rows",(rows)+"");
+                getList.put("rstatus",DataType.RECRUIT_STATUS_UNVALID+"");
             }break;
         }
 
         //分有效和无效刷新列表
         if(pageNum==DataType.VALID_JOB_LIST) {
-            getInRecruitList(getList, new HttpCallBackListener() {
+            getRecruitList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(final String result) {
                     getActivity().runOnUiThread(new Runnable() {
@@ -323,7 +327,7 @@ public class GiveJobsList extends Fragment{
                 }
             });
         }else if (pageNum==DataType.UNVALID_JOB_LIST){
-            QueryInformation.getNotRecruitList(getList, new HttpCallBackListener() {
+            getRecruitList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(String result) {
                     getActivity().runOnUiThread(new Runnable() {
@@ -348,8 +352,7 @@ public class GiveJobsList extends Fragment{
                 }
             });
         }
-        Log.i("validListSize", inRecuitObjectList.size()+"");
-        Log.i("unValidListSize",notRecuitObjectList.size()+"");
+        Log.i("validListSize", recuitObjectList.size()+"");
     }
 
     /*
@@ -362,11 +365,13 @@ public class GiveJobsList extends Fragment{
                 getList.put("userid",Object.loginObject.getUserid());
                 getList.put("page",(validPage)+"");
                 getList.put("rows",(rows)+"");
+                getList.put("rstatus",DataType.RECRUIT_STATUS_VALID+"");
             }break;
             case DataType.UNVALID_JOB_LIST:{
                 getList.put("userid",Object.loginObject.getUserid());
                 getList.put("page",(unvalidPage)+"");
                 getList.put("rows",(rows)+"");
+                getList.put("rstatus",DataType.RECRUIT_STATUS_UNVALID+"");
             }break;
         }
 
@@ -376,7 +381,7 @@ public class GiveJobsList extends Fragment{
         //分有效和无效刷新列表
         if(pageNum==DataType.VALID_JOB_LIST) {
 
-            getInRecruitList(getList, new HttpCallBackListener() {
+            getRecruitList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(final String result) {
                     rv_give_jobs.setLoadMoreEnable(true);
@@ -406,7 +411,7 @@ public class GiveJobsList extends Fragment{
                 }
             });
         }else if (pageNum==DataType.UNVALID_JOB_LIST){
-            QueryInformation.getNotRecruitList(getList, new HttpCallBackListener() {
+            getRecruitList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(String result) {
                     rv_give_jobs.setLoadMoreEnable(true);
@@ -437,32 +442,31 @@ public class GiveJobsList extends Fragment{
             });
         }
 
-        Log.i("validListSize",inRecuitObjectList.size()+"");
-        Log.i("unValidListSize",notRecuitObjectList.size()+"");
+        Log.i("validListSize",recuitObjectList.size()+"");
     }
 
     public void cloneValidList(){
         validList.clear();
-        for(int i=0;i<Object.inRecuitObjectList.size();i++)
-            validList.add(Object.inRecuitObjectList.get(i));
+        for(int i=0;i<Object.recuitObjectList.size();i++)
+            validList.add(Object.recuitObjectList.get(i));
     }
 
     public void cloneUnValidList(){
         unValidList.clear();
-        for(int i=0;i<Object.notRecuitObjectList.size();i++)
-            unValidList.add(Object.notRecuitObjectList.get(i));
+        for(int i=0;i<Object.recuitObjectList.size();i++)
+            unValidList.add(Object.recuitObjectList.get(i));
     }
 
     public void addValidList(){
         //由于继续获得数据会把结果清空加入新数据，再次直接添加即可
-        for(int i=0;i<inRecuitObjectList.size();i++){
-            validList.add(inRecuitObjectList.get(i));
+        for(int i=0;i<recuitObjectList.size();i++){
+            validList.add(recuitObjectList.get(i));
         }
     }
 
     public void addUnvalidList(){
-            for(int i=0;i<notRecuitObjectList.size();i++){
-                unValidList.add(notRecuitObjectList.get(i));
+            for(int i=0;i<recuitObjectList.size();i++){
+                unValidList.add(recuitObjectList.get(i));
             }
     }
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_unchecking_feedback_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout5">
+
+        <com.tac.iparttimejob.UI.Utils.RefreshRecyclerView
+            android:id="@+id/rv_unchecking_feedback_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.tac.iparttimejob.UI.Utils.RefreshRecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:id="@+id/relativeLayout5"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/toolbarTextColor"
+            android:textSize="@dimen/toolbar_title_text_size"
+            android:layout_gravity="center"
+            android:text="待查看反馈"
+            android:id="@+id/title_common_toolbar"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

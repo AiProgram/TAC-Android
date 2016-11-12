@@ -21,11 +21,11 @@ public class MainPagerAdapterForAdmin extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             //审核招聘fragment
-            case 0:return new MyManager();
+            case 0:return new UncheckingJobList();
             //审核评价fragment
-            case 1:return new MyManager();
+            case 1:return new UncheckingCommentList();
             //查看反馈fragment
-            case 2:return new MyManager();
+            case 2:return new UncheckingFeedbackList();
             default:return null;
         }
     }

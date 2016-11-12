@@ -26,4 +26,8 @@ public class DataType {
     //用来区分Dialog类型
     public final static int DIALOG_DATE_PICKER_DEADLINE=1;
     public final static int DIALOG_DATE_PICKER_POST_TIME=2;
+
+    //请求招聘详情的不同
+    public final static int RECRUIT_STATUS_VALID=0;
+    public final static int RECRUIT_STATUS_UNVALID=1;
 }
