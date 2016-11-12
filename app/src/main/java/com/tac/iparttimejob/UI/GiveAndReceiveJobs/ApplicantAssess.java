@@ -26,7 +26,7 @@ import static com.tac.iparttimejob.Class.Object.atooCommentObjectList;
  * Created by 守候。 on 2016/11/12.
 
  */
-
+这里是查看评价 剩下不会了
 public class ApplicantAssess extends Fragment {
     private RefreshRecyclerView rv_applicant_assessment;
     private TextView textView_applicant_assessment;

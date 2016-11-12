@@ -18,7 +18,7 @@ import static com.tac.iparttimejob.NetWork.Edit.EditInformation.setAssessment;
 /**
  * Created by 守候。 on 2016/11/12.
  */
-
+评价 剩下不会写
 public class Assess extends AppCompatActivity {
     private TextView title;
     private TextView assess_title;
