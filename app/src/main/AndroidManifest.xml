@@ -28,8 +28,12 @@
 
         <activity android:name=".UI.MyManager.SetAccountInfo">
 
+        </activity>
+
+        <activity android:name=".UI.Admin.AppMainForAdmin">
 
         </activity>
+
         <activity android:name=".UI.RegisterAndLogin.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

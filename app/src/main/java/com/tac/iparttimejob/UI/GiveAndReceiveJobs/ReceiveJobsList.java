@@ -3,7 +3,6 @@ package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -30,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.tac.iparttimejob.NetWork.Query.QueryInformation.getApplicantList;
+import static com.tac.iparttimejob.NetWork.Query.QueryInformation.getApplicationList;
 import static com.tac.iparttimejob.NetWork.Query.QueryInformation.getInRecruitList;
 
 /**
@@ -60,15 +60,15 @@ public class ReceiveJobsList extends Fragment{
     int rows=10;
     int pointer=0;
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_receive_jobs_list,container,false);
         return view;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated( Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         getViews();
@@ -227,7 +227,7 @@ public class ReceiveJobsList extends Fragment{
 
         //分未报名和已报名列表
         if(pageNum==DataType.UNSIGNED_JOB_LIST) {
-            getApplicantList(getList, new HttpCallBackListener() {
+            getApplicationList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(final String result) {
                     getActivity().runOnUiThread(new Runnable() {
@@ -252,7 +252,7 @@ public class ReceiveJobsList extends Fragment{
                 }
             });
         }else if (pageNum==DataType.SIGNED_JOB_LIST){
-            QueryInformation.getNotRecruitList(getList, new HttpCallBackListener() {
+            getApplicantList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(String result) {
                     getActivity().runOnUiThread(new Runnable() {
@@ -300,7 +300,7 @@ public class ReceiveJobsList extends Fragment{
         //分有效和无效刷新列表
         if(pageNum==DataType.UNSIGNED_JOB_LIST) {
 
-            getInRecruitList(getList, new HttpCallBackListener() {
+            getApplicationList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(final String result) {
                     rv_receive_jobs.setLoadMoreEnable(true);
@@ -330,7 +330,7 @@ public class ReceiveJobsList extends Fragment{
                 }
             });
         }else if (pageNum==DataType.SIGNED_JOB_LIST){
-            QueryInformation.getNotRecruitList(getList, new HttpCallBackListener() {
+           getApplicantList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(String result) {
                     rv_receive_jobs.setLoadMoreEnable(true);
@@ -389,7 +389,7 @@ public class ReceiveJobsList extends Fragment{
         }
     }
 
-    //跳转事件先加载，较为复杂,这里封装起来
+    //跳转事件先加载，较为复杂,这里封装起来，等待编写
     private void jumpToJobContent(int listType,int position){
         Map<String,String> getList=new LinkedHashMap<>();
         //应聘者招聘详情尚未编写完成，这里需要传入是否选择了该招聘的标志，因为查看时无法获得

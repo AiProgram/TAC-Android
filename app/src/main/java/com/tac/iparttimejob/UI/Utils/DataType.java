@@ -5,6 +5,10 @@ package com.tac.iparttimejob.UI.Utils;
  */
 
 public class DataType {
+    //用于区分用户的类别
+    public final static int ADMIN_USER=1;
+    public final static int NORMAL_USER=0;
+
     //用来区分RecyclerView的显示大类型,
     public final static int VALID_JOB_LIST=0;
     public final static int UNVALID_JOB_LIST=1;

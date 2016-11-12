@@ -15,13 +15,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tac.iparttimejob.Class.LoginResult;
+import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.Class.UserResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Login.SignIn;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.Admin.AppMainForAdmin;
 import com.tac.iparttimejob.UI.GiveAndReceiveJobs.AppMain;
+import com.tac.iparttimejob.UI.Utils.DataType;
 
-import java.util.HashMap;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -95,9 +98,18 @@ public class Login extends AppCompatActivity {
                 SignIn.login(login, new HttpCallBackListener() {
                     @Override
                     public void onFinish(String result) {
+                        //区分管理员和普通用户登录事件
+                        switch (Object.userObject.getType()){
+                            case DataType.ADMIN_USER:{
+                                Intent intent=new Intent(Login.this, AppMainForAdmin.class);
+                                startActivity(intent);
+                            }break;
+                            case DataType.NORMAL_USER:{
+                                Intent intent=new Intent(Login.this, AppMain.class);
+                                startActivity(intent);
+                            }break;
+                        }
 
-                        Intent intent=new Intent(Login.this, AppMain.class);
-                        startActivity(intent);
                         //非UI线程只能这样更新UI
                         runOnUiThread(new Runnable() {
                             @Override
