@@ -95,16 +95,18 @@ public class MyReceiveJobsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 jobInfo=unsignedList.get(position).getWorkInfo();
                 deadline=unsignedList.get(position).getDealdine();
                 recruitorName=unsignedList.get(position).getOwner();
-                SignedViewHolder viewHolder=(SignedViewHolder)holder;
+                UnsignedViewHolder viewHolder=(UnsignedViewHolder) holder;
                 viewHolder.tv_job_title.setText(jobTitle);
                 viewHolder.tv_job_info.setText(jobInfo);
                 viewHolder.tv_deadline.setText(deadline);
                 viewHolder.tv_recruitor_name.setText(recruitorName);
             }break;
         }
+        //绑定是绑定点击监听器
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int position =holder.getLayoutPosition();
                 mOnItemClickListener.onItemClick(holder.itemView,position);
             }
         });
@@ -112,6 +114,7 @@ public class MyReceiveJobsAdapter extends RecyclerView.Adapter<RecyclerView.View
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
+                int postion=holder.getLayoutPosition();
                 mOnItemLongClickListener.onItemLongClick(holder.itemView,position);
                 //拦截事件的继续传递
                 return true;
@@ -168,10 +171,10 @@ public class MyReceiveJobsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
 
     public void setOnItemClickListener(OnItemClickListener mOnItemClickListener){
-        mOnItemClickListener = mOnItemClickListener;
+        this.mOnItemClickListener = mOnItemClickListener;
     }
 
     public void setOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickListener) {
-        mOnItemLongClickListener = mOnItemLongClickListener;
+       this. mOnItemLongClickListener = mOnItemLongClickListener;
     }
 }
