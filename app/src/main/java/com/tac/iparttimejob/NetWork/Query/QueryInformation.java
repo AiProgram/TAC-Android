@@ -14,6 +14,7 @@ import com.tac.iparttimejob.Class.EnrollList;
 import com.tac.iparttimejob.Class.EmailResult;
 import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.Class.RecuitList;
+import com.tac.iparttimejob.Class.Resume;
 import com.tac.iparttimejob.Class.ResumeResult;
 import com.tac.iparttimejob.Class.ReturnMessage;
 import com.tac.iparttimejob.Class.UserImage;
@@ -74,6 +75,10 @@ public class QueryInformation extends HttpPost{
                 {
                     if(resumeResult.isSuccess())
                     {
+                        if(resumeObject==null)
+                        {
+                            resumeObject=new Resume();
+                        }
 
                             resumeObject.setUser(resumeResult.getUser());
                             resumeObject.setResumeid(resumeResult.getResumeid());

@@ -217,14 +217,15 @@ public class ReceiveJobsList extends Fragment{
         switch (pageNum){
             case DataType.SIGNED_JOB_LIST:{
                 signedPage=1;
-                getList.put("recruitid",Object.userObject.getUserid());
+                getList.put("userid",Object.userObject.getUserid());
                 getList.put("page",(signedPage)+"");
                 getList.put("rows",(rows)+"");
-            }break;
+        }break;
             case DataType.UNSIGNED_JOB_LIST:{
                 unsignedPage=1;
                 getList.put("page",(unsignedPage)+"");
                 getList.put("rows",(rows)+"");
+                getList.put("rstatus","1");
             }break;
         }
 
