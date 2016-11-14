@@ -49,7 +49,7 @@ public class ReceiveJobsList extends Fragment{
     private MyReceiveJobsAdapter signedListAdapter;
     private MyReceiveJobsAdapter unsignedListAdapter;
 
-    private List<Application> signeList=new ArrayList<>();
+    private List<RecuitResult.Recuit> signeList=new ArrayList<>();
     private List<RecuitResult.Recuit> unsignedList=new ArrayList<>();
 
     //防止多次初始化

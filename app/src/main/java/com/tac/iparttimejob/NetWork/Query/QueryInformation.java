@@ -566,7 +566,7 @@ public class QueryInformation extends HttpPost{
         post(HttpAddress.HOST + HttpAddress.GET_CHOOSE_APPLICATION_LIST, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                ApplicationList applicationList=null;
+                RecuitList applicationList=null;
                 Type type=new TypeToken<RecuitList>(){}.getType();
                 try {
                     applicationList=new Gson().fromJson(result,type);
