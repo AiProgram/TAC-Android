@@ -20,8 +20,8 @@ import java.util.List;
 public class MyReceiveJobsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     //保存点击事件的监听器,点击事件是用接口配合内部接口传递出去的
-    private MyGiveJobAdapter.OnItemClickListener mOnItemClickListener;
-    private MyGiveJobAdapter.OnItemLongClickListener mOnItemLongClickListener;
+    private OnItemClickListener mOnItemClickListener;
+    private OnItemLongClickListener mOnItemLongClickListener;
 
     List<RecuitResult.Recuit> unsignedList;
     List<Application> signedList;
@@ -167,11 +167,11 @@ public class MyReceiveJobsAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
 
-    public void setOnItemClickListener(MyGiveJobAdapter.OnItemClickListener mOnItemClickListener){
-        this.mOnItemClickListener = mOnItemClickListener;
+    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener){
+        mOnItemClickListener = mOnItemClickListener;
     }
 
-    public void setOnItemLongClickListener(MyGiveJobAdapter.OnItemLongClickListener mOnItemLongClickListener) {
-        this.mOnItemLongClickListener = mOnItemLongClickListener;
+    public void setOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickListener) {
+        mOnItemLongClickListener = mOnItemLongClickListener;
     }
 }

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.tac.iparttimejob.Class.Application;
@@ -143,7 +144,7 @@ public class ReceiveJobsList extends Fragment{
 
 
         //有效列表点击事件
-        signedListAdapter.setOnItemClickListener(new MyGiveJobAdapter.OnItemClickListener() {
+        signedListAdapter.setOnItemClickListener(new MyReceiveJobsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 //点击跳转
@@ -151,7 +152,7 @@ public class ReceiveJobsList extends Fragment{
             }
         });
         //失效列表点击事件
-        unsignedListAdapter.setOnItemClickListener(new MyGiveJobAdapter.OnItemClickListener() {
+        unsignedListAdapter.setOnItemClickListener(new MyReceiveJobsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 //点击跳转

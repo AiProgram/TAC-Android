@@ -1,17 +1,13 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
-import android.support.v7.util.AsyncListUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.io.FileOutputStream;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 
-import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;

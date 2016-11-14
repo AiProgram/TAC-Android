@@ -30,4 +30,8 @@ public class DataType {
     //请求招聘详情的不同
     public final static int RECRUIT_STATUS_VALID=0;
     public final static int RECRUIT_STATUS_UNVALID=1;
+
+    //用来区分评论的类型
+    public final static int COMMENT_O_TO_A=0;
+    public final static int COMMENT_A_TO_O=1;
 }
