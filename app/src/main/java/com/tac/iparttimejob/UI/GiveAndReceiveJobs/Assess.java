@@ -25,7 +25,7 @@ public class Assess extends AppCompatActivity {
     private TextView assess;
     private TextView point_title;
     private TextView point;
-    private Button comfirm;
+    private Button confirm;
     private Button cancel;
     int assessPoint;
 
@@ -44,12 +44,12 @@ public class Assess extends AppCompatActivity {
         assess=(TextView)findViewById(R.id.materialEditText);
         point_title=(TextView)findViewById(R.id.assess_tip2);
         point=(TextView)findViewById(R.id.materialEditText2);
-        comfirm=(Button)findViewById(R.id.assess_btn_sure);
+        confirm=(Button)findViewById(R.id.assess_btn_sure);
         cancel=(Button)findViewById(R.id.assess_btn_cancel);
-        comfirm.setOnClickListener(new View.OnClickListener() {
+        confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(assess.length()>=200)
+                if(assess.getText().length()>=200)
                 {
                     Toast.makeText(Assess.this,"评价不用辣么多",Toast.LENGTH_SHORT).show();
                 }
@@ -91,6 +91,7 @@ public class Assess extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                    // 返回
             }
         });
