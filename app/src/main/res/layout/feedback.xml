@@ -7,15 +7,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="反馈"
-        android:textSize="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/feedback_title" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="亲爱的用户，感谢您的支持"
         android:textSize="20sp"
         android:layout_marginTop="46dp"
@@ -55,5 +46,16 @@
         android:layout_alignBaseline="@+id/feedback_btn_sure"
         android:layout_alignBottom="@+id/feedback_btn_sure"
         android:layout_toEndOf="@+id/feedback_title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="反馈"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:id="@+id/feedback_title"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp" />
 
 </RelativeLayout>

@@ -220,15 +220,14 @@
 
             <Button
                 android:text="选中列表"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 style="@style/AcceptButton"
                 android:id="@+id/btn_choosed_list"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/tv_detail"/>
+                android:background="@drawable/button_style_sure"
+                android:layout_marginTop="49dp"
+                android:layout_below="@+id/tv_detail"
+                android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
 

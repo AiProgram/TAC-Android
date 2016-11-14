@@ -210,6 +210,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_cancel_signUp"
                 style="@style/WarningButton"
+                android:background="@drawable/button_style_cancel"
                 android:layout_margin="25dp"
                 android:layout_below="@+id/tv_detail"
                 android:layout_centerHorizontal="true" />

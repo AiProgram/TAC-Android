@@ -13,7 +13,8 @@
 
         <TextView
             android:text="简历"
-            android:textSize="50dp"
+            android:textSize="30dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_resume_title"
@@ -58,16 +59,6 @@
             android:layout_centerHorizontal="true"
             android:hint="请输入您的邮箱" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:drawableLeft="@drawable/ic_question_answer_black_24dp"
-            android:layout_width="fill_parent"
-            android:layout_height="140dp"
-            android:id="@+id/detail_introduce"
-            android:inputType="text"
-            android:hint="您的详细介绍"
-            android:layout_below="@+id/sort_introduce"
-            android:layout_alignParentStart="true" />
-
         <Button
             android:layout_width="120dp"
             android:layout_height="wrap_content"
@@ -87,7 +78,7 @@
             android:id="@+id/resume_btn_sure"
             android:textSize="20dp"
             android:background="@drawable/button_style_sure"
-            android:layout_below="@+id/project_address"
+            android:layout_below="@+id/detail_introduce"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="14dp" />
@@ -108,7 +99,7 @@
             android:inputType="text"
             android:id="@+id/project"
             android:hint="做过的项目"
-            android:layout_below="@+id/detail_introduce"
+            android:layout_below="@+id/sort_introduce"
             android:layout_alignParentStart="true" />
         <com.rengwuxian.materialedittext.MaterialEditText
             android:drawableLeft="@drawable/ic_question_answer_black_24dp"
@@ -128,5 +119,19 @@
             android:hint="项目地址"
             android:layout_below="@+id/good_at"
             android:layout_alignParentStart="true" />
+
+        <EditText
+
+            android:layout_width="fill_parent"
+            android:layout_height="140dp"
+            android:id="@+id/detail_introduce"
+            android:inputType="textMultiLine"
+            android:minLines="8"
+            android:maxLines="30"
+            android:scrollbars="vertical"
+            android:gravity="top"
+            android:background="@android:drawable/edit_text"
+            android:hint="您的详细介绍"
+            android:layout_below="@+id/project_address" />
     </RelativeLayout>
 </ScrollView>

@@ -12,6 +12,7 @@
     <TextView
         android:text="修改个人资料"
         android:textSize="30dp"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_id_title"

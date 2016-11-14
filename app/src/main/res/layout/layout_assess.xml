@@ -4,28 +4,72 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="120dp"
+        android:hint="1~100字"
+        android:inputType="textMultiLine"
+        android:minLines="8"
+        android:maxLines="30"
+        android:scrollbars="vertical"
+        android:gravity="top"
+        android:background="@android:drawable/edit_text"
+        android:layout_below="@+id/assess_tip1"
+        android:id="@+id/materialEditText"
+        android:layout_above="@+id/materialEditText2"
+        android:layout_alignStart="@+id/assess_tip1"
+        android:layout_alignEnd="@+id/materialEditText2" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/materialEditText2"
+        android:hint="1~100"
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/assess_btn_cancel"
+        android:layout_toEndOf="@+id/assess_tip2" />
+
     <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:id="@+id/relativeLayout">
+    android:id="@+id/relativeLayout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="评价"
-        android:textSize="40dp"
+        android:textSize="30dp"
+        android:textColor="@color/black"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/assess_title" />
     </RelativeLayout>
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:layout_width="fill_parent"
-        android:layout_height="120dp"
-        android:hint="1~100字"
-        android:layout_below="@+id/assess_tip1"
-        android:id="@+id/materialEditText"
-        android:layout_above="@+id/materialEditText2"
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="确定"
+        android:textSize="20sp"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/button_style_sure"
+        android:id="@+id/assess_btn_sure"
+        android:layout_marginStart="20dp"
+        android:layout_below="@+id/materialEditText2"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="取消"
+        android:textSize="20sp"
+        android:background="@drawable/button_style_cancel"
+        android:id="@+id/assess_btn_cancel"
+        android:layout_alignBaseline="@+id/assess_btn_sure"
+        android:layout_alignBottom="@+id/assess_btn_sure"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,36 +78,7 @@
         android:id="@+id/assess_tip2"
         android:textSize="25sp"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:text="确定"
-        android:textSize="20sp"
-        android:layout_marginTop="51dp"
-        android:id="@+id/assess_btn_sure"
-        android:layout_below="@+id/assess_tip2"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:text="取消"
-        android:textSize="20sp"
-        android:id="@+id/assess_btn_cancel"
-        android:layout_alignBaseline="@+id/assess_btn_sure"
-        android:layout_alignBottom="@+id/assess_btn_sure"
-        android:layout_alignParentEnd="true" />
-
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/materialEditText2"
-        android:hint="1~100"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/assess_btn_cancel" />
+        android:layout_alignStart="@+id/assess_btn_sure" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -73,7 +88,7 @@
         android:textSize="25sp"
         android:layout_marginTop="40dp"
         android:layout_below="@+id/relativeLayout"
-        android:layout_alignParentStart="true" />
+        android:layout_toStartOf="@+id/materialEditText2" />
 
 
 </RelativeLayout>

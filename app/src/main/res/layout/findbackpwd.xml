@@ -12,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="找回密码"
-        android:textSize="50dp"
+        android:textSize="30dp"
+        android:textColor="@color/black"
         android:id="@+id/tv_register_title"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -37,11 +38,10 @@
         android:layout_width="fill_parent"
         android:layout_height="60dp"
         android:inputType="text"
-        android:layout_marginTop="20dp"
         android:id="@+id/findbackpwd_answer"
-        android:hint="请输入您的密保答案"
+        android:hint="请输入您的邮箱"
         style="@style/SignUpEditTextStyle"
-        android:layout_below="@+id/findbackpwd_question"
+        android:layout_below="@+id/findbackpwd_name"
         android:layout_alignRight="@+id/findbackpwd_name"
         android:layout_alignEnd="@+id/findbackpwd_name"
         android:layout_alignLeft="@+id/findbackpwd_name"
@@ -67,7 +67,7 @@
         android:id="@+id/findbackpwd_btn_sure"
         android:textSize="20dp"
         android:onClick="sure_to_reset"
-        android:background="#1cf718"
+        android:background="@drawable/button_style_sure"
         android:layout_marginTop="22dp"
         android:layout_below="@+id/findbackpwd_check"
         android:layout_alignParentLeft="true"
@@ -85,15 +85,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Spinner
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/findbackpwd_question"
-        android:layout_alignTop="@+id/findbackpwd_name"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="48dp" />
-
     <Button
         android:layout_width="120dp"
         android:layout_height="wrap_content"
@@ -101,7 +92,7 @@
         android:textColor="#ffffff"
         android:id="@+id/findbackpwd_btn_cancel"
         android:textSize="20dp"
-        android:background="#f33333"
+        android:background="@drawable/button_style_cancel"
         android:layout_alignBaseline="@+id/findbackpwd_btn_sure"
         android:layout_alignBottom="@+id/findbackpwd_btn_sure"
         android:layout_alignParentEnd="true" />

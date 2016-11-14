@@ -227,6 +227,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_cancel_recruit"
                 style="@style/WarningButton"
+                android:background="@drawable/button_style_cancel"
                 android:layout_below="@+id/tv_detail"
                 android:layout_alignEnd="@+id/label_detail"
                 android:layout_marginTop="13dp" />
@@ -237,6 +238,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_signed_list"
                 style="@style/AcceptButton"
+                android:background="@drawable/button_style_sure"
                 android:layout_marginEnd="23dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true" />
