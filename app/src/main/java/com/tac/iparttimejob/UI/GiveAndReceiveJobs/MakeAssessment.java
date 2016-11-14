@@ -39,7 +39,7 @@ public class MakeAssessment extends AppCompatActivity {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.assess);
+        setContentView(R.layout.layout_assess);
         title=(TextView)findViewById(R.id.assess_title);
         assess_title=(TextView)findViewById(R.id.assess_tip1);
         assess=(TextView)findViewById(R.id.materialEditText);

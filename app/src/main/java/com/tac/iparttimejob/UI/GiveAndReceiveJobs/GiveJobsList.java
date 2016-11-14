@@ -96,8 +96,8 @@ public class GiveJobsList extends Fragment{
 
     //初始化数据,引入网络操作后修改
     private void initData(int pageNum) {
-        inRecuitObjectList=new ArrayList<>();
-        notRecuitObjectList=new ArrayList<>();
+        Object.recuitObjectList=new ArrayList<>();
+        //notRecuitObjectList=new ArrayList<>();
 
         srl_give_jobs.setRefreshing(true);
 
