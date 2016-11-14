@@ -17,9 +17,10 @@ import static com.tac.iparttimejob.NetWork.Edit.EditInformation.setAssessment;
 
 /**
  * Created by 守候。 on 2016/11/12.
+ * 对于某人发表评价
  */
 //评价 剩下不会写
-public class Assess extends AppCompatActivity {
+public class MakeAssessment extends AppCompatActivity {
     private TextView title;
     private TextView assess_title;
     private TextView assess;
@@ -51,7 +52,7 @@ public class Assess extends AppCompatActivity {
             public void onClick(View view) {
                 if(assess.length()>=200)
                 {
-                    Toast.makeText(Assess.this,"评价不用辣么多",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MakeAssessment.this,"评价不用辣么多",Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -59,7 +60,7 @@ public class Assess extends AppCompatActivity {
                     try {
                         assessPoint = Integer.parseInt(p);
                     } catch (NumberFormatException e) {
-                        Toast.makeText(Assess.this,"输入的是数字",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MakeAssessment.this,"输入的是数字",Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                         return;
                     }
@@ -71,19 +72,19 @@ public class Assess extends AppCompatActivity {
                                 setAssessment(getList, new HttpCallBackListener() {
                                     @Override
                                     public void onFinish(String result) {
-                                        Toast.makeText(Assess.this,"评价成功",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MakeAssessment.this,"评价成功",Toast.LENGTH_SHORT).show();
                                     }
 
                                     @Override
                                     public void onError(String error) {
-                                        Toast.makeText(Assess.this,"失败",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MakeAssessment.this,"失败",Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
                     }
                     else
                     {
-                        Toast.makeText(Assess.this,"范围是1-100",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MakeAssessment.this,"范围是1-100",Toast.LENGTH_SHORT).show();
                     }
                 }
             }

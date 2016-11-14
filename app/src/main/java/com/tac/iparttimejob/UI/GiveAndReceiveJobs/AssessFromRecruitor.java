@@ -24,9 +24,10 @@ import static com.tac.iparttimejob.Class.Object.otoaCommentObjectList;
 
 /**
  * Created by 守候。 on 2016/11/12.
+ * 来自招聘者的评价
  */
 //不知道对不对
-public class RecruitAssess extends Fragment{
+public class AssessFromRecruitor extends Fragment{
     private RefreshRecyclerView rv_recruit_assessment;
     private TextView textView_recruit_assessment;
     private AssessAdapter assessAdapter;

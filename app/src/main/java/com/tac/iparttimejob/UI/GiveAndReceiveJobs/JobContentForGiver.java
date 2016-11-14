@@ -9,11 +9,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tac.iparttimejob.Class.Object;
+import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
 import com.tac.iparttimejob.UI.Utils.MyToolBarLayout;
+import com.tac.iparttimejob.NetWork.Edit.EditInformation;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by AiProgram on 2016/10/21.
@@ -42,6 +48,8 @@ public class JobContentForGiver extends AppCompatActivity{
     //unvalidJobContent独有
     private TextView tv_unvalid_warning;
     private Button btn_choosed_list;
+
+    private String recruitid;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -98,6 +106,8 @@ public class JobContentForGiver extends AppCompatActivity{
         tv_email=(TextView) findViewById(R.id.tv_email);
         tv_workplace=(TextView) findViewById(R.id.tv_workplace);
         tv_detail=(TextView) findViewById(R.id.tv_detail);
+
+        recruitid=Object.recuitObject.getRecruitid();
     }
 
     //初始化公有控件
@@ -129,6 +139,26 @@ public class JobContentForGiver extends AppCompatActivity{
                     @Override
                     public void onClick(View view) {
                         //取消招聘
+                        Map<String,String> cancelRecruit=new LinkedHashMap<String, String>();
+                        cancelRecruit.put("recruitid",recruitid);
+                        cancelRecruit.put("status",DataType.JOB_STATUS_CANCELED+"");
+                        EditInformation.setRecruitStatus(cancelRecruit, new HttpCallBackListener() {
+                            @Override
+                            public void onFinish(String result) {
+                                //取消成功时返回主页面，并刷新
+                                JobContentForGiver.this.finish();
+                            }
+
+                            @Override
+                            public void onError(String error) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(JobContentForGiver.this,"取消应聘失败",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });
                     }
                 });
                 btn_signed_list.setOnClickListener(new View.OnClickListener() {
@@ -160,6 +190,7 @@ public class JobContentForGiver extends AppCompatActivity{
             case DataType.JOB_STATUS_REJECTED:{
                 btn_choosed_list=(Button) findViewById(R.id.btn_choosed_list);
                 //选中列表这时变成查看被拒绝理由的按钮
+                btn_choosed_list.setText("查看驳回理由");
                 btn_choosed_list.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
