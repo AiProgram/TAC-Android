@@ -26,7 +26,7 @@ public class MakeAssessment extends AppCompatActivity {
     private TextView assess;
     private TextView point_title;
     private TextView point;
-    private Button comfirm;
+    private Button confirm;
     private Button cancel;
     int assessPoint;
 
@@ -39,18 +39,18 @@ public class MakeAssessment extends AppCompatActivity {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_assess);
+        setContentView(R.layout.assess);
         title=(TextView)findViewById(R.id.assess_title);
         assess_title=(TextView)findViewById(R.id.assess_tip1);
         assess=(TextView)findViewById(R.id.materialEditText);
         point_title=(TextView)findViewById(R.id.assess_tip2);
         point=(TextView)findViewById(R.id.materialEditText2);
-        comfirm=(Button)findViewById(R.id.assess_btn_sure);
+        confirm=(Button)findViewById(R.id.assess_btn_sure);
         cancel=(Button)findViewById(R.id.assess_btn_cancel);
-        comfirm.setOnClickListener(new View.OnClickListener() {
+        confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(assess.length()>=200)
+                if(assess.getText().length()>=200)
                 {
                     Toast.makeText(MakeAssessment.this,"评价不用辣么多",Toast.LENGTH_SHORT).show();
                 }
@@ -68,7 +68,7 @@ public class MakeAssessment extends AppCompatActivity {
                     {
                             if(userKind==0){
                                 Map<String,String> getList=new LinkedHashMap<>();
-                               // 这里参数没设置
+                                //这里参数没设置
                                 setAssessment(getList, new HttpCallBackListener() {
                                     @Override
                                     public void onFinish(String result) {
@@ -92,7 +92,8 @@ public class MakeAssessment extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    //返回
+                finish();
+                   // 返回
             }
         });
     }

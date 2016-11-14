@@ -470,7 +470,7 @@ public class QueryInformation extends HttpPost{
 
     //查看招聘列表(应聘者)
     public static void getApplicationList(Map<String,String>params,final HttpCallBackListener listener){
-        post(HttpAddress.HOST + HttpAddress.GET_CHOOSE_APPLICATION_LIST, params, new HttpCallBackListener() {
+        post(HttpAddress.HOST + HttpAddress.GET_APPLICATION_LIST, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
                 RecuitList  chooseApplication=null;
@@ -558,7 +558,7 @@ public class QueryInformation extends HttpPost{
     }
     //查看申请列表
     public static void getApplicantList(Map<String,String>params,final HttpCallBackListener listener){
-        post(HttpAddress.HOST + HttpAddress.GET_APPLICATION_LIST, params, new HttpCallBackListener() {
+        post(HttpAddress.HOST + HttpAddress.GET_CHOOSE_APPLICATION_LIST, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
                 ApplicationList applicationList=null;
