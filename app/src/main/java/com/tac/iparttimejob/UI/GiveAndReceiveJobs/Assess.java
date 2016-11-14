@@ -38,7 +38,7 @@ public class Assess extends AppCompatActivity {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_assess);
+        setContentView(R.layout.assess);
         title=(TextView)findViewById(R.id.assess_title);
         assess_title=(TextView)findViewById(R.id.assess_tip1);
         assess=(TextView)findViewById(R.id.materialEditText);
@@ -67,7 +67,7 @@ public class Assess extends AppCompatActivity {
                     {
                             if(userKind==0){
                                 Map<String,String> getList=new LinkedHashMap<>();
-                               // 这里参数没设置
+                                //这里参数没设置
                                 setAssessment(getList, new HttpCallBackListener() {
                                     @Override
                                     public void onFinish(String result) {
@@ -91,7 +91,7 @@ public class Assess extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    //返回
+                   // 返回
             }
         });
     }

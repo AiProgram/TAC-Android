@@ -58,11 +58,10 @@ public class HttpAddress {
 
 //个人模块
 
-
-    //查看申请列表
-    public static final String GET_APPLICATION_LIST         ="tacapplication/getApplicantForApplicant";
     //查看招聘
-    public static final String GET_CHOOSE_APPLICATION_LIST       ="tacapplication/ getRecruitForManagerAndApplicator";
+    public static final String GET_APPLICATION_LIST         ="tacapplication/chooseApplicant";
+    //查看申请列表
+    public static final String GET_CHOOSE_APPLICATION_LIST       ="tacapplication/getApplicantForApplicant";
     //查看某条招聘
     public static final String GET_APPLICATION_INFORMATION  = "tacapplication/getRecruitByID";
     //申请应聘
