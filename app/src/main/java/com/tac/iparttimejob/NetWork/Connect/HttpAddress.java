@@ -18,7 +18,7 @@ public class HttpAddress {
     public static final String SET_CTEAT_PERSONAL_RESUME         ="tacpersonal/createResume";
     public static final String SET_UPDATE_PERSONAL_RESUME       ="tacpersonal/ updateResume";
     //查看简历
-    public static final String GET_PERSONAL_RESUME         ="tacpersonal/ getResume";
+    public static final String GET_PERSONAL_RESUME         ="tacpersonal/getResume";
     //
     public static final String GET_USER_INFORMATION        ="";
     public static final String GET_USER_INFORMATION_BY_NAME        ="tacpersonal/getUserByName";
@@ -49,7 +49,7 @@ public class HttpAddress {
     //查看报名列表
     public static final String GET_ENROLL_LIST              ="tacrecruit/getApplicant";
     //查看以选中的报名列表
-    public static final String GET_CHOOSE_ENROLL_LIST              ="tacrecruit/ getChoosenApplicant";
+    public static final String GET_CHOOSE_ENROLL_LIST              ="tacrecruit/getChoosenApplicant";
     //选择应聘申请
     public static final String SET_CHOOSE_ENROLL      ="tacrecruit/chooseApplicant";
 
@@ -59,7 +59,7 @@ public class HttpAddress {
 //个人模块
 
     //查看招聘
-    public static final String GET_APPLICATION_LIST         ="tacapplication/chooseApplicant";
+    public static final String GET_APPLICATION_LIST         ="tacapplication/getRecruitForManagerAndApplicator";
     //查看申请列表
     public static final String GET_CHOOSE_APPLICATION_LIST       ="tacapplication/getApplicantForApplicant";
     //查看某条招聘
