@@ -220,6 +220,7 @@
 
             <Button
                 android:text="选中列表"
+                android:textSize="20sp"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 style="@style/AcceptButton"

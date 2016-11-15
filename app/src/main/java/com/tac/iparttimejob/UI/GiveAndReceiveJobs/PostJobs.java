@@ -35,6 +35,8 @@ public class PostJobs extends AppCompatActivity{
     private Button btn_input_post_time;
     private Button btn_post_job;
     private Button btn_cancel_post;
+    private EditText et_input_num;
+    private EditText et_input_money;
 
     private AppCompatActivity activity=this;
 
@@ -45,6 +47,8 @@ public class PostJobs extends AppCompatActivity{
     private String phone;
     private String detail;
     private String displaytime;
+    private String num;
+    private String money;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,8 @@ public class PostJobs extends AppCompatActivity{
         btn_input_post_time=(Button) findViewById(R.id.btn_input_post_time);
         btn_post_job=(Button) findViewById(R.id.btn_post_job);
         btn_cancel_post=(Button) findViewById(R.id.btn_cancel_post);
+        et_input_num=(EditText)  findViewById(R.id.et_input_num);
+        et_input_money=(EditText) findViewById(R.id.et_input_money);
     }
     public void initListener(){
         btn_post_job.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +123,13 @@ public class PostJobs extends AppCompatActivity{
         detail=et_input_detail.getText().toString();
         deadline=btn_input_deadline.getText().toString();
         displaytime=btn_input_post_time.getText().toString();
+        num=et_input_num.getText().toString();
+        money=et_input_money.getText().toString();
+
+        //将薪水和详情拼接起来
+        if(money.isEmpty())
+            money="w未知";
+        detail="薪水 :"+money+"\n"+detail;
     }
 
     //检查输入是否合格,待添加
@@ -136,6 +149,7 @@ public class PostJobs extends AppCompatActivity{
         post.put("phone",phone);
         post.put("workInfo",detail);
         post.put("displaytime",displaytime);
+        post.put("needpeopleNum",num);
         EditInformation.setCreatRecuit(post, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {

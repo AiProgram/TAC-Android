@@ -39,6 +39,7 @@ public class JobContentForGiver extends AppCompatActivity{
     private TextView tv_email;
     private TextView tv_workplace;
     private TextView tv_detail;
+    private TextView tv_displaytime;
 
     //validJobContent独有
     private TextView tv_days_left;
@@ -106,6 +107,7 @@ public class JobContentForGiver extends AppCompatActivity{
         tv_email=(TextView) findViewById(R.id.tv_email);
         tv_workplace=(TextView) findViewById(R.id.tv_workplace);
         tv_detail=(TextView) findViewById(R.id.tv_detail);
+        tv_displaytime=(TextView) findViewById(R.id.tv_displaytime);
 
         recruitid=Object.recuitObject.getRecruitid();
     }
@@ -122,6 +124,7 @@ public class JobContentForGiver extends AppCompatActivity{
         tv_detail.setText(Object.recuitObject.getWorkInfo());
         tv_numbers.setText(Object.recuitObject.getNeedpeopleNum()+"");
         tv_email.setText(Object.recuitObject.getEmail());
+        tv_displaytime.setText(Object.recuitObject.getDisplaytime());
 
         //服务器暂时不提供的设置为消失
 //        tv_payment.setVisibility(TextView.GONE);
@@ -175,8 +178,34 @@ public class JobContentForGiver extends AppCompatActivity{
             case DataType.JOB_STATUS_CHECKING:{
                 btn_cancel_recruit=(Button) findViewById(R.id.btn_cancel_recruit);
                 btn_signed_list=(Button) findViewById(R.id.btn_signed_list);
-                btn_cancel_recruit.setClickable(false);
+               // btn_cancel_recruit.setClickable(false);
                 btn_signed_list.setClickable(false);
+                btn_cancel_recruit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //取消招聘
+                        Map<String,String> cancelRecruit=new LinkedHashMap<String, String>();
+                        cancelRecruit.put("recruitid",recruitid);
+                        cancelRecruit.put("status",DataType.JOB_STATUS_CANCELED+"");
+                        EditInformation.setRecruitStatus(cancelRecruit, new HttpCallBackListener() {
+                            @Override
+                            public void onFinish(String result) {
+                                //取消成功时返回主页面，并刷新
+                                JobContentForGiver.this.finish();
+                            }
+
+                            @Override
+                            public void onError(String error) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(JobContentForGiver.this,"取消应聘失败",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
             }break;
             case DataType.JOB_STATUS_FINSHED:{
                 btn_choosed_list=(Button) findViewById(R.id.btn_choosed_list);
