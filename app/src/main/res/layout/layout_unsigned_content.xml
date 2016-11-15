@@ -211,7 +211,7 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="报名"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:background="@drawable/button_style_sure"
                 style="@style/AcceptButton"
                 android:id="@+id/btn_signUp"
