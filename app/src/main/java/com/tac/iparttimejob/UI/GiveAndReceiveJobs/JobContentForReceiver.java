@@ -21,6 +21,7 @@ import static com.tac.iparttimejob.Class.Object.recuitObject;
 import static com.tac.iparttimejob.Class.Object.recuitObjectList;
 import static com.tac.iparttimejob.Class.Object.userObject;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
+import com.tac.iparttimejob.UI.Utils.FormatedTimeGeter;
 
 
 /**
@@ -110,9 +111,9 @@ public class JobContentForReceiver extends AppCompatActivity {
                         Map<String,String> signUpJob=new LinkedHashMap<String, String>();
                         signUpJob.put("recruitid",recuitObject.getRecruitid());
                         signUpJob.put("ownername",recuitObject.getOwner());
-                        signUpJob.put("applicanttime",userObject.getName());
+                        signUpJob.put("applicanttime", FormatedTimeGeter.getFormatedDate());
                         signUpJob.put("userid",userObject.getUserid());
-                        EditInformation.setCancelApplication(signUpJob, new HttpCallBackListener() {
+                        EditInformation.setCreatRecuit(signUpJob, new HttpCallBackListener() {
                             @Override
                             public void onFinish(String result) {
                                 runOnUiThread(new Runnable() {

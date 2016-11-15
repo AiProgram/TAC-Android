@@ -155,10 +155,7 @@ public class UncheckingJobList extends Fragment{
         getList.put("page",(page)+"");
         getList.put("rows",(rows)+"");
         getList.put("rstatus","0");
-<<<<<<< HEAD
 
-=======
->>>>>>> 3771caa18094e30515592f144f9d9f0885905b8f
         //分未报名和已报名列表
             QueryInformation.getRecruitListForManager(getList, new HttpCallBackListener() {
                 @Override
@@ -193,10 +190,7 @@ public class UncheckingJobList extends Fragment{
         getList.put("page",(page)+"");
         getList.put("rows",(rows)+"");
         getList.put("rstatus","0");
-<<<<<<< HEAD
 
-=======
->>>>>>> 3771caa18094e30515592f144f9d9f0885905b8f
 
         //获得新的上拉更多的数据前禁止上拉更多
         rv_unchecking_job_list.setLoadMoreEnable(false);

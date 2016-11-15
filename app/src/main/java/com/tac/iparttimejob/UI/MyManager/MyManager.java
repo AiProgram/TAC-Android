@@ -140,13 +140,15 @@ public class MyManager extends Fragment {
                         //转到账号信息
                         Intent intent=new Intent(getActivity(),SetAccountInfo.class);
                         startActivity(intent);
-                    }
+                    }break;
                     case 1:{
                         //转到个人简历
-                    }
+                        Intent intent=new Intent(getActivity(),SetResume.class);
+                        startActivity(intent);
+                    }break;
                     case 3:{
                         //转到反馈见面
-                    }
+                    }break;
                 }
                 return false;
             }
