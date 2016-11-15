@@ -218,7 +218,9 @@ public class QueryInformation extends HttpPost{
                 {
                     if(image.isSuccess())
                     {
+                        Log.d("image:",image.getPicture());
                         userImage=image.getPicture();
+
                         listener.onFinish("下载成功");
 
                     }
@@ -634,8 +636,9 @@ public class QueryInformation extends HttpPost{
         post(HttpAddress.HOST + HttpAddress.GET_RECRUIT_LIST_FOR_MANAGER, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
+
                 RecuitList recuitResultList=null;
-                Type type=new TypeToken<AssessmentList>(){}.getType();
+                Type type=new TypeToken<RecuitList>(){}.getType();
                 try {
                     recuitResultList=new Gson().fromJson(result,type);
                 }catch (JsonSyntaxException e) {
