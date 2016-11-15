@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:id="@+id/scrollView2"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_below="@+id/common_toolbar">
 
         <RelativeLayout
             android:layout_height="match_parent"
@@ -199,17 +199,6 @@
                 android:layout_toEndOf="@+id/tv_deadline" />
 
             <TextView
-                android:text="招聘PHP程序员"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/title_content"
-                android:paddingBottom="@dimen/content_title_padding"
-                style="@style/ContentTitleTextStyle"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="25dp" />
-
-            <TextView
                 android:text="项目详情："
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -226,10 +215,21 @@
                 android:background="@drawable/button_style_sure"
                 style="@style/AcceptButton"
                 android:id="@+id/btn_signUp"
-                android:layout_below="@+id/tv_detail"
-                android:layout_toStartOf="@+id/tv_days_left"
-                android:layout_marginTop="25dp"
-                android:layout_alignEnd="@+id/tv_email" />
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/tv_detail"/>
+
+            <TextView
+                android:text="招聘PHP程序员"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/title_content"
+                android:paddingBottom="@dimen/content_title_padding"
+                style="@style/ContentTitleTextStyle"
+                android:layout_marginTop="36dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
 
         </RelativeLayout>
 

@@ -3,6 +3,7 @@ package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -19,6 +20,7 @@ import com.tac.iparttimejob.Class.Application;
 import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
+import com.tac.iparttimejob.NetWork.Connect.HttpPost;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
@@ -397,13 +399,29 @@ public class ReceiveJobsList extends Fragment{
     private void jumpToJobContent(int listType,int position){
         Map<String,String> getList=new LinkedHashMap<>();
         //应聘者招聘详情尚未编写完成，这里需要传入是否选择了该招聘的标志，因为查看时无法获得
+        final Intent intent=new Intent(getActivity(),JobContentForReceiver.class);
         switch (listType){
             case DataType.UNSIGNED_JOB_LIST:{
-
+                intent.putExtra("type",DataType.UNSIGNED_JOB_LIST);
+                getList.put("recruitid",unsignedList.get(position).getRecruitid());
             }break;
             case DataType.SIGNED_JOB_LIST:{
-
+                intent.putExtra("type",DataType.SIGNED_JOB_LIST);
+                //这里recruitid返回的是int
+                getList.put("recruitid",signeList.get(position).getRecruitid()+"");
             }break;
         }
+        //获取到信息以后再跳转
+        QueryInformation.getRecruitInformation(getList, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                startActivity(intent);
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
     }
 }
