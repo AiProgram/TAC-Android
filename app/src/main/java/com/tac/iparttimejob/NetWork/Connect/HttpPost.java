@@ -41,7 +41,7 @@ public class HttpPost {
                           }
                         }
                         str.deleteCharAt(str.length()-1); //删除最后一个字符&
-                        Log.d("zjm",str.toString());
+                        Log.d("mapInformation:",str.toString());
                         byte[] data=str.toString().getBytes();
                         URL url = new URL(address);
                         connection = (HttpURLConnection) url.openConnection();

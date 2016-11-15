@@ -39,7 +39,7 @@ public class Object {
     public static List<RecuitResult.Recuit>  chooseApplicationList;
 
     //查看申请列表
-    public static List<RecuitResult.Recuit>        applicationObjectList;
+    public static List<RecuitResult.Recuit>  applicationObjectList;
     //查看某个招聘
     public static RecuitResult.Recuit             applicationObject;
     //查看应聘者对我评价
