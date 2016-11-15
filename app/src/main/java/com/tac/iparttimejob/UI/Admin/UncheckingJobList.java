@@ -154,6 +154,7 @@ public class UncheckingJobList extends Fragment{
         page=1;
         getList.put("page",(page)+"");
         getList.put("rows",(rows)+"");
+        getList.put("rstatus","0");
 
         //分未报名和已报名列表
             QueryInformation.getRecruitListForManager(getList, new HttpCallBackListener() {
@@ -188,6 +189,7 @@ public class UncheckingJobList extends Fragment{
         Map<String,String> getList=new LinkedHashMap<>();
         getList.put("page",(page)+"");
         getList.put("rows",(rows)+"");
+        getList.put("rstatus","0");
 
 
         //获得新的上拉更多的数据前禁止上拉更多
