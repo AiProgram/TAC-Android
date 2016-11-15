@@ -1,7 +1,6 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -50,7 +49,7 @@ public class JobContentForReceiver extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //获得显示的类型
@@ -113,7 +112,7 @@ public class JobContentForReceiver extends AppCompatActivity {
                         signUpJob.put("ownername",recuitObject.getOwner());
                         signUpJob.put("applicanttime", FormatedTimeGeter.getFormatedDate());
                         signUpJob.put("userid",userObject.getUserid());
-                        EditInformation.setCreatRecuit(signUpJob, new HttpCallBackListener() {
+                        EditInformation.setCreatApplication(signUpJob, new HttpCallBackListener() {
                             @Override
                             public void onFinish(String result) {
                                 runOnUiThread(new Runnable() {
