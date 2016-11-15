@@ -80,7 +80,7 @@ public class HttpAddress {
 
 //管理模块
 
-    public static final String GET_RECRUIT_LIST_FOR_MANAGER  ="tacapplication/ getRecruitForManagerAndApplicator";
+    public static final String GET_RECRUIT_LIST_FOR_MANAGER  ="tacapplication/getRecruitForManagerAndApplicator";
 
     public static final String GET_ASSESSMENT_LIST_FOR_MANAGER="tacManager/getaTOoCommentForManager";
 //查看评论列表

@@ -47,7 +47,7 @@ public class UncheckingJobList extends Fragment{
 
     //一次获得的数量以及显示列表指针
     int page=1;
-    int rows=10;
+    int rows=20;
     int pointer=0;
 
 
@@ -244,7 +244,6 @@ public class UncheckingJobList extends Fragment{
     //跳转事件先加载，较为复杂,这里封装起来，等待编写
     private void jumpToJobContent(int position){
         Map<String,String> getJob=new LinkedHashMap<>();
-        //应聘者招聘详情尚未编写完成，这里需要传入是否选择了该招聘的标志，因为查看时无法获得
         final Intent intent=new Intent(getActivity(),JobContentForAdmin.class);
         //等待编写
     }
