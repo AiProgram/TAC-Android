@@ -1,14 +1,11 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -107,7 +104,7 @@ public class JobContentForGiver extends AppCompatActivity{
         tv_phone_number=(TextView) findViewById(R.id.tv_phone_number);
         tv_email=(TextView) findViewById(R.id.tv_email);
         tv_workplace=(TextView) findViewById(R.id.tv_workplace);
-        tv_detail=(TextView) findViewById(R.id.tv_detail);
+        tv_detail=(TextView) findViewById(R.id.tv_detail_resume);
         tv_displaytime=(TextView) findViewById(R.id.tv_displaytime);
 
         recruitid=Object.recuitObject.getRecruitid();

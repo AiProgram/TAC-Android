@@ -1,5 +1,6 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import com.tac.iparttimejob.Class.Enroll;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.MyManager.Resume;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
 import com.tac.iparttimejob.Class.Object;
 
@@ -94,13 +96,32 @@ public class EnrollList extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 //跳转至该人的简历
+                Map<String,String> getResume=new LinkedHashMap<String, String>();
+                getResume.put("userid",enrollList.get(position).getApplicantsid()+"");
+                QueryInformation.getPersonalResume(getResume, new HttpCallBackListener() {
+                    @Override
+                    public void onFinish(String result) {
+                        Intent intent=new Intent(EnrollList.this, Resume.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(EnrollList.this,"获取简历失败",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
             }
         });
 
         enrollListAdapter.setOnCheckBoxClickListener(new MyEnrollListAdapter.onCheckBoxClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                //更新选择状态，修改checkBox状态
+                //更新选择状态，修改checkBox状态,这里暂时不在本处改动
             }
         });
 

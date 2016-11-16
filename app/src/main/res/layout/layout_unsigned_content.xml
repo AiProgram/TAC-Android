@@ -183,7 +183,7 @@
                 android:layout_marginTop="20dp"
                 style="@style/ContentTextStyle"
                 android:layout_marginStart="29dp"
-                android:id="@+id/tv_detail"
+                android:id="@+id/tv_detail_resume"
                 android:layout_below="@+id/label_detail"
                 android:layout_alignParentStart="true" />
 
@@ -218,7 +218,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
-                android:layout_below="@id/tv_detail"/>
+                android:layout_below="@id/tv_detail_resume"/>
 
             <TextView
                 android:text="招聘PHP程序员"

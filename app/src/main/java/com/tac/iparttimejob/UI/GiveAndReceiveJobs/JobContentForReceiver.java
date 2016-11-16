@@ -5,20 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.R;
-import com.tac.iparttimejob.UI.MyManager.ManagerFunction;
 import com.tac.iparttimejob.UI.Utils.DataType;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static com.tac.iparttimejob.Class.Object.recuitObject;
-import static com.tac.iparttimejob.Class.Object.recuitObjectList;
 import static com.tac.iparttimejob.Class.Object.userObject;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.UI.Utils.FormatedTimeGeter;
@@ -85,7 +82,7 @@ public class JobContentForReceiver extends AppCompatActivity {
         tv_phone_number=(TextView) findViewById(R.id.tv_phone_number);
         tv_email=(TextView) findViewById(R.id.tv_email);
         tv_workplace=(TextView) findViewById(R.id.tv_workplace);
-        tv_detail=(TextView) findViewById(R.id.tv_detail);
+        tv_detail=(TextView) findViewById(R.id.tv_detail_resume);
     }
 
     //初始化公有控件

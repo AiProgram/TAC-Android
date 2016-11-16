@@ -84,9 +84,9 @@
             android:text="路人甲"
             android:textSize="20sp"
             android:textColor="@color/black"
-            android:id="@+id/resume_fs_realname"
+            android:id="@+id/tv_name_resume"
             android:layout_alignParentEnd="true"
-            android:layout_alignStart="@+id/resume_fs_username"
+            android:layout_alignStart="@+id/tv_username_resume"
             android:layout_alignTop="@+id/resume_fs_realname_tip" />
 
         <TextView
@@ -95,7 +95,7 @@
             android:text="HZS"
             android:textSize="20sp"
             android:textColor="@color/black"
-            android:id="@+id/resume_fs_username"
+            android:id="@+id/tv_username_resume"
             android:layout_marginLeft="20dp"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/resume_fs_name_tip"
@@ -107,11 +107,11 @@
             android:text="12345678901"
             android:textSize="20sp"
             android:textColor="@color/black"
-            android:id="@+id/resume_fs_phone"
+            android:id="@+id/tv_phone_resume"
             android:layout_alignParentEnd="true"
             android:layout_alignBottom="@+id/resume_fs_phone_tip"
             android:layout_toEndOf="@+id/resume_fs_singleinfo_tip"
-            android:layout_alignStart="@+id/resume_fs_realname" />
+            android:layout_alignStart="@+id/tv_name_resume" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -119,10 +119,10 @@
             android:text="990041251@qq.com"
             android:textSize="20sp"
             android:textColor="@color/black"
-            android:id="@+id/resume_fs_email"
+            android:id="@+id/tv_email_resume"
             android:layout_alignParentEnd="true"
             android:layout_alignBottom="@+id/resume_fs_email_tip"
-            android:layout_alignStart="@+id/resume_fs_phone" />
+            android:layout_alignStart="@+id/tv_phone_resume" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -133,7 +133,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:id="@+id/resume_fs_introduce_tip"
-            android:layout_below="@+id/resume_fs_singleinfo" />
+            android:layout_below="@+id/tv_single_info_resume" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -142,7 +142,7 @@
             android:textSize="20sp"
             android:maxLines="2"
             android:textColor="@color/black"
-            android:id="@+id/resume_fs_singleinfo"
+            android:id="@+id/tv_single_info_resume"
             android:layout_below="@+id/resume_fs_singleinfo_tip"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
@@ -155,7 +155,7 @@
             android:textSize="20sp"
             android:maxLines="30"
             android:textColor="@color/black"
-            android:id="@+id/resume_fs_introduce"
+            android:id="@+id/tv_detail_resume"
             android:layout_below="@+id/resume_fs_introduce_tip"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"

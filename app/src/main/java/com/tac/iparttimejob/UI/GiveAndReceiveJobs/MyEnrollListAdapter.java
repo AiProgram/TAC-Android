@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.tac.iparttimejob.Class.Enroll;
@@ -74,6 +75,13 @@ public class MyEnrollListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             @Override
             public void onClick(View view) {
                 mOnCheckBoxClickListener.onItemClick(holder.itemView,position);
+            }
+        });
+
+        viewHolder.cb_choose.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                
             }
         });
     }

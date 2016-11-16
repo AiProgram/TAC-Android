@@ -45,6 +45,9 @@
         <activity android:name=".UI.GiveAndReceiveJobs.EnrollList">
 
         </activity>
+        <activity android:name=".UI.MyManager.Resume">
+
+        </activity>
         <activity android:name=".UI.RegisterAndLogin.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

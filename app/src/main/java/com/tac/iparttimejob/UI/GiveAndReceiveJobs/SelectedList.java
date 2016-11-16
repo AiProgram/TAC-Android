@@ -1,5 +1,6 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,6 +14,7 @@ import com.tac.iparttimejob.Class.Enroll;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.MyManager.Resume;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
 import com.tac.iparttimejob.Class.Object;
 
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * Created by AiProgram on 2016/11/16.
@@ -91,6 +94,25 @@ public class SelectedList extends AppCompatActivity{
             @Override
             public void onItemClick(View view, int position) {
                 //跳转至该人的简历
+                Map<String,String> getResume=new LinkedHashMap<String, String>();
+                getResume.put("userid",selectedList.get(position).getApplicantsid()+"");
+                QueryInformation.getPersonalResume(getResume, new HttpCallBackListener() {
+                    @Override
+                    public void onFinish(String result) {
+                        Intent intent=new Intent(SelectedList.this, Resume.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SelectedList.this,"获取简历失败",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
             }
         });
 
