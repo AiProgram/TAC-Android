@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:weightSum="1">
+
+        <TextView
+            android:text="简历"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/resume_fs_title"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户名:"
+            android:textSize="20sp"
+            android:textColor="#757575"
+            android:id="@+id/resume_fs_name_tip"
+            android:layout_below="@+id/resume_fs_title"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名:"
+            android:textSize="20sp"
+            android:textColor="#757575"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/resume_fs_realname_tip"
+            android:layout_below="@+id/resume_fs_name_tip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手机:"
+            android:textSize="20sp"
+            android:textColor="#757575"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/resume_fs_phone_tip"
+            android:layout_below="@+id/resume_fs_realname_tip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="邮箱:"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#757575"
+            android:id="@+id/resume_fs_email_tip"
+            android:layout_below="@+id/resume_fs_phone_tip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="一句话简介:"
+            android:textSize="20sp"
+            android:textColor="#757575"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/resume_fs_singleinfo_tip"
+            android:layout_below="@+id/resume_fs_email_tip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="路人甲"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:id="@+id/resume_fs_realname"
+            android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/resume_fs_username"
+            android:layout_alignTop="@+id/resume_fs_realname_tip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HZS"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:id="@+id/resume_fs_username"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/resume_fs_name_tip"
+            android:layout_toEndOf="@+id/resume_fs_singleinfo_tip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12345678901"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:id="@+id/resume_fs_phone"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/resume_fs_phone_tip"
+            android:layout_toEndOf="@+id/resume_fs_singleinfo_tip"
+            android:layout_alignStart="@+id/resume_fs_realname" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="990041251@qq.com"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:id="@+id/resume_fs_email"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/resume_fs_email_tip"
+            android:layout_alignStart="@+id/resume_fs_phone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="详细信息:"
+            android:textSize="20sp"
+            android:textColor="#757575"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/resume_fs_introduce_tip"
+            android:layout_below="@+id/resume_fs_singleinfo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+            android:textSize="20sp"
+            android:maxLines="2"
+            android:textColor="@color/black"
+            android:id="@+id/resume_fs_singleinfo"
+            android:layout_below="@+id/resume_fs_singleinfo_tip"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignStart="@+id/resume_fs_introduce_tip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXCXXXXXXXXXXXXXXXXX"
+            android:textSize="20sp"
+            android:maxLines="30"
+            android:textColor="@color/black"
+            android:id="@+id/resume_fs_introduce"
+            android:layout_below="@+id/resume_fs_introduce_tip"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignStart="@+id/resume_fs_introduce_tip"/>
+    </RelativeLayout>
+</ScrollView>
