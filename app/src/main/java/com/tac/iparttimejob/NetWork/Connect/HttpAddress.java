@@ -53,7 +53,7 @@ public class HttpAddress {
     //选择应聘申请
     public static final String SET_CHOOSE_ENROLL      ="tacrecruit/chooseApplicant";
 
-
+    public static final String SET_CANCEL_ENROLL      ="tacrecruit/CancelChooseApplicant";
 
 
 //个人模块

@@ -38,7 +38,7 @@ import static com.tac.iparttimejob.Class.Object.applicationObject;
 import static com.tac.iparttimejob.Class.Object.chooseApplicationList;
 import static com.tac.iparttimejob.Class.Object.emailData;
 import static com.tac.iparttimejob.Class.Object.enrollObjectList;
-import static com.tac.iparttimejob.Class.Object.getUserObject;
+import static com.tac.iparttimejob.Class.Object.getResumeObject;
 import static com.tac.iparttimejob.Class.Object.inRecuitObjectList;
 import static com.tac.iparttimejob.Class.Object.notRecuitObjectList;
 import static com.tac.iparttimejob.Class.Object.otoaAssessmentByIDObjectList;
@@ -114,39 +114,37 @@ public class QueryInformation extends HttpPost{
         post(HttpAddress.HOST + HttpAddress.GET_USER_INFORMATION_BY_NAME, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                UserResult userResult=null;
+                ResumeResult resumeResult=null;
                 try {
 
-                    userResult=new Gson().fromJson(result,UserResult.class);
+                    resumeResult=new Gson().fromJson(result,ResumeResult.class);
                 }
                 catch (JsonSyntaxException e) {
                     Log.d("gsonErr:",e.toString());
                     //错误
                 }
-                if(userResult!=null)
+                if(resumeResult!=null)
                 {
-                    if(userResult.isSuccess())
+                    if(resumeResult.isSuccess())
                     {
-                        if(getUserObject==null) {
-                            getUserObject=new UserResult.User();
+                        if(getResumeObject==null) {
+                            getResumeObject=new Resume();
                         }
-                        getUserObject.setPhone(userResult.getUser().getPhone());
-                        getUserObject.setUserid(userResult.getUser().getUserid());
-                        getUserObject.setAccount(userResult.getUser().getAccount());
-                        getUserObject.setEmail(userResult.getUser().getEmail());
-                        getUserObject.setImage(userResult.getUser().getImage());
-                        getUserObject.setName(userResult.getUser().getName());
-                        getUserObject.setNickname(userResult.getUser().getNickname());
-                        getUserObject.setPasswd(userResult.getUser().getPasswd());
-                        getUserObject.setAccount(userResult.getUser().getAccount());
-                        getUserObject.setType(userResult.getUser().getType());
+                        getResumeObject.setUser(resumeResult.getUser());
+                        getResumeObject.setResumeid(resumeResult.getResumeid());
+                        getResumeObject.setNickname(resumeResult.getNickname());
+                        getResumeObject.setName(resumeResult.getName());
+                        getResumeObject.setPhone(resumeResult.getPhone());
+                        getResumeObject.setEmail(resumeResult.getEmail());
+                        getResumeObject.setSingleResume(resumeResult.getSingleResume());
+                        getResumeObject.setDetailResume(resumeResult.getDetailResume());
 
                             listener.onFinish("查看成功");
                     }
                     else
                     {
-                        Log.d("gsonErr:",userResult.toString());
-                        listener.onError(userResult.getMessage());
+                        Log.d("gsonErr:",resumeResult.toString());
+                        listener.onError(resumeResult.getMessage());
                     }
                 }
                 else listener.onError(GSON_ERR);

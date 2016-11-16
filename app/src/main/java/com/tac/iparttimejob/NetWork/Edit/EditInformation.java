@@ -414,13 +414,48 @@ public class EditInformation extends HttpPost {
             }
         });
     }
+    //取消应聘申请
+    public static void setCancelChooseEnroll(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.SET_CANCEL_ENROLL, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                ReturnMessage returnMessage=null;
+                try {
+                    returnMessage=new Gson().fromJson(result,ReturnMessage.class);
+                }
+                catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(returnMessage!=null)
+                {
+                    if(returnMessage.isSuccess())
+                    {
 
+                        listener.onFinish("取消成功");
+                    }
+                    else
+                    {
+                        listener.onError(returnMessage.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.d("postErr:",error);
+                listener.onError(error);
+            }
+        });
+    }
 
     //申请应聘
     public static void setCreatApplication(Map<String,String>params,final HttpCallBackListener listener){
         post(HttpAddress.HOST + HttpAddress.SET_CREAT_APPLICATION, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
+                Log.d("result:",result);
                 ReturnMessage returnMessage=null;
                 try {
                     returnMessage=new Gson().fromJson(result,ReturnMessage.class);
