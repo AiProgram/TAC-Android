@@ -130,7 +130,7 @@ public class JobContentForReceiver extends AppCompatActivity {
 
                             @Override
                             public void onError(String error) {
-
+                                Toast.makeText(JobContentForReceiver.this,error,Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
