@@ -218,8 +218,8 @@ public class QueryInformation extends HttpPost{
                 {
                     if(image.isSuccess())
                     {
-                        Log.d("image:",image.getPicture());
-                        userImage=image.getPicture();
+                        //Log.d("image:",image.getData());
+                        userImage=image.getData();
 
                         listener.onFinish("下载成功");
 
@@ -245,6 +245,7 @@ public class QueryInformation extends HttpPost{
         post(HttpAddress.HOST + HttpAddress.GET_RECRUIT_INFORMATION, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
+                Log.d("result:",result);
                 RecuitResult recuitResult=null;
                 if(recuitObject==null){
                     recuitObject=new RecuitResult.Recuit();
@@ -480,6 +481,7 @@ public class QueryInformation extends HttpPost{
         post(HttpAddress.HOST + HttpAddress.GET_APPLICATION_LIST, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
+                Log.d("result:",result);
                 RecuitList  chooseApplication=null;
                 Type type=new TypeToken<RecuitList>(){}.getType();
                 try {

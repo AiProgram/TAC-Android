@@ -415,6 +415,8 @@ public class ReceiveJobsList extends Fragment{
         QueryInformation.getRecruitInformation(getList, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
+
+
                 startActivity(intent);
             }
 

@@ -185,6 +185,7 @@ public class MyManager extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
                         Toast.makeText(getActivity(),"获取头像失败",Toast.LENGTH_SHORT).show();
                     }
                 });
