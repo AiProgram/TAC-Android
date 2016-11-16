@@ -82,7 +82,7 @@ public class SetResume extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 getInput();
-                //设置简历
+                //设置简历,接口存在问题，等待修改
                 Map<String,String> setResume=new LinkedHashMap<String, String>();
                 setResume.put("userid", Object.userObject.getUserid());
                 setResume.put("name",Object.userObject.getName());
@@ -91,7 +91,7 @@ public class SetResume extends AppCompatActivity{
                 setResume.put("email",email);
                 setResume.put("singleResume",singleInfo);
                 setResume.put("detailResume",detail);
-                EditInformation.setUpdateRecruit(setResume, new HttpCallBackListener() {
+                EditInformation.setCreatPersonalResume(setResume, new HttpCallBackListener() {
                     @Override
                     public void onFinish(String result) {
                         //提示更新完成
