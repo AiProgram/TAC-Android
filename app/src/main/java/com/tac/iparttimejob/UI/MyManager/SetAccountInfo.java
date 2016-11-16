@@ -217,8 +217,8 @@ public class SetAccountInfo extends AppCompatActivity{
         intent.putExtra("crop", "true");//
         intent.putExtra("aspectX", 1);//X方向上的比例
         intent.putExtra("aspectY", 1);//Y方向上的比例
-        intent.putExtra("outputX", 480);//裁剪区的X方向宽
-        intent.putExtra("outputY", 480);//裁剪区的Y方向宽
+        intent.putExtra("outputX", 320);//裁剪区的X方向宽
+        intent.putExtra("outputY", 320);//裁剪区的Y方向宽
         intent.putExtra("scale", true);//是否保留比例
         intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
         intent.putExtra("return-data", true);//是否将数据保留在Bitmap中返回dataParcelable相应的Bitmap数据

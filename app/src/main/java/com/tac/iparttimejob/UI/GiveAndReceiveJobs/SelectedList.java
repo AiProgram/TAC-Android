@@ -2,14 +2,12 @@ package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Toast;
-
 
 import com.tac.iparttimejob.Class.Enroll;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
@@ -24,12 +22,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by 守候。 on 2016/11/12.
- * 报名列表
- * 要求调用本activity时必须传入"recruitid"
+ * Created by AiProgram on 2016/11/16.
  */
 
-public class EnrollList extends AppCompatActivity {
+public class SelectedList extends AppCompatActivity{
     private RefreshRecyclerView rv_enroll_list;
     private SwipeRefreshLayout srl_enroll_list;
 
@@ -37,7 +33,7 @@ public class EnrollList extends AppCompatActivity {
 
     private MyEnrollListAdapter enrollListAdapter;
 
-    private List<Enroll> enrollList=new ArrayList<>();
+    private List<Enroll> selectedList=new ArrayList<>();
 
     private String recruitid="0";//默认初始值
 
@@ -52,6 +48,7 @@ public class EnrollList extends AppCompatActivity {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //可以与选择人的界面共用
         setContentView(R.layout.enroll_list);
 
         recruitid=getIntent().getStringExtra("recruitid");
@@ -77,7 +74,7 @@ public class EnrollList extends AppCompatActivity {
 
     //初始化文字显示等
     private void initViews(){
-        enrollListAdapter =new MyEnrollListAdapter(enrollList);
+        enrollListAdapter =new MyEnrollListAdapter(selectedList);
         //设置RecycleView
         rv_enroll_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rv_enroll_list.setItemAnimator(new DefaultItemAnimator());
@@ -94,13 +91,6 @@ public class EnrollList extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 //跳转至该人的简历
-            }
-        });
-
-        enrollListAdapter.setOnCheckBoxClickListener(new MyEnrollListAdapter.onCheckBoxClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                //更新选择状态，修改checkBox状态
             }
         });
 
@@ -132,12 +122,12 @@ public class EnrollList extends AppCompatActivity {
 
     //首次进入页面时初始化数据
     private void initData(){
-        Object.enrollObjectList=new ArrayList<>();
+        Object.enrollChooseObjectList=new ArrayList<>();
 
         srl_enroll_list.setRefreshing(true);
 
         //清空再全部刷新
-        enrollList.clear();
+        selectedList.clear();
 
         //利用下拉刷新接口刷新
         pullDownRefresh();
@@ -154,8 +144,8 @@ public class EnrollList extends AppCompatActivity {
         getList.put("rows",(rows)+"");
         getList.put("recruitid",recruitid);
 
-        //分未报名和已报名列表
-        QueryInformation.getEnrollList(getList, new HttpCallBackListener() {
+        //分已报名列表
+        QueryInformation.getChooseEnrollList(getList, new HttpCallBackListener() {
             @Override
             public void onFinish(final String result) {
                 runOnUiThread(new Runnable() {
@@ -174,7 +164,7 @@ public class EnrollList extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(EnrollList.this, "下拉刷新失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SelectedList.this, "下拉刷新失败", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -192,7 +182,7 @@ public class EnrollList extends AppCompatActivity {
 
         //获得新的上拉更多的数据前禁止上拉更多
         rv_enroll_list.setLoadMoreEnable(false);
-        QueryInformation.getEnrollList(getList, new HttpCallBackListener() {
+        QueryInformation.getChooseEnrollList(getList, new HttpCallBackListener() {
             @Override
             public void onFinish(final String result) {
                 rv_enroll_list.setLoadMoreEnable(true);
@@ -216,7 +206,7 @@ public class EnrollList extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(EnrollList.this, "上拉更多失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SelectedList.this, "上拉更多失败", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -225,17 +215,17 @@ public class EnrollList extends AppCompatActivity {
 
     //静态数组传入有问题，这里使用手动复制方法
     private void cloneEnrollList(){
-        enrollList.clear();
-        for(int i=0;i<Object.enrollObjectList.size();i++)
-            enrollList.add(Object.enrollObjectList.get(i));
+        selectedList.clear();
+        for(int i=0;i<Object.enrollChooseObjectList.size();i++)
+            selectedList.add(Object.enrollChooseObjectList.get(i));
     }
 
 
     //上拉更多时使用
     private void addEnrollList(){
         //由于继续获得数据会把结果清空加入新数据，再次直接添加即可
-        for(int i=0;i<Object.enrollObjectList.size();i++){
-            enrollList.add(Object.enrollObjectList.get(i));
+        for(int i=0;i<Object.enrollChooseObjectList.size();i++){
+            selectedList.add(Object.enrollChooseObjectList.get(i));
         }
     }
 }

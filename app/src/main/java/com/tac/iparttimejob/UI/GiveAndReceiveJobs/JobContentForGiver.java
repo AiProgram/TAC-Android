@@ -169,6 +169,9 @@ public class JobContentForGiver extends AppCompatActivity{
                     @Override
                     public void onClick(View view) {
                         //报名名单
+                        Intent intent=new Intent(JobContentForGiver.this,EnrollList.class);
+                        intent.putExtra("recruitid",recruitid);
+                        startActivity(intent);
                     }
                 });
             }break;
@@ -179,8 +182,7 @@ public class JobContentForGiver extends AppCompatActivity{
             case DataType.JOB_STATUS_CHECKING:{
                 btn_cancel_recruit=(Button) findViewById(R.id.btn_cancel_recruit);
                 btn_signed_list=(Button) findViewById(R.id.btn_signed_list);
-               // btn_cancel_recruit.setClickable(false);
-                btn_signed_list.setClickable(false);
+                btn_signed_list.setEnabled(false);
                 btn_cancel_recruit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -213,8 +215,8 @@ public class JobContentForGiver extends AppCompatActivity{
                 btn_choosed_list.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //选中的列表
-                        Intent intent=new Intent(JobContentForGiver.this,EnrollList.class);
+                        //选中的报名列表
+                        Intent intent=new Intent(JobContentForGiver.this,SelectedList.class);
                         intent.putExtra("recruitid",recruitid);
                         startActivity(intent);
                     }
