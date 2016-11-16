@@ -64,6 +64,7 @@ public class HttpPost {
                         }
                         if (listener != null) {
     // 回调onFinish()方法
+
                             listener.onFinish(result.toString());
                         }
                     } catch (Exception e) {
