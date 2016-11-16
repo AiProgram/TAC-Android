@@ -54,7 +54,7 @@ public class SetResume extends AppCompatActivity{
         et_set_name=(MaterialEditText) findViewById(R.id.et_set_name);
         et_set_phone=(MaterialEditText) findViewById(R.id.et_set_phone);
         et_set_email=(MaterialEditText) findViewById(R.id.et_set_email);
-        et_set_single_info=(MaterialEditText) findViewById(R.id.et_set_single_info);
+        et_set_single_info=(MaterialEditText) findViewById(R.id.tv_single_info);
         et_set_project=(MaterialEditText) findViewById(R.id.et_set_project);
         et_set_good_at=(MaterialEditText) findViewById(R.id.et_set_good_at);
         et_set_project_adress=(MaterialEditText) findViewById(R.id.et_set_project_adress);

@@ -1,6 +1,7 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
@@ -213,6 +214,9 @@ public class JobContentForGiver extends AppCompatActivity{
                     @Override
                     public void onClick(View view) {
                         //选中的列表
+                        Intent intent=new Intent(JobContentForGiver.this,EnrollList.class);
+                        intent.putExtra("recruitid",recruitid);
+                        startActivity(intent);
                     }
                 });
             }break;

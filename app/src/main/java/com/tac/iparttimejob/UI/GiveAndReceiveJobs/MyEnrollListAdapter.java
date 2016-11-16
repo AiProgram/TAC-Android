@@ -1,12 +1,19 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.tac.iparttimejob.Class.Enroll;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.Utils.DataType;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -16,8 +23,8 @@ import java.util.List;
 
 public class MyEnrollListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     //保存点击事件的监听器,点击事件是用接口配合内部接口传递出去的
-    private OnItemClickListener mOnItemClickListener;
-    private OnItemLongClickListener mOnItemLongClickListener;
+    private onContentClickListener mOnContentClickListener;
+    private  onCheckBoxClickListener mOnCheckBoxClickListener;
 
     private List<Enroll> enrollList;
 
@@ -29,30 +36,44 @@ public class MyEnrollListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     //不同 列表项对应不同ViewHolder
-    public class EnrollAdapter extends RecyclerView.ViewHolder{
-
-        public EnrollAdapter(View itemView) {
+    public class EnrollViewHolder extends RecyclerView.ViewHolder{
+        private TextView tv_applicant_name;
+        private TextView tv_assess_point;
+        private TextView tv_single_info;
+        private CheckBox cb_choose;
+        public EnrollViewHolder(View itemView) {
             super(itemView);
+            tv_applicant_name=(TextView) itemView.findViewById(R.id.tv_applicant_name);
+            tv_assess_point=(TextView)   itemView.findViewById(R.id.tv_assess_point);
+            tv_single_info=(TextView)    itemView.findViewById(R.id.tv_single_info);
+            cb_choose=(CheckBox)         itemView.findViewById(R.id.cb_choose);
         }
     }
 
     //设置不同ViewHolder的不同布局及信息显示
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder,final int position) {
+        EnrollViewHolder viewHolder=(EnrollViewHolder) holder;
+        viewHolder.tv_applicant_name.setText(enrollList.get(position).getApplicantname());
+        viewHolder.tv_assess_point.setText(enrollList.get(position).getPoint()+"");
+        viewHolder.tv_single_info.setText(enrollList.get(position).getSingleinfo());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        //如果之前 已经被选中就设置为选中
+        if(enrollList.get(position).getChoosen()== DataType.ENROLL_STATUS_SELECTED)
+            viewHolder.cb_choose.setSelected(true);
+
+        //分别设置内容以及checkbox的点击事件
+        viewHolder.tv_applicant_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mOnItemClickListener.onItemClick(holder.itemView,position);
+                mOnContentClickListener.onItemClick(holder.itemView,position);
             }
         });
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            viewHolder.cb_choose.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View view) {
-                mOnItemLongClickListener.onItemLongClick(holder.itemView,position);
-                //拦截事件的继续传递
-                return true;
+            public void onClick(View view) {
+                mOnCheckBoxClickListener.onItemClick(holder.itemView,position);
             }
         });
     }
@@ -67,7 +88,7 @@ public class MyEnrollListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder;
-        viewHolder=new EnrollAdapter(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_enroll_list,parent,false));
+        viewHolder=new EnrollViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_enroll_list,parent,false));
         return viewHolder;
     }
 
@@ -78,20 +99,20 @@ public class MyEnrollListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     //用于实现RecyclerView的点击事件的接口
-    public interface OnItemClickListener{
+    public interface onContentClickListener{
         void onItemClick(View view, int position);
     }
 
-    public interface OnItemLongClickListener{
-        void onItemLongClick(View view,int position);
+    public interface onCheckBoxClickListener{
+        void onItemClick(View view,int position);
     }
 
 
-    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener){
-        this.mOnItemClickListener = mOnItemClickListener;
+    public void setOnContentClickListener(onContentClickListener mOnContentClickListener){
+        this.mOnContentClickListener = mOnContentClickListener;
     }
 
-    public void setOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickListener) {
-        this.mOnItemLongClickListener = mOnItemLongClickListener;
+    public void setOnCheckBoxClickListener(onCheckBoxClickListener mOnCheckBoxClickListener) {
+        this.mOnCheckBoxClickListener = mOnCheckBoxClickListener;
     }
 }

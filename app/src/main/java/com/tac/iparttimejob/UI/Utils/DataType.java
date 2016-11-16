@@ -34,4 +34,9 @@ public class DataType {
     //用来区分评论的类型
     public final static int COMMENT_O_TO_A=0;
     public final static int COMMENT_A_TO_O=1;
+
+    //用来群分enrollList的选中状态
+    public final static int ENROLL_STATUS_SIGNED=0;
+    public final static int ENROLL_STATUS_SELECTED=1;
+    public final static int ENROLL_STATUS_CANCELED=2;
 }
