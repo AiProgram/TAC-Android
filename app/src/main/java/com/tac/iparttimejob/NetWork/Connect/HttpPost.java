@@ -14,8 +14,10 @@ import java.io.BufferedReader;
 import java.io.OutputStream;
 
 import java.io.InputStreamReader;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Map;
+
 
 
 public class HttpPost {
@@ -34,9 +36,11 @@ public class HttpPost {
                         {
                           for (Map.Entry<String,String>entry:params.entrySet())
                           {
+                             // Log.d("value:",entry.getValue());
+                              //Log.d("value:",URLDecoder.decode(entry.getValue(),"UTF-8"));
                               str.append(entry.getKey()).
                                       append("=").
-                                      append(URLEncoder.encode(entry.getValue(),"UTF-8"))
+                                      append(URLDecoder.decode(entry.getValue(),"UTF-8"))//(URLEncoder.encode(entry.getValue(),"UTF-8"))
                                       .append("&");
                           }
                         }
@@ -54,7 +58,6 @@ public class HttpPost {
                         OutputStream outputStream=connection.getOutputStream();
                         outputStream.write(data);               //提交数据
 
-                        //Log.d("zjm",connection.getResponseMessage());
                         InputStream inPutStream=connection.getInputStream();
                         BufferedReader reader = new BufferedReader(new  InputStreamReader(inPutStream,"UTF-8"));
                         StringBuilder result = new StringBuilder();  //返回结果

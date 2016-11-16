@@ -2,6 +2,7 @@ package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -109,6 +110,7 @@ public class JobContentForReceiver extends AppCompatActivity {
                         //报名
                         Map<String,String> signUpJob=new LinkedHashMap<String, String>();
                         signUpJob.put("recruitid",recuitObject.getRecruitid());
+                        Log.d("owner:",recuitObject.getOwner());
                         signUpJob.put("ownername",recuitObject.getOwner());
                         signUpJob.put("applicanttime", FormatedTimeGeter.getFormatedDate());
                         signUpJob.put("userid",userObject.getUserid());

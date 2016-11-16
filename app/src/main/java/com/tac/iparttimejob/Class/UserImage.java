@@ -25,15 +25,15 @@ public class UserImage {
 
     private String  message;
 
-    public String getPicture() {
-        return picture;
+    public String getData() {
+        return data;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    private String picture;
+    private String data;
 
 
 }
