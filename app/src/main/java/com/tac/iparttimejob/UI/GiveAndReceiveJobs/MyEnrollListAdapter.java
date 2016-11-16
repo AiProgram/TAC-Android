@@ -71,7 +71,8 @@ public class MyEnrollListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
         });
 
-            viewHolder.cb_choose.setOnClickListener(new View.OnClickListener() {
+        //暂时无用
+        viewHolder.cb_choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mOnCheckBoxClickListener.onItemClick(holder.itemView,position);
@@ -81,7 +82,7 @@ public class MyEnrollListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         viewHolder.cb_choose.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                
+                //用接口修改选中状态
             }
         });
     }

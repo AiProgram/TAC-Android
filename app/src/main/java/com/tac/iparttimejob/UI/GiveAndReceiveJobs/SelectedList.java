@@ -14,7 +14,7 @@ import com.tac.iparttimejob.Class.Enroll;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
-import com.tac.iparttimejob.UI.MyManager.Resume;
+import com.tac.iparttimejob.UI.MyManager.ShowResume;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
 import com.tac.iparttimejob.Class.Object;
 
@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 /**
  * Created by AiProgram on 2016/11/16.
@@ -99,7 +98,7 @@ public class SelectedList extends AppCompatActivity{
                 QueryInformation.getPersonalResume(getResume, new HttpCallBackListener() {
                     @Override
                     public void onFinish(String result) {
-                        Intent intent=new Intent(SelectedList.this, Resume.class);
+                        Intent intent=new Intent(SelectedList.this, ShowResume.class);
                         startActivity(intent);
                     }
 

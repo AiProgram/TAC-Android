@@ -12,7 +12,7 @@ import com.tac.iparttimejob.R;
  * Created by AiProgram on 2016/11/16.
  */
 
-public class Resume extends AppCompatActivity {
+public class ShowResume extends AppCompatActivity {
     private TextView tv_username_resume;
     private TextView tv_name_resume;
     private TextView tv_phone_resume;

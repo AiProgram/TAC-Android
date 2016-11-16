@@ -3,7 +3,6 @@ package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,7 +15,7 @@ import com.tac.iparttimejob.Class.Enroll;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
-import com.tac.iparttimejob.UI.MyManager.Resume;
+import com.tac.iparttimejob.UI.MyManager.ShowResume;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
 import com.tac.iparttimejob.Class.Object;
 
@@ -101,7 +100,7 @@ public class EnrollList extends AppCompatActivity {
                 QueryInformation.getPersonalResume(getResume, new HttpCallBackListener() {
                     @Override
                     public void onFinish(String result) {
-                        Intent intent=new Intent(EnrollList.this, Resume.class);
+                        Intent intent=new Intent(EnrollList.this, ShowResume.class);
                         startActivity(intent);
                     }
 
