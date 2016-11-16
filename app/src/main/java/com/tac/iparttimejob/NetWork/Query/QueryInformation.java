@@ -568,6 +568,7 @@ public class QueryInformation extends HttpPost{
         post(HttpAddress.HOST + HttpAddress.GET_CHOOSE_APPLICATION_LIST, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
+                Log.d("result:",result);
                 RecuitList applicationList=null;
                 Type type=new TypeToken<RecuitList>(){}.getType();
                 try {
