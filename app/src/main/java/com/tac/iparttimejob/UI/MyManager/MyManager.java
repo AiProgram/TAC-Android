@@ -26,9 +26,11 @@ import com.tac.iparttimejob.UI.Utils.BlurBitmap;
 import com.tac.iparttimejob.UI.Utils.RoundImageView;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.UI.Utils.BitmapAndStringConverter;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static com.tac.iparttimejob.Class.Object.image1;
+import static com.tac.iparttimejob.Class.Object.userImage;
 
 
 /**
@@ -167,7 +169,9 @@ public class MyManager extends Fragment {
         QueryInformation.getImage(getUserImage, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                userHeadImage=BitmapAndStringConverter.convertStringToIcon(Object.userImage);
+                userImage=userImage.replaceAll(" ","+");
+                userHeadImage=BitmapAndStringConverter.convertStringToIcon(userImage);
+                //userHeadImage=BitmapAndStringConverter.convertStringToIcon(Object.image1);
                 Log.i("获取到的图片字符串",Object.userImage);
 
                 //设置用户头像和高斯背景
@@ -177,12 +181,12 @@ public class MyManager extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getActivity(),"获取头像成功"+Object.userImage.length(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),"获取头像成功"+ userImage.length(),Toast.LENGTH_SHORT).show();
                         rl_user_filed.setBackgroundDrawable(bitmapDrawable);
                         riv_user_head.setImageBitmap(userHeadImage);
                     }
                 });
-                Log.i("图片字符串",Object.userImage.length()+"");
+                Log.i("图片字符串", userImage.length()+"");
             }
 
             @Override

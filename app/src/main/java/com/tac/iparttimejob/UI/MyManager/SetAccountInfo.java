@@ -31,6 +31,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import static com.tac.iparttimejob.Class.Object.image1;
+
 /**
  * Created by AiProgram on 2016/11/5.
  */
@@ -275,6 +277,7 @@ public class SetAccountInfo extends AppCompatActivity{
         final Map<String,String> setUserImage=new LinkedHashMap<>();
         setUserImage.put("fileName",fileNmae);
         setUserImage.put("picture",imageString);
+        image1=imageString;
         EditInformation.setImage(setUserImage, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {

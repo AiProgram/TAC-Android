@@ -20,6 +20,7 @@ public class Object {
     //邮件验证码
     public static String                emailData;
     public static String                userImage;
+    public static String        image1;
     //正在进行的招聘列表
     public static List<RecuitResult.Recuit> recuitObjectList;
 

@@ -100,7 +100,7 @@ public class EnrollList extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 //跳转至该人的简历
                 Map<String,String> getResume=new LinkedHashMap<String, String>();
-                getResume.put("name",enrollList.get(position).getTac_user().getName());
+                getResume.put("username",enrollList.get(position).getTac_user().getName());
                 QueryInformation.getUserInformationByName(getResume, new HttpCallBackListener() {
                     @Override
                     public void onFinish(String result) {
