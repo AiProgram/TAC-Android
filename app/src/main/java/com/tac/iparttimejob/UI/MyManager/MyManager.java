@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.RegisterAndLogin.Login;
 import com.tac.iparttimejob.UI.Utils.BlurBitmap;
 import com.tac.iparttimejob.UI.Utils.RoundImageView;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
@@ -158,8 +160,9 @@ public class MyManager extends Fragment {
     private void getUserHeadImage(){
         Map<String,String> getUserImage=new LinkedHashMap<>();
         //头像文件名
-        String fileNmae=Object.userObject.getName()+".jpg";
-        getUserImage.put("fileName",fileNmae);
+        //String fileNmae=Object.userObject.getName()+".jpg";
+        String fileName="ZJM.jpg";
+        getUserImage.put("fileName",fileName);
 
         QueryInformation.getImage(getUserImage, new HttpCallBackListener() {
             @Override
@@ -181,12 +184,13 @@ public class MyManager extends Fragment {
             }
 
             @Override
-            public void onError(String error) {
+            public void onError(final String error) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
 
                         Toast.makeText(getActivity(),"获取头像失败",Toast.LENGTH_SHORT).show();
+                        Log.i("getimageerror","获取头像错误");
                     }
                 });
 

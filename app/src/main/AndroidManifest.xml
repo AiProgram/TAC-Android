@@ -54,6 +54,9 @@
 
         </activity>
 
+        <activity android:name=".UI.Admin.JobContentForAdmin">
+
+        </activity>
         <activity android:name=".UI.RegisterAndLogin.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

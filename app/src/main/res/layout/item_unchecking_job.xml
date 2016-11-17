@@ -52,14 +52,15 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_deadline_tip"
                 android:layout_alignParentTop="true"
-                android:layout_alignStart="@+id/tv_deadline" />
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="70dp" />
 
             <TextView
                 android:text="发布者"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/label_recruitor_name"
-                android:layout_alignEnd="@+id/tv_deadline_tip"
+                android:layout_alignStart="@id/tv_deadline_tip"
                 android:layout_alignParentBottom="true" />
 
             <TextView
@@ -69,8 +70,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_deadline"
                 android:layout_alignBottom="@+id/tv_job_title"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="12dp" />
+                android:layout_alignStart="@id/tv_deadline_tip"/>
 
             <TextView
                 android:text="HZS"
@@ -79,7 +79,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_recruitor_name"
                 android:layout_alignParentBottom="true"
-                android:layout_alignEnd="@+id/tv_deadline" />
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="20dp"/>
 
         </RelativeLayout>
 

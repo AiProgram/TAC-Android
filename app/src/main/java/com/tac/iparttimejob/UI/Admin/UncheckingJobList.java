@@ -246,8 +246,19 @@ public class UncheckingJobList extends Fragment{
     //跳转事件先加载，较为复杂,这里封装起来，等待编写
     private void jumpToJobContent(int position){
         Map<String,String> getJob=new LinkedHashMap<>();
+        getJob.put("recruitid",jobList.get(position).getRecruitid());
         final Intent intent=new Intent(getActivity(),JobContentForAdmin.class);
-        //等待编写
+        QueryInformation.getRecruitInformation(getJob, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                startActivity(intent);
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
     }
 }
 

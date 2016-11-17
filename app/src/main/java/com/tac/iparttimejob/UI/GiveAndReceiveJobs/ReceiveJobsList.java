@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -239,7 +240,7 @@ public class ReceiveJobsList extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
                         }
                     });
                     cloneUnsignedList();
@@ -264,7 +265,7 @@ public class ReceiveJobsList extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
                         }
                     });
                     cloneSignedList();
@@ -371,14 +372,18 @@ public class ReceiveJobsList extends Fragment{
     //静态数组传入有问题，这里使用手动复制方法
     private void cloneSignedList(){
         signeList.clear();
-        for(int i=0;i<Object.applicationObjectList.size();i++)
+        for(int i=0;i<Object.applicationObjectList.size();i++) {
             signeList.add(Object.applicationObjectList.get(i));
+            //测试完毕请删除
+            Log.i("SignedJob",Object.applicationObjectList.get(i).getDisplaytime()+" "+Object.applicationObjectList.get(i).getOwner());
+        }
     }
 
     private void cloneUnsignedList(){
         unsignedList.clear();
-        for(int i=0;i<Object.chooseApplicationList.size();i++)
+        for(int i=0;i<Object.chooseApplicationList.size();i++) {
             unsignedList.add(Object.chooseApplicationList.get(i));
+        }
     }
 
     //上拉更多时使用
@@ -386,6 +391,7 @@ public class ReceiveJobsList extends Fragment{
         //由于继续获得数据会把结果清空加入新数据，再次直接添加即可
         for(int i=0;i<Object.applicationObjectList.size();i++){
             signeList.add(Object.applicationObjectList.get(i));
+            Log.i("SignedJob",Object.applicationObjectList.get(i).getDisplaytime()+" "+Object.applicationObjectList.get(i).getOwner());
         }
     }
 
