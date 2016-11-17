@@ -5,28 +5,84 @@ package com.tac.iparttimejob.Class;
  */
 
 public class Application {
-    public int getRecruitid() {
-        return recruitid;
+    public int getApplicantsid() {
+        return applicantsid;
     }
 
-    public void setRecruitid(int recruitid) {
-        this.recruitid = recruitid;
+    public void setApplicantsid(int applicantsid) {
+        this.applicantsid = applicantsid;
     }
 
-    public UserResult.User getData() {
-        return data;
+    public String getApplicantname() {
+        return applicantname;
     }
 
-    public void setData(UserResult.User data) {
-        this.data = data;
+    public void setApplicantname(String applicantname) {
+        this.applicantname = applicantname;
     }
 
-    public String getOwner() {
-        return owner;
+    public UserResult.User getTac_user() {
+        return tac_user;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setTac_user(UserResult.User tac_user) {
+        this.tac_user = tac_user;
+    }
+
+    public float getPoint() {
+        return point;
+    }
+
+    public void setPoint(float point) {
+        this.point = point;
+    }
+
+    public String getSingleresume() {
+        return singleresume;
+    }
+
+    public void setSingleresume(String singleresume) {
+        this.singleresume = singleresume;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getApplicanttime() {
+        return applicanttime;
+    }
+
+    public void setApplicanttime(String applicanttime) {
+        this.applicanttime = applicanttime;
+    }
+
+    public RecuitResult.Recuit getTac_recruit() {
+        return tac_recruit;
+    }
+
+    public void setTac_recruit(RecuitResult.Recuit tac_recruit) {
+        this.tac_recruit = tac_recruit;
+    }
+
+    public int getOwnerid() {
+        return ownerid;
+    }
+
+    public void setOwnerid(int ownerid) {
+        this.ownerid = ownerid;
+    }
+
+    public String getWonername() {
+        return wonername;
+    }
+
+    public void setWonername(String wonername) {
+        this.wonername = wonername;
     }
 
     public String getTitle() {
@@ -37,12 +93,20 @@ public class Application {
         this.title = title;
     }
 
-    public String getWorkplace() {
-        return workplace;
+    public String getSinglelnfo() {
+        return singlelnfo;
     }
 
-    public void setWorkplace(String workplace) {
-        this.workplace = workplace;
+    public void setSinglelnfo(String singlelnfo) {
+        this.singlelnfo = singlelnfo;
+    }
+
+    public int getChoosen() {
+        return choosen;
+    }
+
+    public void setChoosen(int choosen) {
+        this.choosen = choosen;
     }
 
     public String getDealdline() {
@@ -53,75 +117,22 @@ public class Application {
         this.dealdline = dealdline;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getWorklnfo() {
-        return worklnfo;
-    }
-
-    public void setWorklnfo(String worklnfo) {
-        this.worklnfo = worklnfo;
-    }
-
-    public String getDisplaytime() {
-        return displaytime;
-    }
-
-    public void setDisplaytime(String displaytime) {
-        this.displaytime = displaytime;
-    }
-
-    public String getReasion() {
-        return reasion;
-    }
-
-    public void setReasion(String reasion) {
-        this.reasion = reasion;
-    }
-
-    public String getOktime() {
-        return oktime;
-    }
-
-    public void setOktime(String oktime) {
-        this.oktime = oktime;
-    }
-
-    private int recruitid;
-    private UserResult.User data;
-    private String owner;
+    private int applicantsid;
+    private String applicantname;
+    private UserResult.User tac_user;
+    private float point;
+    private String singleresume;
+    private String image;
+    private String applicanttime;
+    private RecuitResult.Recuit tac_recruit;
+    private int ownerid;
+    private String wonername;
     private String title;
-    private String workplace;
+    private String singlelnfo;
+    private int choosen;
+
     private String dealdline;
-    private String phone;
-    private String email;
-    private int status;
-    private String worklnfo;
-    private String displaytime;
-    private String reasion;
-    private String oktime;
+
 
 
 }

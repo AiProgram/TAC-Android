@@ -218,6 +218,7 @@ public class QueryInformation extends HttpPost{
                     {
                         //Log.d("image:",image.getData());
                         userImage=image.getData();
+                        Log.d("image:",userImage);
 
                         listener.onFinish("下载成功");
 
@@ -492,6 +493,8 @@ public class QueryInformation extends HttpPost{
                     if (chooseApplication.isSuccess()) {
                         chooseApplicationList=chooseApplication.getData();
                         //chooseApplication.getData().addAll(chooseApplicationList);
+                        Log.d("list:",chooseApplicationList.get(0).getDealdine());
+                        Log.d("list:",chooseApplicationList.get(0).getDisplaytime());
                         listener.onFinish("成功");
                     } else {
                         listener.onError(chooseApplication.getMessage());
@@ -569,7 +572,7 @@ public class QueryInformation extends HttpPost{
             @Override
             public void onFinish(String result) {
                 Log.d("result:",result);
-                RecuitList applicationList=null;
+                ApplicationList applicationList=null;
                 Type type=new TypeToken<RecuitList>(){}.getType();
                 try {
                     applicationList=new Gson().fromJson(result,type);
@@ -580,7 +583,9 @@ public class QueryInformation extends HttpPost{
                 if(applicationList!=null) {
                     if (applicationList.isSuccess()) {
                         applicationObjectList=applicationList.getData();
+                        Log.d("list:",applicationList.getData().get(0).getDealdline());
                         //applicationList.getData().addAll(applicationObjectList);
+                        Log.d("list:",applicationObjectList.get(0).getDealdline());
                         listener.onFinish("成功");
                     } else {
                         listener.onError(applicationList.getMessage());
