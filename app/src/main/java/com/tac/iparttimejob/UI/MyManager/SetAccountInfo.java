@@ -200,6 +200,7 @@ public class SetAccountInfo extends AppCompatActivity{
                 //图片展示出来
                 iv_user_head_image.setImageBitmap(userHeadImage);
                 imageString = BitmapAndStringConverter.convertIconToString(userHeadImage);
+                Log.i("原始字符串",imageString);
                 //留待操作上传头像接口
                 upLoadUserImgae(imageString);
                 break;
@@ -218,8 +219,8 @@ public class SetAccountInfo extends AppCompatActivity{
         intent.putExtra("crop", "true");//
         intent.putExtra("aspectX", 1);//X方向上的比例
         intent.putExtra("aspectY", 1);//Y方向上的比例
-        intent.putExtra("outputX", 320);//裁剪区的X方向宽
-        intent.putExtra("outputY", 320);//裁剪区的Y方向宽
+        intent.putExtra("outputX", 64);//裁剪区的X方向宽
+        intent.putExtra("outputY", 64);//裁剪区的Y方向宽
         intent.putExtra("scale", true);//是否保留比例
         intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
         intent.putExtra("return-data", true);//是否将数据保留在Bitmap中返回dataParcelable相应的Bitmap数据

@@ -7,12 +7,15 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 
 import com.tac.iparttimejob.Class.Enroll;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
+import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.MyManager.ShowResume;
@@ -23,6 +26,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * Created by 守候。 on 2016/11/12.
@@ -96,8 +100,8 @@ public class EnrollList extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 //跳转至该人的简历
                 Map<String,String> getResume=new LinkedHashMap<String, String>();
-                getResume.put("userid",enrollList.get(position).getApplicantsid()+"");
-                QueryInformation.getPersonalResume(getResume, new HttpCallBackListener() {
+                getResume.put("name",enrollList.get(position).getTac_user().getName());
+                QueryInformation.getUserInformationByName(getResume, new HttpCallBackListener() {
                     @Override
                     public void onFinish(String result) {
                         Intent intent=new Intent(EnrollList.this, ShowResume.class);
@@ -121,6 +125,65 @@ public class EnrollList extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 //更新选择状态，修改checkBox状态,这里暂时不在本处改动
+            }
+        });
+
+        enrollListAdapter.setOnCheckedChangeListener(new MyEnrollListAdapter.onCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChange(final CompoundButton compoundButton, boolean b, int position) {
+                Map<String,String> changeSelection=new LinkedHashMap<String, String>();
+                changeSelection.put("recruitid",enrollList.get(position).getTac_recruit().getRecruitid());
+                changeSelection.put("userid",enrollList.get(position).getTac_user().getUserid());
+                if(b==true){
+                    EditInformation.setChooseEnroll(changeSelection, new HttpCallBackListener() {
+                        @Override
+                        public void onFinish(String result) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    compoundButton.setChecked(true);
+                                }
+                            });
+
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    compoundButton.setChecked(false);
+                                    Toast.makeText(EnrollList.this,"操作失败",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
+                    });
+                }else{
+                    EditInformation.setCancelChooseEnroll(changeSelection, new HttpCallBackListener() {
+                        @Override
+                        public void onFinish(String result) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    compoundButton.setChecked(false);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    compoundButton.setChecked(true);
+                                    Toast.makeText(EnrollList.this,"操作失败",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }
             }
         });
 
@@ -246,8 +309,10 @@ public class EnrollList extends AppCompatActivity {
     //静态数组传入有问题，这里使用手动复制方法
     private void cloneEnrollList(){
         enrollList.clear();
-        for(int i=0;i<Object.enrollObjectList.size();i++)
+        for(int i=0;i<Object.enrollObjectList.size();i++) {
             enrollList.add(Object.enrollObjectList.get(i));
+
+        }
     }
 
 
