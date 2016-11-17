@@ -105,10 +105,13 @@ public class Enroll {
     }
 
 
+    public RecuitResult.Recuit getTac_recruit() {
+        return tac_recruit;
+    }
 
-    private int applicantsid;
-    private String applicantname;
-
+    public void setTac_recruit(RecuitResult.Recuit tac_recruit) {
+        this.tac_recruit = tac_recruit;
+    }
     public UserResult.User getTac_user() {
         return tac_user;
     }
@@ -117,19 +120,15 @@ public class Enroll {
         this.tac_user = tac_user;
     }
 
+    private int applicantsid;
+    private String applicantname;
+
     private UserResult.User tac_user;
     private float point;
     private String singleresume;
     private String image;
     private String applicanttime;
 
-    public RecuitResult.Recuit getTac_recruit() {
-        return tac_recruit;
-    }
-
-    public void setTac_recruit(RecuitResult.Recuit tac_recruit) {
-        this.tac_recruit = tac_recruit;
-    }
 
     private RecuitResult.Recuit tac_recruit;
     private int ownerid;

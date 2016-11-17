@@ -373,9 +373,9 @@ public class ReceiveJobsList extends Fragment{
     private void cloneSignedList(){
         signeList.clear();
         for(int i=0;i<Object.applicationObjectList.size();i++) {
-            signeList.add(Object.applicationObjectList.get(i));
+          /*  signeList.add(Object.applicationObjectList.get(i));
             //测试完毕请删除
-            Log.i("SignedJob",Object.applicationObjectList.get(i).getDisplaytime()+" "+Object.applicationObjectList.get(i).getOwner());
+            Log.i("SignedJob",Object.applicationObjectList.get(i).getDisplaytime()+" "+Object.applicationObjectList.get(i).getOwner());*/
         }
     }
 
@@ -390,8 +390,8 @@ public class ReceiveJobsList extends Fragment{
     private void addSignedList(){
         //由于继续获得数据会把结果清空加入新数据，再次直接添加即可
         for(int i=0;i<Object.applicationObjectList.size();i++){
-            signeList.add(Object.applicationObjectList.get(i));
-            Log.i("SignedJob",Object.applicationObjectList.get(i).getDisplaytime()+" "+Object.applicationObjectList.get(i).getOwner());
+          /* signeList.add(Object.applicationObjectList.get(i));
+            Log.i("SignedJob",Object.applicationObjectList.get(i).getDisplaytime()+" "+Object.applicationObjectList.get(i).getOwner());*/
         }
     }
 

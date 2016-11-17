@@ -408,7 +408,7 @@ public class QueryInformation extends HttpPost{
             @Override
             public void onFinish(String result) {
                 EnrollList enrollList=null;
-                Type type=new TypeToken<RecuitList>(){}.getType();
+                Type type=new TypeToken<EnrollList>(){}.getType();
                 try {
                     enrollList=new Gson().fromJson(result,type);
                 }catch (JsonSyntaxException e) {
@@ -442,7 +442,7 @@ public class QueryInformation extends HttpPost{
             @Override
             public void onFinish(String result) {
                 EnrollList enrollList=null;
-                Type type=new TypeToken<RecuitList>(){}.getType();
+                Type type=new TypeToken<EnrollList>(){}.getType();
                 try {
                     enrollList=new Gson().fromJson(result,type);
                 }catch (JsonSyntaxException e) {
@@ -573,7 +573,7 @@ public class QueryInformation extends HttpPost{
             public void onFinish(String result) {
                 Log.d("result:",result);
                 ApplicationList applicationList=null;
-                Type type=new TypeToken<RecuitList>(){}.getType();
+                Type type=new TypeToken<ApplicationList>(){}.getType();
                 try {
                     applicationList=new Gson().fromJson(result,type);
                 }catch (JsonSyntaxException e) {
