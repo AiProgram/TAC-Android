@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -160,14 +161,14 @@ public class MyManager extends Fragment {
     private void getUserHeadImage(){
         Map<String,String> getUserImage=new LinkedHashMap<>();
         //头像文件名
-        //String fileNmae=Object.userObject.getName()+".jpg";
-        String fileName="ZJM.jpg";
-        getUserImage.put("fileName",fileName);
+        String fileNmae=Object.userObject.getName()+".jpg";
+        getUserImage.put("fileName",fileNmae);
 
         QueryInformation.getImage(getUserImage, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
                 userHeadImage=BitmapAndStringConverter.convertStringToIcon(Object.userImage);
+                Log.i("获取到的图片字符串",Object.userImage);
 
                 //设置用户头像和高斯背景
                 //头像的大小应为640X640，在选择头像上传时解决
@@ -181,6 +182,7 @@ public class MyManager extends Fragment {
                         riv_user_head.setImageBitmap(userHeadImage);
                     }
                 });
+                Log.i("图片字符串",Object.userImage.length()+"");
             }
 
             @Override

@@ -2,7 +2,13 @@ package com.tac.iparttimejob.UI.Utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.ref.SoftReference;
+
 /**
  * Created by AiProgram on 2016/11/9.
  */
@@ -45,5 +51,28 @@ public class BitmapAndStringConverter {
         {
             return null;
         }
+    }
+
+    /**
+     * 把Bitmap转换成Base64
+     * @param bitmap
+     * @return
+     */
+    public static String getBitmapStrBase64(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 80, baos);
+        byte[] bytes = baos.toByteArray();
+        return Base64.encodeToString(bytes, 0);
+    }
+
+    /**
+     * 把Base64转换成Bitmap
+     * @param iconBase64
+     * @return
+     */
+    public static Bitmap getBitmap(String iconBase64) {
+        byte[] bitmapArray;
+        bitmapArray = Base64.decode(iconBase64, 0);
+        return BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
     }
 }
