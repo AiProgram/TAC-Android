@@ -583,9 +583,6 @@ public class QueryInformation extends HttpPost{
                 if(applicationList!=null) {
                     if (applicationList.isSuccess()) {
                         applicationObjectList=applicationList.getData();
-                        Log.d("list:",applicationList.getData().get(0).getDealdline());
-                        //applicationList.getData().addAll(applicationObjectList);
-                        Log.d("list:",applicationObjectList.get(0).getDealdline());
                         listener.onFinish("成功");
                     } else {
                         listener.onError(applicationList.getMessage());

@@ -109,13 +109,7 @@ public class Application {
         this.choosen = choosen;
     }
 
-    public String getDealdline() {
-        return dealdline;
-    }
 
-    public void setDealdline(String dealdline) {
-        this.dealdline = dealdline;
-    }
 
     private int applicantsid;
     private String applicantname;
@@ -131,7 +125,15 @@ public class Application {
     private String singlelnfo;
     private int choosen;
 
-    private String dealdline;
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
+
+    private String deadline;
 
 
 
