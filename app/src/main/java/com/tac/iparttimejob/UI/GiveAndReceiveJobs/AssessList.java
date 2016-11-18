@@ -2,21 +2,17 @@ package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tac.iparttimejob.Class.Assessment;
+import com.tac.iparttimejob.Class.AssessmentAtoO;
+import com.tac.iparttimejob.Class.AssessmentOtoA;
 import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.R;
@@ -29,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 
-import static com.tac.iparttimejob.Class.Object.atooCommentObjectList;
 import static com.tac.iparttimejob.Class.Object.userObject;
 
 /**
@@ -46,8 +41,8 @@ public class AssessList extends AppCompatActivity {
     private AssessAdapter assessAdapter;
     private AssessAdapter oToAAdapter;
 
-    private List<Assessment> aToOList=new ArrayList<>();
-    private List<Assessment> oToAList=new ArrayList<>();
+    private List<AssessmentAtoO> aToOList=new ArrayList<>();
+    private List<AssessmentOtoA> oToAList=new ArrayList<>();
 
     private int type;
 
@@ -187,9 +182,10 @@ public class AssessList extends AppCompatActivity {
         switch (type){
             case DataType.COMMENT_A_TO_O:{
                 atooPage=1;
+                getList.put("ownerid",userObject.getUserid());
                 getList.put("page",(atooPage)+"");
                 getList.put("rows",(rows)+"");
-                getList.put("ownerid",userObject.getUserid());
+
                 //分atoo和otoa列表
                 QueryInformation.getAtooComment(getList, new HttpCallBackListener() {
                     @Override

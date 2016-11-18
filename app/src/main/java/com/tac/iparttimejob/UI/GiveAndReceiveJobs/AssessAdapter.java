@@ -6,8 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.tac.iparttimejob.Class.RecuitResult;
-import com.tac.iparttimejob.Class.Assessment;
+import com.tac.iparttimejob.Class.AssessmentOtoA;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
 
@@ -22,14 +21,14 @@ public class AssessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private OnContentClickListener mOnContentClicListener;
     private OnSueClickListener mOnSueClickListener;
 
-    List<Assessment> assessmentList;
+    List<AssessmentOtoA> assessmentList;
     private int type;
 
 
     //传入的是静态对象时本地对象无法与之同步,这里list类型不同，加入listType区分
     public AssessAdapter(int type,List dataList){
         this.type=type;
-        assessmentList=(List<Assessment>) dataList;
+        assessmentList=(List<AssessmentOtoA>) dataList;
     }
 
     //不同 列表项对应不同ViewHolder

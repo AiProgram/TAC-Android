@@ -6,7 +6,7 @@ import java.util.List;
  * Created by 守候。 on 2016/11/2.
  */
 
-public class AssessmentList {
+public class AssessmentOtoAList {
     public boolean isSuccess() {
         return success;
     }
@@ -27,13 +27,14 @@ public class AssessmentList {
     private String message;
 
 
-    public List<Assessment> getData() {
+    public List<AssessmentOtoA> getData() {
         return data;
     }
 
-    public void setData(List<Assessment> data) {
+    public void setData(List<AssessmentOtoA> data) {
         this.data = data;
     }
 
-    private List<Assessment> data;
+    private List<AssessmentOtoA> data;
+
 }
