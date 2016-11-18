@@ -86,6 +86,7 @@ public class MyReceiveJobsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 if(signedList.get(position).getChoosen()==DataType.ENROLL_STATUS_CANCELED) {
                     jobTitle="(已取消)"+jobTitle;
                     holder.itemView.setClickable(false);
+                    holder.itemView.setEnabled(false);
                 }
 
                 jobInfo=signedList.get(position).getTac_recruit().getWorkInfo();
