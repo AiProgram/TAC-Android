@@ -33,7 +33,7 @@ public class ResumeResult {
         this.user = user;
     }
 
-    private UserResult.User user;
+
 
     public int getResumeid() {
         return resumeid;
@@ -90,7 +90,7 @@ public class ResumeResult {
     public void setDetailResume(String detailResume) {
         this.detailResume = detailResume;
     }
-
+    private UserResult.User user;
     private int resumeid;
     private String nickname;
     private  String name;
