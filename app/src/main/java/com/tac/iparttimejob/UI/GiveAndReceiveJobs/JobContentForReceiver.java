@@ -15,6 +15,7 @@ import com.tac.iparttimejob.UI.Utils.DataType;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static com.tac.iparttimejob.Class.Object.applicationObjectList;
 import static com.tac.iparttimejob.Class.Object.recuitObject;
 import static com.tac.iparttimejob.Class.Object.userObject;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
@@ -28,6 +29,7 @@ import com.tac.iparttimejob.UI.Utils.FormatedTimeGeter;
 public class JobContentForReceiver extends AppCompatActivity {
 
     private int type;
+    private int applicantsid;
     //公有控件
     private TextView title_content;
     private TextView tv_author;
@@ -52,6 +54,7 @@ public class JobContentForReceiver extends AppCompatActivity {
 
         //获得显示的类型
         type=getIntent().getIntExtra("type", DataType.UNSIGNED_JOB_LIST);
+        applicantsid=getIntent().getIntExtra("applicantsid",1);
         switch (type){
             case DataType.UNSIGNED_JOB_LIST:{
                 setContentView(R.layout.layout_unsigned_content);
@@ -139,6 +142,26 @@ public class JobContentForReceiver extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         //取消报名,缺少applicantid无法继续编写
+                        Map<String,String>cancelApplication=new LinkedHashMap<String, String>();
+                        cancelApplication.put("applicantsid",applicantsid+"");
+                        Log.i("applicationid",applicantsid+"");
+                        EditInformation.setCancelApplication(cancelApplication, new HttpCallBackListener() {
+                            @Override
+                            public void onFinish(String result) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(JobContentForReceiver.this,"取消成功",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                finish();
+                            }
+
+                            @Override
+                            public void onError(String error) {
+
+                            }
+                        });
                     }
                 });
             }break;

@@ -83,7 +83,7 @@ public class MyReceiveJobsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 jobTitle=signedList.get(position).getTitle();
                 jobInfo=signedList.get(position).getTac_recruit().getWorkInfo();
                 deadline=signedList.get(position).getTac_recruit().getDealdine();
-                recruitorName=signedList.get(position).getWonername();
+                recruitorName=signedList.get(position).getTac_recruit().getOwner();
                 SignedViewHolder viewHolder=(SignedViewHolder)holder;
                 viewHolder.tv_job_title.setText(jobTitle);
                 viewHolder.tv_job_info.setText(jobInfo);

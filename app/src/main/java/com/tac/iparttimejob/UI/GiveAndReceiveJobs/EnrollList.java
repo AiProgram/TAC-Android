@@ -156,7 +156,7 @@ public class EnrollList extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    compoundButton.setChecked(false);
+                                   // compoundButton.setChecked(false);
                                     Toast.makeText(EnrollList.this,"操作失败",Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -180,7 +180,7 @@ public class EnrollList extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    compoundButton.setChecked(true);
+                                    //compoundButton.setChecked(true);
                                     Toast.makeText(EnrollList.this,"操作失败",Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -244,15 +244,15 @@ public class EnrollList extends AppCompatActivity {
         QueryInformation.getEnrollList(getList, new HttpCallBackListener() {
             @Override
             public void onFinish(final String result) {
+                cloneEnrollList();
+                page++;
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         //Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                        rv_enroll_list.notifyData();
                     }
                 });
-                cloneEnrollList();
-                rv_enroll_list.notifyData();
-                page++;
             }
 
             @Override
@@ -282,23 +282,20 @@ public class EnrollList extends AppCompatActivity {
             @Override
             public void onFinish(final String result) {
                 rv_enroll_list.setLoadMoreEnable(true);
-
+                addEnrollList();
+                page++;
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        rv_enroll_list.notifyData();
                         //Toast.makeText(getActivity(), "上拉更多成功", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-                addEnrollList();
-                rv_enroll_list.notifyData();
-                page++;
             }
 
             @Override
             public void onError(String error) {
                 rv_enroll_list.setLoadMoreEnable(true);
-
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

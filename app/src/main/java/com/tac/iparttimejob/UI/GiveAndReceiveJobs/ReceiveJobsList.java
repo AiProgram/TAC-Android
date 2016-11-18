@@ -415,6 +415,7 @@ public class ReceiveJobsList extends Fragment{
                 intent.putExtra("type",DataType.SIGNED_JOB_LIST);
                 //这里recruitid返回的是int
                 getList.put("recruitid",signeList.get(position).getTac_recruit().getRecruitid()+"");
+                intent.putExtra("applicantsid",signeList.get(position).getApplicantsid());
             }break;
         }
         //获取到信息以后再跳转
