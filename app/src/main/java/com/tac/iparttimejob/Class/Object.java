@@ -44,17 +44,18 @@ public class Object {
     //查看某个招聘
     public static RecuitResult.Recuit             applicationObject;
     //查看应聘者对我评价
-    public static List<Assessment>   atooCommentObjectList;
+    public static List<AssessmentAtoO>   atooCommentObjectList;
     //查看招聘者对我评价
-    public static List<Assessment>   otoaCommentObjectList;
+    public static List<AssessmentOtoA>   otoaCommentObjectList;
     //管理员
     //查看招聘信息
     public static List<RecuitResult.Recuit> RecuitObjectlistForManager;
     //查看atoo评论列表
-    public static List<Assessment>   atooAssessmentObjectList;
-    public static List<Assessment>   otoaAssessmentObjectList;
-    public static List<Assessment>   atooAssessmentByIDObjectList;
-    public static List<Assessment>   otoaAssessmentByIDObjectList;
+    public static List<AssessmentAtoO>   atooAssessmentObjectList;
+    public static List<AssessmentOtoA>   otoaAssessmentObjectList;
+
+    public static List<AssessmentAtoO>   atooAssessmentByIDObjectList;
+    public static List<AssessmentOtoA>   otoaAssessmentByIDObjectList;
     public static Advice.suggesstion suggesstion;
 
 

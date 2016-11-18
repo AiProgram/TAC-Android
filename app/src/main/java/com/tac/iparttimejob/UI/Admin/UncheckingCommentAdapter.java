@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.tac.iparttimejob.Class.Assessment;
+import com.tac.iparttimejob.Class.AssessmentOtoA;
 import com.tac.iparttimejob.UI.Utils.DataType;
 import com.tac.iparttimejob.R;
 
@@ -21,13 +21,13 @@ public class UncheckingCommentAdapter extends RecyclerView.Adapter<RecyclerView.
     private OnItemClickListener mOnItemClickListener;
     private OnItemLongClickListener mOnItemLongClickListener;
 
-    List<Assessment> commentList;
+    List<AssessmentOtoA> commentList;
     int listType;
 
     //传入的是静态对象时本地对象无法与之同步,这里list类型不同，加入listType区分
     public UncheckingCommentAdapter(List dataList,int listType){
         this.listType=listType;
-        commentList=(List<Assessment>) dataList;
+        commentList=(List<AssessmentOtoA>) dataList;
     }
 
     //不同 列表项对应不同ViewHolder

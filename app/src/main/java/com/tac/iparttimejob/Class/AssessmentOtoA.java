@@ -6,7 +6,7 @@ import org.w3c.dom.ProcessingInstruction;
  * Created by 守候。 on 2016/11/2.
  */
 
-public class Assessment {
+public class AssessmentOtoA {
 
 
     public int getCommentid() {

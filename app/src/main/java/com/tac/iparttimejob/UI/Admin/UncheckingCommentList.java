@@ -2,7 +2,6 @@ package com.tac.iparttimejob.UI.Admin;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,7 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.tac.iparttimejob.Class.Assessment;
+import com.tac.iparttimejob.Class.AssessmentAtoO;
+import com.tac.iparttimejob.Class.AssessmentOtoA;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
@@ -40,8 +40,8 @@ public class UncheckingCommentList extends Fragment {
     private UncheckingCommentAdapter AtoOAdapter;
     private UncheckingCommentAdapter OtoAAdapter;
 
-    private List<Assessment> aToOList=new ArrayList<>();
-    private List<Assessment> oToAList=new ArrayList<>();
+    private List<AssessmentAtoO> aToOList=new ArrayList<>();
+    private List<AssessmentOtoA> oToAList=new ArrayList<>();
 
     //防止多次初始化
     boolean inited=false;

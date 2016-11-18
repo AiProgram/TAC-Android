@@ -6,10 +6,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.tac.iparttimejob.Class.Advice;
-import com.tac.iparttimejob.Class.Application;
-import com.tac.iparttimejob.Class.Assessment;
 import com.tac.iparttimejob.Class.ApplicationList;
-import com.tac.iparttimejob.Class.AssessmentList;
+import com.tac.iparttimejob.Class.AssessmentAtoO;
+import com.tac.iparttimejob.Class.AssessmentAtoOList;
+import com.tac.iparttimejob.Class.AssessmentOtoAList;
 import com.tac.iparttimejob.Class.EnrollList;
 import com.tac.iparttimejob.Class.EmailResult;
 import com.tac.iparttimejob.Class.RecuitResult;
@@ -18,14 +18,11 @@ import com.tac.iparttimejob.Class.Resume;
 import com.tac.iparttimejob.Class.ResumeResult;
 import com.tac.iparttimejob.Class.ReturnMessage;
 import com.tac.iparttimejob.Class.UserImage;
-import com.tac.iparttimejob.Class.UserResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpAddress;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Connect.HttpPost;
 
 import java.lang.reflect.Type;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import static com.tac.iparttimejob.Class.Object.RecuitObjectlistForManager;
@@ -49,7 +46,6 @@ import static com.tac.iparttimejob.Class.Object.recuitObjectList;
 import static com.tac.iparttimejob.Class.Object.resumeObject;
 import static com.tac.iparttimejob.Class.Object.suggesstion;
 import static com.tac.iparttimejob.Class.Object.userImage;
-import static com.tac.iparttimejob.Class.Object.userObject;
 
 /**
  * Created by 守候。 on 2016/10/26.
@@ -674,8 +670,8 @@ public class QueryInformation extends HttpPost{
         post(HttpAddress.HOST + HttpAddress.GET_ATOO_ASSEMENT_LIST, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                AssessmentList assement=null;
-                Type type=new TypeToken<AssessmentList>(){}.getType();
+                AssessmentAtoOList assement=null;
+                Type type=new TypeToken<AssessmentAtoOList>(){}.getType();
                 try {
                     assement=new Gson().fromJson(result,type);
                 }catch (JsonSyntaxException e) {
@@ -708,8 +704,8 @@ public class QueryInformation extends HttpPost{
         post(HttpAddress.HOST + HttpAddress.GET_ATOOCOMMENT, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                AssessmentList assement=null;
-                Type type=new TypeToken<AssessmentList>(){}.getType();
+                AssessmentAtoOList assement=null;
+                Type type=new TypeToken<AssessmentAtoOList>(){}.getType();
                 try {
                     assement=new Gson().fromJson(result,type);
                 }catch (JsonSyntaxException e) {
@@ -742,8 +738,8 @@ public class QueryInformation extends HttpPost{
         post(HttpAddress.HOST + HttpAddress.GET_OTOA_ASSEMENT_LIST, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                AssessmentList assement=null;
-                Type type=new TypeToken<AssessmentList>(){}.getType();
+                AssessmentOtoAList assement=null;
+                Type type=new TypeToken<AssessmentOtoAList>(){}.getType();
                 try {
                     assement=new Gson().fromJson(result,type);
                 }catch (JsonSyntaxException e) {
@@ -775,8 +771,8 @@ public class QueryInformation extends HttpPost{
         post(HttpAddress.HOST + HttpAddress.GET_OTOACOMMENT, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                AssessmentList assement=null;
-                Type type=new TypeToken<AssessmentList>(){}.getType();
+                AssessmentOtoAList assement=null;
+                Type type=new TypeToken<AssessmentOtoAList>(){}.getType();
                 try {
                     assement=new Gson().fromJson(result,type);
                 }catch (JsonSyntaxException e) {
@@ -808,8 +804,8 @@ public class QueryInformation extends HttpPost{
         post(HttpAddress.HOST + HttpAddress.GET_ATOO_ASSEMENT_LIST_BY_ID, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                AssessmentList assement=null;
-                Type type=new TypeToken<AssessmentList>(){}.getType();
+                AssessmentAtoOList assement=null;
+                Type type=new TypeToken<AssessmentOtoAList>(){}.getType();
                 try {
                     assement=new Gson().fromJson(result,type);
                 }catch (JsonSyntaxException e) {
@@ -841,7 +837,7 @@ public class QueryInformation extends HttpPost{
         post(HttpAddress.HOST + HttpAddress.GET_OTOA_ASSEMENT_LIST_BY_ID, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
-                AssessmentList assement=null;
+                AssessmentOtoAList assement=null;
                 Type type=new TypeToken<RecuitList>(){}.getType();
                 try {
                     assement=new Gson().fromJson(result,type);
