@@ -234,6 +234,7 @@ public class SetAccountInfo extends AppCompatActivity{
     private void initViews(){
         tv_account.setText(Object.userObject.getName());
         tv_email.setText(Object.userObject.getEmail());
+
     }
 
     //设置密码采用弹出Dialog的形式

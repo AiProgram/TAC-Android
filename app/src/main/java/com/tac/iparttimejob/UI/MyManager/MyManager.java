@@ -181,7 +181,7 @@ public class MyManager extends Fragment {
                 userImage=userImage.replaceAll(" ","+");
                 HeadImage=BitmapAndStringConverter.convertStringToIcon(userImage);
                 //userHeadImage=BitmapAndStringConverter.convertStringToIcon(Object.image1);
-                Log.i("获取到的图片字符串",Object.userImage);
+
 
 
                 Bitmap  blurBitmap=HeadImage.copy(Bitmap.Config.ARGB_8888,true);
