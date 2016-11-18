@@ -30,12 +30,12 @@ public class AppMain extends AppCompatActivity {
         TabLayout mainTabLayout=(TabLayout)findViewById(R.id.tabLayout_give_jobs_bottom);
         mainTabLayout.setupWithViewPager(mainViewPager);
 
-        TabLayout.Tab one=mainTabLayout.getTabAt(0);
-        TabLayout.Tab two=mainTabLayout.getTabAt(1);
-        TabLayout.Tab three=mainTabLayout.getTabAt(2);
+        TabLayout.Tab giveJob=mainTabLayout.getTabAt(0);
+        TabLayout.Tab receiveJob=mainTabLayout.getTabAt(1);
+        TabLayout.Tab myManager=mainTabLayout.getTabAt(2);
 
-        one.setIcon(R.drawable.user_head_image);
-        two.setIcon(R.drawable.user_head_image);
-        three.setIcon(R.drawable.user_head_image);
+        giveJob.setIcon(R.drawable.ic_search_black_24dp);
+        receiveJob.setIcon(R.drawable.ic_group_add_black_24dp);
+        myManager.setIcon(R.drawable.ic_settings_black_24dp);
     }
 }

@@ -51,7 +51,7 @@ public class SelectedList extends AppCompatActivity{
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //可以与选择人的界面共用
-        setContentView(R.layout.enroll_list);
+        setContentView(R.layout.layout_enroll_list);
 
         recruitid=getIntent().getStringExtra("recruitid");
 

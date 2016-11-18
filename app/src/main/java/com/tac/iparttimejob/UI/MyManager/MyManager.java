@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tac.iparttimejob.Class.Object;
+import com.tac.iparttimejob.Class.ResumeResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.R;
@@ -32,6 +33,7 @@ import com.tac.iparttimejob.UI.Utils.BitmapAndStringConverter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static com.tac.iparttimejob.Class.Object.getResumeObject;
 import static com.tac.iparttimejob.Class.Object.image1;
 import static com.tac.iparttimejob.Class.Object.userImage;
 
@@ -89,6 +91,16 @@ public class MyManager extends Fragment {
 
         //初始化头像、用户名、简介等
         initViews();
+
+        btn_exit_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //退出登录
+                Intent intent=new Intent(getActivity(),Login.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
     }
 
     public void initViews(){
@@ -97,16 +109,17 @@ public class MyManager extends Fragment {
 
         //获得简历中的一句简介
         Map<String,String> getSingleInfo=new LinkedHashMap<>();
-        getSingleInfo.put("userid",Object.userObject.getUserid());
-        QueryInformation.getPersonalResume(getSingleInfo, new HttpCallBackListener() {
+        getSingleInfo.put("username",Object.userObject.getName());
+        QueryInformation.getUserInformationByName(getSingleInfo, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        tv_single_info.setText(Object.resumeObject.getSingleResume());
+                        tv_single_info.setText(Object.getResumeObject.getSingleResume());
                     }
                 });
+
             }
 
             @Override

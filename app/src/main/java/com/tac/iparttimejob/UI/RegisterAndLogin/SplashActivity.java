@@ -35,8 +35,10 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Intent intent=new Intent(SplashActivity.this,Login.class);
                 startActivity(intent);
+                //设置淡入淡出切换效果
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 finish();
             }
-        },2000);
+        },2500);
     }
 }

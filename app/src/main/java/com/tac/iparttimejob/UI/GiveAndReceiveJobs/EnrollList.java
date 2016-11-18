@@ -7,7 +7,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
@@ -19,6 +18,7 @@ import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.MyManager.ShowResume;
+import com.tac.iparttimejob.UI.Utils.MyToolBarLayout;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
 import com.tac.iparttimejob.Class.Object;
 
@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 /**
  * Created by 守候。 on 2016/11/12.
@@ -37,6 +36,7 @@ import java.util.StringTokenizer;
 public class EnrollList extends AppCompatActivity {
     private RefreshRecyclerView rv_enroll_list;
     private SwipeRefreshLayout srl_enroll_list;
+    private MyToolBarLayout common_toolbar;
 
     private Handler handler=new Handler();
 
@@ -57,7 +57,7 @@ public class EnrollList extends AppCompatActivity {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.enroll_list);
+        setContentView(R.layout.layout_enroll_list);
 
         recruitid=getIntent().getStringExtra("recruitid");
 
@@ -78,10 +78,12 @@ public class EnrollList extends AppCompatActivity {
     private void getViews(){
         rv_enroll_list=(RefreshRecyclerView) findViewById(R.id.rv_enroll_list);
         srl_enroll_list=(SwipeRefreshLayout) findViewById(R.id.srl_enroll_list);
+        common_toolbar=(MyToolBarLayout) findViewById(R.id.common_toolbar);
     }
 
     //初始化文字显示等
     private void initViews(){
+        common_toolbar.setTitle("报名列表");
         enrollListAdapter =new MyEnrollListAdapter(enrollList);
         //设置RecycleView
         rv_enroll_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -106,6 +108,7 @@ public class EnrollList extends AppCompatActivity {
                     public void onFinish(String result) {
                         Intent intent=new Intent(EnrollList.this, ShowResume.class);
                         startActivity(intent);
+                        //Log.i("简历",getResumeObject.getName());
                     }
 
                     @Override

@@ -52,7 +52,7 @@ public class ReceiveJobsList extends Fragment{
     private MyReceiveJobsAdapter signedListAdapter;
     private MyReceiveJobsAdapter unsignedListAdapter;
 
-    private List<RecuitResult.Recuit> signeList=new ArrayList<>();
+    private List<Application> signeList=new ArrayList<>();
     private List<RecuitResult.Recuit> unsignedList=new ArrayList<>();
 
     //防止多次初始化
@@ -352,6 +352,7 @@ public class ReceiveJobsList extends Fragment{
                     addSignedList();
                     rv_receive_jobs.notifyData();
                     signedPage++;
+                    Log.i("已申请页面数",signedPage+"");
                 }
 
                 @Override
@@ -373,9 +374,8 @@ public class ReceiveJobsList extends Fragment{
     private void cloneSignedList(){
         signeList.clear();
         for(int i=0;i<Object.applicationObjectList.size();i++) {
-          /*  signeList.add(Object.applicationObjectList.get(i));
+            signeList.add(Object.applicationObjectList.get(i));
             //测试完毕请删除
-            Log.i("SignedJob",Object.applicationObjectList.get(i).getDisplaytime()+" "+Object.applicationObjectList.get(i).getOwner());*/
         }
     }
 
@@ -390,9 +390,9 @@ public class ReceiveJobsList extends Fragment{
     private void addSignedList(){
         //由于继续获得数据会把结果清空加入新数据，再次直接添加即可
         for(int i=0;i<Object.applicationObjectList.size();i++){
-          /* signeList.add(Object.applicationObjectList.get(i));
-            Log.i("SignedJob",Object.applicationObjectList.get(i).getDisplaytime()+" "+Object.applicationObjectList.get(i).getOwner());*/
+          signeList.add(Object.applicationObjectList.get(i));
         }
+        Object.applicationObjectList.clear();
     }
 
     private void addUnsignedList(){
@@ -414,7 +414,7 @@ public class ReceiveJobsList extends Fragment{
             case DataType.SIGNED_JOB_LIST:{
                 intent.putExtra("type",DataType.SIGNED_JOB_LIST);
                 //这里recruitid返回的是int
-                getList.put("recruitid",signeList.get(position).getRecruitid()+"");
+                getList.put("recruitid",signeList.get(position).getTac_recruit().getRecruitid()+"");
             }break;
         }
         //获取到信息以后再跳转

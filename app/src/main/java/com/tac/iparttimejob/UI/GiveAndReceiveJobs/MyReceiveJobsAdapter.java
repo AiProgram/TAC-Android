@@ -24,7 +24,7 @@ public class MyReceiveJobsAdapter extends RecyclerView.Adapter<RecyclerView.View
     private OnItemLongClickListener mOnItemLongClickListener;
 
     List<RecuitResult.Recuit> unsignedList;
-    List<RecuitResult.Recuit> signedList;
+    List<Application> signedList;
     int listType;
 
     //传入的是静态对象时本地对象无法与之同步,这里list类型不同，加入listType区分
@@ -35,7 +35,7 @@ public class MyReceiveJobsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 unsignedList=(List<RecuitResult.Recuit>) dataList;
             }break;
             case DataType.SIGNED_JOB_LIST:{
-                signedList=(List<RecuitResult.Recuit>) dataList;
+                signedList=(List<Application>) dataList;
             }break;
             default:
                 unsignedList=(List<RecuitResult.Recuit>) dataList;
@@ -81,9 +81,9 @@ public class MyReceiveJobsAdapter extends RecyclerView.Adapter<RecyclerView.View
         switch (listType){
             case DataType.SIGNED_JOB_LIST:{
                 jobTitle=signedList.get(position).getTitle();
-                jobInfo=signedList.get(position).getWorkInfo();
-                deadline=signedList.get(position).getDealdine();
-                recruitorName=signedList.get(position).getOwner();
+                jobInfo=signedList.get(position).getTac_recruit().getWorkInfo();
+                deadline=signedList.get(position).getTac_recruit().getDealdine();
+                recruitorName=signedList.get(position).getWonername();
                 SignedViewHolder viewHolder=(SignedViewHolder)holder;
                 viewHolder.tv_job_title.setText(jobTitle);
                 viewHolder.tv_job_info.setText(jobInfo);
