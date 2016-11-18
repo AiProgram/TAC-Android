@@ -126,7 +126,7 @@ public class JobContentForGiver extends AppCompatActivity{
 
         //服务器暂时不提供的设置为消失
 //        tv_payment.setVisibility(TextView.GONE);
-
+        tv_payment.setText("暂时无效");
 
     }
 

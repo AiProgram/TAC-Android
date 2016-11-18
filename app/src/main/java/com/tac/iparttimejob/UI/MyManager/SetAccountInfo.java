@@ -32,6 +32,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static com.tac.iparttimejob.Class.Object.image1;
+import static com.tac.iparttimejob.Class.Object.userObject;
 
 /**
  * Created by AiProgram on 2016/11/5.
@@ -52,6 +53,8 @@ public class SetAccountInfo extends AppCompatActivity{
     private String    newPhone;
     private Bitmap    userHeadImage;
     private String    imageString;
+
+    private String  newPassword;
 
     private View.OnClickListener popOnclickListener;
 
@@ -128,7 +131,37 @@ public class SetAccountInfo extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 //尝试修改信息
+                Map<String,String> setAcountInfo=new LinkedHashMap<String, String>();
+                setAcountInfo.put("useid",userObject.getUserid());
+                setAcountInfo.put("name",userObject.getName());
+                if(newPassword!=null&&!newPassword.isEmpty())
+                    setAcountInfo.put("password",newPassword);
+                else
+                setAcountInfo.put("password",userObject.getPasswd());
+                setAcountInfo.put("phone",et_set_phone.getText().toString());
+                setAcountInfo.put("email",userObject.getEmail());
+                EditInformation.setUserInformation(setAcountInfo, new HttpCallBackListener() {
+                    @Override
+                    public void onFinish(String result) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SetAccountInfo.this,"设置账号信息成功",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        finish();
+                    }
 
+                    @Override
+                    public void onError(String error) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SetAccountInfo.this,"设置账号信息失败",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -234,7 +267,7 @@ public class SetAccountInfo extends AppCompatActivity{
     private void initViews(){
         tv_account.setText(Object.userObject.getName());
         tv_email.setText(Object.userObject.getEmail());
-
+        et_set_phone.setText(Object.userObject.getPhone());
     }
 
     //设置密码采用弹出Dialog的形式
@@ -253,6 +286,7 @@ public class SetAccountInfo extends AppCompatActivity{
                 String confirmedPassword=et_confirm_password.getText().toString();
                 if(password.equals(confirmedPassword)){
                     //调用修改密码接口
+                    newPassword=password;
                 }else{
                     //提示两次密码不一致
                     Toast.makeText(SetAccountInfo.this,"两次输入密码不一致",Toast.LENGTH_SHORT).show();

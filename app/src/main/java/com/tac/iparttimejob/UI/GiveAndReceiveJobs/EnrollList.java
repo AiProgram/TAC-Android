@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
@@ -112,7 +113,7 @@ public class EnrollList extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onError(String error) {
+                    public void onError(final String error) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -152,12 +153,12 @@ public class EnrollList extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onError(String error) {
+                        public void onError(final String error) {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                    // compoundButton.setChecked(false);
-                                    Toast.makeText(EnrollList.this,"操作失败",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(EnrollList.this,error,Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -176,12 +177,12 @@ public class EnrollList extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onError(String error) {
+                        public void onError(final String error) {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     //compoundButton.setChecked(true);
-                                    Toast.makeText(EnrollList.this,"操作失败",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(EnrollList.this,error,Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }

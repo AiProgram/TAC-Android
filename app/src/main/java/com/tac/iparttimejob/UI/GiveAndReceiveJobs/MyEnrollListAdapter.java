@@ -69,6 +69,10 @@ public class MyEnrollListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         //如果之前 已经被选中就设置为选中
         if(enrollList.get(position).getChoosen()== DataType.ENROLL_STATUS_SELECTED)
             viewHolder.cb_choose.setChecked(true);
+        if (enrollList.get(position).getChoosen()==DataType.ENROLL_STATUS_CANCELED) {
+            viewHolder.cb_choose.setEnabled(false);
+            viewHolder.cb_choose.setText("已失效");
+        }
         Log.i("申请列表", enrollList.get(position).getChoosen()+" "+enrollList.get(position).getApplicantname());
 
         //分别设置内容以及checkbox的点击事件

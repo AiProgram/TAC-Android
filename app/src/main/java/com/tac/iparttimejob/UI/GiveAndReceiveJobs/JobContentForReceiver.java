@@ -98,6 +98,7 @@ public class JobContentForReceiver extends AppCompatActivity {
         tv_email.setText(recuitObject.getEmail());
         tv_workplace.setText(recuitObject.getWorkplace());
         tv_detail.setText(recuitObject.getWorkInfo());
+        tv_payment.setText("暂时无效");
     }
 
     private void getAndSetUniqueViews(){
@@ -124,6 +125,7 @@ public class JobContentForReceiver extends AppCompatActivity {
                                         //报名成功后不允许重复报名
                                         btn_signUp.setEnabled(false);
                                         btn_signUp.setClickable(false);
+                                        finish();
                                     }
                                 });
                             }

@@ -1,5 +1,6 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,6 +82,12 @@ public class MyReceiveJobsAdapter extends RecyclerView.Adapter<RecyclerView.View
         switch (listType){
             case DataType.SIGNED_JOB_LIST:{
                 jobTitle=signedList.get(position).getTitle();
+
+                if(signedList.get(position).getChoosen()==DataType.ENROLL_STATUS_CANCELED) {
+                    jobTitle="(已取消)"+jobTitle;
+                    holder.itemView.setClickable(false);
+                }
+
                 jobInfo=signedList.get(position).getTac_recruit().getWorkInfo();
                 deadline=signedList.get(position).getTac_recruit().getDealdine();
                 recruitorName=signedList.get(position).getTac_recruit().getOwner();
