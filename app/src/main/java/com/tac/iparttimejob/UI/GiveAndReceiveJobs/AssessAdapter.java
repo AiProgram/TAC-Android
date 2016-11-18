@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.Class.Assessment;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.Utils.DataType;
 
 import java.util.List;
 
@@ -17,61 +18,119 @@ import java.util.List;
  */
 //对应类
 public class AssessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-    public  AssessAdapter(List<Assessment> dataList) {
-        this.dataList = dataList;
+    //保存点击事件的监听器,点击事件是用接口配合内部接口传递出去的
+    private OnContentClickListener mOnContentClicListener;
+    private OnSueClickListener mOnSueClickListener;
+
+    List<Assessment> assessmentList;
+    private int type;
+
+
+    //传入的是静态对象时本地对象无法与之同步,这里list类型不同，加入listType区分
+    public AssessAdapter(int type,List dataList){
+        this.type=type;
+        assessmentList=(List<Assessment>) dataList;
     }
-    /*
-    RecyclerView中控制子item的类
-    */
-    //不同ViewHolder对应不同布局
-    public class  AssessmentViewHolder extends RecyclerView.ViewHolder{
-        private TextView user;
-        private TextView assessment;
-        private TextView point;
+
+    //不同 列表项对应不同ViewHolder
+    public class AssessmentViewHolder extends RecyclerView.ViewHolder{
+        TextView tv_username_comment;
+        TextView tv_point_comment;
+        TextView tv_content_comment;
+        TextView tv_sue_comment;
         public AssessmentViewHolder(View itemView) {
             super(itemView);
-            user=(TextView) itemView.findViewById(R.id.user1);
-            assessment=(TextView)  itemView.findViewById(R.id.uer1_assess);
-            point=(TextView) itemView.findViewById(R.id.uer1_score_num);
+            tv_username_comment=(TextView) itemView.findViewById(R.id.tv_username_comment);
+            tv_point_comment=(TextView) itemView.findViewById(R.id.tv_point_comment);
+            tv_content_comment=(TextView) itemView.findViewById(R.id.tv_content_comment);
+            tv_sue_comment=(TextView) itemView.findViewById(R.id.tv_sue_comment);
+        }
+    }
+
+    //设置不同ViewHolder的不同布局及信息显示
+    @Override
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder,final int position) {
+        String username;
+        String point;
+        String content;
+
+        switch (type){
+            case DataType.COMMENT_A_TO_O:{
+                username=assessmentList.get(position).getApplicantname();
+                point=assessmentList.get(position).getTac_applicants().getPoint()+"";
+                content=assessmentList.get(position).getAtooComment();
+            }break;
+            case DataType.COMMENT_O_TO_A:{
+                //otoa存在问题
+                username=assessmentList.get(position).getOnwername();
+                point=assessmentList.get(position).getTac_applicants().getPoint()+"";
+                content=assessmentList.get(position).getAtooComment();
+            }break;
+            default:{
+                username=assessmentList.get(position).getApplicantname();
+                point=assessmentList.get(position).getTac_applicants().getPoint()+"";
+                content=assessmentList.get(position).getAtooComment();
+            }
         }
 
+        AssessmentViewHolder viewHolder=(AssessmentViewHolder) holder;
+        viewHolder.tv_username_comment.setText(username);
+        viewHolder.tv_content_comment.setText(content);
+        viewHolder.tv_point_comment.setText(point);
+
+
+        viewHolder.tv_username_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOnContentClicListener.onContentClick(holder.itemView,position);
+            }
+        });
+
+        viewHolder.tv_sue_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOnSueClickListener.onSueClick(holder.itemView,position);
+            }
+        });
     }
-    /*
-    返回目前RecyclerView的item个数
-    */
+
+    //item总数
     @Override
     public int getItemCount() {
-        //判断数据来源
-//        if (listType==DataType.VALID_JOB_LIST){
-//            if (Object.inRecuitObjectList == null || Object.inRecuitObjectList.size() == 0)
-//                return 0;
-//            return Object.inRecuitObjectList.size();
-//        }else {
-//            if (Object.notRecuitObjectList == null || Object.notRecuitObjectList.size() == 0)
-//                return 0;
-//            return Object.notRecuitObjectList.size();
-//        }
-        if (dataList == null || dataList.size() == 0)
-            return 0;
-        return dataList.size();
+        return assessmentList.size();
     }
-    private List<Assessment>  dataList;
-    @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        int status=getItemViewType(position);
-        int user;
-        String assessment;
-        float point;
-        user = dataList.get(position).getCommentid();
-        assessment = dataList.get(position).getAtooComment();
-        point = dataList.get(position).getAtooPoint();
 
-    }
-    //设置recyclerView的item布局
+    //根据布局类别创建不同ViewHolder
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder myViewHolder;
-        myViewHolder=new AssessmentViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_comment,parent,false));
-        return myViewHolder;
+        RecyclerView.ViewHolder viewHolder;
+        viewHolder=new AssessmentViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_comment,parent,false));
+        return viewHolder;
+    }
+
+    //区分使用哪一种item布局
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
+    //用于实现RecyclerView的点击事件的接口
+
+    public interface OnContentClickListener{
+        void onContentClick(View view,int position);
+    }
+
+    public interface OnSueClickListener{
+        void onSueClick(View view,int position);
+    }
+
+
+    public void setOnContentClickListener(OnContentClickListener mOnContentClicListener){
+        this.mOnContentClicListener=mOnContentClicListener;
+    }
+
+    public void setOnSueClickListener(OnSueClickListener mOnSueClickListener){
+        this.mOnSueClickListener=mOnSueClickListener;
     }
 
 }

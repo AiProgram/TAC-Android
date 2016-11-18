@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.util.Log;
@@ -21,8 +22,10 @@ import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.GiveAndReceiveJobs.AssessList;
 import com.tac.iparttimejob.UI.RegisterAndLogin.Login;
 import com.tac.iparttimejob.UI.Utils.BlurBitmap;
+import com.tac.iparttimejob.UI.Utils.DataType;
 import com.tac.iparttimejob.UI.Utils.RoundImageView;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.UI.Utils.BitmapAndStringConverter;
@@ -125,9 +128,15 @@ public class MyManager extends Fragment {
                     case 2:{
                         if(i1==0){
                             //转到招聘者的评价界面
+                            Intent intent=new Intent(getActivity(), AssessList.class);
+                            intent.putExtra("type", DataType.COMMENT_O_TO_A);
+                            startActivity(intent);
                         }
                         else if(i1==1){
                             //转到应聘者界面
+                            Intent intent=new Intent(getActivity(), AssessList.class);
+                            intent.putExtra("type", DataType.COMMENT_A_TO_O);
+                            startActivity(intent);
                         }
                     }break;
                     default:
