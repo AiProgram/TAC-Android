@@ -19,7 +19,6 @@
             android:layout_height="80dp"
             android:id="@+id/riv_user_head"
             android:src="@drawable/user_head_image"
-            android:scaleType="fitXY"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true">
 

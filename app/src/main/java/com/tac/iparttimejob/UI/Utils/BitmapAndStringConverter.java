@@ -60,7 +60,7 @@ public class BitmapAndStringConverter {
      */
     public static String getBitmapStrBase64(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 80, baos);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] bytes = baos.toByteArray();
         return Base64.encodeToString(bytes, 0);
     }

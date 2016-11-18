@@ -47,7 +47,7 @@ public class MyManager extends Fragment {
     private MyELVAdapter adapter;
     private Button btn_exit_login;
 
-    private Bitmap userHeadImage;
+    private Bitmap HeadImage;
 
 
     @Override
@@ -170,20 +170,20 @@ public class MyManager extends Fragment {
             @Override
             public void onFinish(String result) {
                 userImage=userImage.replaceAll(" ","+");
-                userHeadImage=BitmapAndStringConverter.convertStringToIcon(userImage);
+                HeadImage=BitmapAndStringConverter.convertStringToIcon(userImage);
                 //userHeadImage=BitmapAndStringConverter.convertStringToIcon(Object.image1);
                 Log.i("获取到的图片字符串",Object.userImage);
 
-                //设置用户头像和高斯背景
-                //头像的大小应为640X640，在选择头像上传时解决
-                Bitmap bitmap= BlurBitmap.blurBitmap(userHeadImage,25,getContext());
-                final BitmapDrawable bitmapDrawable=new BitmapDrawable(bitmap);
+
+                Bitmap  blurBitmap=HeadImage.copy(Bitmap.Config.ARGB_8888,true);
+                 blurBitmap= BlurBitmap.blurBitmap(blurBitmap,25,getContext());
+                final BitmapDrawable blurDrawabel=new BitmapDrawable(blurBitmap);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Toast.makeText(getActivity(),"获取头像成功"+ userImage.length(),Toast.LENGTH_SHORT).show();
-                        rl_user_filed.setBackgroundDrawable(bitmapDrawable);
-                        riv_user_head.setImageBitmap(userHeadImage);
+                        rl_user_filed.setBackgroundDrawable(blurDrawabel);
+                        riv_user_head.setImageBitmap(HeadImage);
                     }
                 });
                 Log.i("图片字符串", userImage.length()+"");
