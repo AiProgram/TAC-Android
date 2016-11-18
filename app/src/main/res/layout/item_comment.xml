@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="wrap_content"
     android:id="@+id/relativeLayout2"
     android:layout_marginTop="30dp"
     android:layout_below="@+id/relativeLayout"
@@ -11,8 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="用户1:"
+        android:textColor="@color/black"
         android:textSize="25sp"
         android:id="@+id/user1"
+        android:layout_marginLeft="20dp"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -20,6 +22,7 @@
         android:layout_height="wrap_content"
         android:text="评分:"
         android:textSize="25sp"
+        android:textColor="@color/black"
         android:id="@+id/user1_score"
         android:layout_marginEnd="23dp"
         android:layout_alignParentTop="true"
@@ -29,28 +32,46 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="95"
+        android:textColor="#ff0055"
         android:textSize="25sp"
         android:id="@+id/uer1_score_num"
-        android:layout_marginEnd="21dp"
+        android:layout_marginEnd="20dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        android:layout_height="wrap_content"
+        android:text="XXXXXXXXXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxXXXXXXX"
         android:id="@+id/uer1_assess"
         android:textSize="25sp"
         android:layout_centerVertical="true"
+        android:layout_below="@+id/view"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="举报"
-        android:textColor="#ff0055"
-        android:textSize="20sp"
+        android:textColor="#447eea"
+        android:textSize="25sp"
         android:id="@+id/textView"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/uer1_assess"
+        android:layout_marginRight="30dp"
         android:layout_alignEnd="@+id/uer1_score_num" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#aaaaaa"
+        android:layout_alignParentStart="true"
+        android:id="@+id/view"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/user1" />
 </RelativeLayout>
