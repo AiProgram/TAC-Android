@@ -65,6 +65,10 @@
         <activity android:name=".UI.GiveAndReceiveJobs.AssessList">
 
         </activity>
+
+        <activity android:name=".UI.MyManager.Feedback">
+
+        </activity>
         <activity android:name=".UI.RegisterAndLogin.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

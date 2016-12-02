@@ -30,12 +30,12 @@ public class Advice extends AppCompatActivity  {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.feedback);
+        setContentView(R.layout.layout_send_feedback);
         title=(TextView)findViewById(R.id.feedback_title);
         adviceTitle=(TextView)findViewById(R.id.feedback_title2);
-        advice=(TextView)findViewById(R.id.advice);
-        confirm=(Button)findViewById(R.id.feedback_btn_sure);
-        cancel=(Button)findViewById(R.id.feedback_btn_cancel);
+        advice=(TextView)findViewById(R.id.et_set_advice);
+        confirm=(Button)findViewById(R.id.btn_send_feedback);
+        cancel=(Button)findViewById(R.id.btn_cancel_feedback);
         confirm.setOnClickListener(new View.OnClickListener() {
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
             String date=sdf.format(new java.util.Date());

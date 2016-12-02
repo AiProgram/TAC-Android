@@ -21,7 +21,7 @@ public class HttpAddress {
     public static final String GET_PERSONAL_RESUME         ="tacpersonal/getResume";
     //
     public static final String GET_USER_INFORMATION        ="";
-    public static final String GET_USER_INFORMATION_BY_NAME        ="tacpersonal/getResumeByName";
+    public static final String GET_USER_INFORMATION_BY_NAME        ="tacpersonal/getUserByName";
     //更新用户信息
     public static final String SET_USER_INFORMATION        ="tacpersonal/update";
     //反馈

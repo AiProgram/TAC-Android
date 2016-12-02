@@ -237,15 +237,15 @@ public class ReceiveJobsList extends Fragment{
             getApplicationList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(final String result) {
+                    cloneUnsignedList();
+                    unsignedPage++;
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             //Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            rv_receive_jobs.notifyData();
                         }
                     });
-                    cloneUnsignedList();
-                    rv_receive_jobs.notifyData();
-                    unsignedPage++;
                 }
 
                 @Override
@@ -262,15 +262,15 @@ public class ReceiveJobsList extends Fragment{
             getApplicantList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(String result) {
+                    cloneSignedList();
+                    signedPage++;
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                           // Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            rv_receive_jobs.notifyData();
                         }
                     });
-                    cloneSignedList();
-                    rv_receive_jobs.notifyData();
-                    signedPage++;
                 }
 
                 @Override
@@ -311,17 +311,15 @@ public class ReceiveJobsList extends Fragment{
                 @Override
                 public void onFinish(final String result) {
                     rv_receive_jobs.setLoadMoreEnable(true);
-
+                    addUnsignedList();
+                    unsignedPage++;
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             //Toast.makeText(getActivity(), "上拉更多成功", Toast.LENGTH_SHORT).show();
+                            rv_receive_jobs.notifyData();
                         }
                     });
-
-                    addUnsignedList();
-                    rv_receive_jobs.notifyData();
-                    unsignedPage++;
                 }
 
                 @Override
@@ -341,17 +339,15 @@ public class ReceiveJobsList extends Fragment{
                 @Override
                 public void onFinish(String result) {
                     rv_receive_jobs.setLoadMoreEnable(true);
-
+                    addSignedList();
+                    signedPage++;
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             //Toast.makeText(getActivity(), "上拉更多成功", Toast.LENGTH_SHORT).show();
+                            rv_receive_jobs.notifyData();
                         }
                     });
-
-                    addSignedList();
-                    rv_receive_jobs.notifyData();
-                    signedPage++;
                     Log.i("已申请页面数",signedPage+"");
                 }
 

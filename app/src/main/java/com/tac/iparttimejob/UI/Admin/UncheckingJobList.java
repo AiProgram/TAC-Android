@@ -160,15 +160,15 @@ public class UncheckingJobList extends Fragment{
             QueryInformation.getRecruitListForManager(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(final String result) {
+                    cloneJobList();
+                    page++;
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            rv_unchecking_job_list.notifyData();
                         }
                     });
-                    cloneJobList();
-                    rv_unchecking_job_list.notifyData();
-                    page++;
                 }
 
                 @Override
@@ -198,17 +198,15 @@ public class UncheckingJobList extends Fragment{
                 @Override
                 public void onFinish(final String result) {
                     rv_unchecking_job_list.setLoadMoreEnable(true);
-
+                    addJobList();
+                    page++;
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             //Toast.makeText(getActivity(), "上拉更多成功", Toast.LENGTH_SHORT).show();
+                            rv_unchecking_job_list.notifyData();
                         }
                     });
-
-                    addJobList();
-                    rv_unchecking_job_list.notifyData();
-                    page++;
                 }
 
                 @Override

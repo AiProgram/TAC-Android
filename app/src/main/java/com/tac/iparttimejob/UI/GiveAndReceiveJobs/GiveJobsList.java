@@ -305,15 +305,15 @@ public class GiveJobsList extends Fragment{
             getRecruitList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(final String result) {
+                    cloneValidList();
+                    validPage++;
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            rv_give_jobs.notifyData();
                             Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
                         }
                     });
-                    cloneValidList();
-                    rv_give_jobs.notifyData();
-                    validPage++;
                 }
 
                 @Override
@@ -330,15 +330,15 @@ public class GiveJobsList extends Fragment{
             getRecruitList(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(String result) {
+                    cloneUnValidList();
+                    unvalidPage++;
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            rv_give_jobs.notifyData();
                         }
                     });
-                    cloneUnValidList();
-                    rv_give_jobs.notifyData();
-                    unvalidPage++;
                 }
 
                 @Override
@@ -385,17 +385,15 @@ public class GiveJobsList extends Fragment{
                 @Override
                 public void onFinish(final String result) {
                     rv_give_jobs.setLoadMoreEnable(true);
-
+                    addValidList();
+                    validPage++;
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             //Toast.makeText(getActivity(), "上拉更多成功", Toast.LENGTH_SHORT).show();
+                            rv_give_jobs.notifyData();
                         }
                     });
-
-                    addValidList();
-                    rv_give_jobs.notifyData();
-                    validPage++;
                 }
 
                 @Override
@@ -415,17 +413,15 @@ public class GiveJobsList extends Fragment{
                 @Override
                 public void onFinish(String result) {
                     rv_give_jobs.setLoadMoreEnable(true);
-
+                    addUnvalidList();
+                    unvalidPage++;
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             //Toast.makeText(getActivity(), "上拉更多成功", Toast.LENGTH_SHORT).show();
+                            rv_give_jobs.notifyData();
                         }
                     });
-
-                    addUnvalidList();
-                    rv_give_jobs.notifyData();
-                    unvalidPage++;
                 }
 
                 @Override

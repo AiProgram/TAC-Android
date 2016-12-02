@@ -23,6 +23,7 @@ import com.tac.iparttimejob.Class.ResumeResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.EventBusEvent.SetAccountInfoEvent;
 import com.tac.iparttimejob.UI.GiveAndReceiveJobs.AssessList;
 import com.tac.iparttimejob.UI.RegisterAndLogin.Login;
 import com.tac.iparttimejob.UI.Utils.BlurBitmap;
@@ -30,6 +31,11 @@ import com.tac.iparttimejob.UI.Utils.DataType;
 import com.tac.iparttimejob.UI.Utils.RoundImageView;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.UI.Utils.BitmapAndStringConverter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -54,6 +60,12 @@ public class MyManager extends Fragment {
 
     private Bitmap HeadImage;
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //撤销EventBus注册，必须有
+        EventBus.getDefault().unregister(this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
@@ -101,6 +113,9 @@ public class MyManager extends Fragment {
                 getActivity().finish();
             }
         });
+
+        //注册EventBUs
+        EventBus.getDefault().register(this);
     }
 
     public void initViews(){
@@ -175,6 +190,8 @@ public class MyManager extends Fragment {
                     }break;
                     case 3:{
                         //转到反馈见面
+                        Intent intent=new Intent(getActivity(),Feedback.class);
+                        startActivity(intent);
                     }break;
                 }
                 return false;
@@ -224,5 +241,12 @@ public class MyManager extends Fragment {
 
             }
         });
+    }
+
+    //EventBus刷新事件接收函数
+    //当修改头像或者账号信息成功后刷新信息
+    @Subscribe(threadMode=ThreadMode.MAIN)
+    public void onRefreshContent(SetAccountInfoEvent event){
+        getUserHeadImage();
     }
 }

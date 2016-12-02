@@ -22,10 +22,13 @@ import android.widget.Toast;
 
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.EventBusEvent.SetAccountInfoEvent;
 import com.tac.iparttimejob.UI.Utils.ImageUtils;
 import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.UI.Utils.BitmapAndStringConverter;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -316,6 +319,7 @@ public class SetAccountInfo extends AppCompatActivity{
         EditInformation.setImage(setUserImage, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
+                EventBus.getDefault().post(new SetAccountInfoEvent());
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
