@@ -24,25 +24,20 @@ public class UserResult {
     private boolean success;
     private String  message;
 
-    public User getUser() {
-        return user;
+
+    public User getData() {
+        return data;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setData(User data) {
+        this.data = data;
     }
 
-    private User user;
+    private User data;
 
     public static class User {
 
-        public String getUserid() {
-            return userid;
-        }
 
-        public void setUserid(String userid) {
-            this.userid = userid;
-        }
 
         public String getAccount() {
             return account;
@@ -108,6 +103,14 @@ public class UserResult {
             this.type = type;
         }
 
+        public String getUserid() {
+            return userid;
+        }
+
+        public void setUserid(String userid) {
+            this.userid = userid;
+        }
+
         private String userid;
         private String account;
         private String nickname;
@@ -115,7 +118,18 @@ public class UserResult {
         private String phone;
         private String passwd;
         private String email;
+
+        public float getPoint() {
+            return point;
+        }
+
+        public void setPoint(float point) {
+            this.point = point;
+        }
+
         private String image;
+        private float point;
+
         private int type;
 
         public int getKind() {

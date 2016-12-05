@@ -10,7 +10,9 @@ public class Object {
 
     //用户信息返回
     public static UserResult.User       userObject=null;
-    public static Resume      getResumeObject=null;
+    public static UserResult.User       getuserObject=null;
+    //
+    public static Resume getResumeObject=null;
     //个人资料
     public static Resume             resumeObject=null;
     //招聘信息
@@ -56,7 +58,7 @@ public class Object {
 
     public static List<AssessmentAtoO>   atooAssessmentByIDObjectList;
     public static List<AssessmentOtoA>   otoaAssessmentByIDObjectList;
-    public static Advice.suggesstion suggesstion;
+    public static List<Advice.suggesstion> suggesstion;
 
 
 

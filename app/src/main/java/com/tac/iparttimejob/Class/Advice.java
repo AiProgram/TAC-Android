@@ -1,5 +1,7 @@
 package com.tac.iparttimejob.Class;
 
+import java.util.List;
+
 /**
  * Created by 守候。 on 2016/11/2.
  */
@@ -21,17 +23,20 @@ public class Advice {
         this.message = message;
     }
 
-    public suggesstion getData() {
-        return data;
-    }
 
-    public void setData(suggesstion data) {
-        this.data = data;
-    }
 
     private boolean success;
     private String message;
-    private suggesstion data;
+
+    public List<suggesstion> getData() {
+        return data;
+    }
+
+    public void setData(List<suggesstion> data) {
+        this.data = data;
+    }
+
+    private List<suggesstion> data;
     public class suggesstion{
         public int getAdviceid() {
             return adviceid;
