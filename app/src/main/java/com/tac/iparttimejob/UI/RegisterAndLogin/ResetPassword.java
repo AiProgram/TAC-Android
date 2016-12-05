@@ -24,26 +24,32 @@ import java.util.Map;
  */
 
 public class ResetPassword extends AppCompatActivity {
-    private EditText editText;
-    private Button button;
-    private Button bt_reset_password;
-    private EditText et_reset_password;
+    private EditText et_username_reset_password;
+    private EditText et_email_reset_password;
+    private EditText et_verification_code;
+    private EditText et_password_reset;
     private EditText et_confirm_reset_password;
+    private Button bt_send_verification_code;
+    private Button bt_reset_password;
+    private Button bt_cancel_reset_password;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_email);
+        setContentView(R.layout.layout_reset_password);
         getViews();
         initViews();
         initListener();
     }
 
     private void getViews(){
-        editText=(EditText) findViewById(R.id.editText);
-        button=(Button) findViewById(R.id.button);
-        bt_reset_password=(Button) findViewById(R.id.bt_reset_password);
-        et_reset_password=(EditText) findViewById(R.id.et_reset_password);
+        et_username_reset_password=(EditText) findViewById(R.id.et_username_reset_password);
+        et_email_reset_password=(EditText)   findViewById(R.id.et_email_reset_password);
+        et_verification_code=(EditText) findViewById(R.id.et_verification_code);
+        et_password_reset=(EditText) findViewById(R.id.et_password_reset);
         et_confirm_reset_password=(EditText) findViewById(R.id.et_confirm_reset_password);
+        bt_send_verification_code=(Button) findViewById(R.id.bt_send_verification_code);
+        bt_reset_password=(Button) findViewById(R.id.bt_reset_password);
+        bt_cancel_reset_password=(Button) findViewById(R.id.bt_cancel_reset_password);
     }
 
     private void initViews(){
@@ -52,10 +58,10 @@ public class ResetPassword extends AppCompatActivity {
 
     private void initListener(){
         //获取验证码
-        button.setOnClickListener(new View.OnClickListener() {
+        bt_send_verification_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email=editText.getText().toString();
+                String email=et_email_reset_password.getText().toString();
                 Map<String,String> getCert=new LinkedHashMap<String, String>();
                 getCert.put("getterEmail",email);
                 QueryInformation.getEmailInformation(getCert, new HttpCallBackListener() {
@@ -65,14 +71,15 @@ public class ResetPassword extends AppCompatActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(ResetPassword.this,"验证码发送成功",Toast.LENGTH_SHORT).show();
-                                button.setText(Object.emailData);
+                                bt_send_verification_code.setText("验证码已发送");
+                                bt_send_verification_code.setEnabled(false);
                             }
                         });
                     }
 
                     @Override
                     public void onError(String error) {
-
+                        Toast.makeText(ResetPassword.this,"验证码发送失败",Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -84,36 +91,44 @@ public class ResetPassword extends AppCompatActivity {
             public void onClick(View view) {
                 String password="";
                 String confirmPassword="";
-                password=et_reset_password.getText().toString().trim();
+                String vertificationCode="";
+                String username="";
+                password=et_password_reset.getText().toString().trim();
                 confirmPassword=et_confirm_reset_password.getText().toString().trim();
+                vertificationCode=et_verification_code.getText().toString().trim();
+                username=et_username_reset_password.getText().toString().trim();
                 //检测两次输入密码是否一致
                 if(password.equals(confirmPassword)){
-                    String username="";
-                    Map<String,String> resetPassword=new LinkedHashMap<String, String>();
-                    resetPassword.put("username",username);
-                    resetPassword.put("password",password);
-                    EditInformation.reSetUserPassword(resetPassword, new HttpCallBackListener() {
-                        @Override
-                        public void onFinish(String result) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(ResetPassword.this,"重置成功，请重新登录",Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }
-                            });
-                        }
+                    //验证验证码
+                    if(vertificationCode.equals(Object.emailData)) {
+                        Map<String, String> resetPassword = new LinkedHashMap<String, String>();
+                        resetPassword.put("username", username);
+                        resetPassword.put("password", password);
+                        EditInformation.reSetUserPassword(resetPassword, new HttpCallBackListener() {
+                            @Override
+                            public void onFinish(String result) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(ResetPassword.this, "重置成功，请重新登录", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                });
+                            }
 
-                        @Override
-                        public void onError(String error) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(ResetPassword.this,"重置失败",Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    });
+                            @Override
+                            public void onError(String error) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(ResetPassword.this, "重置失败", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });
+                    }else{
+                        Toast.makeText(ResetPassword.this,"验证码错误",Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else{
                     Toast.makeText(ResetPassword.this,"两次输入密码不一致",Toast.LENGTH_SHORT).show();
