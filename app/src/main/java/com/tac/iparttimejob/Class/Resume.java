@@ -5,15 +5,15 @@ package com.tac.iparttimejob.Class;
  */
 
 public class Resume {
-    public UserResult.User getUser() {
-        return user;
+    public UserResult.User getTac_user() {
+        return tac_user;
     }
 
-    public void setUser(UserResult.User user) {
-        this.user = user;
+    public void setTac_user(UserResult.User tac_user) {
+        this.tac_user = tac_user;
     }
 
-    private UserResult.User user;
+    private UserResult.User tac_user;
 
     public int getResumeid() {
         return resumeid;

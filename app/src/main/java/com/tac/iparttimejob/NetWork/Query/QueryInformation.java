@@ -18,6 +18,7 @@ import com.tac.iparttimejob.Class.Resume;
 import com.tac.iparttimejob.Class.ResumeResult;
 import com.tac.iparttimejob.Class.ReturnMessage;
 import com.tac.iparttimejob.Class.UserImage;
+import com.tac.iparttimejob.Class.UserResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpAddress;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Connect.HttpPost;
@@ -36,6 +37,7 @@ import static com.tac.iparttimejob.Class.Object.chooseApplicationList;
 import static com.tac.iparttimejob.Class.Object.emailData;
 import static com.tac.iparttimejob.Class.Object.enrollObjectList;
 import static com.tac.iparttimejob.Class.Object.getResumeObject;
+import static com.tac.iparttimejob.Class.Object.getuserObject;
 import static com.tac.iparttimejob.Class.Object.inRecuitObjectList;
 import static com.tac.iparttimejob.Class.Object.notRecuitObjectList;
 import static com.tac.iparttimejob.Class.Object.otoaAssessmentByIDObjectList;
@@ -76,14 +78,14 @@ public class QueryInformation extends HttpPost{
                             resumeObject=new Resume();
                         }
 
-                            resumeObject.setUser(resumeResult.getUser());
-                            resumeObject.setResumeid(resumeResult.getResumeid());
-                            resumeObject.setNickname(resumeResult.getNickname());
-                            resumeObject.setName(resumeResult.getName());
-                            resumeObject.setPhone(resumeResult.getPhone());
-                            resumeObject.setEmail(resumeResult.getEmail());
-                            resumeObject.setSingleResume(resumeResult.getSingleResume());
-                            resumeObject.setDetailResume(resumeResult.getDetailResume());
+                            resumeObject.setTac_user(resumeResult.getData().getTac_user());
+                            resumeObject.setResumeid(resumeResult.getData().getResumeid());
+                            resumeObject.setNickname(resumeResult.getData().getNickname());
+                            resumeObject.setName(resumeResult.getData().getName());
+                            resumeObject.setPhone(resumeResult.getData().getPhone());
+                            resumeObject.setEmail(resumeResult.getData().getEmail());
+                            resumeObject.setSingleResume(resumeResult.getData().getSingleResume());
+                            resumeObject.setDetailResume(resumeResult.getData().getDetailResume());
                             listener.onFinish("成功");
 
                     }
@@ -123,17 +125,19 @@ public class QueryInformation extends HttpPost{
                 {
                     if(resumeResult.isSuccess())
                     {
-                        if(getResumeObject==null) {
+                        if(getResumeObject==null)
+                        {
                             getResumeObject=new Resume();
                         }
-                        getResumeObject.setUser(resumeResult.getUser());
-                        getResumeObject.setResumeid(resumeResult.getResumeid());
-                        getResumeObject.setNickname(resumeResult.getNickname());
-                        getResumeObject.setName(resumeResult.getName());
-                        getResumeObject.setPhone(resumeResult.getPhone());
-                        getResumeObject.setEmail(resumeResult.getEmail());
-                        getResumeObject.setSingleResume(resumeResult.getSingleResume());
-                        getResumeObject.setDetailResume(resumeResult.getDetailResume());
+
+                        getResumeObject.setTac_user(resumeResult.getData().getTac_user());
+                        getResumeObject.setResumeid(resumeResult.getData().getResumeid());
+                        getResumeObject.setNickname(resumeResult.getData().getNickname());
+                        getResumeObject.setName(resumeResult.getData().getName());
+                        getResumeObject.setPhone(resumeResult.getData().getPhone());
+                        getResumeObject.setEmail(resumeResult.getData().getEmail());
+                        getResumeObject.setSingleResume(resumeResult.getData().getSingleResume());
+                        getResumeObject.setDetailResume(resumeResult.getData().getDetailResume());
 
                             listener.onFinish("查看成功");
                     }
@@ -141,6 +145,60 @@ public class QueryInformation extends HttpPost{
                     {
                         Log.d("gsonErr:",resumeResult.toString());
                         listener.onError(resumeResult.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.d("POST错误:",error);
+                listener.onError(error);
+            }
+        });
+    }
+    //查看用户资料
+    public static void getInformationByUserName(Map<String,String> params, final HttpCallBackListener listener)
+    {
+        post(HttpAddress.HOST + HttpAddress.GET_USER_INFORMATION, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                UserResult user=null;
+                try {
+
+                    user=new Gson().fromJson(result,UserResult.class);
+                }
+                catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(user!=null)
+                {
+                    if(user.isSuccess())
+                    {
+                        if(getuserObject==null)
+                        {
+                            getuserObject=new UserResult.User();
+                        }
+
+                        getuserObject.setUserid(user.getData().getUserid());
+                        getuserObject.setKind(user.getData().getKind());
+                        getuserObject.setNickname(user.getData().getNickname());
+                        getuserObject.setName(user.getData().getName());
+                        getuserObject.setPhone(user.getData().getPhone());
+                        getuserObject.setEmail(user.getData().getEmail());
+                        getuserObject.setAccount(user.getData().getAccount());
+                        getuserObject.setImage(user.getData().getImage());
+                        getuserObject.setPasswd(user.getData().getPasswd());
+                        getuserObject.setType(user.getData().getType());
+                        getuserObject.setPoint(user.getData().getPoint());
+
+                        listener.onFinish("查看成功");
+                    }
+                    else
+                    {
+                        Log.d("gsonErr:",user.toString());
+                        listener.onError(user.getMessage());
                     }
                 }
                 else listener.onError(GSON_ERR);
@@ -489,8 +547,8 @@ public class QueryInformation extends HttpPost{
                     if (chooseApplication.isSuccess()) {
                         chooseApplicationList=chooseApplication.getData();
                         //chooseApplication.getData().addAll(chooseApplicationList);
-                        Log.d("list:",chooseApplicationList.get(0).getDealdine());
-                        Log.d("list:",chooseApplicationList.get(0).getDisplaytime());
+                        Log.i("list:",chooseApplicationList.get(0).getDealdine());
+                        Log.i("list:",chooseApplicationList.get(0).getDisplaytime());
                         listener.onFinish("成功");
                     } else {
                         listener.onError(chooseApplication.getMessage());
@@ -878,12 +936,7 @@ public class QueryInformation extends HttpPost{
                 }
                 if(advice!=null) {
                     if (advice.isSuccess()) {
-                        suggesstion.setPhone(advice.getData().getPhone());
-                        suggesstion.setAdvice(advice.getData().getAdvice());
-                        suggesstion.setAdviceid(advice.getData().getAdviceid());
-                        suggesstion.setTime(advice.getData().getTime());
-                        suggesstion.setUserid(advice.getData().getUserid());
-                        suggesstion.setUsername(advice.getData().getUsername());
+                        suggesstion=advice.getData();
                         listener.onFinish("成功");
                     } else {
                         listener.onError(advice.getMessage());
