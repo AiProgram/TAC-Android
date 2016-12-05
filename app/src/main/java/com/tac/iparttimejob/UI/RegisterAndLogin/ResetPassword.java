@@ -89,52 +89,89 @@ public class ResetPassword extends AppCompatActivity {
         bt_reset_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String password="";
-                String confirmPassword="";
-                String vertificationCode="";
-                String username="";
-                password=et_password_reset.getText().toString().trim();
-                confirmPassword=et_confirm_reset_password.getText().toString().trim();
-                vertificationCode=et_verification_code.getText().toString().trim();
-                username=et_username_reset_password.getText().toString().trim();
-                //检测两次输入密码是否一致
-                if(password.equals(confirmPassword)){
-                    //验证验证码
-                    if(vertificationCode.equals(Object.emailData)) {
-                        Map<String, String> resetPassword = new LinkedHashMap<String, String>();
-                        resetPassword.put("username", username);
-                        resetPassword.put("password", password);
-                        EditInformation.reSetUserPassword(resetPassword, new HttpCallBackListener() {
-                            @Override
-                            public void onFinish(String result) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(ResetPassword.this, "重置成功，请重新登录", Toast.LENGTH_SHORT).show();
-                                        finish();
-                                    }
-                                });
-                            }
-
-                            @Override
-                            public void onError(String error) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(ResetPassword.this, "重置失败", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        });
-                    }else{
-                        Toast.makeText(ResetPassword.this,"验证码错误",Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else{
-                    Toast.makeText(ResetPassword.this,"两次输入密码不一致",Toast.LENGTH_SHORT).show();
-                    et_confirm_reset_password.setText("");
-                }
+                checkEmail();
             }
         });
+    }
+
+    private void checkEmail(){
+        String username=et_username_reset_password.getText().toString().trim();
+        final String email=et_email_reset_password.getText().toString().trim();
+        Map<String,String> getInfor=new LinkedHashMap<>();
+        getInfor.put("username",username);
+        QueryInformation.getInformationByUserName(getInfor, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                if(Object.getuserObject.getEmail().equals(email)){
+                    editPassword();
+                }
+                else{
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ResetPassword.this,"输入邮箱不是注册邮箱",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ResetPassword.this,"验证邮箱对应性失败",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    private void editPassword(){
+        String password="";
+        String confirmPassword="";
+        String vertificationCode="";
+        String username="";
+        password=et_password_reset.getText().toString().trim();
+        confirmPassword=et_confirm_reset_password.getText().toString().trim();
+        vertificationCode=et_verification_code.getText().toString().trim();
+        username=et_username_reset_password.getText().toString().trim();
+        //检测两次输入密码是否一致
+        if(password.equals(confirmPassword)){
+            //验证验证码
+            if(vertificationCode.equals(Object.emailData)) {
+                Map<String, String> resetPassword = new LinkedHashMap<String, String>();
+                resetPassword.put("username", username);
+                resetPassword.put("password", password);
+                EditInformation.reSetUserPassword(resetPassword, new HttpCallBackListener() {
+                    @Override
+                    public void onFinish(String result) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(ResetPassword.this, "重置成功，请重新登录", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(ResetPassword.this, "重置失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }else{
+                Toast.makeText(ResetPassword.this,"验证码错误",Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            Toast.makeText(ResetPassword.this,"两次输入密码不一致",Toast.LENGTH_SHORT).show();
+            et_confirm_reset_password.setText("");
+        }
     }
 }
