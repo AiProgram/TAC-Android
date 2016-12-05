@@ -28,6 +28,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.tac.iparttimejob.Class.Object.getResumeObject;
+import static com.tac.iparttimejob.Class.Object.resumeObject;
+
 /**
  * Created by 守候。 on 2016/11/12.
  * 报名列表
@@ -102,7 +105,7 @@ public class EnrollList extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 //跳转至该人的简历
-                Map<String,String> getResume=new LinkedHashMap<String, String>();
+                final Map<String,String> getResume=new LinkedHashMap<String, String>();
                 getResume.put("username",enrollList.get(position).getTac_user().getName());
                 QueryInformation.getUserInformationByName(getResume, new HttpCallBackListener() {
                     @Override
@@ -110,6 +113,9 @@ public class EnrollList extends AppCompatActivity {
                         Intent intent=new Intent(EnrollList.this, ShowResume.class);
                         startActivity(intent);
                         //Log.i("简历",getResumeObject.getName());
+                        Log.i("简历信息",resumeObject.getName().isEmpty()+"");
+                        Log.i("简历信息",resumeObject.getEmail().isEmpty()+"");
+                        Log.i("简历信息",resumeObject.getEmail().isEmpty()+"");
                     }
 
                     @Override

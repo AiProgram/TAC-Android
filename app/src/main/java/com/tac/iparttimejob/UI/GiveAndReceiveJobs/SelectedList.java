@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -98,6 +99,9 @@ public class SelectedList extends AppCompatActivity{
                 QueryInformation.getPersonalResume(getResume, new HttpCallBackListener() {
                     @Override
                     public void onFinish(String result) {
+                        Log.i("简历信息",Object.resumeObject.getName());
+                        Log.i("简历信息",Object.resumeObject.getEmail());
+                        Log.i("简历信息",Object.resumeObject.getEmail());
                         Intent intent=new Intent(SelectedList.this, ShowResume.class);
                         startActivity(intent);
                     }
@@ -169,14 +173,15 @@ public class SelectedList extends AppCompatActivity{
         QueryInformation.getChooseEnrollList(getList, new HttpCallBackListener() {
             @Override
             public void onFinish(final String result) {
+                cloneEnrollList();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         //Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                        rv_enroll_list.notifyData();
                     }
                 });
-                cloneEnrollList();
-                rv_enroll_list.notifyData();
+
                 page++;
             }
 
@@ -207,16 +212,14 @@ public class SelectedList extends AppCompatActivity{
             @Override
             public void onFinish(final String result) {
                 rv_enroll_list.setLoadMoreEnable(true);
-
+                addEnrollList();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         //Toast.makeText(getActivity(), "上拉更多成功", Toast.LENGTH_SHORT).show();
+                        rv_enroll_list.notifyData();
                     }
                 });
-
-                addEnrollList();
-                rv_enroll_list.notifyData();
                 page++;
             }
 
