@@ -136,7 +136,13 @@ public class PostJobs extends AppCompatActivity{
 
     //检查输入是否合格
     public boolean checkInput(){
-
+        //获得当前时间
+        //检查输入是否有空
+        if(username.isEmpty()||title.isEmpty()||workplace.isEmpty()||phone.isEmpty()||detail.isEmpty()
+                ||deadline.isEmpty()||displaytime.isEmpty()||num.isEmpty()||money.isEmpty()){
+            Toast.makeText(PostJobs.this,"输入不得有空",Toast.LENGTH_SHORT).show();
+            return false;
+        }
         //检查发布及截至时间时间
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
         try{
