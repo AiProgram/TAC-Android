@@ -553,6 +553,40 @@ public class EditInformation extends HttpPost {
             }
         });
     }
+///审核招聘不通过并提交不通过理由
+    public static void changeRecruitReason(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.RECRUIT_REASON, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                ReturnMessage returnMessage=null;
+                try {
+                    returnMessage=new Gson().fromJson(result,ReturnMessage.class);
+                }
+                catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(returnMessage!=null)
+                {
+                    if(returnMessage.isSuccess())
+                    {
+                        listener.onFinish("审核招聘成功");
+                    }
+                    else
+                    {
+                        listener.onError(returnMessage.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.d("postErr:",error);
+                listener.onError(error);
+            }
+        });
+    }
     //更改otoa评论状态
     public static void setOtoaAssementStatus(Map<String,String>params,final HttpCallBackListener listener){
         post(HttpAddress.HOST + HttpAddress.SET_OTOA_ASSEMENT_STATUS, params, new HttpCallBackListener() {

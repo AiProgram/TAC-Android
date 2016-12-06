@@ -42,6 +42,8 @@ public class HttpAddress {
     public static final String GET_IN_RECUIT_LIST          ="tacrecruit/getRecruiting";
     public static final String GET_NOT_RECUIT_LIST         ="tacrecruit/getRecruited";
     public static final String SET_RECRUIIT_STATUS      ="tacrecruit/changeStatusOfRecruit";
+    //
+    public static final String RECRUIT_REASON           ="tacrecruit/changeStatusOfRecruitAndReason";
     //查看招聘者评价
     public static final String GET_OTOACOMMENT          ="tacpersonal/getAToOComment";
 //举报
