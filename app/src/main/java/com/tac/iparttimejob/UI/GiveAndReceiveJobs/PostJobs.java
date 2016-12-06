@@ -14,15 +14,20 @@ import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.UI.Utils.DataType;
+import com.tac.iparttimejob.UI.Utils.FormatedTimeGeter;
 
 import static com.tac.iparttimejob.Class.Object.loginObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * Created by AiProgram on 2016/10/21.
+ *
+ * 这是用来填写发布招聘的类
  */
 
 public class PostJobs extends AppCompatActivity{
@@ -84,9 +89,6 @@ public class PostJobs extends AppCompatActivity{
                 //检查输入格式，预留
                 if(checkInput()){
                     postJobs();
-                }else{
-                    //输入报错
-                    Toast.makeText(PostJobs.this,"请检查您的输入格式",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -132,8 +134,26 @@ public class PostJobs extends AppCompatActivity{
         detail="薪水 :"+money+"\n"+detail;
     }
 
-    //检查输入是否合格,待添加
+    //检查输入是否合格
     public boolean checkInput(){
+
+        //检查发布及截至时间时间
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+        try{
+            Date currentTime=format.parse(FormatedTimeGeter.getFormatedDate());
+            Date postTime=format.parse(displaytime);
+            Date endTime=format.parse(deadline);
+            if(postTime.compareTo(currentTime)<=0){
+                Toast.makeText(PostJobs.this,"发布时间不得早于当前时间",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            if(endTime.compareTo(postTime)<0){
+                Toast.makeText(PostJobs.this,"截止时间不得早于发布时间",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return true;
     }
 
@@ -186,14 +206,14 @@ public class PostJobs extends AppCompatActivity{
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         // TODO Auto-generated method stub
-                       int mYear = year;
-                       int mMonth = month;
-                       int mDay = day;
+                       String mYear = year+"";
+                       String mMonth = month+"";
+                       String mDay = day+"";
                         //更新EditText控件日期 小于10加0
-                        btn_input_deadline.setText(new StringBuilder().append(mYear).append("-")
-                                .append((mMonth + 1) < 10 ? 0 + (mMonth + 1) : (mMonth + 1))
+                        btn_input_deadline.setText(new StringBuilder().append(year).append("-")
+                                .append((month + 1) < 10 ? "0" + (month + 1) : (month + 1))
                                 .append("-")
-                                .append((mDay < 10) ? 0 + mDay : mDay) );
+                                .append((day < 10) ? "0" + day : day) );
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH) ).show();
@@ -205,14 +225,14 @@ public class PostJobs extends AppCompatActivity{
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         // TODO Auto-generated method stub
-                        int mYear = year;
-                        int mMonth = month;
-                        int mDay = day;
+                        String mYear = year+"";
+                        String mMonth = month+"";
+                        String mDay = day+"";
                         //更新EditText控件日期 小于10加0
-                        btn_input_post_time.setText(new StringBuilder().append(mYear).append("-")
-                                .append((mMonth + 1) < 10 ? 0 + (mMonth + 1) : (mMonth + 1))
+                        btn_input_post_time.setText(new StringBuilder().append(year).append("-")
+                                .append((month + 1) < 10 ? "0" + (month + 1) : (month + 1))
                                 .append("-")
-                                .append((mDay < 10) ? 0 + mDay : mDay) );
+                                .append((day < 10) ? "0" + day : day) );
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH) ).show();
