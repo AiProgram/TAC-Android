@@ -39,8 +39,8 @@ public class AssessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         TextView tv_sue_comment;
         public AssessmentViewHolder(View itemView) {
             super(itemView);
-            tv_username_comment=(TextView) itemView.findViewById(R.id.tv_username_comment);
-            tv_point_comment=(TextView) itemView.findViewById(R.id.tv_point_comment);
+            tv_username_comment=(TextView) itemView.findViewById(R.id.tv_username_feedback);
+            tv_point_comment=(TextView) itemView.findViewById(R.id.tv_phone_feedback);
             tv_content_comment=(TextView) itemView.findViewById(R.id.tv_content_comment);
             tv_sue_comment=(TextView) itemView.findViewById(R.id.tv_sue_comment);
         }

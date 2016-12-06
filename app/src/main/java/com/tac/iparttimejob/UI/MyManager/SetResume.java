@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.tac.iparttimejob.Class.Object;
@@ -83,7 +84,7 @@ public class SetResume extends AppCompatActivity{
             public void onClick(View view) {
                 getInput();
                 //设置简历,接口存在问题，等待修改
-                Map<String,String> setResume=new LinkedHashMap<String, String>();
+                final Map<String,String> setResume=new LinkedHashMap<String, String>();
                 setResume.put("userid", Object.userObject.getUserid());
                 setResume.put("name",Object.userObject.getName());
                 setResume.put("nickname",name);
@@ -91,17 +92,28 @@ public class SetResume extends AppCompatActivity{
                 setResume.put("email",email);
                 setResume.put("singleResume",singleInfo);
                 setResume.put("detailResume",detail);
-                EditInformation.setCreatPersonalResume(setResume, new HttpCallBackListener() {
+                EditInformation.setUpdateRecruit(setResume, new HttpCallBackListener() {
                     @Override
                     public void onFinish(String result) {
                         //提示更新完成
                         //退出界面,当提示完善时可以不退出
                         finish();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SetResume.this,"更新简历成功",Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
 
                     @Override
                     public void onError(String error) {
-
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SetResume.this,"更新简历失败",Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
             }

@@ -94,6 +94,7 @@ public class ResetPassword extends AppCompatActivity {
         });
     }
 
+    //检验是不是注册邮箱
     private void checkEmail(){
         String username=et_username_reset_password.getText().toString().trim();
         final String email=et_email_reset_password.getText().toString().trim();
