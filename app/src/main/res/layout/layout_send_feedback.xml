@@ -32,26 +32,35 @@
         android:text="提交"
         android:textSize="20sp"
         android:layout_marginTop="40dp"
+        android:textColor="#ffffff"
         android:background="@drawable/button_style_sure"
         android:id="@+id/btn_send_feedback"
         android:layout_below="@+id/et_set_advice"
         android:layout_alignStart="@+id/feedback_title2" />
 
-    <com.rengwuxian.materialedittext.MaterialEditText
+    <EditText
         android:layout_width="fill_parent"
         android:layout_height="150dp"
         android:hint="请输入您的宝贵意见"
         android:id="@+id/et_set_advice"
         android:layout_marginTop="60dp"
-        android:inputType="text"
+        android:inputType="textMultiLine"
+        android:minLines="8"
+        android:maxLines="30"
+        android:scrollbars="vertical"
+        android:gravity="top"
+        android:background="@android:drawable/edit_text"
         android:layout_below="@+id/feedback_title2"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
 
     <Button
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:text="取消"
         android:textSize="20sp"
+        android:textColor="#ffffff"
         android:background="@drawable/button_style_cancel"
         android:id="@+id/btn_cancel_feedback"
         android:layout_alignBaseline="@+id/btn_send_feedback"
