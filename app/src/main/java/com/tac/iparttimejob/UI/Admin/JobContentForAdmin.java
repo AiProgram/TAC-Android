@@ -1,11 +1,14 @@
 package com.tac.iparttimejob.UI.Admin;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,27 +89,28 @@ public class JobContentForAdmin extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 //驳回
-                Map<String,String> rejectJob=new LinkedHashMap<String, String>();
-                rejectJob.put("recruitid",Object.recuitObject.getRecruitid());
-                rejectJob.put("status", DataType.JOB_STATUS_REJECTED+"");
-                EditInformation.setRecruitStatus(rejectJob, new HttpCallBackListener() {
-                    @Override
-                    public void onFinish(String result) {
-                        //驳回成功
-                        finish();
-                    }
-
-                    @Override
-                    public void onError(String error) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                //提示失败
-                                Toast.makeText(JobContentForAdmin.this,"驳回失败",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
+//                Map<String,String> rejectJob=new LinkedHashMap<String, String>();
+//                rejectJob.put("recruitid",Object.recuitObject.getRecruitid());
+//                rejectJob.put("status", DataType.JOB_STATUS_REJECTED+"");
+//                EditInformation.setRecruitStatus(rejectJob, new HttpCallBackListener() {
+//                    @Override
+//                    public void onFinish(String result) {
+//                        //驳回成功
+//                        finish();
+//                    }
+//
+//                    @Override
+//                    public void onError(String error) {
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                //提示失败
+//                                Toast.makeText(JobContentForAdmin.this,"驳回失败",Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//                    }
+//                });
+                showReasonDialog();
             }
         });
 
@@ -130,5 +134,56 @@ public class JobContentForAdmin extends AppCompatActivity{
                 });
             }
         });
+    }
+
+    //展示拒绝发布理由的输入框
+    private void showReasonDialog(){
+        //动态加载Dialog布局
+        final View dialogView= LayoutInflater.from(this).inflate(R.layout.dialog_reason_input,null);
+        final AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        builder.setTitle("驳回理由");
+        builder.setPositiveButton("提交", new DialogInterface.OnClickListener() {
+            //输入驳回理由并提交修改
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //提交拒绝理由
+                EditText et_reject_reason=(EditText) dialogView.findViewById(R.id.et_reject_reason);
+                String reason=et_reject_reason.getText().toString();
+                Map<String,String> reject=new LinkedHashMap<String, String>();
+                reject.put("recruitid",Object.recuitObject.getRecruitid());
+                reject.put("status",DataType.JOB_STATUS_REJECTED+"");
+                reject.put("reason",reason);
+                EditInformation.changeRecruitReason(reject, new HttpCallBackListener() {
+                    @Override
+                    public void onFinish(String result) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(JobContentForAdmin.this,"修改成功",Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(JobContentForAdmin.this,"操作失败",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
     }
 }

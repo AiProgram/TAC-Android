@@ -1,9 +1,13 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -227,10 +231,25 @@ public class JobContentForGiver extends AppCompatActivity{
                     @Override
                     public void onClick(View view) {
                         //查看被拒绝发布理由
+                        showReasonDialog();
                     }
                 });
             }break;
         }
+    }
+
+    //查看拒绝理由的弹窗
+    private void showReasonDialog(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("拒绝理由");
+        builder.setMessage(Object.recuitObject.getReason());
+        Log.i("拒绝理由",Object.recuitObject.getReason());
+        builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+        builder.show();
     }
 
 }
