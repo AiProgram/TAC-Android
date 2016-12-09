@@ -11,6 +11,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
+import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
 
 import java.util.LinkedHashMap;
@@ -47,6 +48,7 @@ public class SetResume extends AppCompatActivity{
         setContentView(R.layout.resume);
 
         getViews();
+        initVIews();
         initListener();
     }
 
@@ -74,7 +76,34 @@ public class SetResume extends AppCompatActivity{
         detail=et_set_introduce_detail.getText().toString();
 
         //拼接接口中没提供的信息，后期改为StringBuilder构建
-        detail="做过的项有:   "+project+"\n"+"项目地址:   "+projectAddress+"\n"+detail;
+        detail="做过的项有:   "+project+"\n"+"项目地址:   "+projectAddress+"\n"+"擅长   "+goodAt+"\n"+detail;
+    }
+
+    //初始化文字信息等
+    private void initVIews(){
+        Map<String,String> getResume=new LinkedHashMap<>();
+        getResume.put("userid",Object.userObject.getUserid());
+        QueryInformation.getPersonalResume(getResume, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        et_set_name.setText(Object.resumeObject.getName());
+                        et_set_phone.setText(Object.resumeObject.getPhone());
+                        et_set_email.setText(Object.resumeObject.getEmail());
+                        et_set_single_info.setText(Object.resumeObject.getSingleResume());
+                        et_set_good_at.setText(Object.resumeObject.getGoodat());
+                        //et_set_introduce_detail.setText(Object.resumeObject.getDetailResume());
+                    }
+                });
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
     }
 
     private void initListener(){
