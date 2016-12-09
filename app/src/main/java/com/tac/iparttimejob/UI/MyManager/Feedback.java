@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -23,7 +24,7 @@ import java.util.Map;
 
 public class Feedback extends AppCompatActivity {
 
-    private MaterialEditText et_set_advice;
+    private EditText et_set_advice;
     private Button btn_send_feedback;
     private Button btn_cancel_feedback;
 
@@ -39,7 +40,7 @@ public class Feedback extends AppCompatActivity {
     }
 
     private void getViews(){
-        et_set_advice=(MaterialEditText) findViewById(R.id.et_set_advice);
+        et_set_advice=(EditText) findViewById(R.id.et_set_advice);
         btn_send_feedback=(Button) findViewById(R.id.btn_send_feedback);
         btn_cancel_feedback=(Button) findViewById(R.id.btn_cancel_feedback);
     }

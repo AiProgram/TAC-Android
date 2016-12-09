@@ -17,9 +17,13 @@ import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
+import com.tac.iparttimejob.UI.Utils.FormatedTimeGeter;
 import com.tac.iparttimejob.UI.Utils.MyToolBarLayout;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -135,9 +139,21 @@ public class JobContentForGiver extends AppCompatActivity{
     }
 
     //初始化每个界面独有的控件
-    private void initUniqueViews(){
+    private void initUniqueViews() {
+        int dayDiff=0;
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date now = format.parse(FormatedTimeGeter.getFormatedDate());
+            Date to=format.parse(Object.recuitObject.getDealdine());
+            dayDiff=FormatedTimeGeter.differentDays(now,to);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         switch (Object.recuitObject.getStatus()){
             case DataType.JOB_STATUS_UNDERGONING:{
+                //设置相隔天数
+                TextView tv_days_left=(TextView) findViewById(R.id.tv_days_left);
+                tv_days_left.setText("剩余"+dayDiff+"天");
                 btn_cancel_recruit=(Button) findViewById(R.id.btn_cancel_recruit);
                 btn_signed_list=(Button) findViewById(R.id.btn_signed_list);
                 btn_cancel_recruit.setOnClickListener(new View.OnClickListener() {
@@ -181,6 +197,8 @@ public class JobContentForGiver extends AppCompatActivity{
                 btn_choosed_list.setVisibility(View.GONE);
             }break;
             case DataType.JOB_STATUS_CHECKING:{
+                TextView tv_days_left=(TextView) findViewById(R.id.tv_days_left);
+                tv_days_left.setText("剩余"+dayDiff+"天");
                 btn_cancel_recruit=(Button) findViewById(R.id.btn_cancel_recruit);
                 btn_signed_list=(Button) findViewById(R.id.btn_signed_list);
                 btn_signed_list.setEnabled(false);
