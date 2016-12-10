@@ -1,13 +1,20 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
@@ -140,33 +147,105 @@ public class JobContentForReceiver extends AppCompatActivity {
             }break;
             case DataType.SIGNED_JOB_LIST:{
                 btn_cancel_signUp=(Button) findViewById(R.id.btn_cancel_signUp);
-                btn_cancel_signUp.setOnClickListener(new View.OnClickListener() {
+                //报名但是没有截至则可以取消报名
+                if(recuitObject.getStatus()!=DataType.JOB_STATUS_FINSHED) {
+                    btn_cancel_signUp.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //取消报名,缺少applicantid无法继续编写
+                            Map<String, String> cancelApplication = new LinkedHashMap<String, String>();
+                            cancelApplication.put("applicantsid", applicantsid + "");
+                            Log.i("applicationid", applicantsid + "");
+                            EditInformation.setCancelApplication(cancelApplication, new HttpCallBackListener() {
+                                @Override
+                                public void onFinish(String result) {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(JobContentForReceiver.this, "取消成功", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                    finish();
+                                }
+
+                                @Override
+                                public void onError(String error) {
+
+                                }
+                            });
+                        }
+                    });
+                }else{
+                    //当招聘截至时取消按钮当作评价按钮使用
+                    btn_cancel_signUp.setText("评价招聘者");
+                    btn_cancel_signUp.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            showAssessDialog();
+                        }
+                    });
+                }
+            }break;
+        }
+    }
+
+    //展示评价的对话框
+    private void showAssessDialog(){
+        final View dialogView= LayoutInflater.from(this).inflate(R.layout.layout_assess,null);
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        builder.setPositiveButton("确认评价", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                MaterialEditText et_input_assess_point;
+                EditText et_input_assessment;
+                et_input_assess_point=(MaterialEditText) dialogView.findViewById(R.id.et_input_assess_point);
+                et_input_assessment=(EditText) dialogView.findViewById(R.id.et_input_assessment);
+                String assessment=et_input_assessment.getText().toString().trim();
+                //对于评分点数还需要检测，暂时没写
+                String assessPoint=et_input_assess_point.getText().toString().trim();
+
+                Map<String,String> assess=new LinkedHashMap<String, String>();
+                assess.put("applicantsid",applicantsid+"");
+                assess.put("recruitid",recuitObject.getRecruitid());
+                assess.put("applicantid",userObject.getUserid());
+                assess.put("ownerid",recuitObject.getOwnerid());
+                assess.put("ownername",recuitObject.getOwner());
+                assess.put("comment",assessment);
+                assess.put("point",assessPoint);
+                assess.put("cmmentTime", FormatedTimeGeter.getFormatedDate());
+                //说明文档没有标出，应该是这个接口
+                EditInformation.setAssessment(assess, new HttpCallBackListener() {
                     @Override
-                    public void onClick(View view) {
-                        //取消报名,缺少applicantid无法继续编写
-                        Map<String,String>cancelApplication=new LinkedHashMap<String, String>();
-                        cancelApplication.put("applicantsid",applicantsid+"");
-                        Log.i("applicationid",applicantsid+"");
-                        EditInformation.setCancelApplication(cancelApplication, new HttpCallBackListener() {
+                    public void onFinish(String result) {
+                        runOnUiThread(new Runnable() {
                             @Override
-                            public void onFinish(String result) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(JobContentForReceiver.this,"取消成功",Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                                finish();
+                            public void run() {
+                                Toast.makeText(JobContentForReceiver.this,"评价成功",Toast.LENGTH_SHORT).show();
                             }
+                        });
+                    }
 
+                    @Override
+                    public void onError(String error) {
+                        runOnUiThread(new Runnable() {
                             @Override
-                            public void onError(String error) {
-
+                            public void run() {
+                                Toast.makeText(JobContentForReceiver.this,"评价失败",Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
                 });
-            }break;
-        }
+            }
+        });
+
+        builder.setNegativeButton("取消评价", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        builder.show();
     }
 }

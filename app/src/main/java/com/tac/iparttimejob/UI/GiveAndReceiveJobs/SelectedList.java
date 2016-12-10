@@ -26,14 +26,12 @@ import com.tac.iparttimejob.UI.Utils.FormatedTimeGeter;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
 import com.tac.iparttimejob.Class.Object;
 
-import java.lang.reflect.GenericSignatureFormatError;
+
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.tac.iparttimejob.R.id.assess_btn_sure;
-import static com.tac.iparttimejob.R.id.view;
 
 /**
  * Created by AiProgram on 2016/11/16.
