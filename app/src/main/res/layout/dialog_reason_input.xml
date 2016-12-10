@@ -5,11 +5,16 @@
 
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text=""
-        android:ems="10"
+        android:layout_height="80dp"
+        android:text="xxxxxxxxxxxxxxxxx"
+        android:gravity="top"
+        android:textSize="20sp"
+        android:scrollbars="vertical"
+        android:inputType="textMultiLine"
+        android:ems="100"
+        android:minLines="3"
+        android:maxLines="3"
+        android:background="@drawable/edit"
         android:id="@+id/et_reject_reason"
-        android:layout_weight="1"
         android:hint="驳回理由"/>
 </LinearLayout>

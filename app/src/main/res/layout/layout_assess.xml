@@ -4,15 +4,6 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_input_assess_point"
-        android:hint="1~100"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/assess_tip2" />
-
     <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="50dp"
@@ -25,30 +16,12 @@
         android:layout_height="wrap_content"
         android:text="评价"
         android:textSize="30dp"
+        android:gravity="center"
         android:textColor="@color/black"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/assess_title" />
     </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="请您对该用户进行评分:"
-        android:id="@+id/assess_tip2"
-        android:textSize="25sp"
-        android:layout_centerVertical="true"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="请您对该用户进行评价:"
-        android:id="@+id/assess_tip1"
-        android:textSize="25sp"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/relativeLayout"
-        android:layout_toStartOf="@+id/et_input_assess_point" />
 
     <EditText
         android:layout_width="fill_parent"
@@ -59,10 +32,42 @@
         android:maxLines="30"
         android:scrollbars="vertical"
         android:gravity="top"
-        android:background="@android:drawable/edit_text"
+        android:background="@drawable/edit"
         android:id="@+id/et_input_assessment"
         android:layout_below="@+id/assess_tip1"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_above="@+id/assess_tip2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请您对该用户进行评价:"
+        android:id="@+id/assess_tip1"
+        android:textSize="25sp"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_alignStart="@+id/et_input_assessment" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请您对该用户进行评分:"
+        android:id="@+id/assess_tip2"
+        android:textSize="25sp"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/et_input_assessment" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_input_assess_point"
+        android:hint="1~100"
+        android:layout_below="@+id/assess_tip2"
+        android:layout_alignStart="@+id/assess_tip2"
+        android:layout_alignEnd="@+id/assess_tip2" />
 
 
 </RelativeLayout>

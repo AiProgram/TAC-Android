@@ -112,7 +112,7 @@
             android:maxLines="30"
             android:scrollbars="vertical"
             android:gravity="top"
-            android:background="@android:drawable/edit_text"
+            android:background="@drawable/edit"
             android:hint="您的详细介绍"
             android:layout_below="@+id/et_set_project_adress" />
 
