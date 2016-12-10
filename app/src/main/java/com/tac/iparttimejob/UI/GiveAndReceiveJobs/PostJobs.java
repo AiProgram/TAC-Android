@@ -149,7 +149,7 @@ public class PostJobs extends AppCompatActivity{
             Date currentTime=format.parse(FormatedTimeGeter.getFormatedDate());
             Date postTime=format.parse(displaytime);
             Date endTime=format.parse(deadline);
-            if(postTime.compareTo(currentTime)<=0){
+            if(postTime.compareTo(currentTime)<0){
                 Toast.makeText(PostJobs.this,"发布时间不得早于当前时间",Toast.LENGTH_SHORT).show();
                 return false;
             }

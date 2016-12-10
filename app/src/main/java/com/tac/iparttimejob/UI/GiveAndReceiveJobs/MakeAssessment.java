@@ -44,7 +44,7 @@ public class MakeAssessment extends AppCompatActivity {
         assess_title=(TextView)findViewById(R.id.assess_tip1);
         assess=(TextView)findViewById(R.id.materialEditText);
         point_title=(TextView)findViewById(R.id.assess_tip2);
-        point=(TextView)findViewById(R.id.materialEditText2);
+        point=(TextView)findViewById(R.id.et_input_assess_point);
         confirm=(Button)findViewById(R.id.assess_btn_sure);
         cancel=(Button)findViewById(R.id.assess_btn_cancel);
         confirm.setOnClickListener(new View.OnClickListener() {

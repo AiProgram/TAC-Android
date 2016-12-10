@@ -1,28 +1,39 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.tac.iparttimejob.Class.Enroll;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
+import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.MyManager.ShowResume;
+import com.tac.iparttimejob.UI.Utils.FormatedTimeGeter;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
 import com.tac.iparttimejob.Class.Object;
 
+import java.lang.reflect.GenericSignatureFormatError;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.tac.iparttimejob.R.id.assess_btn_sure;
+import static com.tac.iparttimejob.R.id.view;
 
 /**
  * Created by AiProgram on 2016/11/16.
@@ -34,7 +45,7 @@ public class SelectedList extends AppCompatActivity{
 
     private Handler handler=new Handler();
 
-    private MyEnrollListAdapter enrollListAdapter;
+    private MySelectedListAdapter selectedListAdapter ;
 
     private List<Enroll> selectedList=new ArrayList<>();
 
@@ -77,11 +88,11 @@ public class SelectedList extends AppCompatActivity{
 
     //初始化文字显示等
     private void initViews(){
-        enrollListAdapter =new MyEnrollListAdapter(selectedList);
+        selectedListAdapter =new MySelectedListAdapter(selectedList);
         //设置RecycleView
         rv_enroll_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rv_enroll_list.setItemAnimator(new DefaultItemAnimator());
-        rv_enroll_list.setAdapter(enrollListAdapter);
+        rv_enroll_list.setAdapter(selectedListAdapter);
         //设置RecyclerVi可以上拉刷新
         rv_enroll_list.setLoadMoreEnable(true);
     }
@@ -90,32 +101,11 @@ public class SelectedList extends AppCompatActivity{
     private void initListener(){
 
         //列表点击事件
-        enrollListAdapter.setOnContentClickListener(new MyEnrollListAdapter.onContentClickListener() {
+        selectedListAdapter.setOnContentClickListener(new MySelectedListAdapter.onContentClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                //跳转至该人的简历
-                Map<String,String> getResume=new LinkedHashMap<String, String>();
-                getResume.put("userid",selectedList.get(position).getApplicantsid()+"");
-                QueryInformation.getPersonalResume(getResume, new HttpCallBackListener() {
-                    @Override
-                    public void onFinish(String result) {
-                        Log.i("简历信息",Object.resumeObject.getName());
-                        Log.i("简历信息",Object.resumeObject.getEmail());
-                        Log.i("简历信息",Object.resumeObject.getEmail());
-                        Intent intent=new Intent(SelectedList.this, ShowResume.class);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onError(String error) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(SelectedList.this,"获取简历失败",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
+                //默认点击就是评价，因为已经选中了
+                showAssessDialog(position);
             }
         });
 
@@ -251,5 +241,66 @@ public class SelectedList extends AppCompatActivity{
         for(int i=0;i<Object.enrollChooseObjectList.size();i++){
             selectedList.add(Object.enrollChooseObjectList.get(i));
         }
+    }
+
+
+    //展示评价的对话框
+    private void showAssessDialog(final int position){
+        final View dialogView=LayoutInflater.from(this).inflate(R.layout.layout_assess,null);
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        builder.setPositiveButton("确认评价", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                MaterialEditText et_input_assess_point;
+                EditText et_input_assessment;
+                et_input_assess_point=(MaterialEditText) dialogView.findViewById(R.id.et_input_assess_point);
+                et_input_assessment=(EditText) dialogView.findViewById(R.id.et_input_assessment);
+                String assessment=et_input_assessment.getText().toString().trim();
+                //对于评分点数还需要检测，暂时没写
+                String assessPoint=et_input_assess_point.getText().toString().trim();
+
+                Map<String,String> assess=new LinkedHashMap<String, String>();
+                assess.put("applicantsid",selectedList.get(position).getApplicantsid()+"");
+                assess.put("recruitid",selectedList.get(position).getTac_recruit().getRecruitid());
+                assess.put("applicantid",selectedList.get(position).getTac_user().getUserid());
+                assess.put("ownerid",selectedList.get(position).getOwnerid()+"");
+                assess.put("ownername",selectedList.get(position).getOwnwername());
+                assess.put("comment",assessment);
+                assess.put("point",assessPoint);
+                assess.put("cmmentTime", FormatedTimeGeter.getFormatedDate());
+                //说明文档没有标出，应该是这个接口
+                EditInformation.setAssessment(assess, new HttpCallBackListener() {
+                    @Override
+                    public void onFinish(String result) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SelectedList.this,"评价成功",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SelectedList.this,"评价失败",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        builder.setNegativeButton("取消评价", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        builder.show();
     }
 }
