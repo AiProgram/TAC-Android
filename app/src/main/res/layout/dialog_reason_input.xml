@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:text="xxxxxxxxxxxxxxxxx"
+        android:gravity="top"
+        android:textSize="20sp"
+        android:scrollbars="vertical"
+        android:inputType="textMultiLine"
+        android:ems="100"
+        android:minLines="3"
+        android:maxLines="3"
+        android:background="@drawable/edit"
+        android:id="@+id/et_reject_reason"
+        android:hint="驳回理由"/>
+</LinearLayout>

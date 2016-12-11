@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+
+    android:paddingBottom="5dp"
+    >
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_valid_jobs"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:clickable="true"
+        app:cardElevation="5dp"
+        card_view:cardCornerRadius="5dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardBackgroundColor="#FFFFFF"
+        card_view:cardPreventCornerOverlap="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="招聘PHP程序员兼职"
+                style="@style/JobListTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_job_title"
+                android:layout_marginStart="21dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:text="完成一个教务处平台"
+                style="@style/JobListWorkInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_job_info"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/tv_job_title" />
+
+            <TextView
+                android:text="2016年11月20日"
+                android:textColor="@color/warningRed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_deadline"
+                android:layout_alignParentEnd="true"
+                android:layout_above="@+id/tv_job_info" />
+
+            <TextView
+                android:text="截止至"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_job_title"
+                android:layout_alignStart="@+id/tv_deadline"
+                android:id="@+id/tv_deadline_tip" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

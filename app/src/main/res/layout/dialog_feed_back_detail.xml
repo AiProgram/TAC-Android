@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="反馈详情"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:id="@+id/feed_back_title"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用户名:"
+        android:layout_below="@+id/feed_back_title"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:id="@+id/feed_back_username_tip"
+        android:layout_marginTop="20dp"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="weizhi"
+        android:textColor="@color/black"
+        android:layout_marginStart="12dp"
+        android:id="@+id/tv_username_comment"
+        android:layout_alignBaseline="@+id/feed_back_username_tip"
+        android:layout_alignBottom="@+id/feed_back_username_tip"
+        android:layout_toEndOf="@+id/feed_back_username_tip"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="手机:"
+        android:id="@+id/feed_back_phone_tip"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/feed_back_username_tip"
+        android:layout_alignStart="@+id/feed_back_username_tip"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="反馈:"
+        android:id="@+id/feed_back_detail_tip"
+        android:layout_below="@+id/feed_back_data_tip"
+        android:layout_alignStart="@+id/feed_back_data_tip"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XXXXXXXXXXXXXXXXXXXXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        android:textColor="@color/black"
+        android:id="@+id/tv_detail_feedback"
+        android:layout_below="@+id/feed_back_detail_tip"
+        android:layout_alignStart="@+id/feed_back_detail_tip"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2016年12月6日"
+        android:textColor="@color/black"
+        android:id="@+id/tv_time_feedback"
+        android:layout_alignBaseline="@+id/feed_back_data_tip"
+        android:layout_alignBottom="@+id/feed_back_data_tip"
+        android:layout_alignStart="@+id/tv_username_comment"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="邮箱:"
+        android:id="@+id/feed_back_email_tip"
+        android:layout_below="@+id/feed_back_phone_tip"
+        android:layout_alignStart="@+id/feed_back_phone_tip"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="日期:"
+        android:id="@+id/feed_back_data_tip"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/feed_back_email_tip"
+        android:layout_alignStart="@+id/feed_back_email_tip"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="990041251@qq.com"
+        android:textColor="@color/black"
+        android:id="@+id/tv_email_feedback"
+        android:layout_alignBaseline="@+id/feed_back_email_tip"
+        android:layout_alignBottom="@+id/feed_back_email_tip"
+        android:layout_alignStart="@+id/tv_point_comment"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="18526420000"
+        android:textColor="@color/black"
+        android:id="@+id/tv_point_comment"
+        android:layout_alignBaseline="@+id/feed_back_phone_tip"
+        android:layout_alignBottom="@+id/feed_back_phone_tip"
+        android:layout_alignStart="@+id/tv_username_comment"
+        android:textSize="16dp" />
+
+</RelativeLayout>
