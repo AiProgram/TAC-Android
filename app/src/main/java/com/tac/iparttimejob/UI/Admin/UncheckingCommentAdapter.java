@@ -63,7 +63,7 @@ public class UncheckingCommentAdapter extends RecyclerView.Adapter<RecyclerView.
         String commentInfo;
         owner=commentList.get(position).getOnwername();
         applicant=commentList.get(position).getApplicantname();
-        commentInfo=commentList.get(position).getAtooComment();
+        commentInfo=commentList.get(position).getOtoaComment();
         switch (listType){
             case DataType.COMMENT_A_TO_O:{
                 AtoOViewHolder viewHolder=(AtoOViewHolder) holder;

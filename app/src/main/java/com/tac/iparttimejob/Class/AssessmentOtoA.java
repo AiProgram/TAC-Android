@@ -65,54 +65,6 @@ public class AssessmentOtoA {
         this.recruitid = recruitid;
     }
 
-    public int getAtooTipoff() {
-        return atooTipoff;
-    }
-
-    public void setAtooTipoff(int atooTipoff) {
-        this.atooTipoff = atooTipoff;
-    }
-
-    public String getAtooComment() {
-        return atooComment;
-    }
-
-    public void setAtooComment(String atooComment) {
-        this.atooComment = atooComment;
-    }
-
-    public float getAtooPoint() {
-        return atooPoint;
-    }
-
-    public void setAtooPoint(float atooPoint) {
-        this.atooPoint = atooPoint;
-    }
-
-
-    public int getAtooStatus() {
-        return atooStatus;
-    }
-
-    public void setAtooStatus(int atooStatus) {
-        this.atooStatus = atooStatus;
-    }
-
-    public String getAtooChecktime() {
-        return atooChecktime;
-    }
-
-    public void setAtooChecktime(String atooChecktime) {
-        this.atooChecktime = atooChecktime;
-    }
-
-    public String getAtootime() {
-        return atootime;
-    }
-
-    public void setAtootime(String atootime) {
-        this.atootime = atootime;
-    }
 
     private int commentid;
     private Enroll tac_applicants;
@@ -121,13 +73,62 @@ public class AssessmentOtoA {
     private int applicantid;
     private String applicantname;
     private int recruitid;
-    private int atooTipoff ;
-    private  String atooComment;
-    private float atooPoint;
+    private int otoaTipoff ;
+    private  String otoaComment;
 
-    private int atooStatus;
-    private  String atooChecktime;
-    private  String atootime;
+    public int getOtoaTipoff() {
+        return otoaTipoff;
+    }
+
+    public void setOtoaTipoff(int otoaTipoff) {
+        this.otoaTipoff = otoaTipoff;
+    }
+
+    public String getOtoaComment() {
+        return otoaComment;
+    }
+
+    public void setOtoaComment(String otoaComment) {
+        this.otoaComment = otoaComment;
+    }
+
+    public float getOtoaPoint() {
+        return otoaPoint;
+    }
+
+    public void setOtoaPoint(float otoaPoint) {
+        this.otoaPoint = otoaPoint;
+    }
+
+    public int getOtoaStatus() {
+        return otoaStatus;
+    }
+
+    public void setOtoaStatus(int otoaStatus) {
+        this.otoaStatus = otoaStatus;
+    }
+
+    public String getOtoaChecktime() {
+        return otoaChecktime;
+    }
+
+    public void setOtoaChecktime(String otoaChecktime) {
+        this.otoaChecktime = otoaChecktime;
+    }
+
+    public String getOtoatime() {
+        return otoatime;
+    }
+
+    public void setOtoatime(String otoatime) {
+        this.otoatime = otoatime;
+    }
+
+    private float otoaPoint;
+
+    private int otoaStatus;
+    private  String otoaChecktime;
+    private  String otoatime;
 
 
 }

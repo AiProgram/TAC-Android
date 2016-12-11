@@ -62,17 +62,17 @@ public class AssessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             case DataType.COMMENT_A_TO_O:{
                 username=atoOList.get(position).getApplicantname();
                 point=atoOList.get(position).getTac_applicants().getPoint()+"";
-                content=atoOList.get(position).getOtoaComment();
+                content=atoOList.get(position).getAtooComment();
             }break;
             case DataType.COMMENT_O_TO_A:{
                 username=otoAList.get(position).getOnwername();
                 point=otoAList.get(position).getTac_applicants().getPoint()+"";
-                content=otoAList.get(position).getAtooComment();
+                content=otoAList.get(position).getOtoaComment();
             }break;
             default:{
                 username=atoOList.get(position).getApplicantname();
                 point=atoOList.get(position).getTac_applicants().getPoint()+"";
-                content=atoOList.get(position).getOtoaComment();
+                content=atoOList.get(position).getAtooComment();
             }
         }
 
