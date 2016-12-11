@@ -157,13 +157,17 @@ public class MyManager extends Fragment {
                         if(i1==0){
                             //转到招聘者的评价界面
                             Intent intent=new Intent(getActivity(), AssessList.class);
-                            intent.putExtra("type", DataType.COMMENT_O_TO_A);
+                            Bundle bundle=new Bundle();
+                            bundle.putInt("type", DataType.COMMENT_O_TO_A);
+                            intent.putExtras(bundle);
                             startActivity(intent);
                         }
                         else if(i1==1){
                             //转到应聘者界面
                             Intent intent=new Intent(getActivity(), AssessList.class);
-                            intent.putExtra("type", DataType.COMMENT_A_TO_O);
+                            Bundle bundle=new Bundle();
+                            bundle.putInt("type", DataType.COMMENT_A_TO_O);
+                            intent.putExtras(bundle);
                             startActivity(intent);
                         }
                     }break;

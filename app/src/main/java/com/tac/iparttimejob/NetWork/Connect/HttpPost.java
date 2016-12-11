@@ -36,8 +36,8 @@ public class HttpPost {
                         {
                           for (Map.Entry<String,String>entry:params.entrySet())
                           {
-                             // Log.d("value:",entry.getValue());
-                              //Log.d("value:",URLDecoder.decode(entry.getValue(),"UTF-8"));
+//                             Log.d("value:",entry.getValue());
+//                              Log.d("value:",URLDecoder.decode(entry.getValue(),"UTF-8"));
                               str.append(entry.getKey()).
                                       append("=").
                                       append(URLDecoder.decode(entry.getValue(),"UTF-8"))//(URLEncoder.encode(entry.getValue(),"UTF-8"))

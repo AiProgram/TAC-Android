@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +45,7 @@ public class AssessList extends AppCompatActivity {
     private List<AssessmentAtoO> aToOList=new ArrayList<>();
     private List<AssessmentOtoA> oToAList=new ArrayList<>();
 
-    private int type;
+    private int type=DataType.COMMENT_A_TO_O;
 
     //防止多次初始化
     boolean inited=false;
@@ -61,8 +62,9 @@ public class AssessList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_assessment_list);
 
-        type=getIntent().getIntExtra("type", DataType.COMMENT_A_TO_O);
-
+        Bundle bundle=new Bundle();
+        bundle=getIntent().getExtras();
+        type=bundle.getInt("type");
         getViews();
 
         if(inited==false) {
@@ -169,6 +171,7 @@ public class AssessList extends AppCompatActivity {
 
         //清空再全部刷新
         aToOList.clear();
+        oToAList.clear();
 
         //利用下拉刷新接口刷新
         pullDownRefresh(type);
@@ -178,6 +181,7 @@ public class AssessList extends AppCompatActivity {
 
     //下拉刷新
     private void pullDownRefresh(int type){
+
         Map<String,String> getList=new LinkedHashMap<>();
         switch (type){
             case DataType.COMMENT_A_TO_O:{
@@ -186,7 +190,7 @@ public class AssessList extends AppCompatActivity {
                 getList.put("page",(atooPage)+"");
                 getList.put("rows",(rows)+"");
 
-                //分atoo和otoa列表
+                //分atoo和otoa列表,接口编写反了
                 QueryInformation.getAtooComment(getList, new HttpCallBackListener() {
                     @Override
                     public void onFinish(final String result) {
@@ -203,11 +207,11 @@ public class AssessList extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onError(String error) {
+                    public void onError(final String error) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(AssessList.this, "下拉刷新失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AssessList.this, "下拉刷新失败"+error, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -234,11 +238,11 @@ public class AssessList extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onError(String error) {
+                    public void onError(final String error) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(AssessList.this, "下拉刷新失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AssessList.this, "下拉刷新失败"+error, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

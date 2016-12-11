@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.tac.iparttimejob.Class.AssessmentAtoO;
 import com.tac.iparttimejob.Class.AssessmentOtoA;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
@@ -21,14 +22,18 @@ public class AssessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private OnContentClickListener mOnContentClicListener;
     private OnSueClickListener mOnSueClickListener;
 
-    List<AssessmentOtoA> assessmentList;
+    List<AssessmentOtoA> otoAList;
+    List<AssessmentAtoO> atoOList;
     private int type;
 
 
     //传入的是静态对象时本地对象无法与之同步,这里list类型不同，加入listType区分
     public AssessAdapter(int type,List dataList){
         this.type=type;
-        assessmentList=(List<AssessmentOtoA>) dataList;
+        if(type==DataType.COMMENT_A_TO_O)
+            atoOList=(List<AssessmentAtoO>) dataList;
+        else
+            otoAList=(List<AssessmentOtoA>) dataList;
     }
 
     //不同 列表项对应不同ViewHolder
@@ -39,8 +44,8 @@ public class AssessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         TextView tv_sue_comment;
         public AssessmentViewHolder(View itemView) {
             super(itemView);
-            tv_username_comment=(TextView) itemView.findViewById(R.id.tv_username_feedback);
-            tv_point_comment=(TextView) itemView.findViewById(R.id.tv_phone_feedback);
+            tv_username_comment=(TextView) itemView.findViewById(R.id.tv_username_comment);
+            tv_point_comment=(TextView) itemView.findViewById(R.id.tv_point_comment);
             tv_content_comment=(TextView) itemView.findViewById(R.id.tv_content_comment);
             tv_sue_comment=(TextView) itemView.findViewById(R.id.tv_sue_comment);
         }
@@ -55,20 +60,19 @@ public class AssessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         switch (type){
             case DataType.COMMENT_A_TO_O:{
-                username=assessmentList.get(position).getApplicantname();
-                point=assessmentList.get(position).getTac_applicants().getPoint()+"";
-                content=assessmentList.get(position).getAtooComment();
+                username=atoOList.get(position).getApplicantname();
+                point=atoOList.get(position).getTac_applicants().getPoint()+"";
+                content=atoOList.get(position).getOtoaComment();
             }break;
             case DataType.COMMENT_O_TO_A:{
-                //otoa存在问题
-                username=assessmentList.get(position).getOnwername();
-                point=assessmentList.get(position).getTac_applicants().getPoint()+"";
-                content=assessmentList.get(position).getAtooComment();
+                username=otoAList.get(position).getOnwername();
+                point=otoAList.get(position).getTac_applicants().getPoint()+"";
+                content=otoAList.get(position).getAtooComment();
             }break;
             default:{
-                username=assessmentList.get(position).getApplicantname();
-                point=assessmentList.get(position).getTac_applicants().getPoint()+"";
-                content=assessmentList.get(position).getAtooComment();
+                username=atoOList.get(position).getApplicantname();
+                point=atoOList.get(position).getTac_applicants().getPoint()+"";
+                content=atoOList.get(position).getOtoaComment();
             }
         }
 
@@ -96,7 +100,10 @@ public class AssessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     //item总数
     @Override
     public int getItemCount() {
-        return assessmentList.size();
+        if(type==DataType.COMMENT_A_TO_O)
+        return atoOList.size();
+        else
+            return otoAList.size();
     }
 
     //根据布局类别创建不同ViewHolder
