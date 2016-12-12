@@ -124,14 +124,14 @@ public class MyManager extends Fragment {
 
         //获得简历中的一句简介
         Map<String,String> getSingleInfo=new LinkedHashMap<>();
-        getSingleInfo.put("username",Object.userObject.getName());
-        QueryInformation.getUserInformationByName(getSingleInfo, new HttpCallBackListener() {
+        getSingleInfo.put("userid",Object.userObject.getUserid());
+        QueryInformation.getPersonalResume(getSingleInfo, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        tv_single_info.setText(Object.getResumeObject.getSingleResume());
+                        tv_single_info.setText(Object.resumeObject.getSingleResume());
                     }
                 });
 
@@ -139,7 +139,6 @@ public class MyManager extends Fragment {
 
             @Override
             public void onError(String error) {
-
             }
         });
 

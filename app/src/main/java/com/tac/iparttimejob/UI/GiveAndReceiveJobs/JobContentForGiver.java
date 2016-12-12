@@ -261,7 +261,7 @@ public class JobContentForGiver extends AppCompatActivity{
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("拒绝理由");
         builder.setMessage(Object.recuitObject.getReason());
-        Log.i("拒绝理由",Object.recuitObject.getReason());
+       // Log.i("拒绝理由",Object.recuitObject.getReason());
         builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

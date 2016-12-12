@@ -16,6 +16,7 @@ import com.tac.iparttimejob.Class.AssessmentAtoO;
 import com.tac.iparttimejob.Class.AssessmentOtoA;
 import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
+import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
@@ -114,27 +115,64 @@ public class AssessList extends AppCompatActivity {
             }
         });
 
+        //举报评价事件
         assessAdapter.setOnSueClickListener(new AssessAdapter.OnSueClickListener() {
             @Override
             public void onSueClick(View view, int position) {
-                //举报改评价,来自应聘者
+                Map<String,String> sue=new LinkedHashMap<String, String>();
+                //举报改评价,来自招聘者
+                switch (type){
+                    case DataType.COMMENT_A_TO_O:{
+                    sue.put("commentid",aToOList.get(position).getCommentid()+"");
+                        EditInformation.setAtooReport(sue, new HttpCallBackListener() {
+                            @Override
+                            public void onFinish(String result) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(AssessList.this,"举报成功，感谢您的反馈",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onError(String error) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(AssessList.this,"举报失败",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });
+                    };break;
+                    case DataType.COMMENT_O_TO_A:{
+                        sue.put("commentid",oToAList.get(position).getCommentid()+"");
+                        EditInformation.setOtoaReport(sue, new HttpCallBackListener() {
+                            @Override
+                            public void onFinish(String result) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(AssessList.this,"举报成功，感谢您的反馈",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onError(String error) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(AssessList.this,"举报失败",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });
+                    };break;
+                }
             }
         });
-
-//        //列表点击事件
-//        oToAAdapter.setOnContentClickListener(new AssessAdapter.OnContentClickListener() {
-//            @Override
-//            public void onContentClick(View view, int position) {
-//                //跳转至个人简历
-//            }
-//        });
-//
-//        oToAAdapter.setOnSueClickListener(new AssessAdapter.OnSueClickListener() {
-//            @Override
-//            public void onSueClick(View view, int position) {
-//                //举报改评价,来自招聘者
-//            }
-//        });
 
         rv_comments_from_recruitor.setOnLoadMoreListener(new RefreshRecyclerView.OnLoadMoreListener() {
             @Override
