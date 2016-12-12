@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import com.tac.iparttimejob.Class.AssessmentAtoO;
 import com.tac.iparttimejob.Class.AssessmentOtoA;
 import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
+import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
@@ -44,7 +46,7 @@ public class AssessList extends AppCompatActivity {
     private List<AssessmentAtoO> aToOList=new ArrayList<>();
     private List<AssessmentOtoA> oToAList=new ArrayList<>();
 
-    private int type;
+    private int type=DataType.COMMENT_A_TO_O;
 
     //防止多次初始化
     boolean inited=false;
@@ -61,8 +63,9 @@ public class AssessList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_assessment_list);
 
-        type=getIntent().getIntExtra("type", DataType.COMMENT_A_TO_O);
-
+        Bundle bundle=new Bundle();
+        bundle=getIntent().getExtras();
+        type=bundle.getInt("type");
         getViews();
 
         if(inited==false) {
@@ -112,27 +115,64 @@ public class AssessList extends AppCompatActivity {
             }
         });
 
+        //举报评价事件
         assessAdapter.setOnSueClickListener(new AssessAdapter.OnSueClickListener() {
             @Override
             public void onSueClick(View view, int position) {
-                //举报改评价,来自应聘者
+                Map<String,String> sue=new LinkedHashMap<String, String>();
+                //举报改评价,来自招聘者
+                switch (type){
+                    case DataType.COMMENT_A_TO_O:{
+                    sue.put("commentid",aToOList.get(position).getCommentid()+"");
+                        EditInformation.setAtooReport(sue, new HttpCallBackListener() {
+                            @Override
+                            public void onFinish(String result) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(AssessList.this,"举报成功，感谢您的反馈",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onError(String error) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(AssessList.this,"举报失败",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });
+                    };break;
+                    case DataType.COMMENT_O_TO_A:{
+                        sue.put("commentid",oToAList.get(position).getCommentid()+"");
+                        EditInformation.setOtoaReport(sue, new HttpCallBackListener() {
+                            @Override
+                            public void onFinish(String result) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(AssessList.this,"举报成功，感谢您的反馈",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onError(String error) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(AssessList.this,"举报失败",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });
+                    };break;
+                }
             }
         });
-
-//        //列表点击事件
-//        oToAAdapter.setOnContentClickListener(new AssessAdapter.OnContentClickListener() {
-//            @Override
-//            public void onContentClick(View view, int position) {
-//                //跳转至个人简历
-//            }
-//        });
-//
-//        oToAAdapter.setOnSueClickListener(new AssessAdapter.OnSueClickListener() {
-//            @Override
-//            public void onSueClick(View view, int position) {
-//                //举报改评价,来自招聘者
-//            }
-//        });
 
         rv_comments_from_recruitor.setOnLoadMoreListener(new RefreshRecyclerView.OnLoadMoreListener() {
             @Override
@@ -169,6 +209,7 @@ public class AssessList extends AppCompatActivity {
 
         //清空再全部刷新
         aToOList.clear();
+        oToAList.clear();
 
         //利用下拉刷新接口刷新
         pullDownRefresh(type);
@@ -178,6 +219,7 @@ public class AssessList extends AppCompatActivity {
 
     //下拉刷新
     private void pullDownRefresh(int type){
+
         Map<String,String> getList=new LinkedHashMap<>();
         switch (type){
             case DataType.COMMENT_A_TO_O:{
@@ -186,7 +228,7 @@ public class AssessList extends AppCompatActivity {
                 getList.put("page",(atooPage)+"");
                 getList.put("rows",(rows)+"");
 
-                //分atoo和otoa列表
+                //分atoo和otoa列表,接口编写反了
                 QueryInformation.getAtooComment(getList, new HttpCallBackListener() {
                     @Override
                     public void onFinish(final String result) {
@@ -203,11 +245,11 @@ public class AssessList extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onError(String error) {
+                    public void onError(final String error) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(AssessList.this, "下拉刷新失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AssessList.this, "下拉刷新失败"+error, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -234,11 +276,11 @@ public class AssessList extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onError(String error) {
+                    public void onError(final String error) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(AssessList.this, "下拉刷新失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AssessList.this, "下拉刷新失败"+error, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

@@ -198,6 +198,7 @@ public class GiveJobsList extends Fragment{
                 jumpToJobContent(DataType.UNVALID_JOB_LIST,position);
             }
         });
+
     }
 
     //跳转事件比较复杂，封装起来

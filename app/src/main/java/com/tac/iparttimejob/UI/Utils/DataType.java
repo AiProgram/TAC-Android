@@ -39,4 +39,8 @@ public class DataType {
     public final static int ENROLL_STATUS_SIGNED=0;
     public final static int ENROLL_STATUS_SELECTED=1;
     public final static int ENROLL_STATUS_CANCELED=2;
+
+    //用来区分评价屏蔽状态
+    public final static int COMMENT_STATUS_UNBLOCKED=0;
+    public final static int COMMENT_STATUS_BLOCKED=1;
 }

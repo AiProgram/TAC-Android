@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.tac.iparttimejob.Class.AssessmentAtoO;
 import com.tac.iparttimejob.Class.AssessmentOtoA;
 import com.tac.iparttimejob.UI.Utils.DataType;
 import com.tac.iparttimejob.R;
@@ -21,13 +22,16 @@ public class UncheckingCommentAdapter extends RecyclerView.Adapter<RecyclerView.
     private OnItemClickListener mOnItemClickListener;
     private OnItemLongClickListener mOnItemLongClickListener;
 
-    List<AssessmentOtoA> commentList;
+    List<AssessmentOtoA> otoAList;
+    List<AssessmentAtoO> atoOList;
     int listType;
 
     //传入的是静态对象时本地对象无法与之同步,这里list类型不同，加入listType区分
     public UncheckingCommentAdapter(List dataList,int listType){
         this.listType=listType;
-        commentList=(List<AssessmentOtoA>) dataList;
+        if(listType==DataType.COMMENT_O_TO_A)
+        otoAList=(List<AssessmentOtoA>) dataList;
+        else atoOList=(List<AssessmentAtoO>) dataList;
     }
 
     //不同 列表项对应不同ViewHolder
@@ -61,17 +65,22 @@ public class UncheckingCommentAdapter extends RecyclerView.Adapter<RecyclerView.
         String owner;
         String applicant;
         String commentInfo;
-        owner=commentList.get(position).getOnwername();
-        applicant=commentList.get(position).getApplicantname();
-        commentInfo=commentList.get(position).getAtooComment();
         switch (listType){
             case DataType.COMMENT_A_TO_O:{
+                owner=atoOList.get(position).getOnwername();
+                applicant=atoOList.get(position).getApplicantname();
+                commentInfo=atoOList.get(position).getAtooComment();
+
                 AtoOViewHolder viewHolder=(AtoOViewHolder) holder;
                 viewHolder.tv_comment_giver.setText(applicant);
                 viewHolder.tv_comment_receiver.setText(owner);
                 viewHolder.tv_commen_info.setText(commentInfo);
             }break;
             case DataType.COMMENT_O_TO_A:{
+                owner=otoAList.get(position).getOnwername();
+                applicant=otoAList.get(position).getApplicantname();
+                commentInfo=otoAList.get(position).getOtoaComment();
+
                 OtoAViewHolder viewHolder=(OtoAViewHolder) holder;
                 viewHolder.tv_comment_giver.setText(owner);
                 viewHolder.tv_comment_receiver.setText(applicant);
@@ -98,7 +107,10 @@ public class UncheckingCommentAdapter extends RecyclerView.Adapter<RecyclerView.
     //item总数
     @Override
     public int getItemCount() {
-        return commentList.size();
+        if(listType==DataType.COMMENT_O_TO_A)
+            return otoAList.size();
+        else
+            return atoOList.size();
     }
 
     //根据布局类别创建不同ViewHolder

@@ -45,7 +45,7 @@ public class HttpAddress {
     //
     public static final String RECRUIT_REASON           ="tacrecruit/changeStatusOfRecruitAndReason";
     //查看招聘者评价
-    public static final String GET_OTOACOMMENT          ="tacpersonal/getAToOComment";
+    public static final String GET_OTOACOMMENT          ="tacpersonal/getOToAComment";
 //举报
     public static final String SET_TIPOTOACOMMENT           ="tacpersonal/tipOToAComment";
     //查看报名列表

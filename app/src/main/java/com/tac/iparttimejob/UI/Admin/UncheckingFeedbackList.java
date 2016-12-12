@@ -3,13 +3,11 @@ package com.tac.iparttimejob.UI.Admin;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +16,6 @@ import android.widget.Toast;
 
 import com.tac.iparttimejob.Class.Advice;
 import com.tac.iparttimejob.Class.Object;
-import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
@@ -28,14 +25,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.tac.iparttimejob.R.id.rv_unchecking_job_list;
-import static com.tac.iparttimejob.R.id.tv_detail_feedback;
-import static com.tac.iparttimejob.R.id.tv_email_feedback;
-import static com.tac.iparttimejob.R.id.tv_phone_number;
-import static com.tac.iparttimejob.R.id.tv_time_feedback;
-import static com.tac.iparttimejob.R.id.tv_username_resume;
-import static com.tac.iparttimejob.R.id.view;
 
 /**
  * Created by AiProgram on 2016/11/12.
@@ -259,8 +248,8 @@ public class UncheckingFeedbackList extends Fragment {
         View dialogView=LayoutInflater.from(getActivity()).inflate(R.layout.dialog_feed_back_detail,null);
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
         builder.setView(dialogView);
-        TextView tv_username_feedback=(TextView) dialogView.findViewById(R.id.tv_username_feedback);
-        TextView tv_phone_feedback=(TextView) dialogView.findViewById(R.id.tv_phone_feedback);
+        TextView tv_username_feedback=(TextView) dialogView.findViewById(R.id.tv_username_comment);
+        TextView tv_phone_feedback=(TextView) dialogView.findViewById(R.id.tv_point_comment);
         TextView tv_email_feedback=(TextView) dialogView.findViewById(R.id.tv_email_feedback);
         TextView tv_time_feedback=(TextView) dialogView.findViewById(R.id.tv_time_feedback);
         TextView tv_detail_feedback=(TextView) dialogView.findViewById(R.id.tv_detail_feedback);

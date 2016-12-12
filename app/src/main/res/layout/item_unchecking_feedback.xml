@@ -20,7 +20,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
-            android:layout_below="@+id/tv_username_feedback" />
+            android:layout_below="@+id/tv_username_comment" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
             android:text="18250150000"
             android:textColor="#ff0055"
             android:textSize="20sp"
-            android:id="@+id/tv_phone_feedback"
+            android:id="@+id/tv_point_comment"
             android:layout_alignParentTop="true"
             android:layout_alignEnd="@+id/view" />
 
@@ -40,7 +40,7 @@
             android:textColor="@color/black"
             android:id="@+id/user1_score"
             android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/tv_phone_feedback" />
+            android:layout_toStartOf="@+id/tv_point_comment" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
             android:text="未知用户"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:id="@+id/tv_username_feedback"
+            android:id="@+id/tv_username_comment"
             android:layout_marginLeft="20dp"
             android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/view" />

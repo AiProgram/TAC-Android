@@ -4,14 +4,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -251,10 +254,10 @@ public class SelectedList extends AppCompatActivity{
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 MaterialEditText et_input_assess_point;
-                EditText et_input_assessment;
+                MaterialEditText et_input_assessment;
                 et_input_assess_point=(MaterialEditText) dialogView.findViewById(R.id.et_input_assess_point);
-                et_input_assessment=(EditText) dialogView.findViewById(R.id.et_input_assessment);
-                String assessment=et_input_assessment.getText().toString().trim();
+                et_input_assessment=(MaterialEditText) dialogView.findViewById(R.id.et_input_assessment);
+                final String assessment=et_input_assessment.getText().toString().trim();
                 //对于评分点数还需要检测，暂时没写
                 String assessPoint=et_input_assess_point.getText().toString().trim();
 
@@ -263,10 +266,11 @@ public class SelectedList extends AppCompatActivity{
                 assess.put("recruitid",selectedList.get(position).getTac_recruit().getRecruitid());
                 assess.put("applicantid",selectedList.get(position).getTac_user().getUserid());
                 assess.put("ownerid",selectedList.get(position).getOwnerid()+"");
-                assess.put("ownername",selectedList.get(position).getOwnwername());
+                assess.put("ownername",Object.userObject.getName());
                 assess.put("comment",assessment);
                 assess.put("point",assessPoint);
                 assess.put("cmmentTime", FormatedTimeGeter.getFormatedDate());
+
                 //说明文档没有标出，应该是这个接口
                 EditInformation.setAssessment(assess, new HttpCallBackListener() {
                     @Override
@@ -280,11 +284,11 @@ public class SelectedList extends AppCompatActivity{
                     }
 
                     @Override
-                    public void onError(String error) {
+                    public void onError(final String error) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(SelectedList.this,"评价失败",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SelectedList.this,"评价失败"+assessment,Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -298,7 +302,11 @@ public class SelectedList extends AppCompatActivity{
 
             }
         });
-
-        builder.show();
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
+        WindowManager.LayoutParams  lp=alertDialog.getWindow().getAttributes();
+        lp.width= DrawerLayout.LayoutParams.WRAP_CONTENT;//定义宽度
+        lp.height= DrawerLayout.LayoutParams.WRAP_CONTENT;//定义高度
+        alertDialog.getWindow().setAttributes(lp);
     }
 }

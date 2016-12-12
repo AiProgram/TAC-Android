@@ -37,8 +37,8 @@ public class UncheckingFeedbackAdapter extends RecyclerView.Adapter<RecyclerView
 
         public AdviceAdapter(View itemView) {
             super(itemView);
-            tv_username_feedback=(TextView) itemView.findViewById(R.id.tv_username_feedback);
-            tv_phone_feedback=(TextView)  itemView.findViewById(R.id.tv_phone_feedback);
+            tv_username_feedback=(TextView) itemView.findViewById(R.id.tv_username_comment);
+            tv_phone_feedback=(TextView)  itemView.findViewById(R.id.tv_point_comment);
             tv_detail_feedback=(TextView)  itemView.findViewById(R.id.tv_detail_feedback);
         }
     }

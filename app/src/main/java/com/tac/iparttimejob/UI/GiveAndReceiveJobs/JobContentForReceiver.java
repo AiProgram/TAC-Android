@@ -209,11 +209,13 @@ public class JobContentForReceiver extends AppCompatActivity {
                 assess.put("applicantsid",applicantsid+"");
                 assess.put("recruitid",recuitObject.getRecruitid());
                 assess.put("applicantid",userObject.getUserid());
-                assess.put("ownerid",recuitObject.getOwnerid());
-                assess.put("ownername",recuitObject.getOwner());
+                assess.put("ownerid",recuitObject.getTac_user().getUserid());
+                assess.put("ownername",recuitObject.getTac_user().getName());
                 assess.put("comment",assessment);
                 assess.put("point",assessPoint);
                 assess.put("cmmentTime", FormatedTimeGeter.getFormatedDate());
+
+
                 //说明文档没有标出，应该是这个接口
                 EditInformation.setAssessment(assess, new HttpCallBackListener() {
                     @Override
@@ -227,11 +229,11 @@ public class JobContentForReceiver extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onError(String error) {
+                    public void onError(final String error) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(JobContentForReceiver.this,"评价失败",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(JobContentForReceiver.this,"评价失败"+error,Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

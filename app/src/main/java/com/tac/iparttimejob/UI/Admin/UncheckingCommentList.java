@@ -1,10 +1,13 @@
 package com.tac.iparttimejob.UI.Admin;
 
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -15,12 +18,15 @@ import android.widget.Toast;
 import com.tac.iparttimejob.Class.AssessmentAtoO;
 import com.tac.iparttimejob.Class.AssessmentOtoA;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
+import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
+import com.tac.iparttimejob.UI.Utils.FormatedTimeGeter;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
 import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 
+import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -43,6 +49,7 @@ public class UncheckingCommentList extends Fragment {
     private List<AssessmentAtoO> aToOList=new ArrayList<>();
     private List<AssessmentOtoA> oToAList=new ArrayList<>();
 
+    int listType=DataType.COMMENT_A_TO_O;
     //防止多次初始化
     boolean inited=false;
 
@@ -114,10 +121,12 @@ public class UncheckingCommentList extends Fragment {
                     case DataType.COMMENT_A_TO_O:{
                         rv_unchecking_comment_list.setAdapter(AtoOAdapter);
                         rv_unchecking_comment_list.notifyData();
+                        listType=DataType.COMMENT_A_TO_O;
                     }break;
                     case DataType.COMMENT_O_TO_A:{
                         rv_unchecking_comment_list.setAdapter(OtoAAdapter);
                         rv_unchecking_comment_list.notifyData();
+                        listType=DataType.COMMENT_O_TO_A;
                     }break;
                 }
             }
@@ -223,14 +232,14 @@ public class UncheckingCommentList extends Fragment {
             QueryInformation.getAtooAssementForManager(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(final String result) {
+                    cloneAtoOList();
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            rv_unchecking_comment_list.notifyData();
                         }
                     });
-                    cloneAtoOList();
-                    rv_unchecking_comment_list.notifyData();
                     aToOPage++;
                 }
 
@@ -248,14 +257,14 @@ public class UncheckingCommentList extends Fragment {
             QueryInformation.getOtoaAssementForManager(getList, new HttpCallBackListener() {
                 @Override
                 public void onFinish(String result) {
+                    clonOtoAList();
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            rv_unchecking_comment_list.notifyData();
                         }
                     });
-                    clonOtoAList();
-                    rv_unchecking_comment_list.notifyData();
                     oToAPage++;
                 }
 
@@ -296,27 +305,25 @@ public class UncheckingCommentList extends Fragment {
                 @Override
                 public void onFinish(final String result) {
                     rv_unchecking_comment_list.setLoadMoreEnable(true);
-
+                    addAtoOList();
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             //Toast.makeText(getActivity(), "上拉更多成功", Toast.LENGTH_SHORT).show();
+                            rv_unchecking_comment_list.notifyData();
                         }
                     });
-
-                    addAtoOList();
-                    rv_unchecking_comment_list.notifyData();
                     aToOPage++;
                 }
 
                 @Override
                 public void onError(String error) {
-                    rv_unchecking_comment_list.setLoadMoreEnable(true);
 
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(getActivity(), "上拉更多失败", Toast.LENGTH_SHORT).show();
+                            rv_unchecking_comment_list.setLoadMoreEnable(true);
                         }
                     });
                 }
@@ -326,27 +333,24 @@ public class UncheckingCommentList extends Fragment {
                 @Override
                 public void onFinish(String result) {
                     rv_unchecking_comment_list.setLoadMoreEnable(true);
-
+                    addOtoAList();
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             //Toast.makeText(getActivity(), "上拉更多成功", Toast.LENGTH_SHORT).show();
+                            rv_unchecking_comment_list.notifyData();
                         }
                     });
-
-                    addOtoAList();
-                    rv_unchecking_comment_list.notifyData();
                     oToAPage++;
                 }
 
                 @Override
                 public void onError(String error) {
-                    rv_unchecking_comment_list.setLoadMoreEnable(true);
-
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(getActivity(), "上拉更多失败", Toast.LENGTH_SHORT).show();
+                            rv_unchecking_comment_list.setLoadMoreEnable(true);
                         }
                     });
                 }
@@ -387,11 +391,156 @@ public class UncheckingCommentList extends Fragment {
         //应聘者招聘详情尚未编写完成，这里需要传入是否选择了该招聘的标志，因为查看时无法获得
         switch (listType){
             case DataType.COMMENT_A_TO_O:{
-
+                showCheckDialog(position);
             }break;
             case DataType.COMMENT_O_TO_A:{
-
+                showCheckDialog(position);
             }break;
         }
+    }
+
+    //展示审核的Dialog
+    private void showCheckDialog(final int position){
+        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+        //初始化公有参数
+        final Map<String,String> changeStatus=new LinkedHashMap<>();
+        changeStatus.put("commentid",aToOList.get(position).getCommentid()+"");
+        changeStatus.put("checktime", FormatedTimeGeter.getFormatedDate());
+
+        //设置来自应聘者的评价
+        if(listType==DataType.COMMENT_A_TO_O){
+            builder.setTitle(aToOList.get(position).getApplicantname()+"评价"+aToOList.get(position).getOnwername());
+            builder.setMessage(aToOList.get(position).getAtooComment());
+
+            builder.setPositiveButton("通过审核", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    changeStatus.put("status",DataType.COMMENT_STATUS_UNBLOCKED+"");
+                    EditInformation.setAtooAssementStatus(changeStatus, new HttpCallBackListener() {
+                        @Override
+                        public void onFinish(String result) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(),"操作成功",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(),"操作失败",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+
+            builder.setNeutralButton("无法通过", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    changeStatus.put("status",DataType.COMMENT_STATUS_BLOCKED+"");
+                    EditInformation.setAtooAssementStatus(changeStatus, new HttpCallBackListener() {
+                        @Override
+                        public void onFinish(String result) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(),"操作成功",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(),"操作失败",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }else{
+            //设置来自招聘者的评价
+            builder.setTitle(oToAList.get(position).getOnwername()+"评价"+oToAList.get(position).getApplicantname());
+            builder.setMessage(oToAList.get(position).getOtoaComment());
+            builder.setPositiveButton("通过审核", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    changeStatus.put("status",DataType.COMMENT_STATUS_UNBLOCKED+"");
+                    EditInformation.setOtoaAssementStatus(changeStatus, new HttpCallBackListener() {
+                        @Override
+                        public void onFinish(String result) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(),"操作成功",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(),"操作失败",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+
+            builder.setNeutralButton("无法通过", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    changeStatus.put("status",DataType.COMMENT_STATUS_BLOCKED+"");
+                    EditInformation.setOtoaAssementStatus(changeStatus, new HttpCallBackListener() {
+                        @Override
+                        public void onFinish(String result) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(),"操作成功",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(),"操作失败",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+        builder.show();
     }
 }
