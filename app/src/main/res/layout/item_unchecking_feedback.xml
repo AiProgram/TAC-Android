@@ -7,7 +7,7 @@
     android:layout_marginTop="14dp">
 
     <RelativeLayout android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:id="@+id/relativeLayout2"
         >
 
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="18250150000"
             android:textColor="#ff0055"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:id="@+id/tv_point_comment"
             android:layout_alignParentTop="true"
             android:layout_alignEnd="@+id/view" />
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="手机:"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:id="@+id/user1_score"
             android:layout_alignParentTop="true"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:text="未知用户"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:id="@+id/tv_username_comment"
             android:layout_marginLeft="20dp"
             android:layout_alignParentTop="true"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:text="XXXXXXXXXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxXXXXXXX"
             android:id="@+id/tv_detail_feedback"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:ellipsize="end"
             android:maxLines="2"
             android:layout_below="@+id/view"
