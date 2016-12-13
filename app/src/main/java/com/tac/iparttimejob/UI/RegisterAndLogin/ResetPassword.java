@@ -1,7 +1,6 @@
 package com.tac.iparttimejob.UI.RegisterAndLogin;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -33,7 +32,7 @@ public class ResetPassword extends AppCompatActivity {
     private Button bt_reset_password;
     private Button bt_cancel_reset_password;
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_reset_password);
         getViews();

@@ -58,9 +58,6 @@
 
         </activity>
 
-        <activity android:name=".UI.RegisterAndLogin.Login">
-
-        </activity>
 
         <activity android:name=".UI.GiveAndReceiveJobs.AssessList">
 
@@ -72,7 +69,7 @@
         <activity android:name=".UI.RegisterAndLogin.ResetPassword">
 
         </activity>
-        <activity android:name=".UI.RegisterAndLogin.SplashActivity">
+        <activity android:name=".UI.RegisterAndLogin.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

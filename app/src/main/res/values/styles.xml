@@ -43,6 +43,9 @@
     <style name="SignUpEditTextStyle">
         <item name="met_baseColor">#0028E5</item>
         <item name="met_floatingLabel">normal</item>
+        <item name="met_floatingLabelAnimating">true</item>
+        <item name="met_floatingLabelTextColor">@color/black</item>
+        <item name="met_iconPadding">0dp</item>
     </style>
 
     <style name="WarningButton">

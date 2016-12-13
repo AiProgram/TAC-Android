@@ -6,9 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.tac.iparttimejob.Class.Object;
+import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
+import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.NetWork.SignUp.SignUp;
 import com.tac.iparttimejob.R;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -28,6 +32,7 @@ public class Register extends AppCompatActivity {
     private String phoneNumber;
     private String email;
     private String signUpErr;
+    private String vertCode="sample";
 
     private MaterialEditText et_set_account;
     private MaterialEditText et_set_password;
@@ -37,6 +42,8 @@ public class Register extends AppCompatActivity {
 
     private Button btn_accpet_register;
     private Button btn_cancel_register;
+    private Button bt_send_verification_code;
+    private EditText et_verification_code;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,13 +58,15 @@ public class Register extends AppCompatActivity {
 
         btn_accpet_register=(Button) findViewById(R.id.btn_accept_register);
         btn_cancel_register=(Button) findViewById(R.id.btn_cancel_register);
+        bt_send_verification_code=(Button) findViewById(R.id.bt_send_verification_code);
+        et_verification_code=(EditText) findViewById(R.id.et_verification_code);
 
         //注册按钮事件
         btn_accpet_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getInput();
-                if(checkInput()){
+                if(checkInput()&&verifyEmail()){
                     //完成注册
                     //预留用作验证码函数
                     verifyEmail();
@@ -100,6 +109,34 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 //返回登录界面
                 Register.this.finish();
+            }
+        });
+
+        bt_send_verification_code.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email=et_set_email.getText().toString().trim();
+                Map<String,String> getCert=new LinkedHashMap<String, String>();
+                getCert.put("getterEmail",email);
+                QueryInformation.getEmailInformation(getCert, new HttpCallBackListener() {
+                    @Override
+                    public void onFinish(String result) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(Register.this,"验证码发送成功",Toast.LENGTH_SHORT).show();
+                                bt_send_verification_code.setText("验证码已发送");
+                               // bt_send_verification_code.setEnabled(false);
+                                vertCode= Object.emailData;
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Toast.makeText(Register.this,"验证码发送失败",Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
@@ -161,8 +198,16 @@ public class Register extends AppCompatActivity {
     }
 
     //验证码函数
-    private void verifyEmail(){
-
+    private boolean verifyEmail(){
+        if(vertCode.equals("sample")){
+            signUpErr="请先验证邮箱";
+            return false;
+        }
+        if(!vertCode.equals(et_verification_code.getText().toString().trim())){
+            signUpErr="验证码错误";
+            return false;
+        }
+        return true;
     }
 
 

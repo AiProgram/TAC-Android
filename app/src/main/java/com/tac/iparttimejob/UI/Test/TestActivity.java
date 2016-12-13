@@ -42,14 +42,14 @@ public class TestActivity extends AppCompatActivity {
         userObject=new UserResult.User();
         super.onPostCreate(savedInstanceState);
         setContentView(R.layout.layout_test);
-        btn=(Button) findViewById(R.id.btn_test);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                test();
-
-            }
-        });
+//        btn=(Button) findViewById(R.id.btn_test);
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                test();
+//
+//            }
+//        });
 
     }
 
