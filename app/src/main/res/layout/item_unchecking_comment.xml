@@ -27,34 +27,39 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="AiProgram"
+                android:text="完成一个教务处平台xxxxxxxxxxxxxx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_job_info"
+                android:layout_below="@+id/tv_job_title"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:singleLine="true"
+                android:maxWidth="200dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/tv_job_title" />
+
+            <TextView
+                android:text="AiProgramxxxxx"
                 style="@style/JobListTitle"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_job_title"
-                android:layout_marginStart="21dp"
+                android:layout_marginStart="19dp"
+                android:maxWidth="100dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="10dp" />
+                android:layout_alignParentStart="true" />
 
             <TextView
-                android:text="完成一个教务处平台"
-                style="@style/JobListWorkInfo"
+                android:text="对"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_job_info"
-                android:layout_alignParentBottom="true"
-                android:layout_alignStart="@+id/tv_job_title" />
-
-            <TextView
-                android:text="评论"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tv_job_title"
-                android:layout_toEndOf="@+id/tv_job_title"
-                android:layout_marginStart="16dp"
-                android:id="@+id/textView2" />
+                android:textSize="20sp"
+                android:textColor="#fc0606"
+                android:id="@+id/textView2"
+                android:layout_above="@+id/tv_job_info"
+                android:layout_marginLeft="150dp"/>
 
             <TextView
                 android:text="hong"
@@ -62,10 +67,10 @@
                 style="@style/JobListTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/textView2"
-                android:layout_toEndOf="@+id/textView2"
-                android:layout_marginStart="17dp"
-                android:id="@+id/tv_comment_receiver" />
+                android:id="@+id/tv_comment_receiver"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/textView2"
+                android:layout_marginLeft="50dp"/>
 
         </RelativeLayout>
 

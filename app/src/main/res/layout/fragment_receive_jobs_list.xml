@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background"
     >
 
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@color/toolbar_background"
         android:theme="?attr/actionBarTheme"
         android:minHeight="?attr/actionBarSize"
         android:id="@+id/toolbar_receive_jobs_top"
@@ -36,9 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="40"
-                app:tabTextColor="@color/white"
-                app:tabSelectedTextColor="@color/heavyPink"
-                app:tabMode="fixed"
+                style="@style/mainTabLayoutTheme"
                 android:id="@+id/tl_receive_jobs_top"
                 android:layout_below="@id/toolbar_receive_jobs_top"
                 >

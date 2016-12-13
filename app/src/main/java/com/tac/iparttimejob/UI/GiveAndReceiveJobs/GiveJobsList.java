@@ -9,6 +9,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -114,6 +116,7 @@ public class GiveJobsList extends Fragment{
         }
 
         srl_give_jobs.setRefreshing(false);
+        srl_give_jobs.setColorSchemeColors(R.color.srlColor);
     }
 
 
@@ -171,6 +174,7 @@ public class GiveJobsList extends Fragment{
                 //专项填写招聘的页面
                 Intent intent=new Intent(getActivity(),PostJobs.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.transition.fade_in,R.transition.fade_out);
             }
         });
 
@@ -227,9 +231,10 @@ public class GiveJobsList extends Fragment{
                     @Override
                     public void run() {
                         //Toast.makeText(getActivity(),"获取详情成功",Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                        getActivity().overridePendingTransition(R.transition.zoom_in,R.transition.zoom_out);
                     }
                 });
-                startActivity(intent);
             }
 
             @Override

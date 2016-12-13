@@ -2,16 +2,22 @@ package com.tac.iparttimejob.UI.RegisterAndLogin;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.drawable.DrawableWrapper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +68,7 @@ public class Login extends AppCompatActivity {
         tv_forget_password = (TextView) findViewById(R.id.tv_forget_password);
         btn_login = (Button) findViewById(R.id.btn_login);
         btn_register = (Button) findViewById(R.id.btn_register);
+        final RelativeLayout login_background=(RelativeLayout) findViewById(R.id.login_background);
         pref = getSharedPreferences(FILE, MODE_PRIVATE);
         boolean isMemory = pref.getBoolean("remember_password",false);
 
@@ -167,6 +174,13 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+            }
+        },0);
     }
     //记住密码
     private void remember(){

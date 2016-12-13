@@ -51,7 +51,7 @@ public class MySelectedListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         EnrollViewHolder viewHolder=(EnrollViewHolder) holder;
         viewHolder.tv_applicant_name.setText(selectedList.get(position).getApplicantname());
         viewHolder.tv_assess_point.setText(selectedList.get(position).getPoint()+"");
-        viewHolder.tv_single_info.setText(selectedList.get(position).getSingleinfo());
+        viewHolder.tv_single_info.setText(selectedList.get(position).getSingleresume());
 
         viewHolder.cb_choose.setEnabled(false);
         viewHolder.cb_choose.setSelected(true);

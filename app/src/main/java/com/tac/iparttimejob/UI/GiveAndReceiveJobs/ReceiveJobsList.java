@@ -113,6 +113,7 @@ public class ReceiveJobsList extends Fragment{
         rv_receive_jobs.setAdapter(unsignedListAdapter);
         //设置RecyclerVi可以上拉刷新
         rv_receive_jobs.setLoadMoreEnable(true);
+        srl_receive_jobs.setColorSchemeColors(R.color.srlColor);
     }
 
     //初始化各事件监听器
@@ -205,7 +206,7 @@ public class ReceiveJobsList extends Fragment{
             pullDownRefresh(pageNum);
         }
         else if(pageNum==DataType.UNSIGNED_JOB_LIST){
-            signeList.clear();
+            unsignedList.clear();
             pullDownRefresh(pageNum);
         }
 
@@ -291,12 +292,12 @@ public class ReceiveJobsList extends Fragment{
         Map<String,String> getList=new LinkedHashMap<>();
         switch (pageNum){
             case DataType.UNSIGNED_JOB_LIST:{
-                getList.put("page",(signedPage)+"");
+                getList.put("page",(unsignedPage)+"");
                 getList.put("rows",(rows)+"");
             }break;
             case DataType.SIGNED_JOB_LIST:{
                 getList.put("userid",Object.loginObject.getUserid());
-                getList.put("page",(unsignedPage)+"");
+                getList.put("page",(signedPage)+"");
                 getList.put("rows",(rows)+"");
             }break;
         }
@@ -340,11 +341,11 @@ public class ReceiveJobsList extends Fragment{
                 public void onFinish(String result) {
                     rv_receive_jobs.setLoadMoreEnable(true);
                     addSignedList();
-                    signedPage++;
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             //Toast.makeText(getActivity(), "上拉更多成功", Toast.LENGTH_SHORT).show();
+                            signedPage++;
                             rv_receive_jobs.notifyData();
                         }
                     });
@@ -418,9 +419,14 @@ public class ReceiveJobsList extends Fragment{
         QueryInformation.getRecruitInformation(getList, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(intent);
+                        getActivity().overridePendingTransition(R.transition.zoom_in,R.transition.zoom_out);
+                    }
+                });
 
-
-                startActivity(intent);
             }
 
             @Override

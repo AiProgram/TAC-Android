@@ -95,6 +95,7 @@ public class EnrollList extends AppCompatActivity {
         rv_enroll_list.setAdapter(enrollListAdapter);
         //设置RecyclerVi可以上拉刷新
         rv_enroll_list.setLoadMoreEnable(true);
+        srl_enroll_list.setColorSchemeColors(R.color.srlColor);
     }
 
     //初始化各事件监听器

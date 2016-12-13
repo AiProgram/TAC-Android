@@ -83,4 +83,16 @@
         <item name="android:background">@color/acceptGreen</item>
         <item name="android:textSize">22sp</item>
     </style>
+
+    <style name="mainToolBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="actionMenuTextColor">@color/white</item> <!--  敲定颜色-->
+        <item name="android:textSize">18sp</item> <!--  搞掂字体大小-->
+    </style>
+
+    <style name="mainTabLayoutTheme" parent="Base.Widget.Design.TabLayout">
+        <item name="tabTextColor">#BCD6B8</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabIndicatorColor">@color/white</item>
+    </style>
 </resources>

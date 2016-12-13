@@ -64,7 +64,7 @@ public class MyEnrollListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         final EnrollViewHolder viewHolder=(EnrollViewHolder) holder;
         viewHolder.tv_applicant_name.setText(enrollList.get(position).getApplicantname());
         viewHolder.tv_assess_point.setText(enrollList.get(position).getPoint()+"");
-        viewHolder.tv_single_info.setText(enrollList.get(position).getSingleinfo());
+        viewHolder.tv_single_info.setText(enrollList.get(position).getSingleresume());
 
         //如果之前 已经被选中就设置为选中
         if(enrollList.get(position).getChoosen()== DataType.ENROLL_STATUS_SELECTED)

@@ -10,4 +10,6 @@
     <color name="heavyPink">#FF0040</color>
     <color name="warningRed">#E30038</color>
     <color name="acceptGreen">#5EDB00</color>
+    <color name="toolbar_background">#4E5B55</color>
+    <color name="srlColor">#281F41</color>
 </resources>

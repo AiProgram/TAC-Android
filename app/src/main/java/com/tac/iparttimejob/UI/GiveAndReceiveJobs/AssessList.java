@@ -101,7 +101,7 @@ public class AssessList extends AppCompatActivity {
         rv_comments_from_recruitor.setAdapter(assessAdapter);
         //设置RecyclerVi可以上拉刷新
         rv_comments_from_recruitor.setLoadMoreEnable(true);
-
+        srl_comment_list.setColorSchemeColors(R.color.srlColor);
     }
 
     //初始化各事件监听器
