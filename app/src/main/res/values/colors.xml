@@ -12,4 +12,6 @@
     <color name="acceptGreen">#5EDB00</color>
     <color name="toolbar_background">#4E5B55</color>
     <color name="srlColor">#281F41</color>
+    <color name="gray">#aaaaaa</color>
+
 </resources>
