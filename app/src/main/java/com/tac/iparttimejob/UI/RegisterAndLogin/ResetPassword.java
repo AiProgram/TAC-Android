@@ -12,6 +12,7 @@ import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.Utils.CountDownTimerUtils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -70,8 +71,8 @@ public class ResetPassword extends AppCompatActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(ResetPassword.this,"验证码发送成功",Toast.LENGTH_SHORT).show();
-                                bt_send_verification_code.setText("验证码已发送");
-                                bt_send_verification_code.setEnabled(false);
+                                CountDownTimerUtils countDownTimer=new CountDownTimerUtils(bt_send_verification_code, 60000, 1000);
+                                countDownTimer.start();
                             }
                         });
                     }

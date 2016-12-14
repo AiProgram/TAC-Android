@@ -16,6 +16,7 @@ import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.NetWork.SignUp.SignUp;
 import com.tac.iparttimejob.R;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.tac.iparttimejob.UI.Utils.CountDownTimerUtils;
 import com.tac.iparttimejob.UI.Utils.RegexCheck;
 
 import java.util.LinkedHashMap;
@@ -125,9 +126,11 @@ public class Register extends AppCompatActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(Register.this,"验证码发送成功",Toast.LENGTH_SHORT).show();
-                                bt_send_verification_code.setText("验证码已发送");
+                                //bt_send_verification_code.setText("验证码已发送");
                                // bt_send_verification_code.setEnabled(false);
                                 vertCode= Object.emailData;
+                                CountDownTimerUtils countDownTimer=new CountDownTimerUtils(bt_send_verification_code, 60000, 1000);
+                                countDownTimer.start();
                             }
                         });
                     }
