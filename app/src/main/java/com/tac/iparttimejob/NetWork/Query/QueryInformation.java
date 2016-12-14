@@ -547,8 +547,6 @@ public class QueryInformation extends HttpPost{
                     if (chooseApplication.isSuccess()) {
                         chooseApplicationList=chooseApplication.getData();
                         //chooseApplication.getData().addAll(chooseApplicationList);
-                        Log.i("list:",chooseApplicationList.get(0).getDealdine());
-                        Log.i("list:",chooseApplicationList.get(0).getDisplaytime());
                         listener.onFinish("成功");
                     } else {
                         listener.onError(chooseApplication.getMessage());

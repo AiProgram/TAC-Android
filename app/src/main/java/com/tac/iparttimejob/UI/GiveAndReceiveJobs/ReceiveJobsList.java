@@ -15,7 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.AdapterView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.tac.iparttimejob.Class.Application;
 import com.tac.iparttimejob.Class.Object;
@@ -46,6 +48,8 @@ public class ReceiveJobsList extends Fragment{
     private RefreshRecyclerView rv_receive_jobs;
     private TabLayout tl_receive_jobs_top;
     private SwipeRefreshLayout srl_receive_jobs;
+    private ViewSwitcher viewSwitcher;
+    private RelativeLayout empty_view;
 
     private Handler handler=new Handler();
 
@@ -97,6 +101,8 @@ public class ReceiveJobsList extends Fragment{
         rv_receive_jobs=(RefreshRecyclerView) fragmentView.findViewById(R.id.rv_receive_jobs);
         tl_receive_jobs_top=(TabLayout) fragmentView.findViewById(R.id.tl_receive_jobs_top);
         srl_receive_jobs=(SwipeRefreshLayout) fragmentView.findViewById(R.id.srl_receive_jobs);
+        viewSwitcher=(ViewSwitcher) fragmentView.findViewById(R.id.vs_empty_list);
+        empty_view=(RelativeLayout) fragmentView.findViewById(R.id.empty_view);
     }
 
     //初始化文字显示等
@@ -127,10 +133,12 @@ public class ReceiveJobsList extends Fragment{
                     case DataType.UNSIGNED_JOB_LIST:{
                         rv_receive_jobs.setAdapter(unsignedListAdapter);
                         rv_receive_jobs.notifyData();
+                        chooseView();
                     }break;
                     case DataType.SIGNED_JOB_LIST:{
                         rv_receive_jobs.setAdapter(signedListAdapter);
                         rv_receive_jobs.notifyData();
+                        chooseView();
                     }break;
                 }
             }
@@ -189,6 +197,13 @@ public class ReceiveJobsList extends Fragment{
                 srl_receive_jobs.setRefreshing(false);
             }
         });
+
+        empty_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pullDownRefresh(tl_receive_jobs_top.getSelectedTabPosition());
+            }
+        });
     }
 
     //首次进入页面时初始化数据
@@ -243,8 +258,9 @@ public class ReceiveJobsList extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            //Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
                             rv_receive_jobs.notifyData();
+                            chooseView();
                         }
                     });
                 }
@@ -254,7 +270,7 @@ public class ReceiveJobsList extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "下拉刷新失败", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getActivity(), "下拉刷新失败", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -268,8 +284,9 @@ public class ReceiveJobsList extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            // Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
                             rv_receive_jobs.notifyData();
+                            chooseView();
                         }
                     });
                 }
@@ -279,7 +296,7 @@ public class ReceiveJobsList extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "下拉刷新失败", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getActivity(), "下拉刷新失败", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -434,5 +451,29 @@ public class ReceiveJobsList extends Fragment{
 
             }
         });
+    }
+
+    //选择显示空的view还是rv,当列表没有项时显示提示为空的VIew
+    private void chooseView(){
+        int selectedTab=tl_receive_jobs_top.getSelectedTabPosition();
+        //判断数量应该对应判断
+        if(selectedTab==DataType.SIGNED_JOB_LIST){
+            if (signeList.size() > 0) {
+                if (R.id.srl_receive_jobs == viewSwitcher.getNextView().getId()) {
+                    viewSwitcher.showNext();
+                }
+            } else if (R.id.empty_view == viewSwitcher.getNextView().getId()) {
+                viewSwitcher.showNext();
+            }
+        }
+        else {
+            if (unsignedList.size() > 0) {
+                if (R.id.srl_receive_jobs == viewSwitcher.getNextView().getId()) {
+                    viewSwitcher.showNext();
+                }
+            } else if (R.id.empty_view == viewSwitcher.getNextView().getId()) {
+                viewSwitcher.showNext();
+            }
+        }
     }
 }

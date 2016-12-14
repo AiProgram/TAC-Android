@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/background"
+
     >
 
 
@@ -59,21 +59,31 @@
     </android.support.v7.widget.Toolbar>
 
 
-
-    <android.support.v4.widget.SwipeRefreshLayout
+    <ViewSwitcher
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar_receive_jobs_top"
-        android:id="@+id/srl_receive_jobs">
-
-        <com.tac.iparttimejob.UI.Utils.RefreshRecyclerView
+        android:layout_below="@+id/toolbar_receive_jobs_top"
+        android:id="@+id/vs_empty_list">
+        <android.support.v4.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rv_receive_jobs"
-            android:layout_below="@+id/tl_receive_jobs_top"
-            android:layout_alignParentStart="true" />
+            android:layout_below="@id/toolbar_receive_jobs_top"
+            android:id="@+id/srl_receive_jobs">
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+            <com.tac.iparttimejob.UI.Utils.RefreshRecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rv_receive_jobs"
+                android:layout_below="@+id/tl_receive_jobs_top"
+                android:layout_alignParentStart="true" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <include layout="@layout/layout_empty_view">
+
+        </include>
+    </ViewSwitcher>
+
 
 
 </RelativeLayout>

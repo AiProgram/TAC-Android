@@ -16,7 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.Class.RecuitResult;
@@ -53,6 +55,8 @@ public class GiveJobsList extends Fragment{
     private SwipeRefreshLayout srl_give_jobs;
     private TabLayout tabLayout;
     private ImageButton imgbtn_add_jobs;
+    private ViewSwitcher viewSwitcher;
+    private RelativeLayout empty_view;
 
     private Handler handler=new Handler();
     private MyGiveJobAdapter validJobAdapter;
@@ -127,6 +131,8 @@ public class GiveJobsList extends Fragment{
         srl_give_jobs=(SwipeRefreshLayout) fragmentView.findViewById(R.id.srl_give_jobs);
         tabLayout = (TabLayout)fragmentView.findViewById(R.id.tl_receive_jobs_top);
         imgbtn_add_jobs=(ImageButton) fragmentView.findViewById(R.id.imgbtn_add_jobs) ;
+        viewSwitcher=(ViewSwitcher) fragmentView.findViewById(R.id.vs_empty_list);
+        empty_view=(RelativeLayout) fragmentView.findViewById(R.id.empty_view);
 
         validJobAdapter=new MyGiveJobAdapter(validList);
         UnvalidJobAdapter=new MyGiveJobAdapter(unValidList);
@@ -149,10 +155,13 @@ public class GiveJobsList extends Fragment{
                 if(tab.getPosition()==DataType.VALID_JOB_LIST){
                     rv_give_jobs.setAdapter(validJobAdapter);
                     rv_give_jobs.notifyData();
+                    //切换变化后要重新选择是否显示空View
+                    chooseView();
                 }
                 else if(tab.getPosition()==DataType.UNVALID_JOB_LIST){
                     rv_give_jobs.setAdapter(UnvalidJobAdapter);
                     rv_give_jobs.notifyData();
+                    chooseView();
                 }
             }
 
@@ -280,6 +289,14 @@ public class GiveJobsList extends Fragment{
                 srl_give_jobs.setRefreshing(false);
             }
         });
+
+        empty_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int selectedTab=tabLayout.getSelectedTabPosition();
+                pullDownRefresh(selectedTab);
+            }
+        });
     }
 
     /*
@@ -318,6 +335,7 @@ public class GiveJobsList extends Fragment{
                         public void run() {
                             rv_give_jobs.notifyData();
                             Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            chooseView();
                         }
                     });
                 }
@@ -343,6 +361,7 @@ public class GiveJobsList extends Fragment{
                         public void run() {
                             Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
                             rv_give_jobs.notifyData();
+                            chooseView();
                         }
                     });
                 }
@@ -358,7 +377,6 @@ public class GiveJobsList extends Fragment{
                 }
             });
         }
-        Log.i("validListSize", recuitObjectList.size()+"");
     }
 
     /*
@@ -481,4 +499,27 @@ public class GiveJobsList extends Fragment{
 //        }
     }
 
+    //选择显示空的view还是rv,当列表没有项时显示提示为空的VIew
+    private void chooseView(){
+        int selectedTab=tabLayout.getSelectedTabPosition();
+        //判断数量应该对应判断
+        if(selectedTab==DataType.VALID_JOB_LIST){
+            if (validList.size() > 0) {
+                if (R.id.srl_give_jobs == viewSwitcher.getNextView().getId()) {
+                    viewSwitcher.showNext();
+                }
+            } else if (R.id.empty_view == viewSwitcher.getNextView().getId()) {
+                viewSwitcher.showNext();
+            }
+        }
+        else {
+            if (unValidList.size() > 0) {
+                if (R.id.srl_give_jobs == viewSwitcher.getNextView().getId()) {
+                    viewSwitcher.showNext();
+                }
+            } else if (R.id.empty_view == viewSwitcher.getNextView().getId()) {
+                viewSwitcher.showNext();
+            }
+        }
+    }
 }
