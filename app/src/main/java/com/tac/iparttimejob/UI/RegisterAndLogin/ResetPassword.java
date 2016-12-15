@@ -92,6 +92,13 @@ public class ResetPassword extends AppCompatActivity {
                 checkEmail();
             }
         });
+
+        bt_cancel_reset_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     //检验是不是注册邮箱
@@ -121,7 +128,7 @@ public class ResetPassword extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(ResetPassword.this,"验证邮箱对应性失败",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ResetPassword.this,"请检查您输入的用户名是否正确",Toast.LENGTH_SHORT).show();
                     }
                 });
             }

@@ -185,7 +185,7 @@ public class PostJobs extends AppCompatActivity{
                         //UI提示发布成功
                         Toast.makeText(PostJobs.this,"发布成功",Toast.LENGTH_SHORT).show();
                         //后续预计操作正在进行列表添加项目
-
+                        finish();
                     }
                 });
             }

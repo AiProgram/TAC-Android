@@ -15,10 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -109,8 +112,19 @@ public class JobContentForReceiver extends AppCompatActivity {
     }
 
     private void getAndSetUniqueViews(){
+        int dayDiff=0;
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date now = format.parse(FormatedTimeGeter.getFormatedDate());
+            Date to=format.parse(Object.recuitObject.getDealdine());
+            dayDiff=FormatedTimeGeter.differentDays(now,to);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         switch (type){
             case DataType.UNSIGNED_JOB_LIST:{
+                TextView tv_days_left=(TextView) findViewById(R.id.tv_days_left);
+                tv_days_left.setText("剩余"+dayDiff+"天");
                 btn_signUp=(Button) findViewById(R.id.btn_signUp);
                 btn_signUp.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -409,7 +409,8 @@ public class UncheckingCommentList extends Fragment {
 
         //设置来自应聘者的评价
         if(listType==DataType.COMMENT_A_TO_O){
-            builder.setTitle(aToOList.get(position).getApplicantname()+"评价"+aToOList.get(position).getOnwername());
+            //builder.setTitle(aToOList.get(position).getApplicantname()+"评价"+aToOList.get(position).getOnwername());
+            builder.setTitle(aToOList.get(position).getApplicantname()+"评价");
             builder.setMessage(aToOList.get(position).getAtooComment());
 
             builder.setPositiveButton("通过审核", new DialogInterface.OnClickListener() {
@@ -476,7 +477,8 @@ public class UncheckingCommentList extends Fragment {
             });
         }else{
             //设置来自招聘者的评价
-            builder.setTitle(oToAList.get(position).getOnwername()+"评价"+oToAList.get(position).getApplicantname());
+            //builder.setTitle(oToAList.get(position).getOnwername()+"评价"+oToAList.get(position).getApplicantname());
+            builder.setTitle(oToAList.get(position).getOnwername()+"评价");
             builder.setMessage(oToAList.get(position).getOtoaComment());
             builder.setPositiveButton("通过审核", new DialogInterface.OnClickListener() {
                 @Override

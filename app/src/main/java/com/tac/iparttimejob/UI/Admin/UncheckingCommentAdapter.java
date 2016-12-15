@@ -75,6 +75,7 @@ public class UncheckingCommentAdapter extends RecyclerView.Adapter<RecyclerView.
                 viewHolder.tv_comment_giver.setText(applicant);
                 viewHolder.tv_comment_receiver.setText(owner);
                 viewHolder.tv_commen_info.setText(commentInfo);
+                viewHolder.tv_comment_receiver.setVisibility(View.GONE);
             }break;
             case DataType.COMMENT_O_TO_A:{
                 owner=otoAList.get(position).getOnwername();
@@ -85,6 +86,7 @@ public class UncheckingCommentAdapter extends RecyclerView.Adapter<RecyclerView.
                 viewHolder.tv_comment_giver.setText(owner);
                 viewHolder.tv_comment_receiver.setText(applicant);
                 viewHolder.tv_commen_info.setText(commentInfo);
+                viewHolder.tv_comment_receiver.setVisibility(View.GONE);
             }break;
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
