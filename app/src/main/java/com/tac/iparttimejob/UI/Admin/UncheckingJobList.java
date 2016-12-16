@@ -12,13 +12,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.GiveAndReceiveJobs.JobContentForReceiver;
+import com.tac.iparttimejob.UI.Utils.DataType;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
 import com.tac.iparttimejob.Class.Object;
 
@@ -35,6 +38,8 @@ public class UncheckingJobList extends Fragment{
 
     private RefreshRecyclerView rv_unchecking_job_list;
     private SwipeRefreshLayout srl_unchecking_job_list;
+    private ViewSwitcher viewSwitcher;
+    private RelativeLayout empty_view;
 
     private Handler handler=new Handler();
 
@@ -81,6 +86,8 @@ public class UncheckingJobList extends Fragment{
         View fragmentView=getView();
         rv_unchecking_job_list=(RefreshRecyclerView) fragmentView.findViewById(R.id.rv_unchecking_job_list);
         srl_unchecking_job_list=(SwipeRefreshLayout) fragmentView.findViewById(R.id.srl_unchecking_job_list);
+        viewSwitcher=(ViewSwitcher) fragmentView.findViewById(R.id.vs_empty_list);
+        empty_view=(RelativeLayout) fragmentView.findViewById(R.id.empty_view);
     }
 
     //初始化文字显示等
@@ -130,6 +137,13 @@ public class UncheckingJobList extends Fragment{
                 srl_unchecking_job_list.setRefreshing(false);
             }
         });
+
+        empty_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pullDownRefresh();
+            }
+        });
     }
 
     //首次进入页面时初始化数据
@@ -165,8 +179,9 @@ public class UncheckingJobList extends Fragment{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "招聘审核列表刷新成功", Toast.LENGTH_SHORT).show();
                             rv_unchecking_job_list.notifyData();
+                            chooseView();
                         }
                     });
                 }
@@ -258,5 +273,17 @@ public class UncheckingJobList extends Fragment{
             }
         });
     }
+
+    //选择显示空的view还是rv,当列表没有项时显示提示为空的VIew
+    private void chooseView(){
+        //判断数量应该对应判断
+            if (jobList.size() > 0) {
+                if (R.id.srl_unchecking_job_list == viewSwitcher.getNextView().getId()) {
+                    viewSwitcher.showNext();
+                }
+            } else if (R.id.empty_view == viewSwitcher.getNextView().getId()) {
+                viewSwitcher.showNext();
+            }
+        }
 }
 

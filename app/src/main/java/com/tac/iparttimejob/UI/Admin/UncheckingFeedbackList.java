@@ -11,8 +11,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.tac.iparttimejob.Class.Advice;
 import com.tac.iparttimejob.Class.Object;
@@ -35,6 +37,8 @@ public class UncheckingFeedbackList extends Fragment {
 
     private RefreshRecyclerView rv_unchecking_feedback_list;
     private SwipeRefreshLayout srl_unchecking_feedback_list;
+    private ViewSwitcher viewSwitcher;
+    private RelativeLayout empty_view;
 
     private Handler handler=new Handler();
 
@@ -81,6 +85,8 @@ public class UncheckingFeedbackList extends Fragment {
         View fragmentView=getView();
         rv_unchecking_feedback_list=(RefreshRecyclerView) fragmentView.findViewById(R.id.rv_unchecking_feedback_list);
         srl_unchecking_feedback_list=(SwipeRefreshLayout) fragmentView.findViewById(R.id.srl_unchecking_feedback_list);
+        viewSwitcher=(ViewSwitcher) fragmentView.findViewById(R.id.vs_empty_list);
+        empty_view=(RelativeLayout) fragmentView.findViewById(R.id.empty_view);
     }
 
     //初始化文字显示等
@@ -129,6 +135,13 @@ public class UncheckingFeedbackList extends Fragment {
                 srl_unchecking_feedback_list.setRefreshing(false);
             }
         });
+
+        empty_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pullDownRefresh();
+            }
+        });
     }
 
     //首次进入页面时初始化数据
@@ -164,8 +177,9 @@ public class UncheckingFeedbackList extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "反馈列表刷新成功", Toast.LENGTH_SHORT).show();
                         rv_unchecking_feedback_list.notifyData();
+                        chooseView();
                     }
                 });
             }
@@ -257,7 +271,7 @@ public class UncheckingFeedbackList extends Fragment {
         tv_username_feedback.setText(adviceList.get(position).getUsername());
         tv_phone_feedback.setText(adviceList.get(position).getPhone());
         //email暂时不获取
-        tv_email_feedback.setText("暂时无效");
+        tv_email_feedback.setText("暂时不可用");
         tv_time_feedback.setText(adviceList.get(position).getTime());
         tv_detail_feedback.setText(adviceList.get(position).getAdvice());
         builder.setNegativeButton("确认", new DialogInterface.OnClickListener() {
@@ -268,5 +282,17 @@ public class UncheckingFeedbackList extends Fragment {
         });
         builder.setTitle("详情");
         builder.show();
+    }
+
+    //选择显示空的view还是rv,当列表没有项时显示提示为空的VIew
+    private void chooseView(){
+        //判断数量应该对应判断
+        if (adviceList.size() > 0) {
+            if (R.id.srl_unchecking_feedback_list == viewSwitcher.getNextView().getId()) {
+                viewSwitcher.showNext();
+            }
+        } else if (R.id.empty_view == viewSwitcher.getNextView().getId()) {
+            viewSwitcher.showNext();
+        }
     }
 }

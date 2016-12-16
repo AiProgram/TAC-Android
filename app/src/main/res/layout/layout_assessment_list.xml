@@ -4,6 +4,11 @@
     android:layout_height="match_parent"
     android:background="#cccccc"
     android:weightSum="1">
+    <ViewSwitcher
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/vs_empty_list"
+        android:layout_below="@+id/relativeLayout">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_comment_list"
@@ -13,12 +18,18 @@
         <com.tac.iparttimejob.UI.Utils.RefreshRecyclerView
             android:id="@+id/rv_comments_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="489dp"
             android:layout_alignParentStart="true">
 
         </com.tac.iparttimejob.UI.Utils.RefreshRecyclerView>
 
     </android.support.v4.widget.SwipeRefreshLayout>
+
+        <include layout="@layout/layout_empty_view">
+
+        </include>
+
+    </ViewSwitcher>
 
     <RelativeLayout
         android:layout_width="match_parent"

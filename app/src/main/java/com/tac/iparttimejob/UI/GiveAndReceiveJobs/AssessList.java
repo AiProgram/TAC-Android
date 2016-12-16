@@ -8,8 +8,10 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.tac.iparttimejob.Class.AssessmentAtoO;
 import com.tac.iparttimejob.Class.AssessmentOtoA;
@@ -36,6 +38,8 @@ public class AssessList extends AppCompatActivity {
     private RefreshRecyclerView rv_comments_from_recruitor;
     private SwipeRefreshLayout srl_comment_list;
     private TextView title_comment_list;
+    private ViewSwitcher viewSwitcher;
+    private RelativeLayout empty_view;
 
     private Handler handler=new Handler();
 
@@ -83,6 +87,8 @@ public class AssessList extends AppCompatActivity {
         rv_comments_from_recruitor=(RefreshRecyclerView) findViewById(R.id.rv_comments_list);
         srl_comment_list=(SwipeRefreshLayout) findViewById(R.id.srl_comment_list);
         title_comment_list=(TextView) findViewById(R.id.title_comment_list);
+        viewSwitcher=(ViewSwitcher) findViewById(R.id.vs_empty_list);
+        empty_view=(RelativeLayout) findViewById(R.id.empty_view);
     }
 
     //初始化文字显示等
@@ -197,12 +203,19 @@ public class AssessList extends AppCompatActivity {
                 srl_comment_list.setRefreshing(false);
             }
         });
+
+        empty_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pullDownRefresh(type);
+            }
+        });
     }
 
     //首次进入页面时初始化数据
     private void initData(){
-        Object.atooAssessmentObjectList=new ArrayList<>();
-        Object.otoaAssessmentObjectList=new ArrayList<>();
+        Object.atooCommentObjectList=new ArrayList<>();
+        Object.otoaCommentObjectList=new ArrayList<>();
 
         srl_comment_list.setRefreshing(true);
 
@@ -237,8 +250,9 @@ public class AssessList extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                //Toast.makeText(AssessList.this, "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AssessList.this, "刷新成功", Toast.LENGTH_SHORT).show();
                                 rv_comments_from_recruitor.notifyData();
+                                chooseView();
                             }
                         });
                     }
@@ -263,13 +277,14 @@ public class AssessList extends AppCompatActivity {
                 QueryInformation.getOtoaComment(getList, new HttpCallBackListener() {
                     @Override
                     public void onFinish(final String result) {
-                        cloneAtoOList();
+                        cloneOtoAList();
                         otoaPage++;
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                //Toast.makeText(AssessList.this, "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AssessList.this, "刷新成功", Toast.LENGTH_SHORT).show();
                                 rv_comments_from_recruitor.notifyData();
+                                chooseView();
                             }
                         });
                     }
@@ -393,5 +408,28 @@ public class AssessList extends AppCompatActivity {
 
     //跳转事件先加载，较为复杂,这里封装起来，等待编写
     private void jumpToJobContent(int position) {
+    }
+
+    //选择显示空的view还是rv,当列表没有项时显示提示为空的VIew
+    private void chooseView(){
+        //判断数量应该对应判断
+        if(type==DataType.COMMENT_A_TO_O){
+            if (aToOList.size() > 0) {
+                if (R.id.srl_comment_list == viewSwitcher.getNextView().getId()) {
+                    viewSwitcher.showNext();
+                }
+            } else if (R.id.empty_view == viewSwitcher.getNextView().getId()) {
+                viewSwitcher.showNext();
+            }
+        }
+        else {
+            if (oToAList.size() > 0) {
+                if (R.id.srl_comment_list == viewSwitcher.getNextView().getId()) {
+                    viewSwitcher.showNext();
+                }
+            } else if (R.id.empty_view == viewSwitcher.getNextView().getId()) {
+                viewSwitcher.showNext();
+            }
+        }
     }
 }

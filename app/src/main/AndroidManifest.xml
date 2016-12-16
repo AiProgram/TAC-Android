@@ -70,6 +70,9 @@
 
         </activity>
         <activity android:name=".UI.RegisterAndLogin.Login">
+
+        </activity>
+        <activity android:name=".UI.RegisterAndLogin.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

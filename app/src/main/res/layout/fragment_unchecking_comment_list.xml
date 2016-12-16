@@ -21,6 +21,12 @@
 
     </RelativeLayout>
 
+    <ViewSwitcher
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/vs_empty_list"
+        android:layout_below="@+id/relativeLayout4">
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_unchecking_comment_list"
         android:layout_width="match_parent"
@@ -30,10 +36,17 @@
         <com.tac.iparttimejob.UI.Utils.RefreshRecyclerView
             android:id="@+id/rv_unchecking_comment_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="509dp">
 
         </com.tac.iparttimejob.UI.Utils.RefreshRecyclerView>
 
     </android.support.v4.widget.SwipeRefreshLayout>
+
+
+    <include layout="@layout/layout_empty_view">
+
+    </include>
+
+    </ViewSwitcher>
 
 </RelativeLayout>

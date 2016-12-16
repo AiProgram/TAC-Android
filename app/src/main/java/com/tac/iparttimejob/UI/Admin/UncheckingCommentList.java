@@ -13,7 +13,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.tac.iparttimejob.Class.AssessmentAtoO;
 import com.tac.iparttimejob.Class.AssessmentOtoA;
@@ -40,6 +42,8 @@ public class UncheckingCommentList extends Fragment {
     private RefreshRecyclerView rv_unchecking_comment_list;
     private TabLayout tl_check_comments;
     private SwipeRefreshLayout srl_unchecking_comment_list;
+    private ViewSwitcher viewSwitcher;
+    private RelativeLayout empty_view;
 
     private Handler handler=new Handler();
 
@@ -92,6 +96,8 @@ public class UncheckingCommentList extends Fragment {
         rv_unchecking_comment_list=(RefreshRecyclerView) fragmentView.findViewById(R.id.rv_unchecking_comment_list);
         tl_check_comments=(TabLayout) fragmentView.findViewById(R.id.tl_check_comments);
         srl_unchecking_comment_list=(SwipeRefreshLayout) fragmentView.findViewById(R.id.srl_unchecking_comment_list);
+        viewSwitcher=(ViewSwitcher) fragmentView.findViewById(R.id.vs_empty_list);
+        empty_view=(RelativeLayout) fragmentView.findViewById(R.id.empty_view);
     }
 
     //初始化文字显示等
@@ -185,6 +191,13 @@ public class UncheckingCommentList extends Fragment {
                 srl_unchecking_comment_list.setRefreshing(false);
             }
         });
+
+        empty_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pullDownRefresh(tl_check_comments.getSelectedTabPosition());
+            }
+        });
     }
 
     //首次进入页面时初始化数据
@@ -236,8 +249,9 @@ public class UncheckingCommentList extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "评价审核列表刷新成功", Toast.LENGTH_SHORT).show();
                             rv_unchecking_comment_list.notifyData();
+                            chooseView();
                         }
                     });
                     aToOPage++;
@@ -261,8 +275,9 @@ public class UncheckingCommentList extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "下拉刷新成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "评价审核表刷新成功", Toast.LENGTH_SHORT).show();
                             rv_unchecking_comment_list.notifyData();
+                            chooseView();
                         }
                     });
                     oToAPage++;
@@ -544,5 +559,29 @@ public class UncheckingCommentList extends Fragment {
             });
         }
         builder.show();
+    }
+
+    //选择显示空的view还是rv,当列表没有项时显示提示为空的VIew
+    private void chooseView(){
+        int selectedTab=tl_check_comments.getSelectedTabPosition();
+        //判断数量应该对应判断
+        if(selectedTab==DataType.COMMENT_A_TO_O){
+            if (aToOList.size() > 0) {
+                if (R.id.srl_unchecking_comment_list == viewSwitcher.getNextView().getId()) {
+                    viewSwitcher.showNext();
+                }
+            } else if (R.id.empty_view == viewSwitcher.getNextView().getId()) {
+                viewSwitcher.showNext();
+            }
+        }
+        else {
+            if (oToAList.size() > 0) {
+                if (R.id.srl_unchecking_comment_list == viewSwitcher.getNextView().getId()) {
+                    viewSwitcher.showNext();
+                }
+            } else if (R.id.empty_view == viewSwitcher.getNextView().getId()) {
+                viewSwitcher.showNext();
+            }
+        }
     }
 }
