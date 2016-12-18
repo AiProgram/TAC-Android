@@ -45,7 +45,7 @@ dependencies {
 
     compile 'org.greenrobot:eventbus:3.0.0'
 
-
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
 }
 
 

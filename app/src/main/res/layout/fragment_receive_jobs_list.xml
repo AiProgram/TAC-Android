@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-
     >
 
 
@@ -20,36 +19,18 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
-
-            <Space
-                android:id="@+id/sp_navigation_bar"
-                android:layout_height="@dimen/toolbar_head_image_Size"
-                android:layout_width="@dimen/toolbar_head_image_Size"
-                android:layout_weight="1"
-                />
 
             <android.support.design.widget.TabLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="40"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 style="@style/mainTabLayoutTheme"
                 android:id="@+id/tl_receive_jobs_top"
-                android:layout_below="@id/toolbar_receive_jobs_top"
                 >
             </android.support.design.widget.TabLayout>
 
-            <Space
-                android:layout_width="@dimen/toolbar_icon_size"
-                android:layout_height="@dimen/toolbar_icon_size"
-                android:layout_weight="1"
-                />
-
-        </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
 
@@ -80,6 +61,17 @@
     </ViewSwitcher>
 
 
+    <android.support.v7.widget.SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/vs_empty_list"
+        android:layout_alignParentTop="true"
+        app:queryBackground="@color/toolbar_background"
+        app:queryHint="请输入关键字"
+        app:divider="@color/white"
+        android:id="@+id/sv_search_jobs_receiver"
+        >
+    </android.support.v7.widget.SearchView>
 
 </RelativeLayout>
 

@@ -3,18 +3,18 @@ package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
@@ -23,7 +23,6 @@ import com.tac.iparttimejob.Class.Application;
 import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
-import com.tac.iparttimejob.NetWork.Connect.HttpPost;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.DataType;
@@ -36,7 +35,6 @@ import java.util.Map;
 
 import static com.tac.iparttimejob.NetWork.Query.QueryInformation.getApplicantList;
 import static com.tac.iparttimejob.NetWork.Query.QueryInformation.getApplicationList;
-import static com.tac.iparttimejob.NetWork.Query.QueryInformation.getInRecruitList;
 
 /**
  * Created by AiProgram on 2016/11/10.
@@ -50,14 +48,19 @@ public class ReceiveJobsList extends Fragment{
     private SwipeRefreshLayout srl_receive_jobs;
     private ViewSwitcher viewSwitcher;
     private RelativeLayout empty_view;
+    private SearchView sv_search_jobs_receiver;
 
     private Handler handler=new Handler();
 
     private MyReceiveJobsAdapter signedListAdapter;
     private MyReceiveJobsAdapter unsignedListAdapter;
+    //临时Adapter
+    private MyReceiveJobsAdapter templateListAdapter;
 
     private List<Application> signeList=new ArrayList<>();
     private List<RecuitResult.Recuit> unsignedList=new ArrayList<>();
+    //临时List
+    private List templateList=new ArrayList();
 
     //防止多次初始化
     boolean inited=false;
@@ -80,7 +83,7 @@ public class ReceiveJobsList extends Fragment{
     @Override
     public void onActivityCreated( Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        setHasOptionsMenu(true);
         getViews();
 
         if(inited==false) {
@@ -103,6 +106,7 @@ public class ReceiveJobsList extends Fragment{
         srl_receive_jobs=(SwipeRefreshLayout) fragmentView.findViewById(R.id.srl_receive_jobs);
         viewSwitcher=(ViewSwitcher) fragmentView.findViewById(R.id.vs_empty_list);
         empty_view=(RelativeLayout) fragmentView.findViewById(R.id.empty_view);
+        sv_search_jobs_receiver=(SearchView) fragmentView.findViewById(R.id.sv_search_jobs_receiver);
     }
 
     //初始化文字显示等
@@ -120,6 +124,14 @@ public class ReceiveJobsList extends Fragment{
         //设置RecyclerVi可以上拉刷新
         rv_receive_jobs.setLoadMoreEnable(true);
         srl_receive_jobs.setColorSchemeColors(R.color.srlColor);
+    }
+
+    //初始化搜索菜单
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     //初始化各事件监听器
@@ -202,6 +214,92 @@ public class ReceiveJobsList extends Fragment{
             @Override
             public void onClick(View view) {
                 pullDownRefresh(tl_receive_jobs_top.getSelectedTabPosition());
+            }
+        });
+
+        //设置搜索框相关监听
+        //取消搜索事件
+        sv_search_jobs_receiver.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                if(tl_receive_jobs_top.getSelectedTabPosition()==DataType.UNSIGNED_JOB_LIST){
+                    rv_receive_jobs.setAdapter(unsignedListAdapter);
+                    rv_receive_jobs.notifyData();
+                }else{
+                    rv_receive_jobs.setAdapter(signedListAdapter);
+                    rv_receive_jobs.notifyData();
+                }
+                return false;
+            }
+        });
+
+        //搜索关键字改变事件
+        sv_search_jobs_receiver.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            //提交后过滤
+            @Override
+            public boolean onQueryTextSubmit(final String query) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        templateList.clear();
+                        switch (tl_receive_jobs_top.getSelectedTabPosition()){
+                            case DataType.UNSIGNED_JOB_LIST:{
+                                templateListAdapter=new MyReceiveJobsAdapter(templateList, DataType.UNSIGNED_JOB_LIST);
+                                templateListAdapter.setOnItemClickListener(new MyReceiveJobsAdapter.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(View view, int position) {
+                                        junmpToTempContent(DataType.UNSIGNED_JOB_LIST,position);
+                                    }
+                                });
+                                for (int i=0;i<unsignedList.size();i++){
+                                    boolean contain=false;
+                                    if(unsignedList.get(i).getTitle().contains(query)) contain=true;
+                                    if(unsignedList.get(i).getOwner().contains(query)) contain=true;
+                                    if(unsignedList.get(i).getWorkplace().contains(query)) contain=true;
+                                    if(unsignedList.get(i).getWorkInfo().contains(query))  contain=true;
+                                    if(contain) templateList.add(unsignedList.get(i));
+                                }
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        rv_receive_jobs.setAdapter(templateListAdapter);
+                                        rv_receive_jobs.notifyData();
+                                    }
+                                });
+                            }break;
+                            case DataType.SIGNED_JOB_LIST:{
+                                templateListAdapter=new MyReceiveJobsAdapter(templateList, DataType.SIGNED_JOB_LIST);
+                                templateListAdapter.setOnItemClickListener(new MyReceiveJobsAdapter.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(View view, int position) {
+                                        junmpToTempContent(DataType.SIGNED_JOB_LIST,position);
+                                    }
+                                });
+                                for (int i=0;i<signeList.size();i++){
+                                    boolean contain=false;
+                                    if(signeList.get(i).getTitle().contains(query)) contain=true;
+                                    if(signeList.get(i).getTac_recruit().getOwner().contains(query)) contain=true;
+                                    if(signeList.get(i).getTac_recruit().getWorkplace().contains(query)) contain=true;
+                                    if(signeList.get(i).getTac_recruit().getWorkInfo().contains(query))  contain=true;
+                                    if(contain) templateList.add(signeList.get(i));
+                                }
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        rv_receive_jobs.setAdapter(templateListAdapter);
+                                        rv_receive_jobs.notifyData();
+                                    }
+                                });
+                            }break;
+                        }
+                    }
+                }).start();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
     }
@@ -429,6 +527,44 @@ public class ReceiveJobsList extends Fragment{
                 intent.putExtra("type",DataType.SIGNED_JOB_LIST);
                 //这里recruitid返回的是int
                 getList.put("recruitid",signeList.get(position).getTac_recruit().getRecruitid()+"");
+                intent.putExtra("applicantsid",signeList.get(position).getApplicantsid());
+            }break;
+        }
+        //获取到信息以后再跳转
+        QueryInformation.getRecruitInformation(getList, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(intent);
+                        getActivity().overridePendingTransition(R.transition.zoom_in,R.transition.zoom_out);
+                    }
+                });
+
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+    }
+
+    //搜索结果项的跳转
+    private void junmpToTempContent(int listType, int position){
+        Map<String,String> getList=new LinkedHashMap<>();
+        //应聘者招聘详情尚未编写完成，这里需要传入是否选择了该招聘的标志，因为查看时无法获得
+        final Intent intent=new Intent(getActivity(),JobContentForReceiver.class);
+        switch (listType){
+            case DataType.UNSIGNED_JOB_LIST:{
+                intent.putExtra("type",DataType.UNSIGNED_JOB_LIST);
+                getList.put("recruitid",((List<RecuitResult.Recuit>)templateList).get(position).getRecruitid());
+            }break;
+            case DataType.SIGNED_JOB_LIST:{
+                intent.putExtra("type",DataType.SIGNED_JOB_LIST);
+                //这里recruitid返回的是int
+                getList.put("recruitid",((List<Application>)templateList).get(position).getTac_recruit().getRecruitid());
                 intent.putExtra("applicantsid",signeList.get(position).getApplicantsid());
             }break;
         }
