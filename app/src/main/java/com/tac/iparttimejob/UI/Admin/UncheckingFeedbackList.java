@@ -271,7 +271,7 @@ public class UncheckingFeedbackList extends Fragment {
         tv_username_feedback.setText(adviceList.get(position).getUsername());
         tv_phone_feedback.setText(adviceList.get(position).getPhone());
         //email暂时不获取
-        tv_email_feedback.setText("暂时不可用");
+        tv_email_feedback.setText("用户未填写");
         tv_time_feedback.setText(adviceList.get(position).getTime());
         tv_detail_feedback.setText(adviceList.get(position).getAdvice());
         builder.setNegativeButton("确认", new DialogInterface.OnClickListener() {

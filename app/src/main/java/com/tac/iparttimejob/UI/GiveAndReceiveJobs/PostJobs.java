@@ -1,6 +1,7 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,8 +14,11 @@ import android.widget.Toast;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
+import com.tac.iparttimejob.UI.EventBusEvent.UpdateGiverJobListEvent;
 import com.tac.iparttimejob.UI.Utils.DataType;
 import com.tac.iparttimejob.UI.Utils.FormatedTimeGeter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import static com.tac.iparttimejob.Class.Object.loginObject;
 
@@ -165,6 +169,7 @@ public class PostJobs extends AppCompatActivity{
 
     //操作过于复杂，整合成一个函数
     public void postJobs(){
+        final ProgressDialog progressDialog = ProgressDialog.show(PostJobs.this, "提示", "正在发布招聘", false);
         Log.i("post name",loginObject.getName());
         Map<String,String> post=new LinkedHashMap<>();
         post.put("userid", loginObject.getUserid());
@@ -182,6 +187,8 @@ public class PostJobs extends AppCompatActivity{
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        EventBus.getDefault().post(new UpdateGiverJobListEvent(DataType.VALID_JOB_LIST));
+                        progressDialog.dismiss();
                         //UI提示发布成功
                         Toast.makeText(PostJobs.this,"发布成功",Toast.LENGTH_SHORT).show();
                         //后续预计操作正在进行列表添加项目
@@ -195,6 +202,7 @@ public class PostJobs extends AppCompatActivity{
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        progressDialog.dismiss();
                         Toast.makeText(PostJobs.this,"发布失败",Toast.LENGTH_SHORT).show();
                     }
                 });

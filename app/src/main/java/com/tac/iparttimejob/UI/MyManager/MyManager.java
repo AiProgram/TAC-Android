@@ -24,6 +24,7 @@ import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.EventBusEvent.SetAccountInfoEvent;
+import com.tac.iparttimejob.UI.EventBusEvent.SetResumeEvent;
 import com.tac.iparttimejob.UI.GiveAndReceiveJobs.AssessList;
 import com.tac.iparttimejob.UI.RegisterAndLogin.Login;
 import com.tac.iparttimejob.UI.Utils.BlurBitmap;
@@ -134,7 +135,6 @@ public class MyManager extends Fragment {
                         tv_single_info.setText(Object.resumeObject.getSingleResume());
                     }
                 });
-
             }
 
             @Override
@@ -254,5 +254,29 @@ public class MyManager extends Fragment {
     @Subscribe(threadMode=ThreadMode.MAIN)
     public void onRefreshContent(SetAccountInfoEvent event){
         getUserHeadImage();
+    }
+
+    //跟新简历后刷新
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSetResume(SetResumeEvent event){
+        //获得简历中的一句简介
+        Map<String,String> getSingleInfo=new LinkedHashMap<>();
+        getSingleInfo.put("userid",Object.userObject.getUserid());
+        QueryInformation.getPersonalResume(getSingleInfo, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tv_single_info.setText(Object.resumeObject.getSingleResume());
+                    }
+                });
+
+            }
+
+            @Override
+            public void onError(String error) {
+            }
+        });
     }
 }

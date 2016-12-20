@@ -44,9 +44,9 @@ public class ShowResume extends AppCompatActivity {
     private void initViews(){
         tv_username_resume.setText(Object.resumeObject.getName());
         tv_name_resume.setText(Object.resumeObject.getNickname());
-        tv_phone_resume.setText(Object.recuitObject.getPhone());
+        tv_phone_resume.setText(Object.resumeObject.getPhone());
         tv_email_resume.setText(Object.resumeObject.getEmail());
-        tv_single_info_resume.setText(Object.recuitObject.getSingleInfo());
+        tv_single_info_resume.setText(Object.resumeObject.getSingleResume());
         tv_detail_resume.setText(Object.resumeObject.getDetailResume());
     }
 

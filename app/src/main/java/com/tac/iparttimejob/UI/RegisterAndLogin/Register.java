@@ -1,5 +1,6 @@
 package com.tac.iparttimejob.UI.RegisterAndLogin;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -116,6 +117,7 @@ public class Register extends AppCompatActivity {
         bt_send_verification_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final ProgressDialog dialog = ProgressDialog.show(Register.this, "提示", "正在发送验证码", false);
                 String email=et_set_email.getText().toString().trim();
                 Map<String,String> getCert=new LinkedHashMap<String, String>();
                 getCert.put("getterEmail",email);
@@ -125,6 +127,7 @@ public class Register extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                dialog.dismiss();
                                 Toast.makeText(Register.this,"验证码发送成功",Toast.LENGTH_SHORT).show();
                                 //bt_send_verification_code.setText("验证码已发送");
                                // bt_send_verification_code.setEnabled(false);
@@ -137,7 +140,13 @@ public class Register extends AppCompatActivity {
 
                     @Override
                     public void onError(String error) {
-                        Toast.makeText(Register.this,"验证码发送失败",Toast.LENGTH_SHORT).show();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.dismiss();
+                                Toast.makeText(Register.this,"验证码发送失败",Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
             }

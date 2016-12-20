@@ -1,5 +1,6 @@
 package com.tac.iparttimejob.UI.MyManager;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,6 +14,9 @@ import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.EventBusEvent.SetResumeEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -110,6 +114,7 @@ public class SetResume extends AppCompatActivity{
         btn_confirm_resume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final ProgressDialog progressDialog = ProgressDialog.show(SetResume.this,"提示","正在更新简历",false);
                 getInput();
                 //设置简历,接口存在问题，等待修改
                 final Map<String,String> setResume=new LinkedHashMap<String, String>();
@@ -129,6 +134,9 @@ public class SetResume extends AppCompatActivity{
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                //修改成功后发布事件
+                                EventBus.getDefault().post(new SetResumeEvent());
+                                progressDialog.dismiss();
                                 Toast.makeText(SetResume.this,"更新简历成功",Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -139,6 +147,7 @@ public class SetResume extends AppCompatActivity{
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                progressDialog.dismiss();
                                 Toast.makeText(SetResume.this,"更新简历失败",Toast.LENGTH_SHORT).show();
                             }
                         });

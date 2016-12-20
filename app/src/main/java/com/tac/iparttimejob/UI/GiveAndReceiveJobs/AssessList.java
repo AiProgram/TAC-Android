@@ -1,5 +1,7 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -19,6 +21,8 @@ import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.Admin.JobContentForAdmin;
+import com.tac.iparttimejob.UI.MyManager.ShowResume;
 import com.tac.iparttimejob.UI.Utils.DataType;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
 
@@ -28,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 
+import static com.tac.iparttimejob.Class.Object.resumeObject;
 import static com.tac.iparttimejob.Class.Object.userObject;
 
 /**
@@ -117,6 +122,32 @@ public class AssessList extends AppCompatActivity {
             @Override
             public void onContentClick(View view, int position) {
                 //跳转至个人简历
+                //跳转至该人的简历
+                final Map<String,String> getResume=new LinkedHashMap<String, String>();
+
+                if(type==DataType.COMMENT_A_TO_O)
+                    getResume.put("userid",aToOList.get(position).getApplicantid()+"");
+                else
+                    getResume.put("userid",oToAList.get(position).getOwnerid()+"");
+
+                QueryInformation.getPersonalResume(getResume, new HttpCallBackListener() {
+                    @Override
+                    public void onFinish(String result) {
+                        Intent intent=new Intent(AssessList.this, ShowResume.class);
+                        startActivity(intent);
+                        //Log.i("简历",getResumeObject.getName());
+                    }
+
+                    @Override
+                    public void onError(final String error) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(AssessList.this,"获取简历失败",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -124,6 +155,7 @@ public class AssessList extends AppCompatActivity {
         assessAdapter.setOnSueClickListener(new AssessAdapter.OnSueClickListener() {
             @Override
             public void onSueClick(View view, int position) {
+                final ProgressDialog progressDialog = ProgressDialog.show(AssessList.this, "提示", "正在举报", false);
                 Map<String,String> sue=new LinkedHashMap<String, String>();
                 //举报改评价,来自招聘者
                 switch (type){
@@ -135,6 +167,7 @@ public class AssessList extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+                                        progressDialog.dismiss();
                                         Toast.makeText(AssessList.this,"举报成功，感谢您的反馈",Toast.LENGTH_SHORT).show();
                                     }
                                 });
@@ -145,6 +178,7 @@ public class AssessList extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+                                        progressDialog.dismiss();
                                         Toast.makeText(AssessList.this,"举报失败",Toast.LENGTH_SHORT).show();
                                     }
                                 });
@@ -159,6 +193,7 @@ public class AssessList extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+                                        progressDialog.dismiss();
                                         Toast.makeText(AssessList.this,"举报成功，感谢您的反馈",Toast.LENGTH_SHORT).show();
                                     }
                                 });
@@ -169,6 +204,7 @@ public class AssessList extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+                                        progressDialog.dismiss();
                                         Toast.makeText(AssessList.this,"举报失败",Toast.LENGTH_SHORT).show();
                                     }
                                 });

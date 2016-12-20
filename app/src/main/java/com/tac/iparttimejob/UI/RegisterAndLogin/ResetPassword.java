@@ -1,5 +1,6 @@
 package com.tac.iparttimejob.UI.RegisterAndLogin;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -61,6 +62,7 @@ public class ResetPassword extends AppCompatActivity {
         bt_send_verification_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final ProgressDialog progressDialog = ProgressDialog.show(ResetPassword.this, "提示", "正在发送验证码", false);
                 String email=et_email_reset_password.getText().toString();
                 Map<String,String> getCert=new LinkedHashMap<String, String>();
                 getCert.put("getterEmail",email);
@@ -70,6 +72,7 @@ public class ResetPassword extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                progressDialog.dismiss();
                                 Toast.makeText(ResetPassword.this,"验证码发送成功",Toast.LENGTH_SHORT).show();
                                 CountDownTimerUtils countDownTimer=new CountDownTimerUtils(bt_send_verification_code, 60000, 1000);
                                 countDownTimer.start();
@@ -79,7 +82,13 @@ public class ResetPassword extends AppCompatActivity {
 
                     @Override
                     public void onError(String error) {
-                        Toast.makeText(ResetPassword.this,"验证码发送失败",Toast.LENGTH_SHORT).show();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressDialog.dismiss();
+                                Toast.makeText(ResetPassword.this,"验证码发送失败",Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
             }

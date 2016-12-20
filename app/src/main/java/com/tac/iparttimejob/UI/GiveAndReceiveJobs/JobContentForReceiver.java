@@ -1,6 +1,9 @@
 package com.tac.iparttimejob.UI.GiveAndReceiveJobs;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
@@ -17,7 +20,10 @@ import android.widget.Toast;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
+import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.EventBusEvent.UpdateReceiverJobListEvent;
+import com.tac.iparttimejob.UI.MyManager.ShowResume;
 import com.tac.iparttimejob.UI.Utils.DataType;
 
 import java.text.SimpleDateFormat;
@@ -27,9 +33,13 @@ import java.util.Map;
 
 import static com.tac.iparttimejob.Class.Object.applicationObjectList;
 import static com.tac.iparttimejob.Class.Object.recuitObject;
+import static com.tac.iparttimejob.Class.Object.resumeObject;
 import static com.tac.iparttimejob.Class.Object.userObject;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.UI.Utils.FormatedTimeGeter;
+import com.tac.iparttimejob.UI.Utils.TextUitls;
+
+import org.greenrobot.eventbus.EventBus;
 
 
 /**
@@ -82,6 +92,8 @@ public class JobContentForReceiver extends AppCompatActivity {
         initCommonViews();
 
         getAndSetUniqueViews();
+
+        initListeners();
     }
 
     //获取公有控件
@@ -105,10 +117,72 @@ public class JobContentForReceiver extends AppCompatActivity {
         tv_numbers.setText(recuitObject.getNeedpeopleNum()+"");
         tv_deadline.setText(recuitObject.getDealdine());
         tv_phone_number.setText(recuitObject.getPhone());
-        tv_email.setText(recuitObject.getEmail());
+        tv_email.setText(recuitObject.getTac_user().getEmail());
         tv_workplace.setText(recuitObject.getWorkplace());
         tv_detail.setText(recuitObject.getWorkInfo());
         tv_payment.setText("暂时无效");
+
+        //添加下滑性，提醒可以复制
+        tv_author.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG ); //下划线
+        tv_author.getPaint().setAntiAlias(true);//抗锯齿
+        tv_email.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG ); //下划线
+        tv_email.getPaint().setAntiAlias(true);//抗锯齿
+        tv_phone_number.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG ); //下划线
+        tv_phone_number.getPaint().setAntiAlias(true);//抗锯齿
+    }
+
+
+    private void initListeners(){
+        tv_email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextUitls.copy(tv_email.getText().toString(),JobContentForReceiver.this);
+                Toast.makeText(JobContentForReceiver.this,"已经为您复制Email",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        tv_phone_number.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextUitls.copy(tv_phone_number.getText().toString(),JobContentForReceiver.this);
+                Toast.makeText(JobContentForReceiver.this,"已经为您复制电话号码",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        tv_detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextUitls.copy(tv_detail.getText().toString(),JobContentForReceiver.this);
+                Toast.makeText(JobContentForReceiver.this,"已经为您复制招聘详情",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        tv_author.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //跳转至该人的简历
+                final Map<String,String> getResume=new LinkedHashMap<String, String>();
+                getResume.put("userid",Object.recuitObject.getTac_user().getUserid());
+                QueryInformation.getPersonalResume(getResume, new HttpCallBackListener() {
+                    @Override
+                    public void onFinish(String result) {
+                        Intent intent=new Intent(JobContentForReceiver.this, ShowResume.class);
+                        startActivity(intent);
+                        //Log.i("简历",getResumeObject.getName());
+                    }
+
+                    @Override
+                    public void onError(final String error) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(JobContentForReceiver.this,"获取简历失败",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 
     private void getAndSetUniqueViews(){
@@ -129,6 +203,7 @@ public class JobContentForReceiver extends AppCompatActivity {
                 btn_signUp.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        final ProgressDialog progressDialog = ProgressDialog.show(JobContentForReceiver.this, "提示", "正在报名", false);
                         //报名
                         Map<String,String> signUpJob=new LinkedHashMap<String, String>();
                         signUpJob.put("recruitid",recuitObject.getRecruitid());
@@ -142,6 +217,8 @@ public class JobContentForReceiver extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+                                        EventBus.getDefault().post(new UpdateReceiverJobListEvent(DataType.SIGNED_JOB_LIST));
+                                        progressDialog.dismiss();
                                         Toast.makeText(JobContentForReceiver.this,"报名成功",Toast.LENGTH_SHORT).show();
                                         //报名成功后不允许重复报名
                                         btn_signUp.setEnabled(false);
@@ -152,8 +229,14 @@ public class JobContentForReceiver extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onError(String error) {
-                                Toast.makeText(JobContentForReceiver.this,error,Toast.LENGTH_SHORT).show();
+                            public void onError(final String error) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(JobContentForReceiver.this,error,Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                         });
                     }
@@ -166,6 +249,7 @@ public class JobContentForReceiver extends AppCompatActivity {
                     btn_cancel_signUp.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            final ProgressDialog progressDialog = ProgressDialog.show(JobContentForReceiver.this, "提示", "正在取消报名", false);
                             //取消报名,缺少applicantid无法继续编写
                             Map<String, String> cancelApplication = new LinkedHashMap<String, String>();
                             cancelApplication.put("applicantsid", applicantsid + "");
@@ -176,6 +260,9 @@ public class JobContentForReceiver extends AppCompatActivity {
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
+                                            EventBus.getDefault().post(new UpdateReceiverJobListEvent(DataType.SIGNED_JOB_LIST));
+                                            EventBus.getDefault().post(new UpdateReceiverJobListEvent(DataType.UNSIGNED_JOB_LIST));
+                                            progressDialog.dismiss();
                                             Toast.makeText(JobContentForReceiver.this, "取消成功", Toast.LENGTH_SHORT).show();
                                         }
                                     });
@@ -184,7 +271,12 @@ public class JobContentForReceiver extends AppCompatActivity {
 
                                 @Override
                                 public void onError(String error) {
-
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            progressDialog.dismiss();
+                                        }
+                                    });
                                 }
                             });
                         }
@@ -211,6 +303,7 @@ public class JobContentForReceiver extends AppCompatActivity {
         builder.setPositiveButton("确认评价", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                final ProgressDialog progressDialog = ProgressDialog.show(JobContentForReceiver.this, "提示", "正在提交评价", false);
                 MaterialEditText et_input_assess_point;
                 EditText et_input_assessment;
                 et_input_assess_point=(MaterialEditText) dialogView.findViewById(R.id.et_input_assess_point);
@@ -237,6 +330,7 @@ public class JobContentForReceiver extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                progressDialog.dismiss();
                                 Toast.makeText(JobContentForReceiver.this,"评价成功",Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -247,6 +341,7 @@ public class JobContentForReceiver extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                progressDialog.dismiss();
                                 Toast.makeText(JobContentForReceiver.this,"评价失败"+error,Toast.LENGTH_SHORT).show();
                             }
                         });

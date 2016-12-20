@@ -114,9 +114,6 @@ public class EnrollList extends AppCompatActivity {
                         Intent intent=new Intent(EnrollList.this, ShowResume.class);
                         startActivity(intent);
                         //Log.i("简历",getResumeObject.getName());
-                        Log.i("简历信息",resumeObject.getName().isEmpty()+"");
-                        Log.i("简历信息",resumeObject.getEmail().isEmpty()+"");
-                        Log.i("简历信息",resumeObject.getEmail().isEmpty()+"");
                     }
 
                     @Override

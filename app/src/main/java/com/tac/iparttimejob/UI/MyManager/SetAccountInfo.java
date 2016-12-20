@@ -1,5 +1,6 @@
 package com.tac.iparttimejob.UI.MyManager;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -133,6 +134,7 @@ public class SetAccountInfo extends AppCompatActivity{
         btn_confirm_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final ProgressDialog progressDialog = ProgressDialog.show(SetAccountInfo.this,"提示","正在提交修改",false);
                 //尝试修改信息
                 Map<String,String> setAcountInfo=new LinkedHashMap<String, String>();
                 setAcountInfo.put("useid",userObject.getUserid());
@@ -149,6 +151,7 @@ public class SetAccountInfo extends AppCompatActivity{
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                progressDialog.dismiss();
                                 Toast.makeText(SetAccountInfo.this,"设置账号信息成功",Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -160,6 +163,7 @@ public class SetAccountInfo extends AppCompatActivity{
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                progressDialog.dismiss();
                                 Toast.makeText(SetAccountInfo.this,"设置账号信息失败",Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -263,7 +267,6 @@ public class SetAccountInfo extends AppCompatActivity{
         intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
         intent.putExtra("return-data", true);//是否将数据保留在Bitmap中返回dataParcelable相应的Bitmap数据
         startActivityForResult(intent, UPLOAD_PIC_REQUEST);
-
     }
 
     //初始化各个控件，包括文字等
@@ -309,6 +312,7 @@ public class SetAccountInfo extends AppCompatActivity{
 
     //上传头像
     private void upLoadUserImgae(String imageString){
+        final ProgressDialog progressDialog = ProgressDialog.show(SetAccountInfo.this,"提示","正在上传头像",false);
         //头像文件名
         String fileNmae=Object.userObject.getName()+".jpg";
 
@@ -323,6 +327,7 @@ public class SetAccountInfo extends AppCompatActivity{
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        progressDialog.dismiss();
                         Toast.makeText(SetAccountInfo.this,"设置成功",Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -334,6 +339,7 @@ public class SetAccountInfo extends AppCompatActivity{
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        progressDialog.dismiss();
                         Toast.makeText(SetAccountInfo.this,"设置失败",Toast.LENGTH_SHORT).show();
                     }
                 });

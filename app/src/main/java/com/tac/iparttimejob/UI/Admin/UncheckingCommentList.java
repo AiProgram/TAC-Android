@@ -1,6 +1,7 @@
 package com.tac.iparttimejob.UI.Admin;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -431,6 +432,7 @@ public class UncheckingCommentList extends Fragment {
             builder.setPositiveButton("通过审核", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "提示", "正在通过评价", false);
                     changeStatus.put("status",DataType.COMMENT_STATUS_UNBLOCKED+"");
                     EditInformation.setAtooAssementStatus(changeStatus, new HttpCallBackListener() {
                         @Override
@@ -438,6 +440,7 @@ public class UncheckingCommentList extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    progressDialog.dismiss();
                                     Toast.makeText(getActivity(),"操作成功",Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -448,6 +451,7 @@ public class UncheckingCommentList extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    progressDialog.dismiss();
                                     Toast.makeText(getActivity(),"操作失败",Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -466,6 +470,7 @@ public class UncheckingCommentList extends Fragment {
             builder.setNeutralButton("无法通过", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "提示", "正在屏蔽评价", false);
                     changeStatus.put("status",DataType.COMMENT_STATUS_BLOCKED+"");
                     EditInformation.setAtooAssementStatus(changeStatus, new HttpCallBackListener() {
                         @Override
@@ -473,6 +478,7 @@ public class UncheckingCommentList extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    progressDialog.dismiss();
                                     Toast.makeText(getActivity(),"操作成功",Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -483,6 +489,7 @@ public class UncheckingCommentList extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    progressDialog.dismiss();
                                     Toast.makeText(getActivity(),"操作失败",Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -498,6 +505,7 @@ public class UncheckingCommentList extends Fragment {
             builder.setPositiveButton("通过审核", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "提示", "正在通过评价", false);
                     changeStatus.put("status",DataType.COMMENT_STATUS_UNBLOCKED+"");
                     EditInformation.setOtoaAssementStatus(changeStatus, new HttpCallBackListener() {
                         @Override
@@ -505,6 +513,7 @@ public class UncheckingCommentList extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    progressDialog.dismiss();
                                     Toast.makeText(getActivity(),"操作成功",Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -515,6 +524,7 @@ public class UncheckingCommentList extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    progressDialog.dismiss();
                                     Toast.makeText(getActivity(),"操作失败",Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -533,6 +543,7 @@ public class UncheckingCommentList extends Fragment {
             builder.setNeutralButton("无法通过", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "提示", "正在屏蔽评价", false);
                     changeStatus.put("status",DataType.COMMENT_STATUS_BLOCKED+"");
                     EditInformation.setOtoaAssementStatus(changeStatus, new HttpCallBackListener() {
                         @Override
@@ -540,6 +551,7 @@ public class UncheckingCommentList extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    progressDialog.dismiss();
                                     Toast.makeText(getActivity(),"操作成功",Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -550,6 +562,7 @@ public class UncheckingCommentList extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    progressDialog.dismiss();
                                     Toast.makeText(getActivity(),"操作失败",Toast.LENGTH_SHORT).show();
                                 }
                             });

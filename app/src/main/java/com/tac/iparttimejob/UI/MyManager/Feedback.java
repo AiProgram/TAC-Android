@@ -1,5 +1,6 @@
 package com.tac.iparttimejob.UI.MyManager;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -52,6 +53,7 @@ public class Feedback extends AppCompatActivity {
         btn_send_feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final ProgressDialog progressDialog = ProgressDialog.show(Feedback.this,"提示","正在提交反馈",false);
                 //发送反馈
                 feedback=et_set_advice.getText().toString();
                 Map<String,String>advice=new LinkedHashMap<String, String>();
@@ -67,6 +69,7 @@ public class Feedback extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                progressDialog.dismiss();
                                 Toast.makeText(Feedback.this,"感谢您的建议",Toast.LENGTH_SHORT).show();
                                 finish();
                             }
@@ -78,6 +81,7 @@ public class Feedback extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                progressDialog.dismiss();
                                 Toast.makeText(Feedback.this,"提交失败",Toast.LENGTH_SHORT).show();
                             }
                         });

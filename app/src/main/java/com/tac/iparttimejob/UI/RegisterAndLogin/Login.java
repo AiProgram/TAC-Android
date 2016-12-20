@@ -1,5 +1,6 @@
 package com.tac.iparttimejob.UI.RegisterAndLogin;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -88,6 +89,7 @@ public class Login extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final ProgressDialog dialog3 = ProgressDialog.show(Login.this, "提示", "正在登录中", false);//提示正在进行登录
                 loginObject=new LoginResult.LoginUser();
                 userObject=new UserResult.User();
                 //登录操作
@@ -124,6 +126,8 @@ public class Login extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                //不论操作失败，均使进度条消失
+                                dialog3.dismiss();
                                 Toast.makeText(Login.this,"登录成功",Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -134,6 +138,7 @@ public class Login extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                dialog3.dismiss();
                                 Toast.makeText(Login.this,error,Toast.LENGTH_SHORT).show();
                             }
                         });

@@ -25,8 +25,13 @@ import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.EventBusEvent.UpdateReceiverJobListEvent;
 import com.tac.iparttimejob.UI.Utils.DataType;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -71,7 +76,11 @@ public class ReceiveJobsList extends Fragment{
     int rows=10;
     int pointer=0;
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
@@ -96,6 +105,8 @@ public class ReceiveJobsList extends Fragment{
         initViews();
 
         initListener();
+
+        EventBus.getDefault().register(this);
     }
 
     //获取所有控件
@@ -610,6 +621,16 @@ public class ReceiveJobsList extends Fragment{
             } else if (R.id.empty_view == viewSwitcher.getNextView().getId()) {
                 viewSwitcher.showNext();
             }
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUdpateRecieverJobList(UpdateReceiverJobListEvent event){
+        if(event.listType==DataType.SIGNED_JOB_LIST){
+            pullDownRefresh(DataType.SIGNED_JOB_LIST);
+        }
+        else{
+            pullDownRefresh(DataType.UNSIGNED_JOB_LIST);
         }
     }
 }
