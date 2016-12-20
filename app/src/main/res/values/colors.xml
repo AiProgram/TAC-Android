@@ -14,5 +14,6 @@
     <color name="srlColor">#281F41</color>
     <color name="gray">#aaaaaa</color>
     <color name="lightBlue">#3D8EE5</color>
-
+    <color name="adminTabBackground">#9FC6E7</color>
+    <color name="tabBackground">#FFFFFF</color>
 </resources>

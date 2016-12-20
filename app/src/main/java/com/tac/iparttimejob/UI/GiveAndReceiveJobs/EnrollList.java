@@ -88,7 +88,7 @@ public class EnrollList extends AppCompatActivity {
     //初始化文字显示等
     private void initViews(){
         common_toolbar.setTitle("报名列表");
-        enrollListAdapter =new MyEnrollListAdapter(enrollList);
+        enrollListAdapter =new MyEnrollListAdapter(enrollList,EnrollList.this);
         //设置RecycleView
         rv_enroll_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rv_enroll_list.setItemAnimator(new DefaultItemAnimator());

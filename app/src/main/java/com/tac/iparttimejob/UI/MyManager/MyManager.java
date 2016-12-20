@@ -217,16 +217,13 @@ public class MyManager extends Fragment {
                 userImage=userImage.replaceAll(" ","+");
                 HeadImage=BitmapAndStringConverter.convertStringToIcon(userImage);
                 //userHeadImage=BitmapAndStringConverter.convertStringToIcon(Object.image1);
-
-
-
                 Bitmap  blurBitmap=HeadImage.copy(Bitmap.Config.ARGB_8888,true);
                  blurBitmap= BlurBitmap.blurBitmap(blurBitmap,25,getContext());
                 final BitmapDrawable blurDrawabel=new BitmapDrawable(blurBitmap);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getActivity(),"获取头像成功"+ userImage.length(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),"获取头像成功",Toast.LENGTH_SHORT).show();
                         rl_user_filed.setBackgroundDrawable(blurDrawabel);
                         riv_user_head.setImageBitmap(HeadImage);
                     }

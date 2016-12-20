@@ -78,7 +78,8 @@ public class UncheckingCommentAdapter extends RecyclerView.Adapter<RecyclerView.
                 viewHolder.tv_comment_receiver.setVisibility(View.GONE);
             }break;
             case DataType.COMMENT_O_TO_A:{
-                owner=otoAList.get(position).getOnwername();
+                //OwnerName获取出现问题，暂时这样做
+                owner=otoAList.get(position).getApplicantname();
                 applicant=otoAList.get(position).getApplicantname();
                 commentInfo=otoAList.get(position).getOtoaComment();
 

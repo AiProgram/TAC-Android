@@ -89,7 +89,7 @@ public class SelectedList extends AppCompatActivity{
 
     //初始化文字显示等
     private void initViews(){
-        selectedListAdapter =new MySelectedListAdapter(selectedList);
+        selectedListAdapter =new MySelectedListAdapter(selectedList,SelectedList.this);
         //设置RecycleView
         rv_enroll_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rv_enroll_list.setItemAnimator(new DefaultItemAnimator());
@@ -273,7 +273,7 @@ public class SelectedList extends AppCompatActivity{
                 assess.put("cmmentTime", FormatedTimeGeter.getFormatedDate());
 
                 //说明文档没有标出，应该是这个接口
-                EditInformation.setAssessment(assess, new HttpCallBackListener() {
+                EditInformation.setAssessmentTacrecruit(assess, new HttpCallBackListener() {
                     @Override
                     public void onFinish(String result) {
                         runOnUiThread(new Runnable() {
@@ -289,7 +289,7 @@ public class SelectedList extends AppCompatActivity{
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(SelectedList.this,"评价失败"+assessment,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SelectedList.this,"评价失败"+error,Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

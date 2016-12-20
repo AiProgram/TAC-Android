@@ -172,7 +172,7 @@ public class Register extends AppCompatActivity {
                 signUpErr="用户名不能为空";
             }
             else {
-                signUpErr="用户名以字母开头,包含数字汉字字母下划线，4到25字符";
+                signUpErr="用户名以字母开头,包含数字汉字字母下划线，4到10字符";
             }
             return false;
         }

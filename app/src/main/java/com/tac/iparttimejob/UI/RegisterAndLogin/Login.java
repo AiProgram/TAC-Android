@@ -113,7 +113,7 @@ public class Login extends AppCompatActivity {
                             case DataType.ADMIN_USER:{
                                 Intent intent=new Intent(Login.this, AppMainForAdmin.class);
                                 startActivity(intent);
-                                finish();
+                                //finish();
                             }break;
                             case DataType.NORMAL_USER:{
                                 Intent intent=new Intent(Login.this, AppMain.class);

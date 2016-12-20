@@ -420,7 +420,11 @@ public class UncheckingCommentList extends Fragment {
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
         //初始化公有参数
         final Map<String,String> changeStatus=new LinkedHashMap<>();
-        changeStatus.put("commentid",aToOList.get(position).getCommentid()+"");
+        if(listType==DataType.COMMENT_A_TO_O) {
+            changeStatus.put("commentid", aToOList.get(position).getCommentid() + "");
+        }else {
+            changeStatus.put("commentid", oToAList.get(position).getCommentid() + "");
+        };
         changeStatus.put("checktime", FormatedTimeGeter.getFormatedDate());
 
         //设置来自应聘者的评价
@@ -440,6 +444,8 @@ public class UncheckingCommentList extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    //操作后重新刷新列表
+                                    pullDownRefresh(DataType.COMMENT_A_TO_O);
                                     progressDialog.dismiss();
                                     Toast.makeText(getActivity(),"操作成功",Toast.LENGTH_SHORT).show();
                                 }
@@ -478,6 +484,7 @@ public class UncheckingCommentList extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    pullDownRefresh(DataType.COMMENT_A_TO_O);
                                     progressDialog.dismiss();
                                     Toast.makeText(getActivity(),"操作成功",Toast.LENGTH_SHORT).show();
                                 }
@@ -500,7 +507,7 @@ public class UncheckingCommentList extends Fragment {
         }else{
             //设置来自招聘者的评价
             //builder.setTitle(oToAList.get(position).getOnwername()+"评价"+oToAList.get(position).getApplicantname());
-            builder.setTitle(oToAList.get(position).getOnwername()+"评价");
+            builder.setTitle(oToAList.get(position).getApplicantname()+"评价");
             builder.setMessage(oToAList.get(position).getOtoaComment());
             builder.setPositiveButton("通过审核", new DialogInterface.OnClickListener() {
                 @Override
@@ -513,6 +520,7 @@ public class UncheckingCommentList extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    pullDownRefresh(DataType.COMMENT_O_TO_A);
                                     progressDialog.dismiss();
                                     Toast.makeText(getActivity(),"操作成功",Toast.LENGTH_SHORT).show();
                                 }
@@ -551,6 +559,7 @@ public class UncheckingCommentList extends Fragment {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    pullDownRefresh(DataType.COMMENT_O_TO_A);
                                     progressDialog.dismiss();
                                     Toast.makeText(getActivity(),"操作成功",Toast.LENGTH_SHORT).show();
                                 }

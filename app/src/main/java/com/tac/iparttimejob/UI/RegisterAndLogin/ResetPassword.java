@@ -14,6 +14,7 @@ import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
 import com.tac.iparttimejob.UI.Utils.CountDownTimerUtils;
+import com.tac.iparttimejob.UI.Utils.RegexCheck;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -62,35 +63,39 @@ public class ResetPassword extends AppCompatActivity {
         bt_send_verification_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final ProgressDialog progressDialog = ProgressDialog.show(ResetPassword.this, "提示", "正在发送验证码", false);
                 String email=et_email_reset_password.getText().toString();
-                Map<String,String> getCert=new LinkedHashMap<String, String>();
-                getCert.put("getterEmail",email);
-                QueryInformation.getEmailInformation(getCert, new HttpCallBackListener() {
-                    @Override
-                    public void onFinish(String result) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressDialog.dismiss();
-                                Toast.makeText(ResetPassword.this,"验证码发送成功",Toast.LENGTH_SHORT).show();
-                                CountDownTimerUtils countDownTimer=new CountDownTimerUtils(bt_send_verification_code, 60000, 1000);
-                                countDownTimer.start();
-                            }
-                        });
-                    }
+                if(new RegexCheck().checkEmail(email)){
+                    final ProgressDialog progressDialog = ProgressDialog.show(ResetPassword.this, "提示", "正在发送验证码", false);
+                    Map<String, String> getCert = new LinkedHashMap<String, String>();
+                    getCert.put("getterEmail", email);
+                    QueryInformation.getEmailInformation(getCert, new HttpCallBackListener() {
+                        @Override
+                        public void onFinish(String result) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(ResetPassword.this, "验证码发送成功", Toast.LENGTH_SHORT).show();
+                                    CountDownTimerUtils countDownTimer = new CountDownTimerUtils(bt_send_verification_code, 60000, 1000);
+                                    countDownTimer.start();
+                                }
+                            });
+                        }
 
-                    @Override
-                    public void onError(String error) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressDialog.dismiss();
-                                Toast.makeText(ResetPassword.this,"验证码发送失败",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
+                        @Override
+                        public void onError(String error) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(ResetPassword.this, "验证码发送失败", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }else{
+                    Toast.makeText(ResetPassword.this,"邮箱格式错误",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -98,7 +103,9 @@ public class ResetPassword extends AppCompatActivity {
         bt_reset_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkEmail();
+                if(checkInput()){
+                    checkEmail();
+                }
             }
         });
 
@@ -108,6 +115,31 @@ public class ResetPassword extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    //检测输入的其他正确性
+    private boolean checkInput(){
+        RegexCheck regexCheck=new RegexCheck();
+        String email=et_email_reset_password.getText().toString().trim();
+        String password=et_password_reset.getText().toString().trim();
+        String confirmPassword=et_confirm_reset_password.getText().toString().trim();
+        if(email.isEmpty()||password.isEmpty()||confirmPassword.isEmpty()){
+            Toast.makeText(ResetPassword.this,"输入不得有空",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(!regexCheck.checkEmail(email)){
+            Toast.makeText(ResetPassword.this,"邮箱格式错误",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(!regexCheck.checkPassword(password)){
+            Toast.makeText(ResetPassword.this,"密码以字母开头仅包含数字字母，6到20位",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(!regexCheck.checkPassword(confirmPassword)){
+            Toast.makeText(ResetPassword.this,"密码以字母开头仅包含数字字母，6到20位",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     //检验是不是注册邮箱
@@ -183,7 +215,12 @@ public class ResetPassword extends AppCompatActivity {
                     }
                 });
             }else{
-                Toast.makeText(ResetPassword.this,"验证码错误",Toast.LENGTH_SHORT).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ResetPassword.this,"验证码错误",Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }
         else{
@@ -191,4 +228,5 @@ public class ResetPassword extends AppCompatActivity {
             et_confirm_reset_password.setText("");
         }
     }
+
 }

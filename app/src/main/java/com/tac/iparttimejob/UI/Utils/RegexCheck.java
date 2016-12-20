@@ -18,9 +18,9 @@ public class RegexCheck {
     private Matcher matcher;
 
     //检查账户
-    public boolean checkAccount(String Account){
+    public  boolean checkAccount(String Account){
         //限制为包含数字或字母或下划线,4到20个字符
-        regex="^[a-zA-Z][a-zA-Z0-9_]{3,19}$";
+        regex="^[a-zA-Z][a-zA-Z0-9_]{3,9}$";
 
         pattern=Pattern.compile(regex);
         matcher=pattern.matcher(Account);
@@ -29,8 +29,8 @@ public class RegexCheck {
 
     //检查密码
     public boolean checkPassword(String Password){
-        //以字母开头，长度在8到20之间，只能包含字母、数字和下划线
-        regex="^[a-zA-Z]\\w{7,19}$";
+        //以字母开头，长度在6到20之间，只能包含字母、数字和下划线
+        regex="^[a-zA-Z]\\w{5,19}$";
 
         pattern=Pattern.compile(regex);
         matcher=pattern.matcher(Password);

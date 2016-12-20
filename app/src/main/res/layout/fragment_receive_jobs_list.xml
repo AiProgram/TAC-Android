@@ -69,6 +69,7 @@
         app:queryBackground="@color/toolbar_background"
         app:queryHint="请输入关键字"
         app:divider="@color/white"
+        app:searchIcon="@drawable/ic_search_white_24dp"
         android:id="@+id/sv_search_jobs_receiver"
         >
     </android.support.v7.widget.SearchView>

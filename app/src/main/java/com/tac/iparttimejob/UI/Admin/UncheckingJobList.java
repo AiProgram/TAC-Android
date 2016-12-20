@@ -20,10 +20,15 @@ import com.tac.iparttimejob.Class.RecuitResult;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Query.QueryInformation;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.EventBusEvent.UpdateAdminJobListEvent;
 import com.tac.iparttimejob.UI.GiveAndReceiveJobs.JobContentForReceiver;
 import com.tac.iparttimejob.UI.Utils.DataType;
 import com.tac.iparttimejob.UI.Utils.RefreshRecyclerView;
 import com.tac.iparttimejob.Class.Object;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -55,7 +60,11 @@ public class UncheckingJobList extends Fragment{
     int rows=20;
     int pointer=0;
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
@@ -79,6 +88,8 @@ public class UncheckingJobList extends Fragment{
         initViews();
 
         initListener();
+
+        EventBus.getDefault().register(this);
     }
 
     //获取所有控件
@@ -285,5 +296,11 @@ public class UncheckingJobList extends Fragment{
                 viewSwitcher.showNext();
             }
         }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUpdateJobList(UpdateAdminJobListEvent event){
+        pullDownRefresh();
+    }
+
 }
 

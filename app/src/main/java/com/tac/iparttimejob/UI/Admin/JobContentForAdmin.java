@@ -18,9 +18,12 @@ import com.tac.iparttimejob.Class.Object;
 import com.tac.iparttimejob.NetWork.Connect.HttpCallBackListener;
 import com.tac.iparttimejob.NetWork.Edit.EditInformation;
 import com.tac.iparttimejob.R;
+import com.tac.iparttimejob.UI.EventBusEvent.UpdateAdminJobListEvent;
 import com.tac.iparttimejob.UI.GiveAndReceiveJobs.JobContentForGiver;
 import com.tac.iparttimejob.UI.Utils.DataType;
 import com.tac.iparttimejob.UI.Utils.FormatedTimeGeter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -144,6 +147,7 @@ public class JobContentForAdmin extends AppCompatActivity{
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                EventBus.getDefault().post(new UpdateAdminJobListEvent());
                                 progressDialog.dismiss();
                                 finish();
                             }
@@ -193,6 +197,7 @@ public class JobContentForAdmin extends AppCompatActivity{
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                EventBus.getDefault().post(new UpdateAdminJobListEvent());
                                 progressDialog.dismiss();
                                 Toast.makeText(JobContentForAdmin.this,"修改成功",Toast.LENGTH_SHORT).show();
                                 finish();
