@@ -519,9 +519,43 @@ public class EditInformation extends HttpPost {
             }
         });
     }
-        //评价
+        //应聘者评价招聘者
     public static void setAssessment(Map<String,String>params,final HttpCallBackListener listener){
         post(HttpAddress.HOST + HttpAddress.SET_ASSESSMENT, params, new HttpCallBackListener() {
+            @Override
+            public void onFinish(String result) {
+                ReturnMessage returnMessage=null;
+                try {
+                    returnMessage=new Gson().fromJson(result,ReturnMessage.class);
+                }
+                catch (JsonSyntaxException e) {
+                    Log.d("gsonErr:",e.toString());
+                    //错误
+                }
+                if(returnMessage!=null)
+                {
+                    if(returnMessage.isSuccess())
+                    {
+                        listener.onFinish("评价成功");
+                    }
+                    else
+                    {
+                        listener.onError(returnMessage.getMessage());
+                    }
+                }
+                else listener.onError(GSON_ERR);
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.d("postErr:",error);
+                listener.onError(error);
+            }
+        });
+    }
+    //招聘者评价应聘者
+    public static void setAssessmentTacrecruit(Map<String,String>params,final HttpCallBackListener listener){
+        post(HttpAddress.HOST + HttpAddress.SET_TACRECRUIT_ASSESSMENT, params, new HttpCallBackListener() {
             @Override
             public void onFinish(String result) {
                 ReturnMessage returnMessage=null;
