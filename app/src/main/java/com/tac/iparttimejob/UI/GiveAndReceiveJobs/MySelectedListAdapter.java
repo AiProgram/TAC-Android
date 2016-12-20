@@ -34,13 +34,11 @@ public class MySelectedListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public class EnrollViewHolder extends RecyclerView.ViewHolder{
         private TextView tv_applicant_name;
         private TextView tv_assess_point;
-        private TextView tv_single_info;
         private CheckBox cb_choose;
         public EnrollViewHolder(View itemView) {
             super(itemView);
             tv_applicant_name=(TextView) itemView.findViewById(R.id.tv_applicant_name);
             tv_assess_point=(TextView)   itemView.findViewById(R.id.tv_assess_point);
-            tv_single_info=(TextView)    itemView.findViewById(R.id.tv_single_info);
             cb_choose=(CheckBox)         itemView.findViewById(R.id.cb_choose);
         }
     }
@@ -51,7 +49,6 @@ public class MySelectedListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         EnrollViewHolder viewHolder=(EnrollViewHolder) holder;
         viewHolder.tv_applicant_name.setText(selectedList.get(position).getApplicantname());
         viewHolder.tv_assess_point.setText(selectedList.get(position).getPoint()+"");
-        viewHolder.tv_single_info.setText(selectedList.get(position).getSingleresume());
 
         viewHolder.cb_choose.setEnabled(false);
         viewHolder.cb_choose.setSelected(true);

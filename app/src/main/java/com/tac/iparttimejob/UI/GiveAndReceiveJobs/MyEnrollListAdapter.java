@@ -47,13 +47,11 @@ public class MyEnrollListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class EnrollViewHolder extends RecyclerView.ViewHolder{
         private TextView tv_applicant_name;
         private TextView tv_assess_point;
-        private TextView tv_single_info;
         private CheckBox cb_choose;
         public EnrollViewHolder(View itemView) {
             super(itemView);
             tv_applicant_name=(TextView) itemView.findViewById(R.id.tv_applicant_name);
             tv_assess_point=(TextView)   itemView.findViewById(R.id.tv_assess_point);
-            tv_single_info=(TextView)    itemView.findViewById(R.id.tv_single_info);
             cb_choose=(CheckBox)         itemView.findViewById(R.id.cb_choose);
         }
     }
@@ -64,7 +62,6 @@ public class MyEnrollListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         final EnrollViewHolder viewHolder=(EnrollViewHolder) holder;
         viewHolder.tv_applicant_name.setText(enrollList.get(position).getApplicantname());
         viewHolder.tv_assess_point.setText(enrollList.get(position).getPoint()+"");
-        viewHolder.tv_single_info.setText(enrollList.get(position).getSingleresume());
 
         //如果之前 已经被选中就设置为选中
         if(enrollList.get(position).getChoosen()== DataType.ENROLL_STATUS_SELECTED)
