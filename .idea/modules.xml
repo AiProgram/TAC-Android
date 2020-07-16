@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GitProj-TAC-Android.iml" filepath="$PROJECT_DIR$/.idea/modules/GitProj-TAC-Android.iml" group="TAC-Android" />
       <module fileurl="file://$PROJECT_DIR$/TAC-Android.iml" filepath="$PROJECT_DIR$/TAC-Android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TAC-Android-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TAC-Android-app.iml" group="TAC-Android/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
